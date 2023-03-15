@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
 
     public Camera playerCamera;
+    public GameObject movementEffect;
 
     public NavMeshAgent agent;
     void Update()
@@ -18,6 +19,9 @@ public class PlayerController : MonoBehaviour
             {
                 agent.SetDestination(hit.point);
             }
+
+            GameObject effect = Instantiate(movementEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(effect, 2f);
         }
     }
 }
