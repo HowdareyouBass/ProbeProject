@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public class Race
+[CreateAssetMenu(fileName = "New Race", menuName = "Race")]
+public class Race : ScriptableObject
 {
-    float m_AttackRange;
-    float m_Health;
-    float m_Evasion;
-    float m_CounterAttack;
-    float m_Attack;
-    float m_Defense;
-    float m_MagicGift;
-    float m_PhysicsGift;
+    public float attackRange;
+    public float health;
+    [Range(0f, 1f)]
+    public float evasion;
+    [Range(0f, 1f)]
+    public float counterAttack;
+    public float attack;
+    public float defense;
+    public float magicGift;
+    public float physicsGift;
 }
