@@ -23,9 +23,10 @@ public class PlayerController : MonoBehaviour
                 if (hit.transform.CompareTag("Enemy"))
                 {
                     Vector3 enemyMesurments = hit.collider.bounds.size;
-                    destinaton = hit.transform.position - new Vector3(0, enemyMesurments.y / 2, 0);
+                    Vector3 vectorToEnemyNearestPoint = (hit.transform.position - transform.position) + Vector3.Normalize(transform.position - hit.transform.position) * enemyMesurments.x;
+                    destinaton = transform.position + vectorToEnemyNearestPoint;
                     effectPosition = hit.transform.position - new Vector3(0, enemyMesurments.y / 2, 0);
-                    effectRotation = Quaternion.LookRotation(new Vector3(0, 1, 0));
+                    effectRotation = Quaternion.LookRotation(Vector3.up);
                 }
                 else
                 {
