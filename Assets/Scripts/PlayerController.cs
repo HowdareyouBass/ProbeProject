@@ -5,11 +5,11 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-
     public Camera playerCamera;
     public GameObject movementEffect;
-
     public NavMeshAgent agent;
+    private bool following;
+    private IEnumerator objectFollowing;
     void Update()
     {
         if (Input.GetMouseButtonDown(1))
@@ -24,19 +24,23 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.transform.CompareTag("Enemy"))
                 {
+                    if (objectFollowing != null)
+                    {
+                        StopCoroutine(objectFollowing);
+                    }
                     Vector3 enemyMesurments = hit.collider.bounds.size;
-                    StartCoroutine(FollowTarget(hit, enemyMesurments.x));
+                    objectFollowing = FollowTarget(hit, enemyMesurments.x);
+                    StartCoroutine(objectFollowing);
                     effectPosition = hit.transform.position - new Vector3(0, enemyMesurments.y / 2, 0);
                     effectRotation = Quaternion.LookRotation(Vector3.up);
                 }
                 else
                 {
-                    StopAllCoroutines();
+                    StopCoroutine(objectFollowing);
                     Move(hit.point);
                     effectPosition = hit.point;
                     effectRotation = Quaternion.LookRotation(hit.normal);
                 }
-
                 GameObject effect = Instantiate(movementEffect, effectPosition, effectRotation);
                 Destroy(effect, 2f);
             }
