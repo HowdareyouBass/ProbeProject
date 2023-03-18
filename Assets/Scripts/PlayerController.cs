@@ -16,53 +16,58 @@ public class PlayerController : MonoBehaviour
         {
             Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            Vector3 effectPosition;
-            Quaternion effectRotation;
            
             //If clicked on something
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.transform.CompareTag("Enemy"))
                 {
-                    if (objectFollowing != null)
-                    {
-                        StopCoroutine(objectFollowing);
-                    }
-                    Vector3 enemyMesurments = hit.collider.bounds.size;
-                    objectFollowing = FollowTarget(hit, enemyMesurments.x);
-                    StartCoroutine(objectFollowing);
-                    effectPosition = hit.transform.position - new Vector3(0, enemyMesurments.y / 2, 0);
-                    effectRotation = Quaternion.LookRotation(Vector3.up);
+                    FollowTarget(hit);
                 }
                 else
                 {
-                    StopCoroutine(objectFollowing);
-                    Move(hit.point);
-                    effectPosition = hit.point;
-                    effectRotation = Quaternion.LookRotation(hit.normal);
+                    MoveToTarget(hit);
                 }
-                GameObject effect = Instantiate(movementEffect, effectPosition, effectRotation);
-                Destroy(effect, 2f);
             }
         }
     }
-
-    IEnumerator FollowTarget(RaycastHit target, float targetRadius)
+    IEnumerator FollowTargetRoutine(RaycastHit target, float targetRadius)
     {
         while(true)
         {
-            Move(target.transform.position, targetRadius);
+            MoveToEntity(target.transform.position, targetRadius);
             yield return null;
         }
     }
-    void Move(Vector3 destination, float radiusOfObjectToFollow)
+    void MoveToEntity(Vector3 destination, float radiusOfObjectToFollow)
     {
         Vector3 vectorToEnemyNearestPoint = (destination - transform.position) + Vector3.Normalize(transform.position - destination) * radiusOfObjectToFollow;
         agent.SetDestination(transform.position + vectorToEnemyNearestPoint);
     }
-    void Move(Vector3 destination)
+    void MoveToPoint(Vector3 destination)
     {
         agent.SetDestination(destination);
+    }
+    void FollowTarget(RaycastHit target)
+    {
+        if (objectFollowing != null)
+            StopCoroutine(objectFollowing);
+        Vector3 targetMesurments = target.collider.bounds.size;
+        objectFollowing = FollowTargetRoutine(target, targetMesurments.x);
+        StartCoroutine(objectFollowing);
+        SpawnEffect(target.transform.position - new Vector3(0, targetMesurments.y / 2, 0), Vector3.up);
+    }
+    void MoveToTarget(RaycastHit target)
+    {
+        if (objectFollowing != null)
+            StopCoroutine(objectFollowing);
+        MoveToPoint(target.point);
+        SpawnEffect(target.point, target.normal);
+    }
+    void SpawnEffect(Vector3 effectPosition, Vector3 effectRotation)
+    {   
+        GameObject effect = Instantiate(movementEffect, effectPosition, Quaternion.LookRotation(effectRotation));
+        Destroy(effect, 2f);
     }
 }
 
