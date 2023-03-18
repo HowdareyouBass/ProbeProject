@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
+                    StopAllCoroutines();
                     Move(hit.point);
                     effectPosition = hit.point;
                     effectRotation = Quaternion.LookRotation(hit.normal);
