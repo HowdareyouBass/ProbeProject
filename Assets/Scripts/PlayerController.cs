@@ -8,13 +8,19 @@ public class PlayerController : MonoBehaviour
     public Camera playerCamera;
     public GameObject movementEffect;
     public NavMeshAgent agent;
-    private bool following;
-    private IEnumerator objectFollowing;
-    private NavMeshObstacle objectFollowed;
-    private float playerRadius = 1f;
+    public Race playerRace;
 
-    private Vector3 tarPos;
-    private Vector3 v1;
+    private IEnumerator objectFollowing;
+    private IEnumerator objectAttacking;
+    private NavMeshObstacle objectFollowedNavMesh;
+    private float playerRadius = 1f;
+    private PlayerStats stats;
+
+    void Start()
+    {
+        stats = new PlayerStats();
+        stats.setRace(playerRace);
+    }
 
     void Update()
     {
@@ -28,7 +34,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.transform.CompareTag("Enemy"))
                 {
-                    FollowTarget(hit);
+                    AttackTarget(hit);
                 }
                 else
                 {
@@ -37,20 +43,52 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    void AttackTarget(RaycastHit target)
+    {
+        //Disable NavMeshObjstacle component so that agent dont't try to avoid it
+        if (objectFollowedNavMesh != null)
+            objectFollowedNavMesh.enabled = true;
+        objectFollowedNavMesh = target.transform.GetComponent<NavMeshObstacle>();
+        objectFollowedNavMesh.enabled = false;
+
+        if(objectAttacking != null)
+            StopCoroutine(objectAttacking);
+        Vector3 targetMesurments = target.collider.bounds.size;
+        objectAttacking = AttackTargetRoutine(target, targetMesurments.z);
+        StartCoroutine(objectAttacking);
+        SpawnEffect(target.transform.position - new Vector3(0, targetMesurments.y / 2, 0), Vector3.up);
+    }
+    IEnumerator AttackTargetRoutine(RaycastHit target, float targetRadius)
+    {
+        while (true)
+        {
+            while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude > stats.GetAttackRange())
+            {
+                MoveToEntity(target.transform.position, targetRadius);
+                yield return null;
+            }
+            StopMoving();
+            while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude <= stats.GetAttackRange())
+            {
+                Attack(target);
+                yield return new WaitForSeconds(1f);
+            }
+        }
+    }
+
     void FollowTarget(RaycastHit target)
     {
         //Disable NavMeshObjstacle component so that agent dont't try to avoid it
-        if (objectFollowed != null)
-            objectFollowed.enabled = true;
-        objectFollowed = target.transform.GetComponent<NavMeshObstacle>();
-        objectFollowed.enabled = false;
+        if (objectFollowedNavMesh != null)
+            objectFollowedNavMesh.enabled = true;
+        objectFollowedNavMesh = target.transform.GetComponent<NavMeshObstacle>();
+        objectFollowedNavMesh.enabled = false;
 
         if (objectFollowing != null)
             StopCoroutine(objectFollowing);
         Vector3 targetMesurments = target.collider.bounds.size;
         objectFollowing = FollowTargetRoutine(target, targetMesurments.z);
-        Debug.Log(targetMesurments.x);
-        Debug.Log(targetMesurments.z);
         StartCoroutine(objectFollowing);
         SpawnEffect(target.transform.position - new Vector3(0, targetMesurments.y / 2, 0), Vector3.up);
     }
@@ -62,10 +100,13 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
     }
+
     void MoveToTarget(RaycastHit target)
     {
-        if (objectFollowed != null)
-            objectFollowed.enabled = true;
+        if (objectFollowedNavMesh != null)
+            objectFollowedNavMesh.enabled = true;
+        if (objectAttacking != null)
+            StopCoroutine(objectAttacking);
         if (objectFollowing != null)
             StopCoroutine(objectFollowing);
         MoveToPoint(target.point);
@@ -75,26 +116,29 @@ public class PlayerController : MonoBehaviour
     {
         agent.SetDestination(destination);
     }
-    void MoveToEntity(Vector3 destination, float radiusOfObjectToFollow)
+    void MoveToEntity(Vector3 destination, float radiusOfEntity)
     {
-        Vector3 toPlayerFromEnemyNormalized = Vector3.Normalize(transform.position - destination) / 2;
-        Vector3 toEnemyNearestPoint = (destination - transform.position) + toPlayerFromEnemyNormalized * radiusOfObjectToFollow + toPlayerFromEnemyNormalized * playerRadius;
-        v1 = Vector3.Normalize(transform.position - destination) / 2;
-        tarPos = destination;
-        agent.SetDestination(transform.position + toEnemyNearestPoint);
+        agent.SetDestination(transform.position + FindNearestPointToEntity(destination, radiusOfEntity));
     }
     void SpawnEffect(Vector3 effectPosition, Vector3 effectRotation)
     {   
         GameObject effect = Instantiate(movementEffect, effectPosition, Quaternion.LookRotation(effectRotation));
         Destroy(effect, 2f);
     }
-
-    void OnDrawGizmos()
+    Vector3 FindNearestPointToEntity(Vector3 entityPosition, float entityRadius)
     {
-        Gizmos.color = Color.red;
-        if (v1 == null)
-            return;
-        Gizmos.DrawLine(tarPos, tarPos + v1);
+        Vector3 toPlayerFromEntityNormalized = Vector3.Normalize(transform.position - entityPosition) / 2;
+        return (entityPosition - transform.position) + toPlayerFromEntityNormalized * entityRadius + toPlayerFromEntityNormalized * playerRadius;
+    }
+
+    void Attack(RaycastHit target)
+    {
+        target.transform.GetComponent<EnemyBehavior>().Damage(stats.GetAttackDamage());
+    }
+
+    void StopMoving()
+    {
+        agent.SetDestination(transform.position);
     }
 }
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ff1e0d195ec5745884838694990d60, type: 3}
   m_Name: HumanTest
   m_EditorClassIdentifier: 
-  attackRange: 50
+  attackRange: 1
   health: 100
   evasion: 0.05
   counterAttack: 0.1
