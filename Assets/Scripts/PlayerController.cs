@@ -13,11 +13,13 @@ public class PlayerController : MonoBehaviour
     private IEnumerator objectFollowing;
     private IEnumerator objectAttacking;
     private NavMeshObstacle objectFollowedNavMesh;
-    private float playerRadius = 1f;
     private PlayerStats stats;
+    private float playerRadius = 1f;
+    private bool canAttack;
 
     void Start()
     {
+        canAttack = true;
         stats = new PlayerStats();
         stats.setRace(playerRace);
     }
@@ -59,6 +61,13 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(objectAttacking);
         SpawnEffect(target.transform.position - new Vector3(0, targetMesurments.y / 2, 0), Vector3.up);
     }
+    IEnumerator WaitForNextAttack()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(1f);
+        canAttack = true;
+        yield break;
+    }
     IEnumerator AttackTargetRoutine(RaycastHit target, float targetRadius)
     {
         while (true)
@@ -71,8 +80,12 @@ public class PlayerController : MonoBehaviour
             StopMoving();
             while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude <= stats.GetAttackRange())
             {
-                Attack(target);
-                yield return new WaitForSeconds(1f);
+                if (canAttack)
+                {
+                    Attack(target);
+                    StartCoroutine(WaitForNextAttack());
+                }
+                yield return null;
             }
         }
     }
