@@ -5,23 +5,20 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
+    public PlayerBehaviour player;
     public Camera playerCamera;
     public GameObject movementEffect;
     public NavMeshAgent agent;
-    public Race playerRace;
 
     private IEnumerator objectFollowing;
     private IEnumerator objectAttacking;
     private NavMeshObstacle objectFollowedNavMesh;
-    private PlayerStats stats;
     private float playerRadius = 1f;
     private bool canAttack;
 
     void Start()
     {
         canAttack = true;
-        stats = new PlayerStats();
-        stats.setRace(playerRace);
     }
 
     void Update()
@@ -64,7 +61,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator WaitForNextAttack()
     {
         canAttack = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(player.GetAttackCooldown());
         canAttack = true;
         yield break;
     }
@@ -72,17 +69,17 @@ public class PlayerController : MonoBehaviour
     {
         while (true)
         {
-            while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude > stats.GetAttackRange())
+            while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude > player.GetAttackRange())
             {
                 MoveToEntity(target.transform.position, targetRadius);
                 yield return null;
             }
             StopMoving();
-            while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude <= stats.GetAttackRange())
+            while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude <= player.GetAttackRange())
             {
                 if (canAttack)
                 {
-                    Attack(target);
+                    player.AttackTarget(target);
                     StartCoroutine(WaitForNextAttack());
                 }
                 yield return null;
@@ -142,11 +139,6 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 toPlayerFromEntityNormalized = Vector3.Normalize(transform.position - entityPosition) / 2;
         return (entityPosition - transform.position) + toPlayerFromEntityNormalized * entityRadius + toPlayerFromEntityNormalized * playerRadius;
-    }
-
-    void Attack(RaycastHit target)
-    {
-        target.transform.GetComponent<EnemyBehavior>().Damage(stats.GetAttackDamage());
     }
 
     void StopMoving()
