@@ -17,9 +17,9 @@ public class PlayerEquipment
     public int GetAttackSpeed()
     {
         int sum = 0;
-        foreach (Item i in items)
+        foreach (Item item in items)
         {
-            sum += i.AttackSpeed;
+            sum += item.AttackSpeed;
         }
         return sum;
     }

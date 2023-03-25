@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 189167293}
   - component: {fileID: 189167292}
   m_Layer: 5
-  m_Name: UI
+  m_Name: DebugUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1238,7 +1238,7 @@ NavMeshAgent:
   m_Speed: 7
   m_Acceleration: 100
   avoidancePriority: 50
-  m_AngularSpeed: 360
+  m_AngularSpeed: 1000
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

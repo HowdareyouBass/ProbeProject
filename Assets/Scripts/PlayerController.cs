@@ -10,40 +10,81 @@ public class PlayerController : MonoBehaviour
     public GameObject movementEffect;
     public NavMeshAgent agent;
 
-    private IEnumerator objectFollowing;
-    private IEnumerator objectAttacking;
+    private Coroutine objectFollowing;
+    private Coroutine objectAttacking;
+    private Coroutine holdingMouse;
+    private Coroutine lookingAtTarget;
     private NavMeshObstacle objectFollowedNavMesh;
     private float playerRadius = 1f;
     private bool canAttack;
 
-    void Start()
+    private void Start()
     {
         canAttack = true;
+        agent.updateRotation = false;
     }
-
-    void Update()
+    private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (holdingMouse == null)
         {
-            Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-           
-            //If clicked on something
-            if (Physics.Raycast(ray, out hit))
+            holdingMouse = StartCoroutine(HoldingMouse());
+        }
+    }
+    private IEnumerator HoldingMouse()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            OnClick();
+            yield return new WaitForSeconds(0.1f);
+            holdingMouse = null;
+        }
+        else
+        {
+            holdingMouse = null;
+            yield break;
+        }
+    }
+    private void OnClick()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        
+        //If clicked on something
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.transform.CompareTag("Enemy"))
             {
-                if (hit.transform.CompareTag("Enemy"))
-                {
-                    AttackTarget(hit);
-                }
-                else
-                {
-                    MoveToTarget(hit);
-                }
+                AttackTarget(hit);
+            }
+            else
+            {
+                MoveToTarget(hit);
             }
         }
     }
 
-    void AttackTarget(RaycastHit target)
+    private void LookAtTarget(Vector3 targetPosition)
+    {
+        if (lookingAtTarget != null)
+        {
+            StopCoroutine(lookingAtTarget);
+        }
+        lookingAtTarget = StartCoroutine(LookAtTargetRoutine(targetPosition));
+    }
+    private IEnumerator LookAtTargetRoutine(Vector3 targetPosition)
+    {
+        Vector3 lookRotation = targetPosition - transform.position;
+        lookRotation.y = 0;
+        float time = 0f;
+        while (time < 1f)
+        {
+            transform.forward = Vector3.Slerp(transform.forward, lookRotation, time);
+            time += Time.deltaTime * 1f;
+            yield return null;
+        }
+    }
+
+    private void AttackTarget(RaycastHit target)
     {
         //Disable NavMeshObjstacle component so that agent dont't try to avoid it
         if (objectFollowedNavMesh != null)
@@ -51,21 +92,14 @@ public class PlayerController : MonoBehaviour
         objectFollowedNavMesh = target.transform.GetComponent<NavMeshObstacle>();
         objectFollowedNavMesh.enabled = false;
 
-        if(objectAttacking != null)
-            StopCoroutine(objectAttacking);
+        LookAtTarget(target.transform.position);
+
+        StopAttacking();
         Vector3 targetMesurments = target.collider.bounds.size;
-        objectAttacking = AttackTargetRoutine(target, targetMesurments.z);
-        StartCoroutine(objectAttacking);
+        objectAttacking = StartCoroutine(AttackTargetRoutine(target, targetMesurments.z));
         SpawnEffect(target.transform.position - new Vector3(0, targetMesurments.y / 2, 0), Vector3.up);
     }
-    IEnumerator WaitForNextAttack()
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(player.GetAttackCooldown());
-        canAttack = true;
-        yield break;
-    }
-    IEnumerator AttackTargetRoutine(RaycastHit target, float targetRadius)
+    private IEnumerator AttackTargetRoutine(RaycastHit target, float targetRadius)
     {
         while (true)
         {
@@ -86,8 +120,15 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    private IEnumerator WaitForNextAttack()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(player.GetAttackCooldown());
+        canAttack = true;
+        yield break;
+    }
 
-    void FollowTarget(RaycastHit target)
+    private void FollowTarget(RaycastHit target)
     {
         //Disable NavMeshObjstacle component so that agent dont't try to avoid it
         if (objectFollowedNavMesh != null)
@@ -95,14 +136,12 @@ public class PlayerController : MonoBehaviour
         objectFollowedNavMesh = target.transform.GetComponent<NavMeshObstacle>();
         objectFollowedNavMesh.enabled = false;
 
-        if (objectFollowing != null)
-            StopCoroutine(objectFollowing);
+        StopFollowing();
         Vector3 targetMesurments = target.collider.bounds.size;
-        objectFollowing = FollowTargetRoutine(target, targetMesurments.z);
-        StartCoroutine(objectFollowing);
+        objectFollowing = StartCoroutine(FollowTargetRoutine(target, targetMesurments.z));
         SpawnEffect(target.transform.position - new Vector3(0, targetMesurments.y / 2, 0), Vector3.up);
     }
-    IEnumerator FollowTargetRoutine(RaycastHit target, float targetRadius)
+    private IEnumerator FollowTargetRoutine(RaycastHit target, float targetRadius)
     {
         while(true)
         {
@@ -111,39 +150,52 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void MoveToTarget(RaycastHit target)
+    private void MoveToTarget(RaycastHit target)
     {
         if (objectFollowedNavMesh != null)
             objectFollowedNavMesh.enabled = true;
-        if (objectAttacking != null)
-            StopCoroutine(objectAttacking);
-        if (objectFollowing != null)
-            StopCoroutine(objectFollowing);
+        StopAttacking();
+        StopFollowing();
+
+        LookAtTarget(target.point);
+
         MoveToPoint(target.point);
         SpawnEffect(target.point, target.normal);
     }
-    void MoveToPoint(Vector3 destination)
+    private void MoveToPoint(Vector3 destination)
     {
         agent.SetDestination(destination);
     }
-    void MoveToEntity(Vector3 destination, float radiusOfEntity)
+    private void MoveToEntity(Vector3 destination, float radiusOfEntity)
     {
         agent.SetDestination(transform.position + FindNearestPointToEntity(destination, radiusOfEntity));
     }
-    void SpawnEffect(Vector3 effectPosition, Vector3 effectRotation)
+    private void SpawnEffect(Vector3 effectPosition, Vector3 effectRotation)
     {   
         GameObject effect = Instantiate(movementEffect, effectPosition, Quaternion.LookRotation(effectRotation));
         Destroy(effect, 2f);
     }
-    Vector3 FindNearestPointToEntity(Vector3 entityPosition, float entityRadius)
+    private Vector3 FindNearestPointToEntity(Vector3 entityPosition, float entityRadius)
     {
         Vector3 toPlayerFromEntityNormalized = Vector3.Normalize(transform.position - entityPosition) / 2;
         return (entityPosition - transform.position) + toPlayerFromEntityNormalized * entityRadius + toPlayerFromEntityNormalized * playerRadius;
     }
 
-    void StopMoving()
+    private void StopMoving()
     {
         agent.SetDestination(transform.position);
+    }
+
+    private void StopAttacking()
+    {
+        if (objectAttacking != null)
+            StopCoroutine(objectAttacking);
+    }
+
+    private void StopFollowing()
+    {
+        if (objectFollowing != null)
+            StopCoroutine(objectFollowing);
     }
 }
 
