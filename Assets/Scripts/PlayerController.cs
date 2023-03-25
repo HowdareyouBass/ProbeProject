@@ -9,10 +9,10 @@ public class PlayerController : MonoBehaviour
     public Camera playerCamera;
     public GameObject movementEffect;
     public NavMeshAgent agent;
+    public bool paused;
 
     private Coroutine objectFollowing;
     private Coroutine objectAttacking;
-    private Coroutine holdingMouse;
     private Coroutine lookingAtTarget;
     private NavMeshObstacle objectFollowedNavMesh;
     private float playerRadius = 1f;
@@ -21,27 +21,25 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         canAttack = true;
-        agent.updateRotation = false;
+        //agent.updateRotation = false;
+        StartCoroutine(HoldingMouse());
     }
     private void Update()
     {
-        if (holdingMouse == null)
-        {
-            holdingMouse = StartCoroutine(HoldingMouse());
-        }
     }
     private IEnumerator HoldingMouse()
     {
-        if (Input.GetMouseButton(1))
+        while(!paused)
         {
-            OnClick();
-            yield return new WaitForSeconds(0.1f);
-            holdingMouse = null;
-        }
-        else
-        {
-            holdingMouse = null;
-            yield break;
+            if (Input.GetMouseButton(1))
+            {
+                OnClick();
+                yield return new WaitForSeconds(0.1f);
+            }
+            else
+            {
+                yield return new WaitForEndOfFrame();
+            }
         }
     }
     private void OnClick()
@@ -52,35 +50,16 @@ public class PlayerController : MonoBehaviour
         //If clicked on something
         if (Physics.Raycast(ray, out hit))
         {
+            
             if (hit.transform.CompareTag("Enemy"))
             {
+                LookAtTarget(hit.transform.position);
                 AttackTarget(hit);
             }
             else
             {
                 MoveToTarget(hit);
             }
-        }
-    }
-
-    private void LookAtTarget(Vector3 targetPosition)
-    {
-        if (lookingAtTarget != null)
-        {
-            StopCoroutine(lookingAtTarget);
-        }
-        lookingAtTarget = StartCoroutine(LookAtTargetRoutine(targetPosition));
-    }
-    private IEnumerator LookAtTargetRoutine(Vector3 targetPosition)
-    {
-        Vector3 lookRotation = targetPosition - transform.position;
-        lookRotation.y = 0;
-        float time = 0f;
-        while (time < 1f)
-        {
-            transform.forward = Vector3.Slerp(transform.forward, lookRotation, time);
-            time += Time.deltaTime * 1f;
-            yield return null;
         }
     }
 
@@ -91,8 +70,6 @@ public class PlayerController : MonoBehaviour
             objectFollowedNavMesh.enabled = true;
         objectFollowedNavMesh = target.transform.GetComponent<NavMeshObstacle>();
         objectFollowedNavMesh.enabled = false;
-
-        LookAtTarget(target.transform.position);
 
         StopAttacking();
         Vector3 targetMesurments = target.collider.bounds.size;
@@ -156,12 +133,32 @@ public class PlayerController : MonoBehaviour
             objectFollowedNavMesh.enabled = true;
         StopAttacking();
         StopFollowing();
-
-        LookAtTarget(target.point);
-
         MoveToPoint(target.point);
         SpawnEffect(target.point, target.normal);
     }
+    
+    private void LookAtTarget(Vector3 targetPosition)
+    {
+        if (lookingAtTarget != null)
+            StopCoroutine(lookingAtTarget);
+        lookingAtTarget = StartCoroutine(LookAtTargetRoutine(targetPosition));
+    }
+    private IEnumerator LookAtTargetRoutine(Vector3 targetPosition)
+    {
+        Vector3 lookRotation;
+        float time;
+        time = 0f;
+        lookRotation = targetPosition - transform.position;
+        lookRotation.y = 0;
+        while (time < 1f)
+        {
+            transform.forward = Vector3.Slerp(transform.forward, lookRotation, time);
+            time += Time.deltaTime * 1f;
+            yield return null;
+        }
+    } 
+    
+
     private void MoveToPoint(Vector3 destination)
     {
         agent.SetDestination(destination);
