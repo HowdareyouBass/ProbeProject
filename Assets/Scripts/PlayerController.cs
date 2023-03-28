@@ -9,37 +9,27 @@ public class PlayerController : MonoBehaviour
     public Camera playerCamera;
     public GameObject movementEffect;
     public NavMeshAgent agent;
+    public AnimationCurve curve;
     public bool paused;
+    public float rotationSpeed;
 
     private Coroutine objectFollowing;
     private Coroutine objectAttacking;
     private Coroutine lookingAtTarget;
     private NavMeshObstacle objectFollowedNavMesh;
     private float playerRadius = 1f;
-    private bool canAttack;
-
-    private void Start()
-    {
-        canAttack = true;
-        //agent.updateRotation = false;
-        StartCoroutine(HoldingMouse());
-    }
+    private bool canAttack = true;
+    private float timer = 0;
     private void Update()
     {
-    }
-    private IEnumerator HoldingMouse()
-    {
-        while(!paused)
+        if (timer >= 0.1f && Input.GetMouseButton(1))
         {
-            if (Input.GetMouseButton(1))
-            {
-                OnClick();
-                yield return new WaitForSeconds(0.1f);
-            }
-            else
-            {
-                yield return new WaitForEndOfFrame();
-            }
+            OnClick();
+            timer = 0f;
+        }
+        else
+        {
+            timer += Time.deltaTime;
         }
     }
     private void OnClick()
@@ -53,7 +43,6 @@ public class PlayerController : MonoBehaviour
             
             if (hit.transform.CompareTag("Enemy"))
             {
-                LookAtTarget(hit.transform.position);
                 AttackTarget(hit);
             }
             else
@@ -72,6 +61,7 @@ public class PlayerController : MonoBehaviour
         objectFollowedNavMesh.enabled = false;
 
         StopAttacking();
+        LookAtTarget(target);
         Vector3 targetMesurments = target.collider.bounds.size;
         objectAttacking = StartCoroutine(AttackTargetRoutine(target, targetMesurments.z));
         SpawnEffect(target.transform.position - new Vector3(0, targetMesurments.y / 2, 0), Vector3.up);
@@ -136,24 +126,22 @@ public class PlayerController : MonoBehaviour
         MoveToPoint(target.point);
         SpawnEffect(target.point, target.normal);
     }
-    
-    private void LookAtTarget(Vector3 targetPosition)
+    //This one for entities
+    private void LookAtTarget(RaycastHit target)
     {
         if (lookingAtTarget != null)
             StopCoroutine(lookingAtTarget);
-        lookingAtTarget = StartCoroutine(LookAtTargetRoutine(targetPosition));
+        lookingAtTarget = StartCoroutine(LookAtTargetRoutine(target));
     }
-    private IEnumerator LookAtTargetRoutine(Vector3 targetPosition)
+    private IEnumerator LookAtTargetRoutine(RaycastHit target)
     {
-        Vector3 lookRotation;
-        float time;
-        time = 0f;
-        lookRotation = targetPosition - transform.position;
-        lookRotation.y = 0;
-        while (time < 1f)
+        Vector3 lookRotation = target.transform.position - transform.position;
+        float delta = 0.01f;
+        while(transform.forward.x > lookRotation.x + delta || transform.forward.z > lookRotation.z + delta || transform.forward.x < delta || transform.forward.z < delta)
         {
-            transform.forward = Vector3.Slerp(transform.forward, lookRotation, time);
-            time += Time.deltaTime * 1f;
+            lookRotation = target.transform.position - transform.position;
+            lookRotation.y = 0;
+            transform.forward = Vector3.MoveTowards(transform.forward, lookRotation, rotationSpeed * Time.deltaTime);
             yield return null;
         }
     } 
@@ -187,6 +175,8 @@ public class PlayerController : MonoBehaviour
     {
         if (objectAttacking != null)
             StopCoroutine(objectAttacking);
+        if (lookingAtTarget != null)
+            StopCoroutine(lookingAtTarget);
     }
 
     private void StopFollowing()
