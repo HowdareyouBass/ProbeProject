@@ -269,7 +269,6 @@ GameObject:
   - component: {fileID: 108488047}
   - component: {fileID: 108488050}
   - component: {fileID: 108488049}
-  - component: {fileID: 108488048}
   m_Layer: 7
   m_Name: LilCap
   m_TagString: Untagged
@@ -292,19 +291,6 @@ Transform:
   m_Father: {fileID: 1628607962}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &108488048
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108488046}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &108488049
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1238,7 +1224,7 @@ NavMeshAgent:
   m_Speed: 7
   m_Acceleration: 100
   avoidancePriority: 50
-  m_AngularSpeed: 10000
+  m_AngularSpeed: 1000
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
