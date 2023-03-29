@@ -585,6 +585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: {fileID: 11400000, guid: 56b88e1a4defd5444be092146250446b, type: 2}
   enemyHelth: {fileID: 38296501}
+  damageEffect: {fileID: 8774903704942797486, guid: ac62a51afd08fe34891a0e937f088243, type: 3}
 --- !u!1 &511674585
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: {fileID: 11400000, guid: 56b88e1a4defd5444be092146250446b, type: 2}
   enemyHelth: {fileID: 576891939}
+  damageEffect: {fileID: 8774903704942797486, guid: ac62a51afd08fe34891a0e937f088243, type: 3}
 --- !u!1 &576891937
 GameObject:
   m_ObjectHideFlags: 0

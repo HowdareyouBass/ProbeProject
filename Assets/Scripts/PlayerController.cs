@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
     private float timer = 0;
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            
+        }
         if (timer >= 0.1f && Input.GetMouseButton(1))
         {
             OnClick();

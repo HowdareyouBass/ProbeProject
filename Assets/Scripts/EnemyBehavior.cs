@@ -6,8 +6,9 @@ using TMPro;
 public class EnemyBehavior : MonoBehaviour
 {
     public EnemyType type;
-    private EnemyStats enemy;
     public TextMeshProUGUI enemyHelth;
+    public GameObject damageEffect;
+    private EnemyStats enemy;
     
 
     void Start()
@@ -21,6 +22,10 @@ public class EnemyBehavior : MonoBehaviour
     }
     public void Damage(float amount)
     {
+        Vector3 offset = new Vector3(0f, 10000f, 0f);
+        GameObject effect = Instantiate(damageEffect, transform.position + offset, transform.rotation);
+        effect.transform.SetParent(transform);
+        effect.GetComponent<TextMeshPro>().text = amount.ToString();
         enemy.Damage(amount);
     }
 }
