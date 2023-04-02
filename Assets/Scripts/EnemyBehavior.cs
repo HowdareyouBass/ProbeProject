@@ -5,6 +5,7 @@ using TMPro;
 
 public class EnemyBehavior : MonoBehaviour
 {
+    [SerializeField] private Renderer healthRenderer = new Renderer();
     public EnemyType type;
     public TextMeshProUGUI enemyHelth;
     public GameObject damageEffect;
@@ -22,10 +23,21 @@ public class EnemyBehavior : MonoBehaviour
     }
     public void Damage(float amount)
     {
-        Vector3 offset = new Vector3(0f, 10000f, 0f);
-        GameObject effect = Instantiate(damageEffect, transform.position + offset, transform.rotation);
+        GameObject effect = Instantiate(damageEffect, transform.position, transform.rotation);
         effect.transform.SetParent(transform);
         effect.GetComponent<TextMeshPro>().text = amount.ToString();
+
         enemy.Damage(amount);
+
+        healthRenderer.material.SetFloat("_Health", enemy.GetCurrentHealth());
+
+        if (enemy.GetCurrentHealth() <= 0)
+        {
+            Die();
+        }
+    }
+    private void Die()
+    {
+        Destroy(transform.gameObject, 0);
     }
 }

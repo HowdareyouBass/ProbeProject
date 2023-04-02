@@ -15,10 +15,12 @@ public class EnemyStats
     public void Damage(float amount)
     {
         m_CurrentHealth -= amount;
+        if (m_CurrentHealth < 0)
+            m_CurrentHealth = 0;
     }
 
     public float GetCurrentHealth()
     {
-        return m_CurrentHealth;
+        return m_CurrentHealth / m_MaxHealth;
     }
 }
