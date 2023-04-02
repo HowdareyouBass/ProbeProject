@@ -13,7 +13,7 @@ public class PlayerBehaviour : MonoBehaviour
         //Start stats from race
         playerStats = new PlayerStats(race);
         playerItems = new PlayerEquipment();
-        playerItems.EquipItem(new Item(100));
+        playerItems.EquipItem(new Item(300));
     }
 
     public void AttackTarget(RaycastHit target)

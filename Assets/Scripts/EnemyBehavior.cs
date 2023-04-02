@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class EnemyBehavior : MonoBehaviour
     public TextMeshProUGUI enemyHelth;
     public GameObject damageEffect;
     private EnemyStats enemy;
+    public bool isDead;
     
 
     void Start()
@@ -38,6 +40,10 @@ public class EnemyBehavior : MonoBehaviour
     }
     private void Die()
     {
-        Destroy(transform.gameObject, 0);
+        isDead = true;
+        //healthRenderer.enabled = false;
+        this.GetComponent<CapsuleCollider>().enabled = false;
+        this.GetComponent<NavMeshObstacle>().enabled = false;
+        Destroy(transform.gameObject, 0.1f);
     }
 }

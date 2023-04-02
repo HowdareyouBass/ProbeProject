@@ -1108,12 +1108,6 @@ MonoBehaviour:
   playerCamera: {fileID: 963194227}
   movementEffect: {fileID: 7590234846238662618, guid: 6b12e0f0193a1514883d49446593fbab, type: 3}
   agent: {fileID: 1628607963}
-  curve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   paused: 0
   rotationSpeed: 10
 --- !u!114 &1628607965
@@ -1560,5 +1554,21 @@ PrefabInstance:
       propertyPath: camTransform
       value: 
       objectReference: {fileID: 963194228}
+    - target: {fileID: 6746957540255858414, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6746957540255858414, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6746957540255858414, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6746957540255858414, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.47
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}

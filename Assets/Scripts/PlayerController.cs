@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public Camera playerCamera;
     public GameObject movementEffect;
     public NavMeshAgent agent;
-    public AnimationCurve curve;
     public bool paused;
     public float rotationSpeed;
 
@@ -18,8 +17,8 @@ public class PlayerController : MonoBehaviour
     private Coroutine lookingAtTarget;
     private NavMeshObstacle targetNavMesh;
     private float playerRadius = 1f;
-    private bool canAttack = true;
     private float timer = 0;
+    private bool canAttack = true;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -81,6 +80,8 @@ public class PlayerController : MonoBehaviour
         Vector3 lookRotation = target.transform.position - transform.position;
         while(transform.forward != lookRotation)
         {
+            if (target.transform == null)
+                yield break;
             lookRotation = target.transform.position - transform.position;
             lookRotation.y = 0;
             transform.forward = Vector3.MoveTowards(transform.forward, lookRotation, rotationSpeed * Time.deltaTime);
@@ -104,7 +105,15 @@ public class PlayerController : MonoBehaviour
                     player.AttackTarget(target);
                     StartCoroutine(WaitForNextAttack());
                 }
-                yield return null;
+
+                //Stops attacking object that already died
+                if(target.transform.GetComponent<EnemyBehavior>().isDead)
+                {
+                    Debug.Log("ded");
+                    yield break;
+                }
+
+                yield return null;;
             }
         }
     }
