@@ -5,20 +5,27 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     public Race race;
-    public PlayerEquipment playerItems;
+    public PlayerEquipment playerEquipment;
+    public GameObject go;
     private PlayerStats playerStats;
 
     void Start()
     {
         //Start stats from race
         playerStats = new PlayerStats(race);
-        playerItems = new PlayerEquipment();
-        playerItems.EquipItem(new Item(300));
+        playerEquipment = new PlayerEquipment();
+        playerEquipment.EquipItem(new Item(300));
+        playerEquipment.EquipSpell(new ProjectileSpell(go), 0);
     }
 
     public void AttackTarget(RaycastHit target)
     {
         target.transform.GetComponent<EnemyBehavior>().Damage(playerStats.GetAttackDamage());
+    }
+
+    public void CastSpell(int spellSlot)
+    {
+        GameObject castEffect = Instantiate(playerEquipment.GetSpell(spellSlot).CastEffect(), transform.position, transform.rotation);
     }
 
     public float GetAttackRange()
@@ -31,6 +38,6 @@ public class PlayerBehaviour : MonoBehaviour
     }
     public float GetAttackCooldown()
     {
-        return playerStats.GetBaseAttackSpeed() / playerItems.GetAttackSpeed() * 100;
+        return playerStats.GetBaseAttackSpeed() / (playerEquipment.GetAttackSpeed() * 100 + 1);
     }
 }

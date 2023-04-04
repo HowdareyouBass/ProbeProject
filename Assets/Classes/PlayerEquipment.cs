@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class PlayerEquipment
 {   
-    List<Item> items;
+    List<Item> m_Items;
+    SpellBase[] m_Spells;
     public PlayerEquipment()
     {
-        items = new List<Item>();
+        m_Items = new List<Item>();
+        m_Spells = new SpellBase[5];
     }
     public void EquipItem(Item eqipped)
     {
-        items.Add(eqipped);
+        m_Items.Add(eqipped);
+    }
+
+    public void EquipSpell(SpellBase spell, int spellSlot)
+    {
+        m_Spells[0] = spell;
     }
 
     public int GetAttackSpeed()
     {
         int sum = 0;
-        foreach (Item item in items)
+        foreach (Item item in m_Items)
         {
             sum += item.AttackSpeed;
         }
         return sum;
+    }
+
+    public SpellBase GetSpell(int spellSlot)
+    {
+        return m_Spells[spellSlot];
     }
 }

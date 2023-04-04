@@ -96,7 +96,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6746957540238612335}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -144,8 +144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthRenderer: {fileID: 6746957540255858401}
   type: {fileID: 11400000, guid: 56b88e1a4defd5444be092146250446b, type: 2}
-  enemyHelth: {fileID: 0}
   damageEffect: {fileID: 8774903704942797486, guid: ac62a51afd08fe34891a0e937f088243, type: 3}
+  isDead: 0
 --- !u!1 &6746957540255858415
 GameObject:
   m_ObjectHideFlags: 0

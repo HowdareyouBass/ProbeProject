@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public Camera playerCamera;
     public GameObject movementEffect;
     public NavMeshAgent agent;
-    public bool paused;
     public float rotationSpeed;
 
     private Coroutine objectFollowing;
@@ -23,7 +22,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            
+            player.CastSpell(0);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            StopAction();
         }
         if (timer >= 0.1f && Input.GetMouseButton(1))
         {

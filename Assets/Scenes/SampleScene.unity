@@ -585,8 +585,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthRenderer: {fileID: 0}
   type: {fileID: 11400000, guid: 56b88e1a4defd5444be092146250446b, type: 2}
-  enemyHelth: {fileID: 576891939}
   damageEffect: {fileID: 8774903704942797486, guid: ac62a51afd08fe34891a0e937f088243, type: 3}
+  isDead: 0
 --- !u!1 &576891937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,7 +1108,6 @@ MonoBehaviour:
   playerCamera: {fileID: 963194227}
   movementEffect: {fileID: 7590234846238662618, guid: 6b12e0f0193a1514883d49446593fbab, type: 3}
   agent: {fileID: 1628607963}
-  paused: 0
   rotationSpeed: 10
 --- !u!114 &1628607965
 MonoBehaviour:
@@ -1123,6 +1122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   race: {fileID: 11400000, guid: dc1f2b643637e9a4385a2019bedddd5e, type: 2}
+  go: {fileID: 5113775379424654891, guid: 3ce5ba9dcc2b2ef4785bb3172bdce772, type: 3}
 --- !u!1001 &1940188049
 PrefabInstance:
   m_ObjectHideFlags: 0

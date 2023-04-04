@@ -8,7 +8,6 @@ public class EnemyBehavior : MonoBehaviour
 {
     [SerializeField] private Renderer healthRenderer = new Renderer();
     public EnemyType type;
-    public TextMeshProUGUI enemyHelth;
     public GameObject damageEffect;
     private EnemyStats enemy;
     public bool isDead;
@@ -18,10 +17,6 @@ public class EnemyBehavior : MonoBehaviour
     {
         enemy = new EnemyStats();
         enemy.SetType(type);
-    }
-    void Update()
-    {
-        enemyHelth.text = enemy.GetCurrentHealth().ToString();
     }
     public void Damage(float amount)
     {
