@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public Vector3 Direction;
+    public Spell spell;
+    public int spellSlot;
     public Rigidbody rb;
     void Start()
     {
@@ -12,12 +14,14 @@ public class Projectile : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rb.AddForce(Vector3.Normalize(transform.forward) * Time.deltaTime * 100);
+        rb.velocity = Vector3.Normalize(transform.forward) * Time.deltaTime * 100;
     }
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Spell"))
-            return;
-        Destroy(transform.gameObject);
+        if (collider.CompareTag("Enemy"))
+        {
+            collider.transform.GetComponent<EnemyBehavior>().Damage(spell.Damage);
+            Destroy(transform.gameObject);
+        }
     }
 }

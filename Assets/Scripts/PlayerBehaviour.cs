@@ -7,15 +7,22 @@ public class PlayerBehaviour : MonoBehaviour
     public Race race;
     public PlayerEquipment playerEquipment;
     public GameObject go;
+    public Spell so;
     private PlayerStats playerStats;
 
     void Start()
     {
         //Start stats from race
         playerStats = new PlayerStats(race);
+
         playerEquipment = new PlayerEquipment();
-        playerEquipment.EquipItem(new Item(300));
-        playerEquipment.EquipSpell(new ProjectileSpell(go), 0);
+        playerEquipment.EquipItem(new Item(0));
+
+        go.GetComponent<Projectile>().spellSlot = 0;
+        go.GetComponent<Projectile>().spell = so;
+        ProjectileSpell fireball = new ProjectileSpell(go);
+        fireball.SetSpellStats(so);
+        playerEquipment.EquipSpell(fireball, 0);
     }
 
     public void AttackTarget(RaycastHit target)
@@ -38,6 +45,6 @@ public class PlayerBehaviour : MonoBehaviour
     }
     public float GetAttackCooldown()
     {
-        return playerStats.GetBaseAttackSpeed() / (playerEquipment.GetAttackSpeed() * 100 + 1);
+        return playerStats.GetBaseAttackSpeed() * 100 / (playerEquipment.GetAttackSpeed() + 100);
     }
 }
