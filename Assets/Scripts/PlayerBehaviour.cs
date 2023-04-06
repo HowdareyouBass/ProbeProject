@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    public Race race;
-    public PlayerEquipment playerEquipment;
-    public GameObject go;
-    public Spell so;
+    [SerializeField] private Race race;
+    [SerializeField] private PlayerEquipment playerEquipment;
+    [SerializeField] private GameObject go;
+    [SerializeField] private Spell so;
     private PlayerStats playerStats;
 
     void Start()
@@ -23,6 +23,11 @@ public class PlayerBehaviour : MonoBehaviour
         ProjectileSpell fireball = new ProjectileSpell(go);
         fireball.SetSpellStats(so);
         playerEquipment.EquipSpell(fireball, 0);
+    }
+
+    public void EquipItem(Item item)
+    {
+        playerEquipment.EquipItem(item);
     }
 
     public void AttackTarget(RaycastHit target)

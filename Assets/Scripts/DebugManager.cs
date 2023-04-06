@@ -23,6 +23,6 @@ public class DebugManager : MonoBehaviour
     public void AddItem()
     {
         Item item = new Item(Int16.Parse(addItemPanel.GetComponentInChildren<TMP_InputField>().text));
-        player.playerEquipment.EquipItem(item);
+        player.EquipItem(item);
     }
 }
