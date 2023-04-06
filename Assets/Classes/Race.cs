@@ -5,6 +5,7 @@ public class Race : ScriptableObject
 {
     public float attack;
     public float attackRange;
+    [Range(1f, 1.7f)]
     public float baseAttackSpeed;
     public float health;
     public float defense;

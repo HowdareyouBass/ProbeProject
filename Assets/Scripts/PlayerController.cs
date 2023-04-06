@@ -20,14 +20,6 @@ public class PlayerController : MonoBehaviour
     private bool canAttack = true;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            player.CastSpell(0);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            StopAction();
-        }
         if (timer >= 0.1f && Input.GetMouseButton(1))
         {
             OnClick();
@@ -181,7 +173,7 @@ public class PlayerController : MonoBehaviour
     {
         agent.SetDestination(transform.position);
     }
-    private void StopAction()
+    public void StopAction()
     {
         agent.SetDestination(transform.position);
         if (objectFollowing != null)

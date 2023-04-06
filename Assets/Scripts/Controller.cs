@@ -5,20 +5,18 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
     public PlayerBehaviour player;
+    public PlayerController playerController;
     public GameObject debugUI;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             player.CastSpell(0);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            playerController.StopAction();
         }
         if (Input.GetKeyDown(KeyCode.F12))
         {

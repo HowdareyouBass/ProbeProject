@@ -50,6 +50,6 @@ public class PlayerBehaviour : MonoBehaviour
     }
     public float GetAttackCooldown()
     {
-        return playerStats.GetBaseAttackSpeed() * 100 / (playerEquipment.GetAttackSpeed() + 100);
+        return playerStats.GetBaseAttackSpeed() * 100 / (playerEquipment.GetAttackSpeed() + 20);
     }
 }
