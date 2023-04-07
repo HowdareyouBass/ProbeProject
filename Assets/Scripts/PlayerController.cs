@@ -104,7 +104,6 @@ public class PlayerController : MonoBehaviour
                 //Stops attacking object that already died
                 if(target.transform.GetComponent<EnemyBehavior>().isDead)
                 {
-                    Debug.Log("ded");
                     yield break;
                 }
 

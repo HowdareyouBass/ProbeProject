@@ -6,7 +6,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Spell spell;
-    public int spellSlot;
+    public int projectileSpeed = 100;
     public Rigidbody rb;
     void Start()
     {
@@ -14,7 +14,7 @@ public class Projectile : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rb.velocity = Vector3.Normalize(transform.forward) * Time.deltaTime * 100;
+        rb.velocity = Vector3.Normalize(transform.forward) * Time.deltaTime * projectileSpeed;
     }
     private void OnTriggerEnter(Collider collider)
     {

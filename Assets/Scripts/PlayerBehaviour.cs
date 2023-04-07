@@ -5,29 +5,23 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField] private Race race;
-    [SerializeField] private PlayerEquipment playerEquipment;
-    [SerializeField] private GameObject go;
-    [SerializeField] private Spell so;
+    private PlayerEquipment playerEquipment;
     private PlayerStats playerStats;
 
     void Start()
     {
         //Start stats from race
         playerStats = new PlayerStats(race);
-
         playerEquipment = new PlayerEquipment();
-        playerEquipment.EquipItem(new Item(0));
-
-        go.GetComponent<Projectile>().spellSlot = 0;
-        go.GetComponent<Projectile>().spell = so;
-        ProjectileSpell fireball = new ProjectileSpell(go);
-        fireball.SetSpellStats(so);
-        playerEquipment.EquipSpell(fireball, 0);
     }
 
     public void EquipItem(Item item)
     {
         playerEquipment.EquipItem(item);
+    }
+    public void EquipSpell(SpellBase spell, int spellSlot)
+    {
+        playerEquipment.EquipSpell(spell, spellSlot);
     }
 
     public void AttackTarget(RaycastHit target)
