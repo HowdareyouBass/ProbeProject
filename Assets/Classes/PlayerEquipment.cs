@@ -3,22 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
 public class PlayerEquipment
 {   
     List<Item> m_Items;
-    SpellBase[] m_Spells;
+    Spell[] m_Spells;
     public PlayerEquipment()
     {
         m_Items = new List<Item>();
-        m_Spells = new SpellBase[5];
+        m_Spells = new Spell[5];
     }
     public void EquipItem(Item eqipped)
     {
         m_Items.Add(eqipped);
     }
 
-    public void EquipSpell(SpellBase spell, int spellSlot)
+    public void EquipSpell(Spell spell, int spellSlot)
     {
         m_Spells[0] = spell;
     }
@@ -33,7 +32,7 @@ public class PlayerEquipment
         return sum;
     }
 
-    public SpellBase GetSpell(int spellSlot)
+    public Spell GetSpell(int spellSlot)
     {
         return m_Spells[spellSlot];
     }

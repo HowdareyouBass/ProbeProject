@@ -19,7 +19,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         playerEquipment.EquipItem(item);
     }
-    public void EquipSpell(SpellBase spell, int spellSlot)
+    public void EquipSpell(Spell spell, int spellSlot)
     {
         playerEquipment.EquipSpell(spell, spellSlot);
     }
@@ -31,7 +31,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void CastSpell(int spellSlot)
     {
-        GameObject castEffect = Instantiate(playerEquipment.GetSpell(spellSlot).CastEffect(), transform.position, transform.rotation);
+        GameObject castEffect = Instantiate(playerEquipment.GetSpell(spellSlot).GetEffect(), transform.position, transform.rotation);
     }
 
     public float GetAttackRange()

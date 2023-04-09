@@ -10,11 +10,11 @@ public class DebugManager : MonoBehaviour
     public GameObject debugUI;
     public List<GameObject> spellPrefabsList;
 
-    private SpellBase GetSpellType(string type, string spellName)
+    private Spell GetSpellType(string type, string spellName)
     {
         if (type == "Projectile")
         {
-            if (spellName == "Fireball") return new ProjectileSpell(spellPrefabsList[0]);
+            if (spellName == "Fireball") return new Spell();
         }
         Debug.Log("ll");
         return null;
@@ -32,7 +32,7 @@ public class DebugManager : MonoBehaviour
         if (damageInput.text != "" &&
             slotInput.text != "")
         {
-            SpellBase spell = GetSpellType(spellType.captionText.text, spellName.captionText.text); 
+            Spell spell = GetSpellType(spellType.captionText.text, spellName.captionText.text); 
             player.EquipSpell(spell, Int16.Parse(slotInput.text));
         }
         else

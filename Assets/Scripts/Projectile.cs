@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
     {
         if (collider.CompareTag("Enemy"))
         {
-            collider.transform.GetComponent<EnemyBehavior>().Damage(spell.Damage);
+            collider.transform.GetComponent<EnemyBehavior>().Damage(spell.GetDamage());
             Destroy(transform.gameObject);
         }
     }
