@@ -5273,10 +5273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e933f4f8010dee5469fc82eb4a13c51b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1628607965}
-  debugUI: {fileID: 1487568327}
-  spellPrefabsList:
-  - {fileID: 7109850949513595945, guid: 1f82d6154d172d944851b7d312e1ad15, type: 3}
+  settingsSO: {fileID: 11400000, guid: eacba6f754c53a7479d520a3f725957d, type: 2}
 --- !u!1 &1628607958
 GameObject:
   m_ObjectHideFlags: 0

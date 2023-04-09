@@ -31,6 +31,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void CastSpell(int spellSlot)
     {
+        //Don't ask me about that please
+        playerEquipment.GetSpell(spellSlot).GetEffect().GetComponent<Projectile>().spell = playerEquipment.GetSpell(spellSlot);
         GameObject castEffect = Instantiate(playerEquipment.GetSpell(spellSlot).GetEffect(), transform.position, transform.rotation);
     }
 

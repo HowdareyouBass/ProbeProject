@@ -17,3 +17,7 @@ MonoBehaviour:
     m_SpellDamage: 50
     m_Effect: {fileID: 7109850949513595945, guid: 1f82d6154d172d944851b7d312e1ad15, type: 3}
     type: 1
+  - m_Name: Fireball100
+    m_SpellDamage: 100
+    m_Effect: {fileID: 7109850949513595945, guid: 1f82d6154d172d944851b7d312e1ad15, type: 3}
+    type: 1

@@ -19,7 +19,8 @@ public class PlayerEquipment
 
     public void EquipSpell(Spell spell, int spellSlot)
     {
-        m_Spells[0] = spell;
+        Debug.Log(spell.GetDamage());
+        m_Spells[spellSlot] = spell;
     }
 
     public int GetAttackSpeed()
