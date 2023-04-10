@@ -45,7 +45,20 @@ public class ExtendedEditorWindow : EditorWindow
             {
                 if (!string.IsNullOrEmpty(lastPropPath) && p.propertyPath.Contains(lastPropPath)) { continue; }
                 lastPropPath = p.propertyPath;
+
                 EditorGUILayout.PropertyField(p, new GUIContent (db.spells[spellIndex].GetName()));
+                if (p.isExpanded)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    if (GUILayout.Button("Delete Spell"))
+                    {
+                        db.spells.RemoveAt(spellIndex);
+                        p.isExpanded = false;
+                        serializedObject.ApplyModifiedProperties();
+                        serializedObject.Update();
+                    }
+                    EditorGUILayout.EndHorizontal();
+                }
                 spellIndex++;
             }
         }
