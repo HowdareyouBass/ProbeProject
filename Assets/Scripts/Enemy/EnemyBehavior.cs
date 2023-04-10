@@ -10,7 +10,7 @@ public class EnemyBehavior : MonoBehaviour
     public EnemyType type;
     public GameObject damageEffect;
     private EnemyStats enemy;
-    public bool isDead;
+    [HideInInspector] public bool isDead;
     
 
     void Start()

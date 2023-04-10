@@ -15,9 +15,13 @@ MonoBehaviour:
   spells:
   - m_Name: Fireball
     m_SpellDamage: 50
-    m_Effect: {fileID: 7109850949513595945, guid: 1f82d6154d172d944851b7d312e1ad15, type: 3}
-    type: 1
-  - m_Name: Gr
-    m_SpellDamage: 50
     m_Effect: {fileID: 7109850949513595945, guid: 4dcec31c226a64f4ab89333c73ffa670, type: 3}
-    type: 1
+    m_EffectOnImpact: {fileID: 0}
+    m_SpeedOfProjectile: 300
+    m_Type: 1
+  - m_Name: roll
+    m_SpellDamage: 0
+    m_Effect: {fileID: 0}
+    m_EffectOnImpact: {fileID: 0}
+    m_SpeedOfProjectile: 0
+    m_Type: 0

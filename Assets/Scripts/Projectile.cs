@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
             Destroy(transform.gameObject);
             if (spell.GetEffectOnImpact() == null)
             {
-                Debug.LogError("Spell Impact game object isn't assigned");
+                Debug.LogWarning("Spell Impact game object isn't assigned");
                 return;
             }
             Instantiate(spell.GetEffectOnImpact());

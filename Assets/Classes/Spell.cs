@@ -14,6 +14,11 @@ public class Spell
     [SerializeField] private int m_SpeedOfProjectile;
     [SerializeField] private Types m_Type = Types.none;
 
+    public Spell(string name)
+    {
+        m_Name = name;
+    }
+
     public string GetName()
     {
         return m_Name;
