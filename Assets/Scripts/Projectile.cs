@@ -6,10 +6,12 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Spell spell;
-    public int projectileSpeed = 100;
+    public int projectileSpeed;
     public Rigidbody rb;
     void Start()
     {
+        rb = transform.GetComponent<Rigidbody>();
+        projectileSpeed = spell.GetSpeed();
         Destroy(this.gameObject, 100f);
     }
     void FixedUpdate()
@@ -22,6 +24,12 @@ public class Projectile : MonoBehaviour
         {
             collider.transform.GetComponent<EnemyBehavior>().Damage(spell.GetDamage());
             Destroy(transform.gameObject);
+            if (spell.GetEffectOnImpact() == null)
+            {
+                Debug.LogError("Spell Impact game object isn't assigned");
+                return;
+            }
+            Instantiate(spell.GetEffectOnImpact());
         }
     }
 }

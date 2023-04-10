@@ -24,43 +24,48 @@ public class ExtendedEditorWindow : EditorWindow
 
     protected void DrawProperties(SerializedProperty prop, bool drawChildren, SpellDatabase db)
     {
-        string lastPropPath = string.Empty;
+        //string lastPropPath = string.Empty;
         int spellIndex = 0;
         foreach(SerializedProperty p in prop)
         {
-            if (p.isArray && p.propertyType == SerializedPropertyType.Generic)
+            EditorGUILayout.BeginHorizontal();
+            p.isExpanded = EditorGUILayout.Foldout(p.isExpanded, p.displayName);
+            EditorGUILayout.EndHorizontal();
+
+            //if (!string.IsNullOrEmpty(lastPropPath) && p.propertyPath.Contains(lastPropPath)) { continue; }
+            //lastPropPath = p.propertyPath;
+            
+            if (p.isExpanded)
             {
+                EditorGUI.indentLevel++;
+
+                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Name"));
+                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Effect"));
+                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_SpellDamage"));
+                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Type"));
+                
+                
+                if (db.spells[spellIndex].GetSpellType() == Spell.Types.projectile)
+                {
+                    EditorGUILayout.PropertyField(p.FindPropertyRelative("m_EffectOnImpact"));
+                    EditorGUILayout.PropertyField(p.FindPropertyRelative("m_SpeedOfProjectile"));
+                }
+                
+                
                 EditorGUILayout.BeginHorizontal();
-                p.isExpanded = EditorGUILayout.Foldout(p.isExpanded, p.displayName);
+                GUILayout.Space(20);
+                if (GUILayout.Button("Delete Spell"))
+                {
+                    db.spells.RemoveAt(spellIndex);
+                    p.isExpanded = false;
+                    serializedObject.ApplyModifiedProperties();
+                    serializedObject.Update();
+                }
                 EditorGUILayout.EndHorizontal();
 
-                if (p.isExpanded)
-                {
-                    EditorGUI.indentLevel++;
-                    DrawProperties(p, drawChildren, db);
-                    EditorGUI.indentLevel--;
-                }
+                EditorGUI.indentLevel--;
             }
-            else
-            {
-                if (!string.IsNullOrEmpty(lastPropPath) && p.propertyPath.Contains(lastPropPath)) { continue; }
-                lastPropPath = p.propertyPath;
-
-                EditorGUILayout.PropertyField(p, new GUIContent (db.spells[spellIndex].GetName()));
-                if (p.isExpanded)
-                {
-                    EditorGUILayout.BeginHorizontal();
-                    if (GUILayout.Button("Delete Spell"))
-                    {
-                        db.spells.RemoveAt(spellIndex);
-                        p.isExpanded = false;
-                        serializedObject.ApplyModifiedProperties();
-                        serializedObject.Update();
-                    }
-                    EditorGUILayout.EndHorizontal();
-                }
-                spellIndex++;
-            }
+            spellIndex++;
         }
     }
 }

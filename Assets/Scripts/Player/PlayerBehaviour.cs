@@ -31,9 +31,37 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void CastSpell(int spellSlot)
     {
+        Spell spell = playerEquipment.GetSpell(spellSlot);
+
+        if (spell == null)
+        {
+            Debug.LogWarning("No spell in a slot " + (spellSlot + 1).ToString());
+            return;
+        }
+
+        if (spell.GetSpellType() == Spell.Types.none)
+        {
+            Debug.LogWarning("Spell Type is none");
+            return;
+        }
+        
+
         //Don't ask me about that please
-        playerEquipment.GetSpell(spellSlot).GetEffect().GetComponent<Projectile>().spell = playerEquipment.GetSpell(spellSlot);
-        GameObject castEffect = Instantiate(playerEquipment.GetSpell(spellSlot).GetEffect(), transform.position, transform.rotation);
+        //spell.GetEffect().GetComponent<Projectile>().spell = spell;
+        GameObject castEffect = Instantiate(spell.GetEffect(), transform.position, transform.rotation);
+
+        if (spell.GetSpellType() == Spell.Types.projectile)
+        {
+            Rigidbody rb = castEffect.AddComponent<Rigidbody>();
+            rb.useGravity = false;
+
+            SphereCollider collider = castEffect.AddComponent<SphereCollider>();
+            collider.radius = 0.4f;
+            collider.isTrigger = true;
+
+            Projectile spellProjectileComponent = castEffect.AddComponent<Projectile>();
+            spellProjectileComponent.spell = spell;
+        }
     }
 
     public float GetAttackRange()
