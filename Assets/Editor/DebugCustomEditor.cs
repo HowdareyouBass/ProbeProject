@@ -9,9 +9,16 @@ public class DebugCustomEditor : Editor
     private bool showEquipSpell = false;
     private string spellName = string.Empty;
     private int spellSlot;
+    private bool isInPlaymode;
 
     public override void OnInspectorGUI()
     { 
+        isInPlaymode = Application.IsPlaying(target);
+        if (!isInPlaymode)
+        {
+            base.OnInspectorGUI();
+            return;
+        }
 
         DebugManager settings = target as DebugManager;
 
