@@ -9686,8 +9686,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ff39a18e4c7d9f419f91b162128b1d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spell: {fileID: 11400000, guid: f82c4aa052865cc46bd10fb07fd86f51, type: 2}
-  spellSlot: 0
+  spell:
+    m_Name: 0
+    m_SpellDamage: 0
+    m_Effect: {fileID: 0}
+    type: 0
+  projectileSpeed: 100
   rb: {fileID: 7109850949513595947}
 --- !u!54 &7109850949513595947
 Rigidbody:

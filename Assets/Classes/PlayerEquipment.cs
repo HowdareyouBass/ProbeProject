@@ -19,7 +19,6 @@ public class PlayerEquipment
 
     public void EquipSpell(Spell spell, int spellSlot)
     {
-        Debug.Log(spell.GetDamage());
         m_Spells[spellSlot] = spell;
     }
 
