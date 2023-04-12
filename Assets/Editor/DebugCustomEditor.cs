@@ -75,14 +75,14 @@ public class DebugCustomEditor : Editor
 
         foreach (Spell sp in db.spells)
         {
-            if (sp.GetName() == spellName)
+            if (sp.GetName().ToLower() == spellName.ToLower())
             {
                 spell = sp;
             }
         }
         foreach (Spell sp in db.spells)
         {
-            if (sp.GetName().Contains(spellName))
+            if (sp.GetName().ToLower().Contains(spellName.ToLower()))
             {
                 spell = sp;
             }

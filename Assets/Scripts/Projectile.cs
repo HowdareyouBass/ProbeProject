@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     public Spell spell;
     public int projectileSpeed;
     public Rigidbody rb;
+    public Vector3 targetRotation;
     void Start()
     {
         rb = transform.GetComponent<Rigidbody>();
