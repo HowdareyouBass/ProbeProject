@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour
     {
         rb = transform.GetComponent<Rigidbody>();
         projectileSpeed = spell.GetSpeed();
-        Destroy(this.gameObject, 100f);
+        Destroy(this.gameObject, 20f);
     }
     void FixedUpdate()
     {
@@ -29,7 +29,18 @@ public class Projectile : MonoBehaviour
                 Debug.LogWarning("Spell Impact game object isn't assigned");
                 return;
             }
-            Instantiate(spell.GetEffectOnImpact());
+            Instantiate(spell.GetEffectOnImpact(), transform);
+        }
+        if (collider.CompareTag("Obstacle"))
+        {
+            Destroy(transform.gameObject);
+            if (spell.GetEffectOnImpact() == null)
+            {
+                Debug.LogWarning("Spell Impact game object isn't assigned");
+                return;
+            }
+            Quaternion rot = Quaternion.LookRotation(collider.transform.position - transform.position);
+            Instantiate(spell.GetEffectOnImpact(), transform.position, rot);
         }
     }
 }

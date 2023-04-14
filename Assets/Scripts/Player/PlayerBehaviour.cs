@@ -7,6 +7,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private Race race;
     private PlayerEquipment playerEquipment;
     private PlayerStats playerStats;
+    private Spell currentSpell;
+    public bool isCastingSpell = false;
 
     void Start()
     {
@@ -31,36 +33,56 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void CastSpell(int spellSlot)
     {
-        Spell spell = playerEquipment.GetSpell(spellSlot);
-
-        if (spell == null)
+        currentSpell = playerEquipment.GetSpell(spellSlot);
+        
+        if (currentSpell == null)
         {
             Debug.LogWarning("No spell in a slot " + (spellSlot + 1).ToString());
             return;
         }
 
-        if (spell.GetSpellType() == Spell.Types.none)
+        #if UNITY_EDITOR
+        if (currentSpell.GetSpellType() == Spell.Types.none)
         {
             Debug.LogWarning("Spell Type is none");
             return;
         }
-        
+        #endif
 
-        //Don't ask me about that please
-        //spell.GetEffect().GetComponent<Projectile>().spell = spell;
-        GameObject castEffect = Instantiate(spell.GetEffect(), transform.position, transform.rotation);
 
-        if (spell.GetSpellType() == Spell.Types.projectile)
+        if (currentSpell.GetSpellType() == Spell.Types.projectile)
         {
+            isCastingSpell = false;
+
+            GameObject castEffect = Instantiate(currentSpell.GetEffect(), transform.position, transform.rotation);
+            // If spell type is projectile then we move projectile
             Rigidbody rb = castEffect.AddComponent<Rigidbody>();
             rb.useGravity = false;
 
+            //Collider so we can interract with anything
             SphereCollider collider = castEffect.AddComponent<SphereCollider>();
             collider.radius = 0.4f;
             collider.isTrigger = true;
 
+            //And projectile component
             Projectile spellProjectileComponent = castEffect.AddComponent<Projectile>();
-            spellProjectileComponent.spell = spell;
+            spellProjectileComponent.spell = currentSpell;
+        }
+
+        if (currentSpell.GetSpellType() == Spell.Types.directedAtEnemy)
+        {
+            //Set Cursor to something
+
+            isCastingSpell = true;
+        }
+    }
+
+    public void CastSpellAtTarget(RaycastHit target)
+    {
+        if (target.transform.CompareTag("Enemy"))
+        {
+            GameObject castEffect = Instantiate(currentSpell.GetEffect(), target.transform.position, Quaternion.identity);
+            isCastingSpell = false;
         }
     }
 

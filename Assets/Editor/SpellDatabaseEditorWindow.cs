@@ -5,7 +5,7 @@ public class SpellDatabaseEditorWindow : EditorWindow
 {
     private static SpellDatabase db;
     private SerializedObject serializedObject;
-    private string n = string.Empty;
+    private string searchName = string.Empty;
     public static void Open(SpellDatabase _db)
     {
         SpellDatabaseEditorWindow window = GetWindow<SpellDatabaseEditorWindow>("Spell Database Editor");
@@ -38,10 +38,12 @@ public class SpellDatabaseEditorWindow : EditorWindow
     private void DrawProperty(SerializedProperty prop, bool drawChildren)
     {
         int spellIndex = 0;
-        n = EditorGUILayout.TextField(n);
+        EditorGUILayout.LabelField("Search");
+        searchName = EditorGUILayout.TextField(searchName);
         foreach(SerializedProperty p in prop)
         {
-            if (!db.spells[spellIndex].GetName().ToLower().Contains(n.ToLower()) && !string.IsNullOrEmpty(n))
+            //if spell doesn't found in database then we go to next
+            if (!db.spells[spellIndex].GetName().ToLower().Contains(searchName.ToLower()) && !string.IsNullOrEmpty(searchName))
             {
                 spellIndex++;
                 continue;

@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     public PlayerBehaviour player;
-    public Camera playerCamera;
     public GameObject movementEffect;
     public NavMeshAgent agent;
     public float rotationSpeed;
@@ -16,37 +15,17 @@ public class PlayerController : MonoBehaviour
     private Coroutine lookingAtTarget;
     private NavMeshObstacle targetNavMesh;
     private float playerRadius = 1f;
-    private float timer = 0;
     private bool canAttack = true;
-    private void Update()
+
+    public void OnClick(RaycastHit hit)
     {
-        if (timer >= 0.1f && Input.GetMouseButton(1))
+        if (hit.transform.CompareTag("Enemy"))
         {
-            OnClick();
-            timer = 0f;
+            AttackTarget(hit);
         }
         else
         {
-            timer += Time.deltaTime;
-        }
-    }
-
-    private void OnClick()
-    {
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        
-        //If clicked on something
-        if (Physics.Raycast(ray, out hit))
-        {
-            if (hit.transform.CompareTag("Enemy"))
-            {
-                AttackTarget(hit);
-            }
-            else
-            {
-                MoveToTarget(hit);
-            }
+            MoveToTarget(hit);
         }
     }
 

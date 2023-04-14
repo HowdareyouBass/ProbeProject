@@ -3041,7 +3041,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -5213,7 +5213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1628607965}
   playerController: {fileID: 1628607964}
-  debugUI: {fileID: 1487568327}
+  playerCamera: {fileID: 963194227}
 --- !u!4 &1551235736
 Transform:
   m_ObjectHideFlags: 0
@@ -5359,7 +5359,7 @@ Transform:
   m_Children:
   - {fileID: 108488047}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &1628607963
 NavMeshAgent:
@@ -5396,7 +5396,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1628607965}
-  playerCamera: {fileID: 963194227}
   movementEffect: {fileID: 7590234846238662618, guid: 6b12e0f0193a1514883d49446593fbab, type: 3}
   agent: {fileID: 1628607963}
   rotationSpeed: 10
@@ -5413,6 +5412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   race: {fileID: 11400000, guid: dc1f2b643637e9a4385a2019bedddd5e, type: 2}
+  isCastingSpell: 1
 --- !u!1 &1629631870
 GameObject:
   m_ObjectHideFlags: 0
@@ -6442,7 +6442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4137471096652543767, guid: 4ec40bb81ca467f4984480a827605988, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4137471096652543767, guid: 4ec40bb81ca467f4984480a827605988, type: 3}
       propertyPath: m_LocalScale.x
@@ -6660,7 +6660,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8cc02d29f5b3eeb4b8b05a9a122ad26b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6703,7 +6703,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2077712117
 GameObject:
@@ -7113,7 +7113,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6746957540238612323, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6746957540238612323, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
       propertyPath: m_LocalPosition.x

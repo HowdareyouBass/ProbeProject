@@ -71,20 +71,33 @@ public class DebugCustomEditor : Editor
 
     private Spell FindSpellByName(SpellDatabase db)
     {
-       Spell spell = null;
+        Spell spell = null;
 
         foreach (Spell sp in db.spells)
         {
             if (sp.GetName() == spellName)
             {
+                Debug.Log("Found by ideal equal");
                 spell = sp;
+                break;
             }
-        }
-        foreach (Spell sp in db.spells)
-        {
+            if (sp.GetName().ToLower() == spellName.ToLower())
+            {
+                Debug.Log("Found by both to lower");
+                spell = sp;
+                break;
+            }
             if (sp.GetName().Contains(spellName))
             {
+                Debug.Log("Found by contatining");
                 spell = sp;
+                break;
+            }
+            if (sp.GetName().Contains(spellName.ToLower()))
+            {
+                Debug.Log("Found by contatining but spell name lower");
+                spell = sp;
+                break;
             }
         }
         return spell;
