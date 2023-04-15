@@ -20,8 +20,14 @@ MonoBehaviour:
     m_SpeedOfProjectile: 300
     m_Type: 1
   - m_Name: Explosion
-    m_SpellDamage: 0
+    m_SpellDamage: 30
     m_Effect: {fileID: 1084998522222095862, guid: 9db013d6353cbc241817a792501be25c, type: 3}
     m_EffectOnImpact: {fileID: 0}
     m_SpeedOfProjectile: 0
     m_Type: 2
+  - m_Name: Heal
+    m_SpellDamage: 0
+    m_Effect: {fileID: 0}
+    m_EffectOnImpact: {fileID: 0}
+    m_SpeedOfProjectile: 0
+    m_Type: 4

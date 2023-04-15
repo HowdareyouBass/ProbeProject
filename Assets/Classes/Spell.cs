@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine;
 
-[Serializable]
-public class Spell
+[System.Serializable]
+public class Spell : DatabaseItem
 {
     public enum Types { none, projectile, directedAtEnemy, directedAtGround, playerCast, custom }
-    [SerializeField] private string m_Name;
     [SerializeField] private float m_SpellDamage;
     [SerializeField] private GameObject m_Effect;
     [SerializeField] private GameObject m_EffectOnImpact;
@@ -19,10 +15,6 @@ public class Spell
         m_Name = name;
     }
 
-    public string GetName()
-    {
-        return m_Name;
-    }
     public float GetDamage()
     {
         return m_SpellDamage;

@@ -17,6 +17,11 @@ public class PlayerController : MonoBehaviour
     private float playerRadius = 1f;
     private bool canAttack = true;
 
+    void Start()
+    {
+        StopAction();
+    }
+
     public void OnClick(RaycastHit hit)
     {
         if (hit.transform.CompareTag("Enemy"))
@@ -43,7 +48,7 @@ public class PlayerController : MonoBehaviour
         objectAttacking = StartCoroutine(AttackTargetRoutine(target, targetMesurments.z));
         SpawnEffect(target.transform.position - new Vector3(0, targetMesurments.y / 2, 0), Vector3.up);
     }
-    private void LookAtTarget(RaycastHit target)
+    public void LookAtTarget(RaycastHit target)
     {
         if (lookingAtTarget != null)
             StopCoroutine(lookingAtTarget);
@@ -61,7 +66,7 @@ public class PlayerController : MonoBehaviour
             transform.forward = Vector3.MoveTowards(transform.forward, lookRotation, rotationSpeed * Time.deltaTime);
             yield return null;
         }
-    } 
+    }
     private IEnumerator AttackTargetRoutine(RaycastHit target, float targetRadius)
     {
         while (true)

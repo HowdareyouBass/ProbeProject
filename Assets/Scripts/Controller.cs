@@ -31,7 +31,12 @@ public class Controller : MonoBehaviour
             if (hit.colliderInstanceID == 0)
                 return;
 
-            player.CastSpellAtTarget(hit);
+            if (hit.transform.CompareTag("Enemy"))
+            {
+                playerController.StopAction();
+                playerController.LookAtTarget(hit);
+                player.CastSpellAtTarget(hit);
+            }
         }
     }
     

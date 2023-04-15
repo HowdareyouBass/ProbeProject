@@ -1,14 +1,17 @@
-using UnityEditor;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-public class SpellDatabaseEditorWindow : ExtendedEditorWindow
+public class ItemDatabaseEditorWindow : ExtendedEditorWindow
 {
-    private static SpellDatabase db;
+    private static ItemDatabase db;
     private string searchName;
 
-    public static void Open(SpellDatabase _db)
+
+    public static void Open(ItemDatabase _db)
     {
-        SpellDatabaseEditorWindow window = GetWindow<SpellDatabaseEditorWindow>("Spell Database Editor");
+        ItemDatabaseEditorWindow window = GetWindow<ItemDatabaseEditorWindow>("Item Database Editor");
         db = _db;
         window.serializedObject = new SerializedObject(db);
     }
@@ -19,17 +22,23 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
         {
             if (GUILayout.Button("File open"))
             {
-                db = Resources.Load<SpellDatabase>("SpellDatabase");
+                db = Resources.Load<ItemDatabase>("ItemDatabase");
                 serializedObject = new SerializedObject(db);
             }
             return;
         }
         serializedObject.ApplyModifiedProperties();
-        DrawProperties(serializedObject.FindProperty("spells"), true);
+        if (serializedObject.FindProperty("items") == null)
+        {
+            Debug.Log("BUFH");
+        }
+
+        DrawProperties(serializedObject.FindProperty("items"), true);
+        
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Add"))
         {
-            db.spells.Add(new Spell(""));
+            db.items.Add(new Item(""));
             serializedObject.Update();
         }
         EditorGUILayout.EndHorizontal();
@@ -37,17 +46,18 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
 
     private void DrawProperties(SerializedProperty prop, bool drawChildren)
     {
-        int spellIndex = 0;
+        int index = 0;
         EditorGUILayout.LabelField("Search");
         searchName = EditorGUILayout.TextField(searchName);
         foreach(SerializedProperty p in prop)
         {
             //if spell doesn't found in database then we go to next
-            if (!db.spells[spellIndex].GetName().ToLower().Contains(searchName.ToLower()) && !string.IsNullOrEmpty(searchName))
+            if (!db.items[index].GetName().ToLower().Contains(searchName.ToLower()) && !string.IsNullOrEmpty(searchName))
             {
-                spellIndex++;
+                index++;
                 continue;
             }
+
             EditorGUILayout.BeginHorizontal();
             p.isExpanded = EditorGUILayout.Foldout(p.isExpanded, p.displayName);
             EditorGUILayout.EndHorizontal();
@@ -57,23 +67,13 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
                 EditorGUI.indentLevel++;
 
                 EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Name"));
-                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Effect"));
-                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_SpellDamage"));
-                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Type"));
-                
-                
-                if (db.spells[spellIndex].GetSpellType() == Spell.Types.projectile)
-                {
-                    EditorGUILayout.PropertyField(p.FindPropertyRelative("m_EffectOnImpact"));
-                    EditorGUILayout.PropertyField(p.FindPropertyRelative("m_SpeedOfProjectile"));
-                }
-                
+                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_AttackSpeed"));
                 
                 EditorGUILayout.BeginHorizontal();
                 GUILayout.Space(20);
-                if (GUILayout.Button("Delete Spell"))
+                if (GUILayout.Button("Delete Item"))
                 {
-                    db.spells.RemoveAt(spellIndex);
+                    db.items.RemoveAt(index);
                     p.isExpanded = false;
                     serializedObject.ApplyModifiedProperties();
                     serializedObject.Update();
@@ -82,7 +82,7 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
 
                 EditorGUI.indentLevel--;
             }
-            spellIndex++;
+            index++;
         }
     }
 }

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82207898ba408544ea983329e80163be, type: 3}
-  m_Name: DebugSettings
+  m_Script: {fileID: 11500000, guid: 879fdffed7b245e47b5d394da52c3f16, type: 3}
+  m_Name: ItemDatabase
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  spellDatabase: {fileID: 11400000, guid: 6492cbfd84a5d9d40ab7ea1f5ea47c25, type: 2}
-  itemDatabase: {fileID: 11400000, guid: 42a129203578a54458655a99d83e3557, type: 2}
+  items:
+  - m_Name: Sword
+    m_AttackSpeed: 100

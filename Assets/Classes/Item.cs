@@ -1,12 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Item
+[System.Serializable]
+public class Item : DatabaseItem
 {
-    public Item(int attackSpeed)
+
+    [SerializeField] private int m_AttackSpeed;
+
+    public Item(string name)
     {
-        AttackSpeed = attackSpeed;
+        m_Name = name;
     }
-    public int AttackSpeed;
+
+    public int GetAttackSpeed()
+    {
+        return m_AttackSpeed;
+    }
 }

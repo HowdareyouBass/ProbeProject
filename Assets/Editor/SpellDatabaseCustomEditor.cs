@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -9,11 +7,16 @@ public class AssetHandler
     [OnOpenAsset()]
     public static bool OpenEditor(int instanceId, int line)
     {
-        SpellDatabase obj = EditorUtility.InstanceIDToObject(instanceId) as SpellDatabase;
-        if (obj != null)
+        SpellDatabase spelldb = EditorUtility.InstanceIDToObject(instanceId) as SpellDatabase;
+        ItemDatabase itemdb = EditorUtility.InstanceIDToObject(instanceId) as ItemDatabase;
+        if (spelldb != null)
         {
-            SpellDatabaseEditorWindow.Open(obj);
+            SpellDatabaseEditorWindow.Open(spelldb);
             return true;
+        }
+        if (itemdb != null)
+        {   
+            
         }
         return false;
     }

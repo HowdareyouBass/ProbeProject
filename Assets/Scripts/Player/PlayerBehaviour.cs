@@ -79,11 +79,9 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void CastSpellAtTarget(RaycastHit target)
     {
-        if (target.transform.CompareTag("Enemy"))
-        {
-            GameObject castEffect = Instantiate(currentSpell.GetEffect(), target.transform.position, Quaternion.identity);
-            isCastingSpell = false;
-        }
+        GameObject castEffect = Instantiate(currentSpell.GetEffect(), target.transform.position, Quaternion.identity);
+        target.transform.GetComponent<EnemyBehavior>().Damage(currentSpell.GetDamage());
+        isCastingSpell = false;
     }
 
     public float GetAttackRange()
