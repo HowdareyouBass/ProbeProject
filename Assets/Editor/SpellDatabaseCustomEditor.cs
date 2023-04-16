@@ -16,7 +16,8 @@ public class AssetHandler
         }
         if (itemdb != null)
         {   
-            
+            ItemDatabaseEditorWindow.Open(itemdb);
+            return true;
         }
         return false;
     }

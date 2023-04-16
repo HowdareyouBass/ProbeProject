@@ -17,12 +17,8 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
     {
         if (serializedObject == null)
         {
-            if (GUILayout.Button("File open"))
-            {
-                db = Resources.Load<SpellDatabase>("SpellDatabase");
-                serializedObject = new SerializedObject(db);
-            }
-            return;
+            db = Resources.Load<SpellDatabase>("SpellDatabase");
+            serializedObject = new SerializedObject(db);
         }
         serializedObject.ApplyModifiedProperties();
         DrawProperties(serializedObject.FindProperty("spells"), true);
@@ -54,21 +50,34 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
             
             if (p.isExpanded)
             {
+                Spell.Types spellType = db.spells[spellIndex].GetSpellType();
+
                 EditorGUI.indentLevel++;
 
                 EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Name"));
-                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Effect"));
-                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_SpellDamage"));
                 EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Type"));
-                
-                
-                if (db.spells[spellIndex].GetSpellType() == Spell.Types.projectile)
+
+                if (spellType == Spell.Types.passive)
                 {
+                    EditorGUILayout.PropertyField(p.FindPropertyRelative("m_PassiveStats"));
+                    EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Percents"));
+                }
+
+                if (spellType == Spell.Types.directedAtEnemy)
+                {
+                    EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Effect"));
+                    EditorGUILayout.PropertyField(p.FindPropertyRelative("m_SpellDamage"));
+                }
+                
+                if (spellType == Spell.Types.projectile)
+                {
+                    EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Effect"));
+                    EditorGUILayout.PropertyField(p.FindPropertyRelative("m_SpellDamage"));
                     EditorGUILayout.PropertyField(p.FindPropertyRelative("m_EffectOnImpact"));
                     EditorGUILayout.PropertyField(p.FindPropertyRelative("m_SpeedOfProjectile"));
                 }
                 
-                
+                //Delete Spell Button
                 EditorGUILayout.BeginHorizontal();
                 GUILayout.Space(20);
                 if (GUILayout.Button("Delete Spell"))

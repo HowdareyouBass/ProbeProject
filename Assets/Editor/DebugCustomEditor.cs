@@ -84,7 +84,7 @@ public class DebugCustomEditor : Editor
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
-        spellSlot = (Slot)EditorGUILayout.EnumFlagsField("Spell Slot", spellSlot);
+        spellSlot = (Slot)EditorGUILayout.EnumPopup("Spell Slot", spellSlot);
         EditorGUILayout.EndHorizontal();
 
         EditorGUI.indentLevel--;

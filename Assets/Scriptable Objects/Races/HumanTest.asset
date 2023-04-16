@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: 10
   attackRange: 1
+  attackSpeed: 20
   baseAttackSpeed: 1
   health: 100
   defense: 10

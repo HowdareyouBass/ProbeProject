@@ -11,10 +11,27 @@ public class PlayerEquipment
     {
         m_Items = new List<Item>();
         m_Spells = new Spell[5];
+        for (int i = 0; i < 5; i++)
+        {
+            m_Spells[i] = new Spell("");
+        }
     }
     public void EquipItem(Item eqipped)
     {
         m_Items.Add(eqipped);
+    }
+
+    public PlayerStats AddPassiveSpellsTo(PlayerStats stats)
+    {
+        foreach (Spell spell in m_Spells)
+        {
+            if (spell.GetSpellType() == Spell.Types.passive)
+            {
+                stats += spell.GetPassiveStats();
+                stats.ApplySpellPercents(spell.GetPercents());
+            }
+        }
+        return stats;
     }
 
     public void EquipSpell(Spell spell, int spellSlot)

@@ -20,12 +20,8 @@ public class ItemDatabaseEditorWindow : ExtendedEditorWindow
     {
         if (serializedObject == null)
         {
-            if (GUILayout.Button("File open"))
-            {
-                db = Resources.Load<ItemDatabase>("ItemDatabase");
-                serializedObject = new SerializedObject(db);
-            }
-            return;
+            db = Resources.Load<ItemDatabase>("ItemDatabase");
+            serializedObject = new SerializedObject(db);
         }
         serializedObject.ApplyModifiedProperties();
         if (serializedObject.FindProperty("items") == null)

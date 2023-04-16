@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class PlayerBehaviour : MonoBehaviour
     private PlayerStats playerStats;
     private Spell currentSpell;
     public bool isCastingSpell = false;
+
+    //public static event Action onEquipSpell;
 
     void Start()
     {
@@ -24,6 +27,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void EquipSpell(Spell spell, int spellSlot)
     {
         playerEquipment.EquipSpell(spell, spellSlot);
+        playerStats = playerEquipment.AddPassiveSpellsTo(playerStats);
     }
 
     public void AttackTarget(RaycastHit target)
@@ -94,6 +98,6 @@ public class PlayerBehaviour : MonoBehaviour
     }
     public float GetAttackCooldown()
     {
-        return playerStats.GetBaseAttackSpeed() * 100 / (playerEquipment.GetAttackSpeed() + 20);
+        return playerStats.GetBaseAttackSpeed() * 100 / (playerEquipment.GetAttackSpeed() + playerStats.GetAttackSpeed());
     }
 }
