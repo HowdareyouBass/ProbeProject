@@ -29,7 +29,7 @@ public class ItemDatabaseEditorWindow : ExtendedEditorWindow
             Debug.Log("BUFH");
         }
 
-        DrawProperties(serializedObject.FindProperty("items"), true);
+        DrawPropertiess(serializedObject.FindProperty("items"), true);
         
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Add"))
@@ -40,7 +40,7 @@ public class ItemDatabaseEditorWindow : ExtendedEditorWindow
         EditorGUILayout.EndHorizontal();
     }
 
-    private void DrawProperties(SerializedProperty prop, bool drawChildren)
+    private void DrawPropertiess(SerializedProperty prop, bool drawChildren)
     {
         int index = 0;
         EditorGUILayout.LabelField("Search");

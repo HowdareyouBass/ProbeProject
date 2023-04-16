@@ -23,6 +23,7 @@ public class DebugCustomEditor : Editor
         isInPlaymode = Application.IsPlaying(target);
         if (!isInPlaymode)
         {
+            EquipSpellEditorWindow.isInPlaymode = false;
             base.OnInspectorGUI();
             return;
         }
@@ -33,7 +34,8 @@ public class DebugCustomEditor : Editor
 
         if (GUILayout.Button("Equip Spell"))
         {
-            OnEquipSpellClick();
+            EquipSpellEditorWindow.Open(settings.settingsSO.spellDatabase);
+            //OnEquipSpellClick();
         }
         if (showEquipSpell)
         {
@@ -69,8 +71,8 @@ public class DebugCustomEditor : Editor
                 return;
             }
             spellName = string.Empty;
-            Debug.Log("<color=green>Spell Successfully Equiped</color>");
             settings.settingsSO.player.EquipSpell(spell, (int)spellSlot);
+            Debug.Log("<color=green>Spell Successfully Equiped</color>");
         }
         showEquipSpell = !showEquipSpell;
     }
