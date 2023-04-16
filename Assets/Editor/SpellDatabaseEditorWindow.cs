@@ -65,12 +65,6 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
         currentProperty = serializedObject.FindProperty("spells");
         EditorGUILayout.BeginHorizontal();
 
-        
-
-        EditorGUILayout.EndHorizontal();
-
-        EditorGUILayout.BeginHorizontal();
-
         EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(250), GUILayout.ExpandHeight(true));
         DrawSidebar(currentProperty);
         EditorGUILayout.EndVertical();
@@ -112,7 +106,7 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
         }
         else
         {
-            EditorGUILayout.LabelField("Select an item from the list");
+            EditorGUILayout.LabelField("Select spell from the list");
         }
         EditorGUILayout.EndVertical();
 

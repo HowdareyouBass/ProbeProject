@@ -15,3 +15,7 @@ MonoBehaviour:
   items:
   - m_Name: Sword
     m_AttackSpeed: 100
+  - m_Name: Flow
+    m_AttackSpeed: 0
+  - m_Name: Dude items are ready
+    m_AttackSpeed: 0

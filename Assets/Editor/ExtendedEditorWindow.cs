@@ -52,7 +52,7 @@ public class ExtendedEditorWindow : EditorWindow
                 if (GUILayout.Button(p.displayName))
                 {
                     selectedPropertyPath = p.propertyPath;
-                    propertyIndex = Int32.Parse(selectedPropertyPath[18].ToString());
+                    propertyIndex = GetIndexFromPropertyPath(selectedPropertyPath);
                 }
                 GUI.backgroundColor = new Color(1f, 1f, 1f);
             }
@@ -61,7 +61,7 @@ public class ExtendedEditorWindow : EditorWindow
                 if (GUILayout.Button(p.displayName))
                 {
                     selectedPropertyPath = p.propertyPath;
-                    propertyIndex = Int32.Parse(selectedPropertyPath[18].ToString());
+                    propertyIndex = GetIndexFromPropertyPath(selectedPropertyPath);
                 }
             }
         }
@@ -69,5 +69,18 @@ public class ExtendedEditorWindow : EditorWindow
         {
             selectedProperty = serializedObject.FindProperty(selectedPropertyPath);
         }
+    }
+
+    private int GetIndexFromPropertyPath(string path)
+    {
+        int digits = 0;
+        int i = 0;
+        //Get index when first number met
+        for (i = 1; !char.IsDigit(path[i]); i++);
+        //Get length of number
+        for (; char.IsDigit(path[i]); digits++, i++);
+        //Just to use same index
+        i -= digits;
+        return Int32.Parse(path.Substring(i, digits));
     }
 }
