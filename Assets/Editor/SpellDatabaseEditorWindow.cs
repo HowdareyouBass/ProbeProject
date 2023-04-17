@@ -17,33 +17,43 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
         projectileProperties = new List<string>
         {
             "Name",
-            "Type"
+            "Type",
+            "Spell Damage",
+            "Effect",
+            "Effect On Impact",
+            "Projectile Speed",
+            "Cast Range",
+            "Is Self Directed",
         };
 
         directedAtEnemyProperties = new List<string>
         {
             "Name",
             "Type",
+            "Spell Damage",
             "Effect",
-            "Range",
+            "Cast Range",
         };
 
         directedAtGroundProperties = new List<string>
         {
             "Name",
-            "Type"
+            "Type",
+            "Spell Damage",
         };
 
         passiveProperties = new List<string>
         {
             "Name",
-            "Type"
+            "Type",
+            "Spell Damage",
         };
 
         playerCastProperties = new List<string>
         {
             "Name",
-            "Type"
+            "Type",
+            "Spell Damage",
         };
     }
 

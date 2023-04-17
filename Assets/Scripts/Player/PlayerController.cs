@@ -55,9 +55,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator CastSpellOnTargetRoutine(RaycastHit target, float targetRadius)
     {
-        Debug.Log(player.GetCurrentSpellRange());
-        Debug.Log(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude);
-        while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude > player.GetCurrentSpellRange())
+        while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude > player.GetCurrentSpellCastRange() && player.GetCurrentSpellCastRange() != 0)
         {
             MoveToEntity(target.transform.position, targetRadius);
             yield return null;
@@ -69,9 +67,10 @@ public class PlayerController : MonoBehaviour
 
     private void AttackTarget(RaycastHit target)
     {
-        //Disable NavMeshObjstacle component so that agent dont't try to avoid target
+        //Enable previous enemy attacked NavMeshObstacle component
         if (targetNavMesh != null)
             targetNavMesh.enabled = true;
+        //Disable NavMeshObstacle component so that agent dont't try to avoid
         targetNavMesh = target.transform.GetComponent<NavMeshObstacle>();
         targetNavMesh.enabled = false;
 

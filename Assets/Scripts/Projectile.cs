@@ -6,17 +6,22 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Spell spell;
+    public RaycastHit target;
     public int projectileSpeed;
     public Rigidbody rb;
     void Start()
     {
         rb = transform.GetComponent<Rigidbody>();
-        projectileSpeed = spell.GetSpeed();
+        projectileSpeed = spell.GetProjectileSpeed();
         Destroy(this.gameObject, 20f);
+        if (spell.IsSelfDirected)
+        {
+            transform.forward = Vector3.Normalize(target.transform.position - transform.position) * Time.deltaTime * projectileSpeed;
+        }
     }
     void FixedUpdate()
     {
-        rb.velocity = transform.forward * Time.deltaTime * projectileSpeed;
+        rb.velocity = transform.forward * Time.deltaTime * projectileSpeed;   
     }
     private void OnTriggerEnter(Collider collider)
     {
@@ -31,7 +36,7 @@ public class Projectile : MonoBehaviour
             }
             Instantiate(spell.GetEffectOnImpact(), transform);
         }
-        if (collider.CompareTag("Obstacle"))
+        if (collider.CompareTag("Obstacle") && !spell.IsSelfDirected)
         {
             Destroy(transform.gameObject);
             if (spell.GetEffectOnImpact() == null)
