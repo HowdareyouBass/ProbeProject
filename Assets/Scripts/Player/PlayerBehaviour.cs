@@ -99,4 +99,9 @@ public class PlayerBehaviour : MonoBehaviour
     {
         return playerStats.GetBaseAttackSpeed() * 100 / (playerEquipment.GetAttackSpeed() + playerStats.GetAttackSpeed());
     }
+
+    public float GetCurrentSpellRange()
+    {
+        return currentSpell.GetRange();
+    }
 }

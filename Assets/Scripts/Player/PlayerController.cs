@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private Coroutine objectFollowing;
     private Coroutine objectAttacking;
+    private Coroutine objectSpellCasting;
     private Coroutine lookingAtTarget;
     private NavMeshObstacle targetNavMesh;
     private float playerRadius = 1f;
@@ -20,6 +21,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         StopAction();
+    }
+
+    public void CastSpell(int spellSlot)
+    {   
+        player.CastSpell(spellSlot);
     }
 
     public void OnClick(RaycastHit hit)
@@ -32,6 +38,33 @@ public class PlayerController : MonoBehaviour
         {
             MoveToTarget(hit);
         }
+    }
+
+    public void CastSpellOnTarget(RaycastHit target)
+    {
+        if (targetNavMesh != null)
+            targetNavMesh.enabled = true;
+        targetNavMesh = target.transform.GetComponent<NavMeshObstacle>();
+        targetNavMesh.enabled = false;
+
+        StopAction();
+        LookAtTarget(target);
+        Vector3 targetMesurments = target.collider.bounds.size;
+        objectSpellCasting = StartCoroutine(CastSpellOnTargetRoutine(target, targetMesurments.z));
+    }
+
+    private IEnumerator CastSpellOnTargetRoutine(RaycastHit target, float targetRadius)
+    {
+        Debug.Log(player.GetCurrentSpellRange());
+        Debug.Log(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude);
+        while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude > player.GetCurrentSpellRange())
+        {
+            MoveToEntity(target.transform.position, targetRadius);
+            yield return null;
+        }
+        StopMoving();
+        player.CastSpellAtTarget(target);
+        yield break;
     }
 
     private void AttackTarget(RaycastHit target)
@@ -149,7 +182,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 FindNearestPointToEntity(Vector3 entityPosition, float entityRadius)
     {
         Vector3 toPlayerFromEntityNormalized = Vector3.Normalize(transform.position - entityPosition) / 2;
-        return (entityPosition - transform.position) + toPlayerFromEntityNormalized * entityRadius + toPlayerFromEntityNormalized * playerRadius;
+        return (entityPosition - transform.position) + toPlayerFromEntityNormalized * (entityRadius + playerRadius);
     }
 
     private void StopMoving()
@@ -165,6 +198,8 @@ public class PlayerController : MonoBehaviour
             StopCoroutine(objectAttacking);
         if (lookingAtTarget != null)
             StopCoroutine(lookingAtTarget);
+        if (objectSpellCasting != null)
+            StopCoroutine(objectSpellCasting);
     }
 }
 

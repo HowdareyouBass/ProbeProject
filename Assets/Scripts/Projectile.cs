@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rb.velocity = Vector3.Normalize(transform.forward) * Time.deltaTime * projectileSpeed;
+        rb.velocity = transform.forward * Time.deltaTime * projectileSpeed;
     }
     private void OnTriggerEnter(Collider collider)
     {

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Controller : MonoBehaviour
-{    
-    public PlayerBehaviour player;
+{
     public PlayerController playerController;
     public Camera playerCamera;
 
@@ -16,15 +15,15 @@ public class Controller : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            player.CastSpell(0);
+            playerController.CastSpell(0);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             playerController.StopAction();
-            player.isCastingSpell = false;
+            playerController.player.isCastingSpell = false;
         }
         
-        if (Input.GetMouseButtonDown(0) && player.isCastingSpell)
+        if (Input.GetMouseButtonDown(0) && playerController.player.isCastingSpell)
         {
             RaycastHit hit = CastRayFromCamera();
 
@@ -33,9 +32,7 @@ public class Controller : MonoBehaviour
 
             if (hit.transform.CompareTag("Enemy"))
             {
-                playerController.StopAction();
-                playerController.LookAtTarget(hit);
-                player.CastSpellAtTarget(hit);
+                playerController.CastSpellOnTarget(hit);
             }
         }
     }
@@ -51,7 +48,7 @@ public class Controller : MonoBehaviour
                 return;
             playerController.OnClick(hit);
 
-            player.isCastingSpell = false;
+            playerController.player.isCastingSpell = false;
             timer = 0f;
         }
         else

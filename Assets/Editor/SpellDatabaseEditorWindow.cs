@@ -23,7 +23,9 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
         directedAtEnemyProperties = new List<string>
         {
             "Name",
-            "Type"
+            "Type",
+            "Effect",
+            "Range",
         };
 
         directedAtGroundProperties = new List<string>
@@ -50,8 +52,6 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
         SpellDatabaseEditorWindow window = GetWindow<SpellDatabaseEditorWindow>("Spell Database Editor");
         db = _db;
         window.serializedObject = new SerializedObject(db);
-
-        
     }
 
     private void OnGUI()

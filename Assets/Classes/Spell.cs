@@ -16,6 +16,9 @@ public class Spell : DatabaseItem
     [SerializeField] private GameObject m_EffectOnImpact;
     [SerializeField] private int m_SpeedOfProjectile;
 
+    //This is for Directed spells only
+    [SerializeField] private float m_Range;
+
     //This is for Passive only
     [SerializeField] private PlayerStats m_PassiveStats;
     [SerializeField] private Percents m_Percents;
@@ -25,35 +28,15 @@ public class Spell : DatabaseItem
         m_Name = name;
     }
 
-    public float GetDamage()
-    {
-        return m_SpellDamage;
-    }
+    public float GetDamage() { return m_SpellDamage; }
+    public float GetRange() { return m_Range / 50; }
 
-    public GameObject GetEffect()
-    {
-        return m_Effect;
-    }
-    public GameObject GetEffectOnImpact()
-    {
-        return m_EffectOnImpact;
-    }
+    public GameObject GetEffect() { return m_Effect; }
+    public GameObject GetEffectOnImpact() { return m_EffectOnImpact; }
 
-    public int GetSpeed()
-    {
-        return m_SpeedOfProjectile;
-    }
-    public Types GetSpellType()
-    {
-        return m_Type;
-    }
+    public int GetSpeed() { return m_SpeedOfProjectile; }
+    public Types GetSpellType() { return m_Type; }
 
-    public PlayerStats GetPassiveStats()
-    {
-        return m_PassiveStats;
-    }
-    public Percents GetPercents()
-    {
-        return m_Percents;
-    }
+    public PlayerStats GetPassiveStats() { return m_PassiveStats; }
+    public Percents GetPercents() { return m_Percents; }
 }
