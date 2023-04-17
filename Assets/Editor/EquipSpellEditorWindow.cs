@@ -5,23 +5,18 @@ using UnityEngine;
 
 public class EquipSpellEditorWindow : ExtendedEditorWindow
 {
+    public enum Slot {first, second, third, fourth, fifth};
     private static SpellDatabase db;
+    private static PlayerBehaviour player;
+    private Slot spellSlot;
     public static bool isInPlaymode = true;
 
-    //private static List<string> projectileProperties = new List<string>();
-
-    public static void Open(SpellDatabase _db)
+    public static void Open(SpellDatabase _db, PlayerBehaviour _player)
     {
         EquipSpellEditorWindow window = GetWindow<EquipSpellEditorWindow>("Equip Spell");
         db = _db;
+        player = _player;
         window.serializedObject = new SerializedObject(db);
-
-        //projectileProperties = new List<string>
-        //{
-        //    "Name",
-        //    "Type"
-        //};
-
     }
 
     private void OnGUI()
@@ -33,25 +28,21 @@ public class EquipSpellEditorWindow : ExtendedEditorWindow
         currentProperty = serializedObject.FindProperty("spells");
         EditorGUILayout.BeginHorizontal();
 
-        EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(150), GUILayout.ExpandHeight(true));
+        EditorGUILayout.BeginVertical();
+        spellSlot = (Slot)EditorGUILayout.EnumPopup("Spell Slot", spellSlot);
         DrawSidebar(currentProperty);
         EditorGUILayout.EndVertical();
 
-        EditorGUILayout.BeginVertical("box", GUILayout.ExpandHeight(true));
-        if (selectedProperty != null)
-        {
-            EditorGUILayout.LabelField("Here you can temporarely change spell stats");
-            if (db.spells[propertyIndex].GetSpellType() == Spell.Types.projectile)
-            {
-                //DrawPropertiesFromList(selectedProperty, projectileProperties, true);
-            }
-        }
-        else
-        {
-            EditorGUILayout.LabelField("Select an item from the list");
-        }
-        EditorGUILayout.EndVertical();
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.Space();
+        EditorGUILayout.BeginHorizontal();
 
+        if (GUILayout.Button("Equip"))
+        {
+            player.EquipSpell(db.spells[propertyIndex], (int)spellSlot);
+            Debug.Log("<color=green>Spell Equiped Successfully</color>");
+            Close();
+        }
         EditorGUILayout.EndHorizontal();
 
     }

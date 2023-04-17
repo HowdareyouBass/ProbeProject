@@ -6,11 +6,11 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
 {
     private static SpellDatabase db;
 
-    private static List<string> projectileProperties;
-    private static List<string> directedAtEnemyProperties;
-    private static List<string> directedAtGroundProperties;
-    private static List<string> passiveProperties;
-    private static List<string> playerCastProperties;
+    public static List<string> directedAtEnemyProperties {private set; get;}
+    public static List<string> projectileProperties{private set; get;}
+    public static List<string> directedAtGroundProperties {private set; get;}
+    public static List<string> passiveProperties {private set; get;}
+    public static List<string> playerCastProperties {private set; get;}
 
     public SpellDatabaseEditorWindow()
     {
@@ -92,7 +92,7 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
             }
             else if (spellType == Spell.Types.playerCast)
             {
-                DrawPropertiesFromList(selectedProperty,playerCastProperties, true);
+                DrawPropertiesFromList(selectedProperty, playerCastProperties, true);
             }
             else
             {

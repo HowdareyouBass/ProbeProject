@@ -11,13 +11,11 @@ public class PlayerBehaviour : MonoBehaviour
     private Spell currentSpell;
     public bool isCastingSpell = false;
 
-    //public static event Action onEquipSpell;
-
     void Start()
     {
         //Start stats from race
         playerStats = new PlayerStats(race);
-        playerEquipment = new PlayerEquipment();
+        playerEquipment = new PlayerEquipment();//d
     }
 
     public void EquipItem(Item item)
@@ -26,6 +24,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
     public void EquipSpell(Spell spell, int spellSlot)
     {
+        Debug.Log(playerEquipment == null);
         playerEquipment.EquipSpell(spell, spellSlot);
         playerStats = playerEquipment.AddPassiveSpellsTo(playerStats);
     }

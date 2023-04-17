@@ -34,7 +34,7 @@ public class DebugCustomEditor : Editor
 
         if (GUILayout.Button("Equip Spell"))
         {
-            EquipSpellEditorWindow.Open(settings.settingsSO.spellDatabase);
+            EquipSpellEditorWindow.Open(settings.settingsSO.spellDatabase, settings.settingsSO.player);
             //OnEquipSpellClick();
         }
         if (showEquipSpell)
