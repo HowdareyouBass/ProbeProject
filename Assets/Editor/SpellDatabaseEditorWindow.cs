@@ -47,6 +47,8 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
             "Name",
             "Type",
             "Spell Damage",
+            "Passive Stats",
+            "Percents",
         };
 
         playerCastProperties = new List<string>
@@ -75,7 +77,7 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
         currentProperty = serializedObject.FindProperty("spells");
         EditorGUILayout.BeginHorizontal();
 
-        EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(250), GUILayout.ExpandHeight(true));
+        EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(180), GUILayout.ExpandHeight(true));
         DrawSidebar(currentProperty);
         EditorGUILayout.EndVertical();
 

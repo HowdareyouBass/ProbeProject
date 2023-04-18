@@ -15,22 +15,21 @@ public class DebugCustomEditor : Editor
     private string itemName = string.Empty;
     private DebugManager settings;
 
-    public override void OnInspectorGUI()
-    { 
-        //Debug.Log("Spell Name: " + spellName);
-        //Debug.Log("Item Name: " + itemName);
+    private void OnEnable()
+    {
+        settings = target as DebugManager;
+        settings.settingsSO.player = GameObject.Find("/Player").GetComponent<PlayerBehaviour>();
+    }
 
+    public override void OnInspectorGUI()
+    {        
         isInPlaymode = Application.IsPlaying(target);
         if (!isInPlaymode)
         {
             EquipSpellEditorWindow.isInPlaymode = false;
             base.OnInspectorGUI();
             return;
-        }
-
-        settings = target as DebugManager;
-
-        settings.settingsSO.player = GameObject.Find("/Player").GetComponent<PlayerBehaviour>();
+        }        
 
         if (GUILayout.Button("Equip Spell"))
         {
@@ -44,7 +43,8 @@ public class DebugCustomEditor : Editor
 
         if(GUILayout.Button("Equip Item"))
         {
-            OnEquipItemClick();
+            EquipItemEditorWindow.Open(settings.settingsSO.itemDatabase, settings.settingsSO.player);
+            //OnEquipItemClick();
         }
         if (showEquipItem)
         {

@@ -87,8 +87,8 @@ MonoBehaviour:
     m_Effect: {fileID: 7109850949513595945, guid: 4dcec31c226a64f4ab89333c73ffa670, type: 3}
     m_CastRange: 300
     m_EffectOnImpact: {fileID: 1084998522222095862, guid: 9db013d6353cbc241817a792501be25c, type: 3}
-    m_ProjectileSpeed: 300
-    m_IsSelfDirected: 1
+    m_ProjectileSpeed: 100
+    m_IsSelfDirected: 0
     m_PassiveStats:
       m_MaxHealth: 0
       m_Attack: 0

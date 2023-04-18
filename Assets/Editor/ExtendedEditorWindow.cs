@@ -36,7 +36,6 @@ public class ExtendedEditorWindow : EditorWindow
 
     protected void DrawSidebar(SerializedProperty prop)
     {
-
         EditorGUILayout.LabelField("Search");
         searchName = EditorGUILayout.TextField(searchName);
         foreach(SerializedProperty p in prop)
