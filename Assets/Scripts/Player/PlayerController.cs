@@ -23,11 +23,6 @@ public class PlayerController : MonoBehaviour
         StopAction();
     }
 
-    public void CastSpell(int spellSlot)
-    {   
-        player.CastSpell(spellSlot);
-    }
-
     public void OnClick(RaycastHit hit)
     {
         if (hit.transform.CompareTag("Enemy"))
@@ -40,7 +35,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void CastSpellOnTarget(RaycastHit target)
+    public void CastSpell(int spellSlot, RaycastHit target)
     {
         if (targetNavMesh != null)
             targetNavMesh.enabled = true;
@@ -48,20 +43,21 @@ public class PlayerController : MonoBehaviour
         targetNavMesh.enabled = false;
 
         StopAction();
-        LookAtTarget(target);
         Vector3 targetMesurments = target.collider.bounds.size;
-        objectSpellCasting = StartCoroutine(CastSpellOnTargetRoutine(target, targetMesurments.z));
+        player.SetCurrentSpell(spellSlot);
+        objectSpellCasting = StartCoroutine(CastSpellOnTargetRoutine(target, targetMesurments.z, spellSlot));
     }
 
-    private IEnumerator CastSpellOnTargetRoutine(RaycastHit target, float targetRadius)
+    private IEnumerator CastSpellOnTargetRoutine(RaycastHit target, float targetRadius, int spellSlot)
     {
-        while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude > player.GetCurrentSpellCastRange() && player.GetCurrentSpellCastRange() != 0)
+        while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude > player.GetCurrentSpell().GetCastRange() && player.GetCurrentSpell().GetCastRange() != 0)
         {
             MoveToEntity(target.transform.position, targetRadius);
             yield return null;
         }
+        LookAtTargetRoutine(target);
         StopMoving();
-        player.CastSpellAtTarget(target);
+        player.CastSpellAtTarget(spellSlot, target);
         yield break;
     }
 

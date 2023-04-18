@@ -9,7 +9,7 @@ public class PlayerBehaviour : MonoBehaviour
     private PlayerEquipment playerEquipment;
     private PlayerStats playerStats;
     private Spell currentSpell;
-    public bool isCastingSpell = false;
+    //public bool isCastingSpell = false;
 
     void Start()
     {
@@ -57,10 +57,8 @@ public class PlayerBehaviour : MonoBehaviour
             if(currentSpell.IsSelfDirected)
             {
                 //Change Cursor here
-                isCastingSpell = true;
                 return;
             }
-            isCastingSpell = false;
 
             GameObject castEffect = Instantiate(currentSpell.GetEffect(), transform.position, transform.rotation);
             // If spell type is projectile then we move projectile with rigid body
@@ -80,14 +78,13 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (currentSpell.GetSpellType() == Spell.Types.directedAtEnemy)
         {
-            //Set Cursor to something
-
-            isCastingSpell = true;
+            
         }
     }
 
-    public void CastSpellAtTarget(RaycastHit target)
+    public void CastSpellAtTarget(int spellSlot, RaycastHit target)
     {
+        currentSpell = playerEquipment.GetSpell(spellSlot);
         if (currentSpell.GetSpellType() == Spell.Types.projectile)
         {
             GameObject castEffect = Instantiate(currentSpell.GetEffect(), transform.position, transform.rotation);
@@ -110,7 +107,6 @@ public class PlayerBehaviour : MonoBehaviour
             GameObject castEffect = Instantiate(currentSpell.GetEffect(), target.transform.position, Quaternion.identity);
             target.transform.GetComponent<EnemyBehavior>().Damage(currentSpell.GetDamage());
         }
-        isCastingSpell = false;
     }
 
     public float GetAttackRange()
@@ -126,8 +122,13 @@ public class PlayerBehaviour : MonoBehaviour
         return playerStats.GetBaseAttackSpeed() * 100 / (playerEquipment.GetAttackSpeed() + playerStats.GetAttackSpeed());
     }
 
-    public float GetCurrentSpellCastRange()
+    public Spell GetCurrentSpell()
     {
-        return currentSpell.GetCastRange();
+        return currentSpell;
+    }
+
+    public void SetCurrentSpell(int spellSlot)
+    {
+        currentSpell = playerEquipment.GetSpell(spellSlot);
     }
 }
