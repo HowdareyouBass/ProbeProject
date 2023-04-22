@@ -33,10 +33,10 @@ public class PlayerBehaviour : MonoBehaviour
         target.transform.GetComponent<EnemyBehavior>().Damage(playerStats.GetAttackDamage());
     }
 
-    public void CastSpell(int spellSlot)
+    public void CastSpellAtTarget(int spellSlot, RaycastHit target)
     {
         currentSpell = playerEquipment.GetSpell(spellSlot);
-        
+
         if (currentSpell == null)
         {
             Debug.LogWarning("No spell in a slot " + (spellSlot + 1).ToString());
@@ -51,40 +51,6 @@ public class PlayerBehaviour : MonoBehaviour
         }
         #endif
 
-
-        if (currentSpell.GetSpellType() == Spell.Types.projectile)
-        {
-            if(currentSpell.IsSelfDirected)
-            {
-                //Change Cursor here
-                return;
-            }
-
-            GameObject castEffect = Instantiate(currentSpell.GetEffect(), transform.position, transform.rotation);
-            // If spell type is projectile then we move projectile with rigid body
-            Rigidbody rb = castEffect.AddComponent<Rigidbody>();
-            rb.useGravity = false;
-
-            //Collider so we can interract with anything
-            SphereCollider collider = castEffect.AddComponent<SphereCollider>();
-            collider.radius = 0.4f;
-            collider.isTrigger = true;
-
-            //And projectile component
-            Projectile spellProjectileComponent = castEffect.AddComponent<Projectile>();
-            spellProjectileComponent.spell = currentSpell;
-            
-        }
-
-        if (currentSpell.GetSpellType() == Spell.Types.directedAtEnemy)
-        {
-            
-        }
-    }
-
-    public void CastSpellAtTarget(int spellSlot, RaycastHit target)
-    {
-        currentSpell = playerEquipment.GetSpell(spellSlot);
         if (currentSpell.GetSpellType() == Spell.Types.projectile)
         {
             GameObject castEffect = Instantiate(currentSpell.GetEffect(), transform.position, transform.rotation);

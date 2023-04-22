@@ -16,7 +16,6 @@ public class Spell : DatabaseItem
     //This is for Projectile only
     [SerializeField] private GameObject m_EffectOnImpact;
     [SerializeField] private int m_ProjectileSpeed;
-    [SerializeField] private bool m_IsSelfDirected;
 
     //This is for Directed spells only
 
@@ -24,12 +23,13 @@ public class Spell : DatabaseItem
     [SerializeField] private PlayerStats m_PassiveStats;
     [SerializeField] private Percents m_Percents;
 
+    //This is for Player cast only
+    
+
     public Spell(string name)
     {
         m_Name = name;
     }
-
-    public bool IsSelfDirected { get => m_IsSelfDirected; }
 
     public float GetDamage() { return m_SpellDamage; }
     public float GetCastRange() { return m_CastRange / 50; }
