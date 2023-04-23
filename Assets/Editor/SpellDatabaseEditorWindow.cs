@@ -31,8 +31,10 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
             "Name",
             "Type",
             "Spell Damage",
-            "Effect",
+            "Effect On Impact",
             "Cast Range",
+            "Have Radius On Impact",
+            "Radius On Impact",
         };
 
         directedAtGroundProperties = new List<string>
@@ -40,6 +42,9 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
             "Name",
             "Type",
             "Spell Damage",
+            "Effect On Impact",
+            "Cast Range",
+            "Radius On Impact",
         };
 
         passiveProperties = new List<string>

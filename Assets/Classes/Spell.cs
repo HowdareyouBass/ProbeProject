@@ -10,14 +10,16 @@ public class Spell : DatabaseItem
     [SerializeField] private Types m_Type = Types.none;
     
     //This is for Projectiles and Directed spells
-    [SerializeField] private GameObject m_Effect;
+    [SerializeField] private GameObject m_EffectOnImpact;
     [SerializeField] private float m_CastRange;
 
     //This is for Projectile only
-    [SerializeField] private GameObject m_EffectOnImpact;
+    [SerializeField] private GameObject m_Effect;
     [SerializeField] private int m_ProjectileSpeed;
 
     //This is for Directed spells only
+    [SerializeField] private bool m_HaveRadiusOnImpact;
+    [SerializeField] private float m_RadiusOnImpact;
 
     //This is for Passive only
     [SerializeField] private PlayerStats m_PassiveStats;
@@ -31,8 +33,10 @@ public class Spell : DatabaseItem
         m_Name = name;
     }
 
+    public bool HaveRadiusOnImpact { get => m_HaveRadiusOnImpact; }
     public float GetDamage() { return m_SpellDamage; }
     public float GetCastRange() { return m_CastRange / 50; }
+    public float GetRadiusOnImpact() { return m_RadiusOnImpact; }
 
     public GameObject GetEffect() { return m_Effect; }
     public GameObject GetEffectOnImpact() { return m_EffectOnImpact; }

@@ -12,8 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private Coroutine playerIsFollowing;
     private Coroutine playerIsAttacking;
-    private Coroutine objectSpellCasting;
-    private Coroutine lockedAtTarget;
+    private Coroutine playerSpellCasting;
     private Coroutine lookingAtTarget;
     private NavMeshObstacle targetNavMesh;
     private float playerRadius = 1f;
@@ -38,18 +37,29 @@ public class PlayerController : MonoBehaviour
 
     public void CastSpell(int spellSlot, RaycastHit target)
     {
+        player.SetCurrentSpell(spellSlot);
+        Spell.Types spellType = player.GetCurrentSpell().GetSpellType();
+        if (target.transform.CompareTag("Enemy") && spellType == Spell.Types.directedAtEnemy)
+        {
+            CastSpellOnEnemy(target);
+        }
+        else if (spellType == Spell.Types.directedAtGround)
+        {
+            CastSpellOnGround(target);
+        }
+    }
+
+    private void CastSpellOnEnemy(RaycastHit target)
+    {
         if (targetNavMesh != null)
             targetNavMesh.enabled = true;
         targetNavMesh = target.transform.GetComponent<NavMeshObstacle>();
         targetNavMesh.enabled = false;
-
-        StopAction();
         Vector3 targetMesurments = target.collider.bounds.size;
-        player.SetCurrentSpell(spellSlot);
-        objectSpellCasting = StartCoroutine(CastSpellOnTargetRoutine(target, targetMesurments.z, spellSlot));
+        StopAction();
+        playerSpellCasting = StartCoroutine(CastSpellOnTargetRoutine(target, targetMesurments.z));
     }
-
-    private IEnumerator CastSpellOnTargetRoutine(RaycastHit target, float targetRadius, int spellSlot)
+    private IEnumerator CastSpellOnTargetRoutine(RaycastHit target, float targetRadius)
     {
         while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude > player.GetCurrentSpell().GetCastRange() && player.GetCurrentSpell().GetCastRange() != 0)
         {
@@ -58,7 +68,73 @@ public class PlayerController : MonoBehaviour
         }
         StopMoving();
         LookAtTarget(target);
-        player.CastSpellAtTarget(spellSlot, target);
+        player.CastSpell(target);
+        yield break;
+    }
+
+    public void LookAtTarget(RaycastHit target)
+    {
+        if (lookingAtTarget != null)
+            StopCoroutine(lookingAtTarget);
+        lookingAtTarget = StartCoroutine(LookAtTargetRoutine(target));
+    }
+    private IEnumerator LookAtTargetRoutine(RaycastHit target)
+    {
+        Vector3 lookRotation = target.transform.position - transform.position;
+        float delta = 0.001f;
+        //Difference between desired looking rotation and current looking rotation
+        Vector3 difference = lookRotation - transform.forward;
+        while(Mathf.Abs(difference.x) > delta || Mathf.Abs(difference.z) > delta)
+        {
+            if (target.transform == null)
+                yield break;
+            lookRotation = target.transform.position - transform.position;
+            //Set y to 0 so that player GameObject don't rotate up and down
+            lookRotation.y = 0;
+            transform.forward = Vector3.MoveTowards(transform.forward, lookRotation, rotationSpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    private void CastSpellOnGround(RaycastHit target)
+    {
+        StopAction();
+        playerSpellCasting = StartCoroutine(CastSpellOnGroundRoutine(target));
+    }
+    private IEnumerator CastSpellOnGroundRoutine(RaycastHit target)
+    {
+        while(FindNearestPointToEntity(target.point, 0).magnitude > player.GetCurrentSpell().GetCastRange() && player.GetCurrentSpell().GetCastRange() != 0)
+        {
+            MoveToEntity(target.point, 0);
+            yield return null;
+        }
+        StopMoving();
+        LookAtPoint(target.point);
+        player.CastSpell(target);
+        yield break;
+    }
+
+    private void LookAtPoint(Vector3 point)
+    {
+        if (lookingAtTarget != null)
+            StopCoroutine(lookingAtTarget);
+        lookingAtTarget = StartCoroutine(LookAtPointRoutine(point));
+    }
+
+    private IEnumerator LookAtPointRoutine(Vector3 point)
+    {
+        Vector3 lookRotation = point - transform.position;
+        float delta = 0.001f;
+        //Difference between desired looking rotation and current looking rotation
+        Vector3 difference = lookRotation - transform.forward;
+        while(Mathf.Abs(difference.x) > delta || Mathf.Abs(difference.z) > delta)
+        {
+            lookRotation = point - transform.position;
+            //Set y to 0 so that player GameObject don't rotate up and down
+            lookRotation.y = 0;
+            transform.forward = Vector3.MoveTowards(transform.forward, lookRotation, rotationSpeed * Time.deltaTime);
+            yield return null;
+        }
         yield break;
     }
 
@@ -77,50 +153,6 @@ public class PlayerController : MonoBehaviour
         Vector3 targetMesurments = target.collider.bounds.size;
         playerIsAttacking = StartCoroutine(AttackTargetRoutine(target, targetMesurments.z));
         SpawnEffect(target.transform.position - new Vector3(0, targetMesurments.y / 2, 0), Vector3.up);
-    }
-
-
-    public void LockAtTarget(RaycastHit target)
-    {
-        if (lockedAtTarget != null)
-            StopCoroutine(lockedAtTarget);
-        lockedAtTarget = StartCoroutine(LockAtTargetRoutine(target));
-    }
-    public void LookAtTarget(RaycastHit target)
-    {
-        if (lookingAtTarget != null)
-            StopCoroutine(lookingAtTarget);
-        lookingAtTarget = StartCoroutine(LookAtTargetRoutine(target));
-    }
-    private IEnumerator LockAtTargetRoutine(RaycastHit target)
-    {
-        Vector3 lookRotation = target.transform.position - transform.position;
-        while(true)
-        {
-            if (target.transform == null)
-                yield break;
-            lookRotation = target.transform.position - transform.position;
-            lookRotation.y = 0;
-            transform.forward = Vector3.MoveTowards(transform.forward, lookRotation, rotationSpeed * Time.deltaTime);
-            yield return null;
-        }
-    }
-    private IEnumerator LookAtTargetRoutine(RaycastHit target)
-    {
-        Vector3 lookRotation = target.transform.position - transform.position;
-        float delta = 0.001f;
-        //Difference between desired looking rotation and current looking rotation
-        Vector3 difference = lookRotation - transform.forward;
-        while(Mathf.Abs(difference.x) > delta || Mathf.Abs(difference.z) > delta)
-        {
-            if (target.transform == null)
-                yield break;
-            lookRotation = target.transform.position - transform.position;
-            //Set y to 0 so that player GameObject don't rotate up and down
-            lookRotation.y = 0;
-            transform.forward = Vector3.MoveTowards(transform.forward, lookRotation, rotationSpeed * Time.deltaTime);
-            yield return null;
-        }
     }
     private IEnumerator AttackTargetRoutine(RaycastHit target, float targetRadius)
     {
@@ -203,6 +235,10 @@ public class PlayerController : MonoBehaviour
     }
     private Vector3 FindNearestPointToEntity(Vector3 entityPosition, float entityRadius)
     {
+        if (entityRadius == 0)
+        {
+            return entityPosition - transform.position;
+        }
         Vector3 toPlayerFromEntityNormalized = Vector3.Normalize(transform.position - entityPosition) / 2;
         return (entityPosition - transform.position) + toPlayerFromEntityNormalized * (entityRadius + playerRadius);
     }
@@ -218,12 +254,10 @@ public class PlayerController : MonoBehaviour
             StopCoroutine(playerIsFollowing);
         if (playerIsAttacking != null)
             StopCoroutine(playerIsAttacking);
-        if (lockedAtTarget != null)
-            StopCoroutine(lockedAtTarget);
         if (lookingAtTarget != null)
             StopCoroutine(lookingAtTarget);
-        if (objectSpellCasting != null)
-            StopCoroutine(objectSpellCasting);
+        if (playerSpellCasting != null)
+            StopCoroutine(playerSpellCasting);
     }
 }
 

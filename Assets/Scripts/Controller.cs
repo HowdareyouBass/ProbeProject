@@ -17,12 +17,10 @@ public class Controller : MonoBehaviour
         {
             RaycastHit hit = CastRayFromCamera();
 
+            //If clicked on something
             if (hit.colliderInstanceID == 0)
                 return;
-            if (hit.transform.CompareTag("Enemy"))
-            {
-                playerController.CastSpell(0, hit);
-            }
+            playerController.CastSpell(0, hit);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {

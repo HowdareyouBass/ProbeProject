@@ -33,13 +33,11 @@ public class PlayerBehaviour : MonoBehaviour
         target.transform.GetComponent<EnemyBehavior>().Damage(playerStats.GetAttackDamage());
     }
 
-    public void CastSpellAtTarget(int spellSlot, RaycastHit target)
+    public void CastSpell(RaycastHit target)
     {
-        currentSpell = playerEquipment.GetSpell(spellSlot);
-
         if (currentSpell == null)
         {
-            Debug.LogWarning("No spell in a slot " + (spellSlot + 1).ToString());
+            Debug.LogWarning("No spell in a slot ");
             return;
         }
 
@@ -58,7 +56,7 @@ public class PlayerBehaviour : MonoBehaviour
             Rigidbody rb = castEffect.AddComponent<Rigidbody>();
             rb.useGravity = false;
 
-            //Collider so we can interract with anything
+            //Collider so we can interract with enemy
             SphereCollider collider = castEffect.AddComponent<SphereCollider>();
             collider.radius = 0.4f;
             collider.isTrigger = true;
@@ -70,8 +68,19 @@ public class PlayerBehaviour : MonoBehaviour
         }
         if (currentSpell.GetSpellType() == Spell.Types.directedAtEnemy)
         {
-            GameObject castEffect = Instantiate(currentSpell.GetEffect(), target.transform.position, Quaternion.identity);
+            GameObject castEffect = Instantiate(currentSpell.GetEffectOnImpact(), target.transform.position, Quaternion.identity);
+            if (currentSpell.HaveRadiusOnImpact)
+            {
+                Explosion spellExplosionComponent = castEffect.AddComponent<Explosion>();
+                spellExplosionComponent.spell = currentSpell;
+            }
             target.transform.GetComponent<EnemyBehavior>().Damage(currentSpell.GetDamage());
+        }
+        if (currentSpell.GetSpellType() == Spell.Types.directedAtGround)
+        {
+            GameObject castEffect = Instantiate(currentSpell.GetEffectOnImpact(), target.point, Quaternion.identity);
+            Explosion spellExplosionComponent = castEffect.AddComponent<Explosion>();
+            spellExplosionComponent.spell = currentSpell;
         }
     }
 
