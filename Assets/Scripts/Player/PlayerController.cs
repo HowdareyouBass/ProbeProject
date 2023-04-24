@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         player.SetCurrentSpell(spellSlot);
         Spell.Types spellType = player.GetCurrentSpell().GetSpellType();
-        if (target.transform.CompareTag("Enemy") && spellType == Spell.Types.directedAtEnemy)
+        if (target.transform.CompareTag("Enemy"))
         {
             CastSpellOnEnemy(target);
         }

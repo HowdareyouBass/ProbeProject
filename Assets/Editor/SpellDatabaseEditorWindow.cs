@@ -109,6 +109,7 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
             }
             else if (spellType == Spell.Types.playerCast)
             {
+                EditorGUILayout.LabelField("Still in development and could be deleted so dont't use");
                 DrawPropertiesFromList(selectedProperty, playerCastProperties, true);
             }
             else
