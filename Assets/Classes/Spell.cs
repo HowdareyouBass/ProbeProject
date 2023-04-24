@@ -22,11 +22,11 @@ public class Spell : DatabaseItem
     [SerializeField] private float m_RadiusOnImpact;
 
     //This is for Passive only
-    [SerializeField] private PlayerStats m_PassiveStats;
+    [SerializeField] private PassiveSpellStats m_PassiveStats;
     [SerializeField] private Percents m_Percents;
 
     //This is for Player cast only
-    
+    [SerializeField] private StatusEffect m_StatusEffect;
 
     public Spell(string name)
     {
@@ -34,16 +34,20 @@ public class Spell : DatabaseItem
     }
 
     public bool HaveRadiusOnImpact { get => m_HaveRadiusOnImpact; }
+
     public float GetDamage() { return m_SpellDamage; }
-    public float GetCastRange() { return m_CastRange / 50; }
-    public float GetRadiusOnImpact() { return m_RadiusOnImpact; }
-
-    public GameObject GetEffect() { return m_Effect; }
-    public GameObject GetEffectOnImpact() { return m_EffectOnImpact; }
-
-    public int GetProjectileSpeed() { return m_ProjectileSpeed; }
     public Types GetSpellType() { return m_Type; }
 
-    public PlayerStats GetPassiveStats() { return m_PassiveStats; }
+    public GameObject GetEffectOnImpact() { return m_EffectOnImpact; }
+    public float GetCastRange() { return m_CastRange / 50; }
+
+    public GameObject GetEffect() { return m_Effect; }
+    public int GetProjectileSpeed() { return m_ProjectileSpeed; }
+
+    public float GetRadiusOnImpact() { return m_RadiusOnImpact; }
+
+    public PassiveSpellStats GetPassiveStats() { return m_PassiveStats; }
     public Percents GetPercents() { return m_Percents; }
+
+    public StatusEffect GetStatusEffect() { return m_StatusEffect; }
 }

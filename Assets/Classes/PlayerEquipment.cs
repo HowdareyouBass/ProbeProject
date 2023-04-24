@@ -27,8 +27,7 @@ public class PlayerEquipment
         {
             if (spell.GetSpellType() == Spell.Types.passive)
             {
-                stats += spell.GetPassiveStats();
-                stats.ApplySpellPercents(spell.GetPercents());
+                stats.ApplyPassiveSpell(spell);
             }
         }
         return stats;

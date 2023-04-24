@@ -41,11 +41,18 @@ public class PlayerController : MonoBehaviour
         Spell.Types spellType = player.GetCurrentSpell().GetSpellType();
         if (target.transform.CompareTag("Enemy"))
         {
-            CastSpellOnEnemy(target);
+            if (spellType == Spell.Types.projectile || spellType == Spell.Types.directedAtEnemy)
+            {
+                CastSpellOnEnemy(target);
+            }
         }
         else if (spellType == Spell.Types.directedAtGround)
         {
             CastSpellOnGround(target);
+        }
+        else if (spellType == Spell.Types.playerCast)
+        {
+            player.CastSpell(target);
         }
     }
 

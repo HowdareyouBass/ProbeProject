@@ -82,6 +82,21 @@ public class PlayerBehaviour : MonoBehaviour
             Explosion spellExplosionComponent = castEffect.AddComponent<Explosion>();
             spellExplosionComponent.spell = currentSpell;
         }
+        if (currentSpell.GetSpellType() == Spell.Types.playerCast)
+        {
+            Debug.Log("Casted something on yourself");
+            StartCoroutine(currentSpell.GetStatusEffect().StartEffect(this));
+        }
+    }
+
+    public void ApplyStatusEffect(StatusEffect effect)
+    {
+        playerStats.ApplyStatusEffect(effect);
+    }
+
+    public void DeapplyStatusEffect(StatusEffect effect)
+    {
+        playerStats.DeapplyStatusEffect(effect);
     }
 
     public float GetAttackRange()
