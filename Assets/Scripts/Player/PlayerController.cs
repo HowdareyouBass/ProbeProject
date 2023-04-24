@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public NavMeshAgent agent;
     public float rotationSpeed;
 
+    public GameEvent OnPlayerAttack;
+
     private Coroutine playerIsFollowing;
     private Coroutine playerIsAttacking;
     private Coroutine playerSpellCasting;
@@ -17,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private NavMeshObstacle targetNavMesh;
     private float playerRadius = 1f;
     private bool canAttack = true;
+
 
     void Start()
     {
@@ -175,6 +178,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (canAttack)
                 {
+                    OnPlayerAttack.TriggerEvent();
                     player.AttackTarget(target);
                     StartCoroutine(WaitForNextAttack());
                 }

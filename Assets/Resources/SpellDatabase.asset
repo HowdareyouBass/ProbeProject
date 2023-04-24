@@ -28,9 +28,13 @@ MonoBehaviour:
       m_AttackPercent: 0
       m_MaxHealthPercent: 0
     m_StatusEffect:
-      m_Duration: 0
+      m_DurationInSeconds: 0
+      m_StartCount: 0
+      m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
+      m_DecreaseCount:
+        gameEvent: {fileID: 0}
   - m_Name: Passive Test
     m_SpellDamage: 0
     m_Type: 5
@@ -46,9 +50,13 @@ MonoBehaviour:
       m_AttackPercent: 1
       m_MaxHealthPercent: 0
     m_StatusEffect:
-      m_Duration: 0
+      m_DurationInSeconds: 0
+      m_StartCount: 0
+      m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
+      m_DecreaseCount:
+        gameEvent: {fileID: 0}
   - m_Name: HomingFireball
     m_SpellDamage: 0
     m_Type: 1
@@ -64,9 +72,13 @@ MonoBehaviour:
       m_AttackPercent: 0
       m_MaxHealthPercent: 0
     m_StatusEffect:
-      m_Duration: 0
+      m_DurationInSeconds: 0
+      m_StartCount: 0
+      m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
+      m_DecreaseCount:
+        gameEvent: {fileID: 0}
   - m_Name: GroundTest
     m_SpellDamage: 5
     m_Type: 3
@@ -82,10 +94,14 @@ MonoBehaviour:
       m_AttackPercent: 0
       m_MaxHealthPercent: 0
     m_StatusEffect:
-      m_Duration: 0
+      m_DurationInSeconds: 0
+      m_StartCount: 0
+      m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
-  - m_Name: PlayerCastTest
+      m_DecreaseCount:
+        gameEvent: {fileID: 0}
+  - m_Name: Series of attacks
     m_SpellDamage: 0
     m_Type: 4
     m_EffectOnImpact: {fileID: 0}
@@ -100,6 +116,32 @@ MonoBehaviour:
       m_AttackPercent: 0
       m_MaxHealthPercent: 0
     m_StatusEffect:
-      m_Duration: 3
+      m_DurationInSeconds: 0
+      m_StartCount: 5
+      m_CountDelta: 1
       m_Stats:
         m_AttackSpeed: 200
+      m_DecreaseCount:
+        gameEvent: {fileID: 11400000, guid: b38bd7989e678794aa582aab107ac4e4, type: 2}
+  - m_Name: test
+    m_SpellDamage: 0
+    m_Type: 5
+    m_EffectOnImpact: {fileID: 0}
+    m_CastRange: 0
+    m_Effect: {fileID: 0}
+    m_ProjectileSpeed: 0
+    m_HaveRadiusOnImpact: 0
+    m_RadiusOnImpact: 0
+    m_PassiveStats:
+      m_AttackSpeed: 0
+    m_Percents:
+      m_AttackPercent: 0
+      m_MaxHealthPercent: 0
+    m_StatusEffect:
+      m_DurationInSeconds: 0
+      m_StartCount: 0
+      m_CountDelta: 0
+      m_Stats:
+        m_AttackSpeed: 0
+      m_DecreaseCount:
+        gameEvent: {fileID: 0}
