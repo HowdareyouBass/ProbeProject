@@ -1,11 +1,69 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class SpellDatabaseEditorWindow : EditorWindow
+public class SpellDatabaseEditorWindow : ExtendedEditorWindow
 {
     private static SpellDatabase db;
-    private SerializedObject serializedObject;
-    private string n = string.Empty;
+
+    public static List<string> directedAtEnemyProperties {private set; get;}
+    public static List<string> projectileProperties{private set; get;}
+    public static List<string> directedAtGroundProperties {private set; get;}
+    public static List<string> passiveProperties {private set; get;}
+    public static List<string> playerCastProperties {private set; get;}
+
+    public SpellDatabaseEditorWindow()
+    {
+        projectileProperties = new List<string>
+        {
+            "Name",
+            "Type",
+            "Spell Damage",
+            "Effect",
+            "Effect On Impact",
+            "Projectile Speed",
+            "Cast Range",
+            "Is Self Directed",
+        };
+
+        directedAtEnemyProperties = new List<string>
+        {
+            "Name",
+            "Type",
+            "Spell Damage",
+            "Effect On Impact",
+            "Cast Range",
+            "Have Radius On Impact",
+            "Radius On Impact",
+        };
+
+        directedAtGroundProperties = new List<string>
+        {
+            "Name",
+            "Type",
+            "Spell Damage",
+            "Effect On Impact",
+            "Cast Range",
+            "Radius On Impact",
+        };
+
+        passiveProperties = new List<string>
+        {
+            "Name",
+            "Type",
+            "Spell Damage",
+            "Passive Stats",
+            "Percents",
+        };
+
+        playerCastProperties = new List<string>
+        {
+            "Name",
+            "Type",
+            "Status Effect",
+        };
+    }
+
     public static void Open(SpellDatabase _db)
     {
         SpellDatabaseEditorWindow window = GetWindow<SpellDatabaseEditorWindow>("Spell Database Editor");
@@ -17,15 +75,61 @@ public class SpellDatabaseEditorWindow : EditorWindow
     {
         if (serializedObject == null)
         {
-            if (GUILayout.Button("File open"))
-            {
-                db = Resources.Load<SpellDatabase>("SpellDatabase");
-                serializedObject = new SerializedObject(db);
-            }
-            return;
+            db = Resources.Load<SpellDatabase>("SpellDatabase");
+            serializedObject = new SerializedObject(db);
         }
+
+        currentProperty = serializedObject.FindProperty("spells");
+        EditorGUILayout.BeginHorizontal();
+
+        EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(180), GUILayout.ExpandHeight(true));
+        DrawSidebar(currentProperty);
+        EditorGUILayout.EndVertical();
+
+        EditorGUILayout.BeginVertical("box", GUILayout.ExpandHeight(true));
+        if (selectedProperty != null)
+        {
+            Spell.Types spellType = db.spells[propertyIndex].GetSpellType();
+            
+            if (spellType == Spell.Types.projectile)
+            {
+                DrawPropertiesFromList(selectedProperty, projectileProperties, true);
+            }
+            else if (spellType == Spell.Types.directedAtEnemy)
+            {
+                DrawPropertiesFromList(selectedProperty, directedAtEnemyProperties, true);
+            }
+            else if (spellType == Spell.Types.directedAtGround)
+            {
+                DrawPropertiesFromList(selectedProperty, directedAtGroundProperties, true);
+            }
+            else if (spellType == Spell.Types.passive)
+            {
+                DrawPropertiesFromList(selectedProperty, passiveProperties, true);
+            }
+            else if (spellType == Spell.Types.playerCast)
+            {
+                DrawPropertiesFromList(selectedProperty, playerCastProperties, true);
+            }
+            else
+            {
+                DrawProperties(selectedProperty, true);
+            }
+            if (GUILayout.Button("Delete Spell"))
+            {
+                db.spells.RemoveAt(propertyIndex);
+                serializedObject.Update();
+            }
+        }
+        else
+        {
+            EditorGUILayout.LabelField("Select spell from the list");
+        }
+        EditorGUILayout.EndVertical();
+
+        EditorGUILayout.EndHorizontal();
+
         serializedObject.ApplyModifiedProperties();
-        DrawProperty(serializedObject.FindProperty("spells"), true);
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Add"))
         {
@@ -35,52 +139,4 @@ public class SpellDatabaseEditorWindow : EditorWindow
         EditorGUILayout.EndHorizontal();
     }
 
-    private void DrawProperty(SerializedProperty prop, bool drawChildren)
-    {
-        int spellIndex = 0;
-        n = EditorGUILayout.TextField(n);
-        foreach(SerializedProperty p in prop)
-        {
-            if (!db.spells[spellIndex].GetName().ToLower().Contains(n.ToLower()) && !string.IsNullOrEmpty(n))
-            {
-                spellIndex++;
-                continue;
-            }
-            EditorGUILayout.BeginHorizontal();
-            p.isExpanded = EditorGUILayout.Foldout(p.isExpanded, p.displayName);
-            EditorGUILayout.EndHorizontal();
-            
-            if (p.isExpanded)
-            {
-                EditorGUI.indentLevel++;
-
-                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Name"));
-                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Effect"));
-                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_SpellDamage"));
-                EditorGUILayout.PropertyField(p.FindPropertyRelative("m_Type"));
-                
-                
-                if (db.spells[spellIndex].GetSpellType() == Spell.Types.projectile)
-                {
-                    EditorGUILayout.PropertyField(p.FindPropertyRelative("m_EffectOnImpact"));
-                    EditorGUILayout.PropertyField(p.FindPropertyRelative("m_SpeedOfProjectile"));
-                }
-                
-                
-                EditorGUILayout.BeginHorizontal();
-                GUILayout.Space(20);
-                if (GUILayout.Button("Delete Spell"))
-                {
-                    db.spells.RemoveAt(spellIndex);
-                    p.isExpanded = false;
-                    serializedObject.ApplyModifiedProperties();
-                    serializedObject.Update();
-                }
-                EditorGUILayout.EndHorizontal();
-
-                EditorGUI.indentLevel--;
-            }
-            spellIndex++;
-        }
-    }
 }
