@@ -78,37 +78,4 @@ public class DebugCustomEditor : Editor
 
         EditorGUI.indentLevel--;
     }
-
-    private T FindByName<T>(List<T> list) where T : DatabaseItem
-    {
-        T item = null;
-
-        foreach (T sp in list)
-        {
-            if (sp.GetName().ToLower() == spellName.ToLower())
-            {
-                item = sp;
-                break;
-            }
-            if (sp.GetName().ToLower() == spellName.ToLower())
-            {
-                item = sp;
-                break;
-            }
-        }
-        foreach (Spell sp in db.spells)
-        {
-            if (sp.GetName().Contains(spellName))
-            {
-                item = sp;
-                break;
-            }
-            if (sp.GetName().Contains(spellName.ToLower()))
-            {
-                item = sp;
-                break;
-            }
-        }
-        return item;
-    }
 }
