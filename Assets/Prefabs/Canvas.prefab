@@ -312,6 +312,8 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   fill: {fileID: 682294125944455188}
+  gameEventListener:
+    gameEvent: {fileID: 11400000, guid: cb0d6361547533c41a135027a47d469f, type: 2}
 --- !u!1 &682294127250033584
 GameObject:
   m_ObjectHideFlags: 0

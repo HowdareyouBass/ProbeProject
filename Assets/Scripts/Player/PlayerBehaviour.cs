@@ -6,10 +6,19 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField] private Race race;
+    
+    public GameEvent OnPlayerDamaged;
+
     private PlayerEquipment playerEquipment;
     private PlayerStats playerStats;
     private Spell currentSpell;
     //public bool isCastingSpell = false;
+
+    public void Damage(float amount)
+    {
+        playerStats.Damage(amount);
+        OnPlayerDamaged.TriggerEvent();
+    }
 
     void Start()
     {
@@ -116,6 +125,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         return currentSpell;
     }
+    public float GetCurrentHealth() { return playerStats.GetCurrentHealth(); }
+    public float GetMaxHealth() { return playerStats.GetMaxHealth(); }
 
     public void SetCurrentSpell(int spellSlot)
     {

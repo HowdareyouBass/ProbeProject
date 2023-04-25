@@ -54,23 +54,15 @@ public class PlayerStats
         m_AttackSpeed -= stats.GetAttackSpeed();
     }
 
-    public float GetAttackDamage()
+    public void Damage(float amount)
     {
-        return m_Attack;
-    }
-    
-    public float GetAttackRange()
-    {
-        return m_AttackRange;
+        m_CurrentHealth -= amount;
     }
 
-    public float GetBaseAttackSpeed()
-    {
-        return m_BaseAttackSpeed;
-    }
-
-    public float GetAttackSpeed()
-    {
-        return m_AttackSpeed;
-    }
+    public float GetMaxHealth() { return m_MaxHealth; }
+    public float GetCurrentHealth() { return m_CurrentHealth; }
+    public float GetAttackDamage() { return m_Attack; }
+    public float GetAttackRange() { return m_AttackRange; }
+    public float GetBaseAttackSpeed() { return m_BaseAttackSpeed; }
+    public float GetAttackSpeed() { return m_AttackSpeed; }
 }

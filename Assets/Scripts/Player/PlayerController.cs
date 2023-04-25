@@ -38,6 +38,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Damage(float amount)
+    {
+        player.Damage(amount);
+    }
+
     public void CastSpell(int spellSlot, RaycastHit target)
     {
         player.SetCurrentSpell(spellSlot);

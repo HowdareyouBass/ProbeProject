@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   race: {fileID: 11400000, guid: dc1f2b643637e9a4385a2019bedddd5e, type: 2}
+  OnPlayerDamaged: {fileID: 11400000, guid: cb0d6361547533c41a135027a47d469f, type: 2}
 --- !u!1 &4092150373782436356
 GameObject:
   m_ObjectHideFlags: 0

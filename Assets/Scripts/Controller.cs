@@ -22,6 +22,10 @@ public class Controller : MonoBehaviour
                 return;
             playerController.CastSpell(0, hit);
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            playerController.Damage(10);
+        }
         if (Input.GetKeyDown(KeyCode.S))
         {
             playerController.StopAction();
