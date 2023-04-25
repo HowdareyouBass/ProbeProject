@@ -6,65 +6,83 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     public PlayerBehaviour player;
-    public Camera playerCamera;
     public GameObject movementEffect;
     public NavMeshAgent agent;
     public float rotationSpeed;
 
-    private Coroutine objectFollowing;
-    private Coroutine objectAttacking;
+    public GameEvent OnPlayerAttack;
+
+    private Coroutine playerIsFollowing;
+    private Coroutine playerIsAttacking;
+    private Coroutine playerSpellCasting;
     private Coroutine lookingAtTarget;
     private NavMeshObstacle targetNavMesh;
     private float playerRadius = 1f;
-    private float timer = 0;
     private bool canAttack = true;
-    private void Update()
+
+
+    void Start()
     {
-        if (timer >= 0.1f && Input.GetMouseButton(1))
+        StopAction();
+    }
+
+    public void OnClick(RaycastHit hit)
+    {
+        if (hit.transform.CompareTag("Enemy"))
         {
-            OnClick();
-            timer = 0f;
+            AttackTarget(hit);
         }
         else
         {
-            timer += Time.deltaTime;
+            MoveToTarget(hit);
         }
     }
 
-    private void OnClick()
+    public void CastSpell(int spellSlot, RaycastHit target)
     {
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        
-        //If clicked on something
-        if (Physics.Raycast(ray, out hit))
+        player.SetCurrentSpell(spellSlot);
+        Spell.Types spellType = player.GetCurrentSpell().GetSpellType();
+        if (target.transform.CompareTag("Enemy"))
         {
-            if (hit.transform.CompareTag("Enemy"))
+            if (spellType == Spell.Types.projectile || spellType == Spell.Types.directedAtEnemy)
             {
-                AttackTarget(hit);
+                CastSpellOnEnemy(target);
             }
-            else
-            {
-                MoveToTarget(hit);
-            }
+        }
+        else if (spellType == Spell.Types.directedAtGround)
+        {
+            CastSpellOnGround(target);
+        }
+        else if (spellType == Spell.Types.playerCast)
+        {
+            player.CastSpell(target);
         }
     }
 
-    private void AttackTarget(RaycastHit target)
+    private void CastSpellOnEnemy(RaycastHit target)
     {
-        //Disable NavMeshObjstacle component so that agent dont't try to avoid target
         if (targetNavMesh != null)
             targetNavMesh.enabled = true;
         targetNavMesh = target.transform.GetComponent<NavMeshObstacle>();
         targetNavMesh.enabled = false;
-
-        StopAction();
-        LookAtTarget(target);
         Vector3 targetMesurments = target.collider.bounds.size;
-        objectAttacking = StartCoroutine(AttackTargetRoutine(target, targetMesurments.z));
-        SpawnEffect(target.transform.position - new Vector3(0, targetMesurments.y / 2, 0), Vector3.up);
+        StopAction();
+        playerSpellCasting = StartCoroutine(CastSpellOnTargetRoutine(target, targetMesurments.z));
     }
-    private void LookAtTarget(RaycastHit target)
+    private IEnumerator CastSpellOnTargetRoutine(RaycastHit target, float targetRadius)
+    {
+        while(FindNearestPointToEntity(target.transform.position, targetRadius).magnitude > player.GetCurrentSpell().GetCastRange() && player.GetCurrentSpell().GetCastRange() != 0)
+        {
+            MoveToEntity(target.transform.position, targetRadius);
+            yield return null;
+        }
+        StopMoving();
+        LookAtTarget(target);
+        player.CastSpell(target);
+        yield break;
+    }
+
+    public void LookAtTarget(RaycastHit target)
     {
         if (lookingAtTarget != null)
             StopCoroutine(lookingAtTarget);
@@ -73,16 +91,79 @@ public class PlayerController : MonoBehaviour
     private IEnumerator LookAtTargetRoutine(RaycastHit target)
     {
         Vector3 lookRotation = target.transform.position - transform.position;
-        while(transform.forward != lookRotation)
+        float delta = 0.001f;
+        //Difference between desired looking rotation and current looking rotation
+        Vector3 difference = lookRotation - transform.forward;
+        while(Mathf.Abs(difference.x) > delta || Mathf.Abs(difference.z) > delta)
         {
             if (target.transform == null)
                 yield break;
             lookRotation = target.transform.position - transform.position;
+            //Set y to 0 so that player GameObject don't rotate up and down
             lookRotation.y = 0;
             transform.forward = Vector3.MoveTowards(transform.forward, lookRotation, rotationSpeed * Time.deltaTime);
             yield return null;
         }
-    } 
+    }
+
+    private void CastSpellOnGround(RaycastHit target)
+    {
+        StopAction();
+        playerSpellCasting = StartCoroutine(CastSpellOnGroundRoutine(target));
+    }
+    private IEnumerator CastSpellOnGroundRoutine(RaycastHit target)
+    {
+        while(FindNearestPointToEntity(target.point, 0).magnitude > player.GetCurrentSpell().GetCastRange() && player.GetCurrentSpell().GetCastRange() != 0)
+        {
+            MoveToEntity(target.point, 0);
+            yield return null;
+        }
+        StopMoving();
+        LookAtPoint(target.point);
+        player.CastSpell(target);
+        yield break;
+    }
+
+    private void LookAtPoint(Vector3 point)
+    {
+        if (lookingAtTarget != null)
+            StopCoroutine(lookingAtTarget);
+        lookingAtTarget = StartCoroutine(LookAtPointRoutine(point));
+    }
+
+    private IEnumerator LookAtPointRoutine(Vector3 point)
+    {
+        Vector3 lookRotation = point - transform.position;
+        float delta = 0.001f;
+        //Difference between desired looking rotation and current looking rotation
+        Vector3 difference = lookRotation - transform.forward;
+        while(Mathf.Abs(difference.x) > delta || Mathf.Abs(difference.z) > delta)
+        {
+            lookRotation = point - transform.position;
+            //Set y to 0 so that player GameObject don't rotate up and down
+            lookRotation.y = 0;
+            transform.forward = Vector3.MoveTowards(transform.forward, lookRotation, rotationSpeed * Time.deltaTime);
+            yield return null;
+        }
+        yield break;
+    }
+
+    private void AttackTarget(RaycastHit target)
+    {
+        //Enable previous enemy attacked NavMeshObstacle component
+        if (targetNavMesh != null)
+            targetNavMesh.enabled = true;
+        //Disable NavMeshObstacle component so that agent dont't try to avoid
+        targetNavMesh = target.transform.GetComponent<NavMeshObstacle>();
+        targetNavMesh.enabled = false;
+
+        StopAction();
+        //LockAtTarget(target);
+        LookAtTarget(target);
+        Vector3 targetMesurments = target.collider.bounds.size;
+        playerIsAttacking = StartCoroutine(AttackTargetRoutine(target, targetMesurments.z));
+        SpawnEffect(target.transform.position - new Vector3(0, targetMesurments.y / 2, 0), Vector3.up);
+    }
     private IEnumerator AttackTargetRoutine(RaycastHit target, float targetRadius)
     {
         while (true)
@@ -97,11 +178,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (canAttack)
                 {
+                    OnPlayerAttack.TriggerEvent();
                     player.AttackTarget(target);
                     StartCoroutine(WaitForNextAttack());
                 }
 
-                //Stops attacking object that already died
+                //Stops attacking enemy that already died
                 if(target.transform.GetComponent<EnemyBehavior>().isDead)
                 {
                     yield break;
@@ -129,7 +211,7 @@ public class PlayerController : MonoBehaviour
 
         StopAction();
         Vector3 targetMesurments = target.collider.bounds.size;
-        objectFollowing = StartCoroutine(FollowTargetRoutine(target, targetMesurments.z));
+        playerIsFollowing = StartCoroutine(FollowTargetRoutine(target, targetMesurments.z));
         SpawnEffect(target.transform.position - new Vector3(0, targetMesurments.y / 2, 0), Vector3.up);
     }
     private IEnumerator FollowTargetRoutine(RaycastHit target, float targetRadius)
@@ -164,8 +246,12 @@ public class PlayerController : MonoBehaviour
     }
     private Vector3 FindNearestPointToEntity(Vector3 entityPosition, float entityRadius)
     {
+        if (entityRadius == 0)
+        {
+            return entityPosition - transform.position;
+        }
         Vector3 toPlayerFromEntityNormalized = Vector3.Normalize(transform.position - entityPosition) / 2;
-        return (entityPosition - transform.position) + toPlayerFromEntityNormalized * entityRadius + toPlayerFromEntityNormalized * playerRadius;
+        return (entityPosition - transform.position) + toPlayerFromEntityNormalized * (entityRadius + playerRadius);
     }
 
     private void StopMoving()
@@ -175,12 +261,14 @@ public class PlayerController : MonoBehaviour
     public void StopAction()
     {
         agent.SetDestination(transform.position);
-        if (objectFollowing != null)
-            StopCoroutine(objectFollowing);
-        if (objectAttacking != null)
-            StopCoroutine(objectAttacking);
+        if (playerIsFollowing != null)
+            StopCoroutine(playerIsFollowing);
+        if (playerIsAttacking != null)
+            StopCoroutine(playerIsAttacking);
         if (lookingAtTarget != null)
             StopCoroutine(lookingAtTarget);
+        if (playerSpellCasting != null)
+            StopCoroutine(playerSpellCasting);
     }
 }
 

@@ -6,17 +6,23 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Spell spell;
+    public RaycastHit target;
     public int projectileSpeed;
     public Rigidbody rb;
     void Start()
     {
         rb = transform.GetComponent<Rigidbody>();
-        projectileSpeed = spell.GetSpeed();
-        Destroy(this.gameObject, 100f);
+        projectileSpeed = spell.GetProjectileSpeed();
+        //Destroy(this.gameObject, 20f);
+        //if (spell.IsSelfDirected)
+        //{
+            transform.forward = Vector3.Normalize(target.transform.position - transform.position) * Time.deltaTime * projectileSpeed;
+        //}
     }
     void FixedUpdate()
     {
-        rb.velocity = Vector3.Normalize(transform.forward) * Time.deltaTime * projectileSpeed;
+        transform.forward = Vector3.Normalize(target.transform.position - transform.position) * Time.deltaTime * projectileSpeed;
+        rb.velocity = transform.forward * Time.deltaTime * projectileSpeed;   
     }
     private void OnTriggerEnter(Collider collider)
     {
@@ -29,7 +35,18 @@ public class Projectile : MonoBehaviour
                 Debug.LogWarning("Spell Impact game object isn't assigned");
                 return;
             }
-            Instantiate(spell.GetEffectOnImpact());
+            Instantiate(spell.GetEffectOnImpact(), transform);
         }
+        // if (collider.CompareTag("Obstacle") && !spell.IsSelfDirected)
+        // {
+        //     Destroy(transform.gameObject);
+        //     if (spell.GetEffectOnImpact() == null)
+        //     {
+        //         Debug.LogWarning("Spell Impact game object isn't assigned");
+        //         return;
+        //     }
+        //     Quaternion rot = Quaternion.LookRotation(collider.transform.position - transform.position);
+        //     Instantiate(spell.GetEffectOnImpact(), transform.position, rot);
+        // }
     }
 }
