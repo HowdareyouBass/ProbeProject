@@ -52,31 +52,6 @@ public class DebugCustomEditor : Editor
         }
     }
 
-    private void OnEquipSpellClick()
-    {
-        if (showEquipSpell)
-        {
-            if (string.IsNullOrEmpty(spellName))
-            {
-                Debug.LogWarning("Name is empty");
-                showEquipSpell = !showEquipSpell;
-                return;
-            }
-            Spell spell = FindByName<Spell>(settings.settingsSO.spellDatabase.spells);
-
-            if (spell == null)
-            {
-                Debug.LogWarning("Spell not found");
-                showEquipSpell = !showEquipSpell;
-                return;
-            }
-            spellName = string.Empty;
-            settings.settingsSO.player.EquipSpell(spell, (int)spellSlot);
-            Debug.Log("<color=green>Spell Successfully Equiped</color>");
-        }
-        showEquipSpell = !showEquipSpell;
-    }
-
     private void ShowEquipSpell()
     {
         EditorGUI.indentLevel++;
@@ -91,34 +66,7 @@ public class DebugCustomEditor : Editor
 
         EditorGUI.indentLevel--;
     }
-
-    private void OnEquipItemClick()
-    {
-        if (showEquipItem)
-        {
-            if (string.IsNullOrEmpty(itemName))
-            {
-                Debug.LogWarning("Name is empty");
-                showEquipItem = !showEquipItem;
-                return;
-            }
-            Item item = FindByName<Item>(settings.settingsSO.itemDatabase.items);
-
-            if (item == null)
-            {
-                Debug.LogWarning("Item not found");
-                showEquipItem = !showEquipItem;
-                return;
-            }
-            itemName = string.Empty;
-
-            Debug.Log("<color=green>Item Successfully Equiped</color>");
-            
-            settings.settingsSO.player.EquipItem(item);
-        }
-        showEquipItem = !showEquipItem;
-    }
-
+    
     private void ShowEquipItem()
     {
         EditorGUI.indentLevel++;
@@ -137,7 +85,7 @@ public class DebugCustomEditor : Editor
 
         foreach (T sp in list)
         {
-            if (sp.GetName() == spellName)
+            if (sp.GetName().ToLower() == spellName.ToLower())
             {
                 item = sp;
                 break;
@@ -147,6 +95,9 @@ public class DebugCustomEditor : Editor
                 item = sp;
                 break;
             }
+        }
+        foreach (Spell sp in db.spells)
+        {
             if (sp.GetName().Contains(spellName))
             {
                 item = sp;

@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     public RaycastHit target;
     public int projectileSpeed;
     public Rigidbody rb;
+    public Vector3 targetRotation;
     void Start()
     {
         rb = transform.GetComponent<Rigidbody>();
