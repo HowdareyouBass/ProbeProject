@@ -20,7 +20,7 @@ public class StatusEffect
         if (m_DecreaseCount.gameEvent != null)
         {
             //Adding function to UnityEvent wich will be called when event triggers
-            m_DecreaseCount.onEventTriggered.AddListener(DecreaseCount);
+            m_DecreaseCount.onEventTriggered += DecreaseCount;
         }
         //Adding this listener in count when the event triggers
         m_DecreaseCount.gameEvent.AddListener(m_DecreaseCount);

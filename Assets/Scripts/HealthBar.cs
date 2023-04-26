@@ -16,7 +16,7 @@ public class HealthBar : MonoBehaviour
 
     void OnEnable()
     {
-        gameEventListener.onEventTriggered.AddListener(SetHealth);
+        gameEventListener.onEventTriggered += SetHealth;
         gameEventListener.gameEvent.AddListener(gameEventListener);
 
         slider.maxValue = player.GetMaxHealth();
