@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameEventListener
 {
     public GameEvent gameEvent;
-    [System.NonSerialized] public Action onEventTriggered;
+    public event Action onEventTriggered;
 
     public void OnEventTriggered()
     {
