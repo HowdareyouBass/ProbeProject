@@ -14,11 +14,26 @@ public class ExtendedEditorWindow : EditorWindow
     protected int propertyIndex = 0;
     private string searchName = string.Empty;
 
-
     protected void DrawProperties(SerializedProperty prop, bool drawChildren)
     {
-        foreach(SerializedProperty p in prop)
+        string lastPropPath = string.Empty;
+        if (prop.isArray && prop.propertyType == SerializedPropertyType.Generic)
         {
+            EditorGUILayout.BeginHorizontal();
+            prop.isExpanded = EditorGUILayout.Foldout(prop.isExpanded, prop.displayName);
+            EditorGUILayout.EndHorizontal();
+
+            if (prop.isExpanded)
+            {
+                EditorGUI.indentLevel++;
+                DrawProperties(prop, drawChildren);
+                EditorGUI.indentLevel--;
+            }
+        }
+        else
+        {
+            if (!string.IsNullOrEmpty(lastPropPath) && prop.propertyPath.Contains(lastPropPath)) { return; }
+            lastPropPath = prop.propertyPath;
             EditorGUILayout.PropertyField(prop, drawChildren);
         }
     }
@@ -29,7 +44,7 @@ public class ExtendedEditorWindow : EditorWindow
         {
             if (list.Contains(p.displayName))
             {
-                EditorGUILayout.PropertyField(prop, drawChildren);
+                DrawProperties(p, drawChildren);
             }
         }
     }

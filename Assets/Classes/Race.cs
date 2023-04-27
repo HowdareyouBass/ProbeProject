@@ -15,5 +15,6 @@ public class Race : ScriptableObject
     public float evasion;
     [Range(0f, 1f)]
     public float magicGift;
+    [Range(0f, 1f)]
     public float physicsGift;
 }

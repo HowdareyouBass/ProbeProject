@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4092150372153248433}
   - component: {fileID: 4092150372153248438}
   - component: {fileID: 4092150372153248439}
+  - component: {fileID: 3125271741887349869}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -121,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46db636ed5c32041b1f9cf82accbe3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4092150372153248439}
+  health: {fileID: 3125271741887349869}
   movementEffect: {fileID: 7590234846238662618, guid: 6b12e0f0193a1514883d49446593fbab, type: 3}
   agent: {fileID: 4092150372153248433}
   rotationSpeed: 10
@@ -140,6 +141,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   race: {fileID: 11400000, guid: dc1f2b643637e9a4385a2019bedddd5e, type: 2}
   OnPlayerDamaged: {fileID: 11400000, guid: cb0d6361547533c41a135027a47d469f, type: 2}
+--- !u!114 &3125271741887349869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4092150372153248444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f64b89d479b9642867cb9f4ab46852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OnDeath: {fileID: 11400000, guid: a612faacacec7794582728b866dc3c03, type: 2}
+  m_OnDamaged: {fileID: 11400000, guid: cb0d6361547533c41a135027a47d469f, type: 2}
 --- !u!1 &4092150373782436356
 GameObject:
   m_ObjectHideFlags: 0

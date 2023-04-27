@@ -3,24 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class PlayerStats
+public class PlayerStats : EntityStats
 {
-    private float m_CurrentHealth = 0;
-    private float m_MaxHealth = 0;
     private float m_Attack = 0;
     private float m_AttackRange = 0;
     private float m_AttackSpeed = 0;
     private float m_BaseAttackSpeed = 1;
     private float m_Evasion = 0;
 
-    public PlayerStats()
+    public void ApplyRace(Race race)
     {
-    }
+        currentHealth = race.health;
 
-    public PlayerStats(Race race)
-    {
         m_MaxHealth = race.health;
-        m_CurrentHealth = race.health;
         m_Attack = race.attack;
         m_AttackRange = race.attackRange;
         m_AttackSpeed = race.attackSpeed;
@@ -54,13 +49,7 @@ public class PlayerStats
         m_AttackSpeed -= stats.GetAttackSpeed();
     }
 
-    public void Damage(float amount)
-    {
-        m_CurrentHealth -= amount;
-    }
-
     public float GetMaxHealth() { return m_MaxHealth; }
-    public float GetCurrentHealth() { return m_CurrentHealth; }
     public float GetAttackDamage() { return m_Attack; }
     public float GetAttackRange() { return m_AttackRange; }
     public float GetBaseAttackSpeed() { return m_BaseAttackSpeed; }

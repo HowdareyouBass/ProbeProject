@@ -11,6 +11,7 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
     public static List<string> directedAtGroundProperties {private set; get;}
     public static List<string> passiveProperties {private set; get;}
     public static List<string> playerCastProperties {private set; get;}
+    public static List<string> passiveSwitchableProperties {private set; get;}
 
     public SpellDatabaseEditorWindow()
     {
@@ -62,6 +63,13 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
             "Type",
             "Status Effect",
         };
+
+        passiveSwitchableProperties = new List<string>
+        {
+            "Name",
+            "Type",
+            "Switchable Stats",
+        };
     }
 
     public static void Open(SpellDatabase _db)
@@ -110,6 +118,10 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
             else if (spellType == Spell.Types.playerCast)
             {
                 DrawPropertiesFromList(selectedProperty, playerCastProperties, true);
+            }
+            else if (spellType == Spell.Types.passiveSwitchable)
+            {
+                DrawPropertiesFromList(selectedProperty, passiveSwitchableProperties, true);
             }
             else
             {

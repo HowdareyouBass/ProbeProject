@@ -3,28 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBehaviour : MonoBehaviour
+public class Player : MonoBehaviour
 {
+    public static Player instance = null;
+    public static PlayerStats playerStats { get; private set; }
+
     [SerializeField] private Race race;
     
     public GameEvent OnPlayerDamaged;
 
     private PlayerEquipment playerEquipment;
-    private PlayerStats playerStats;
     private Spell currentSpell;
     //public bool isCastingSpell = false;
 
-    public void Damage(float amount)
+    void Awake()
     {
-        playerStats.Damage(amount);
-        OnPlayerDamaged.TriggerEvent();
+        //Start from race
+        playerStats = new PlayerStats();
+        playerStats.ApplyRace(race);
+        playerEquipment = new PlayerEquipment();
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogError("Error : MORE THEN 1 PLAYER BEHAVIOUR COMPONENT IS NOT ALLOUD!");
+        }
     }
 
-    void Start()
+    public void Damage(float amount)
     {
-        //Start stats from race
-        playerStats = new PlayerStats(race);
-        playerEquipment = new PlayerEquipment();//d
+        //playerStats.Damage(amount);
+        OnPlayerDamaged.TriggerEvent();
     }
 
     public void EquipItem(Item item)
@@ -34,12 +45,12 @@ public class PlayerBehaviour : MonoBehaviour
     public void EquipSpell(Spell spell, int spellSlot)
     {
         playerEquipment.EquipSpell(spell, spellSlot);
-        playerStats = playerEquipment.AddPassiveSpellsTo(playerStats);
+        playerEquipment.AddPassiveSpellsTo(playerStats);
     }
 
     public void AttackTarget(RaycastHit target)
     {
-        target.transform.GetComponent<EnemyBehavior>().Damage(playerStats.GetAttackDamage());
+        target.transform.GetComponent<Health>().Damage(playerStats.GetAttackDamage());
     }
 
     public void CastSpell(RaycastHit target)
@@ -96,6 +107,11 @@ public class PlayerBehaviour : MonoBehaviour
             Debug.Log("Casted something on yourself");
             StartCoroutine(currentSpell.GetStatusEffect().StartEffect(this));
         }
+        if (currentSpell.GetSpellType() == Spell.Types.passiveSwitchable)
+        {
+            currentSpell.SwitchPassive();
+            playerEquipment.AddPassiveSpellsTo(playerStats);
+        }
     }
 
     public void ApplyStatusEffect(StatusEffect effect)
@@ -108,25 +124,16 @@ public class PlayerBehaviour : MonoBehaviour
         playerStats.DeapplyStatusEffect(effect);
     }
 
-    public float GetAttackRange()
-    {
-        return playerStats.GetAttackRange();
-    }
-    public float GetAttackDamage()
-    {
-        return playerStats.GetAttackDamage();
-    }
+    public float GetAttackRange() { return playerStats.GetAttackRange(); }
+    public float GetAttackDamage() { return playerStats.GetAttackDamage(); }
     public float GetAttackCooldown()
-    {
+    { 
         return playerStats.GetBaseAttackSpeed() * 100 / (playerEquipment.GetAttackSpeed() + playerStats.GetAttackSpeed());
     }
 
-    public Spell GetCurrentSpell()
-    {
-        return currentSpell;
-    }
-    public float GetCurrentHealth() { return playerStats.GetCurrentHealth(); }
+    public Spell GetCurrentSpell() { return currentSpell; }
     public float GetMaxHealth() { return playerStats.GetMaxHealth(); }
+    public EntityStats GetStats() { return playerStats; }
 
     public void SetCurrentSpell(int spellSlot)
     {

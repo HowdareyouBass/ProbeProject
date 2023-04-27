@@ -5,13 +5,15 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    public PlayerBehaviour player;
-    public GameObject movementEffect;
-    public NavMeshAgent agent;
-    public float rotationSpeed;
+    [SerializeField] private Health health;
 
-    public GameEvent OnPlayerAttack;
+    [SerializeField] private GameObject movementEffect;
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private float rotationSpeed;
 
+    [SerializeField] private GameEvent OnPlayerAttack;
+
+    private Player player;
     private Coroutine playerIsFollowing;
     private Coroutine playerIsAttacking;
     private Coroutine playerSpellCasting;
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        player = Player.instance;
         StopAction();
     }
 
@@ -40,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     public void Damage(float amount)
     {
-        player.Damage(amount);
+        health.Damage(amount);
     }
 
     public void CastSpell(int spellSlot, RaycastHit target)
@@ -58,7 +61,7 @@ public class PlayerController : MonoBehaviour
         {
             CastSpellOnGround(target);
         }
-        else if (spellType == Spell.Types.playerCast)
+        else if (spellType == Spell.Types.playerCast || spellType == Spell.Types.passiveSwitchable)
         {
             player.CastSpell(target);
         }

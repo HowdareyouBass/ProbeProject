@@ -18,7 +18,7 @@ public class DebugCustomEditor : Editor
     private void OnEnable()
     {
         settings = target as DebugManager;
-        settings.settingsSO.player = GameObject.Find("/Player").GetComponent<PlayerBehaviour>();
+        settings.settingsSO.player = Player.instance;
     }
 
     public override void OnInspectorGUI()
@@ -34,7 +34,6 @@ public class DebugCustomEditor : Editor
         if (GUILayout.Button("Equip Spell"))
         {
             EquipSpellEditorWindow.Open(settings.settingsSO.spellDatabase, settings.settingsSO.player);
-            //OnEquipSpellClick();
         }
         if (showEquipSpell)
         {
@@ -44,7 +43,6 @@ public class DebugCustomEditor : Editor
         if(GUILayout.Button("Equip Item"))
         {
             EquipItemEditorWindow.Open(settings.settingsSO.itemDatabase, settings.settingsSO.player);
-            //OnEquipItemClick();
         }
         if (showEquipItem)
         {

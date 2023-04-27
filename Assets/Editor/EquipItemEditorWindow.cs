@@ -6,10 +6,10 @@ using UnityEngine;
 public class EquipItemEditorWindow : ExtendedEditorWindow
 {
     private static ItemDatabase db;
-    private static PlayerBehaviour player;
+    private static Player player;
     public static bool isInPlaymode = true;
 
-    public static void Open(ItemDatabase _db, PlayerBehaviour _player)
+    public static void Open(ItemDatabase _db, Player _player)
     {
         EquipItemEditorWindow window = GetWindow<EquipItemEditorWindow>("Equip Item");
         db = _db;

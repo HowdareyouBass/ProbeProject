@@ -21,16 +21,16 @@ public class PlayerEquipment
         m_Items.Add(eqipped);
     }
 
-    public PlayerStats AddPassiveSpellsTo(PlayerStats stats)
+    public void AddPassiveSpellsTo(PlayerStats stats)
     {
         foreach (Spell spell in m_Spells)
         {
-            if (spell.GetSpellType() == Spell.Types.passive)
+            if (spell.GetSpellType() == Spell.Types.passive || spell.GetSpellType() == Spell.Types.passiveSwitchable)
             {
                 stats.ApplyPassiveSpell(spell);
             }
         }
-        return stats;
+        //return stats;
     }
 
     public void EquipSpell(Spell spell, int spellSlot)

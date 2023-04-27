@@ -7,11 +7,11 @@ public class EquipSpellEditorWindow : ExtendedEditorWindow
 {
     public enum Slot {first, second, third, fourth, fifth};
     private static SpellDatabase db;
-    private static PlayerBehaviour player;
+    private static Player player;
     private Slot spellSlot;
     public static bool isInPlaymode = true;
 
-    public static void Open(SpellDatabase _db, PlayerBehaviour _player)
+    public static void Open(SpellDatabase _db, Player _player)
     {
         EquipSpellEditorWindow window = GetWindow<EquipSpellEditorWindow>("Equip Spell");
         db = _db;

@@ -11,6 +11,11 @@ public class GameEventListener
 
     public void OnEventTriggered()
     {
+        if (onEventTriggered == null)
+        {
+            Debug.Log("No functions assigned to event");
+            return;
+        }
         onEventTriggered.Invoke();
     } 
 }

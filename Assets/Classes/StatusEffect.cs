@@ -15,11 +15,11 @@ public class StatusEffect
 
     private int m_CurrentCount;
 
-    public IEnumerator StartEffect(PlayerBehaviour player)
+    public IEnumerator StartEffect(Player player)
     {
         if (m_DecreaseCount.gameEvent != null)
         {
-            //Adding function to UnityEvent wich will be called when event triggers
+            //Adding function to Action wich will be called when event triggers
             m_DecreaseCount.onEventTriggered += DecreaseCount;
         }
         //Adding this listener in count when the event triggers
