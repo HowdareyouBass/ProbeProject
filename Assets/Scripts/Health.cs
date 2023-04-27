@@ -7,20 +7,20 @@ public class Health : MonoBehaviour
     [SerializeField] private GameEvent m_OnDeath;
     [SerializeField] private GameEvent m_OnDamaged;
     
-    private PlayerStats stats;
+    private EntityStats stats;
 
     void Start()
     {
         //Could not use floats because they just copy instead of referencing float from stats
-        stats = Player.playerStats;
+        stats = GetComponent<IEntity>().GetStats();
     }
 
     public void Damage(float amount)
     {
-        stats.currentHealth -= amount;
+        stats.Damage(amount);
         if (m_OnDamaged != null)
             m_OnDamaged.TriggerEvent();
-        if (stats.currentHealth <= 0)
+        if (stats.GetCurrentHealth() <= 0)
         {
             if (m_OnDeath != null)
                 m_OnDeath.TriggerEvent();

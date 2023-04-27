@@ -1,60 +1,42 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.AI;
 
-[RequireComponent(typeof(Health))]
-public class Player : MonoBehaviour, IEntity
+public class Enemy : MonoBehaviour, IEntity
 {
-    public const float PLAYER_RADIUS = 1f;
-
-    public static Player instance = null;
-    public static PlayerStats stats { get; private set; }
-
-    [SerializeField] private Race race;
-    
-    public GameEvent OnPlayerDamaged;
-
-    private PlayerEquipment equipment;
+    [SerializeField] private Renderer healthRenderer = new Renderer();
+    [SerializeField] private GameEventListener OnEnemyDeath;
+    [SerializeField] private EnemyType type;
+    [SerializeField] private GameObject damageEffect;
+    private EnemyStats stats;
+    private EnemyEquipment equipment;
     private Spell currentSpell;
-    //public bool isCastingSpell = false;
+    [HideInInspector] public bool isDead;
 
-    void Awake()
+    void Start()
     {
-        stats = new PlayerStats();
-        stats.ApplyRace(race);
-        equipment = new PlayerEquipment();
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Debug.LogError("Error : MORE THEN 1 PLAYER BEHAVIOUR COMPONENT IS NOT ALOUD!");
-        }
-    }
+        OnEnemyDeath.onEventTriggered += (()=> isDead = true);
 
+        stats = new EnemyStats();
+        stats.SetType(type);
+    }
     public void Damage(float amount)
     {
-        //stats.Damage(amount);
-        OnPlayerDamaged.TriggerEvent();
-    }
+        GameObject effect = Instantiate(damageEffect, transform.position, transform.rotation);
+        effect.transform.SetParent(transform);
+        effect.GetComponent<TextMeshPro>().text = amount.ToString();
 
-    public void EquipItem(Item item)
-    {
-        equipment.EquipItem(item);
-    }
-    public void EquipSpell(Spell spell, int spellSlot)
-    {
-        equipment.EquipSpell(spell, spellSlot);
-        equipment.AddPassiveSpellsTo(stats);
-    }
+        stats.Damage(amount);
 
-    public void DamageTarget(RaycastHit target)
-    {
-        target.transform.GetComponent<Health>().Damage(stats.GetAttackDamage());
-    }
+        healthRenderer.material.SetFloat("_Health", stats.GetCurrentHealth());
 
+        if (stats.GetCurrentHealth() <= 0)
+        {
+            Die();
+        }
+    }
     public void CastSpell(RaycastHit target)
     {
         if (currentSpell == null)
@@ -115,28 +97,31 @@ public class Player : MonoBehaviour, IEntity
             equipment.AddPassiveSpellsTo(stats);
         }
     }
-
     public void ApplyStatusEffect(StatusEffect effect)
     {
         stats.ApplyStatusEffect(effect);
     }
-
     public void DeapplyStatusEffect(StatusEffect effect)
     {
         stats.DeapplyStatusEffect(effect);
     }
-
-    public float GetAttackRange() { return stats.GetAttackRange(); }
-    public float GetAttackDamage() { return stats.GetAttackDamage(); }
-    public float GetAttackCooldown()
-    { 
-        return stats.GetBaseAttackSpeed() * 100 / (equipment.GetAttackSpeed() + stats.GetAttackSpeed());
+    
+    private void Die()
+    {
+        isDead = true;
+        //healthRenderer.enabled = false;
+        this.GetComponent<CapsuleCollider>().enabled = false;
+        this.GetComponent<NavMeshObstacle>().enabled = false;
+        Destroy(transform.gameObject, 0.1f);
     }
 
     public Spell GetCurrentSpell() { return currentSpell; }
-    public float GetMaxHealth() { return stats.GetMaxHealth(); }
     public EntityStats GetStats() { return stats; }
-
+    public float GetAttackRange() { return stats.GetAttackRange(); }
+    public float GetAttackCooldown()
+    {
+        return stats.GetBaseAttackSpeed() * 100 / (stats.GetAttackSpeed());
+    }
     public void SetCurrentSpell(int spellSlot)
     {
         currentSpell = equipment.GetSpell(spellSlot);

@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerEquipment
-{   
+public class PlayerEquipment : EntityEquipment
+{
     List<Item> m_Items;
-    Spell[] m_Spells;
     public PlayerEquipment()
     {
         m_Items = new List<Item>();
@@ -19,18 +18,6 @@ public class PlayerEquipment
     public void EquipItem(Item eqipped)
     {
         m_Items.Add(eqipped);
-    }
-
-    public void AddPassiveSpellsTo(PlayerStats stats)
-    {
-        foreach (Spell spell in m_Spells)
-        {
-            if (spell.GetSpellType() == Spell.Types.passive || spell.GetSpellType() == Spell.Types.passiveSwitchable)
-            {
-                stats.ApplyPassiveSpell(spell);
-            }
-        }
-        //return stats;
     }
 
     public void EquipSpell(Spell spell, int spellSlot)
@@ -46,10 +33,5 @@ public class PlayerEquipment
             sum += item.GetAttackSpeed();
         }
         return sum;
-    }
-
-    public Spell GetSpell(int spellSlot)
-    {
-        return m_Spells[spellSlot];
     }
 }

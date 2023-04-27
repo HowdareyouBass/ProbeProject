@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour
     {
         if (collider.CompareTag("Enemy"))
         {
-            collider.transform.GetComponent<EnemyBehavior>().Damage(spell.GetDamage());
+            collider.transform.GetComponent<Enemy>().Damage(spell.GetDamage());
             Destroy(transform.gameObject);
             if (spell.GetEffectOnImpact() == null)
             {

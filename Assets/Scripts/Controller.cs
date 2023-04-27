@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-    public PlayerController playerController;
-    public Camera playerCamera;
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private Camera playerCamera;
 
     private float timer = 0;
 

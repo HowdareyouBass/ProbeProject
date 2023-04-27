@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_OnDeath: {fileID: 11400000, guid: 18ba38d9dbe979846b9303c2ec58518f, type: 2}
+  m_OnDamaged: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

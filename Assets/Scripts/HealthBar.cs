@@ -14,7 +14,7 @@ public class HealthBar : MonoBehaviour
 
     void Start()
     {
-        playerStats = Player.playerStats;
+        playerStats = Player.stats;
 
         gameEventListener.onEventTriggered += SetHealth;
         gameEventListener.gameEvent.AddListener(gameEventListener);
@@ -25,7 +25,7 @@ public class HealthBar : MonoBehaviour
 
     private void SetHealth()
     {
-        slider.value = playerStats.currentHealth;
+        slider.value = playerStats.GetCurrentHealth();
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 

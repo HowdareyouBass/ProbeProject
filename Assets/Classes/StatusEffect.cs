@@ -15,7 +15,7 @@ public class StatusEffect
 
     private int m_CurrentCount;
 
-    public IEnumerator StartEffect(Player player)
+    public IEnumerator StartEffect(IEntity entity)
     {
         if (m_DecreaseCount.gameEvent != null)
         {
@@ -25,12 +25,12 @@ public class StatusEffect
         //Adding this listener in count when the event triggers
         m_DecreaseCount.gameEvent.AddListener(m_DecreaseCount);
 
-        player.ApplyStatusEffect(this);
+        entity.ApplyStatusEffect(this);
 
         if (m_DurationInSeconds != 0)
         {
             yield return new WaitForSeconds(m_DurationInSeconds);
-            player.DeapplyStatusEffect(this);
+            entity.DeapplyStatusEffect(this);
         }
         if (m_StartCount != 0)
         {
@@ -39,7 +39,7 @@ public class StatusEffect
             {
                 if (m_CurrentCount <= 0)
                 {
-                    player.DeapplyStatusEffect(this);
+                    entity.DeapplyStatusEffect(this);
                     m_DecreaseCount.gameEvent.RemoveListener(m_DecreaseCount);
                     yield break;
                 }

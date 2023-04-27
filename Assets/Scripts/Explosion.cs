@@ -13,7 +13,7 @@ public class Explosion : MonoBehaviour
         int numberOfEnemiesHit = Physics.OverlapSphereNonAlloc(transform.position, spell.GetRadiusOnImpact(), hitEnemies, enemyLayer);
         for (int i = 0; i < numberOfEnemiesHit; i++)
         {
-            EnemyBehavior enemy = hitEnemies[i].transform.GetComponent<EnemyBehavior>();
+            Enemy enemy = hitEnemies[i].transform.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.Damage(spell.GetDamage());
