@@ -1,27 +1,45 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-[CreateAssetMenu(fileName = "New Game Event", menuName = "Game Event")]
-public class GameEvent : ScriptableObject
+public sealed class GameEvent<T>
 {
-    private List<GameEventListener> listeners = new List<GameEventListener>();
+    private event Action<T> action;
 
-    public void TriggerEvent()
+    public void Trigger(T value)
     {
-        for (int i = listeners.Count - 1; i >= 0; i--)
+        action.Invoke(value);
+    }
+    public void Subscribe(Action<T> func)
+    {
+        action += func;
+    }
+    public void Unsubscribe(Action<T> func)
+    {
+        action -= func;
+    }
+}
+public sealed class GameEvent
+{
+    private event Action action;
+
+    public void Trigger()
+    {
+        if (action != null)
         {
-            listeners[i].OnEventTriggered();
+            action.Invoke();
+            return;
         }
+        Debug.LogWarning("No action assigned to this event");
     }
-
-    public void AddListener(GameEventListener listener)
+    public void Subscribe(Action func)
     {
-        listeners.Add(listener);
+        action += func;
     }
-
-    public void RemoveListener(GameEventListener listener)
+    public void Unsubscribe(Action func)
     {
-        listeners.Remove(listener);
+        action -= func;
     }
 }

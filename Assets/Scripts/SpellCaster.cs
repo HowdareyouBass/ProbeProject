@@ -9,6 +9,7 @@ public class SpellCaster : MonoBehaviour
     private IController controller;
     private Coroutine spellCasting;
     private Spell.Types spellType;
+    private Spell currentSpell;
 
     void Start()
     {
@@ -18,8 +19,8 @@ public class SpellCaster : MonoBehaviour
 
     public void CastSpell(int spellSlot, RaycastHit target)
     {
-        entity.SetCurrentSpell(spellSlot);
-        spellType = entity.GetCurrentSpell().GetSpellType();
+        currentSpell = entity.GetSpellFromSlot(spellSlot);
+        spellType = currentSpell.GetSpellType();
 
         controller.StopActions();
 
@@ -56,13 +57,11 @@ public class SpellCaster : MonoBehaviour
     }
     private void CastSpellSelf()
     {
-        //Don't need target because it's self cast
-        entity.CastSpell(new RaycastHit());
+        InstantiateSpell(new RaycastHit());
     }
     private IEnumerator CastSpellRoutine(RaycastHit target, float targetRadius, bool isGround)
     {
-
-        float castRange = entity.GetCurrentSpell().GetCastRange();
+        float castRange = currentSpell.GetCastRange();
         while(EntityMath.VectorToNearestPoint(transform, target).magnitude > castRange && castRange != 0)
         {
             if (isGround)
@@ -77,7 +76,67 @@ public class SpellCaster : MonoBehaviour
         }
         movement.Stop();
         movement.LookAtTarget(target);
-        entity.CastSpell(target);
+        InstantiateSpell(target);
         yield break;
+    }
+
+    private void InstantiateSpell(RaycastHit target)
+    {
+        if (currentSpell == null)
+        {
+            Debug.LogWarning("No spell in a slot ");
+            return;
+        }
+
+        #if UNITY_EDITOR
+        if (currentSpell.GetSpellType() == Spell.Types.none)
+        {
+            Debug.LogWarning("Spell Type is none");
+            return;
+        }
+        #endif
+
+        if (currentSpell.GetSpellType() == Spell.Types.projectile)
+        {
+            GameObject castEffect = Instantiate(currentSpell.GetEffect(), transform.position, transform.rotation);
+            // If spell type is projectile then we move projectile
+            Rigidbody rb = castEffect.AddComponent<Rigidbody>();
+            rb.useGravity = false;
+
+            //Collider so we can interract with enemy
+            SphereCollider collider = castEffect.AddComponent<SphereCollider>();
+            collider.radius = 0.4f;
+            collider.isTrigger = true;
+
+            //And projectile component
+            Projectile spellProjectileComponent = castEffect.AddComponent<Projectile>();
+            spellProjectileComponent.spell = currentSpell;
+            spellProjectileComponent.target = target;
+        }
+        if (currentSpell.GetSpellType() == Spell.Types.directedAtEnemy)
+        {
+            GameObject castEffect = Instantiate(currentSpell.GetEffectOnImpact(), target.transform.position, Quaternion.identity);
+            if (currentSpell.HaveRadiusOnImpact)
+            {
+                Explosion spellExplosionComponent = castEffect.AddComponent<Explosion>();
+                spellExplosionComponent.spell = currentSpell;
+            }
+            GetComponent<IEntity>().DamageTarget(target);
+        }
+        if (currentSpell.GetSpellType() == Spell.Types.directedAtGround)
+        {
+            GameObject castEffect = Instantiate(currentSpell.GetEffectOnImpact(), target.point, Quaternion.identity);
+            Explosion spellExplosionComponent = castEffect.AddComponent<Explosion>();
+            spellExplosionComponent.spell = currentSpell;
+        }
+        if (currentSpell.GetSpellType() == Spell.Types.playerCast)
+        {
+            StartCoroutine(currentSpell.GetStatusEffect().StartEffect(entity));
+        }
+        if (currentSpell.GetSpellType() == Spell.Types.passiveSwitchable)
+        {
+            currentSpell.SwitchPassive();
+            entity.GetEquipment().AddPassiveSpellsTo(entity.GetStats());
+        }
     }
 }

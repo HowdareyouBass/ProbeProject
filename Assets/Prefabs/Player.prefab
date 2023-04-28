@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4092150372153248435}
   - component: {fileID: 4092150372153248434}
   - component: {fileID: 4092150372153248433}
-  - component: {fileID: 4092150372153248438}
   - component: {fileID: 4092150372153248439}
+  - component: {fileID: 4092150372153248438}
   - component: {fileID: 3125271741887349869}
   - component: {fileID: 5464639896118133101}
   - component: {fileID: 695730108043266242}
@@ -113,6 +113,19 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 2
+--- !u!114 &4092150372153248439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4092150372153248444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b91392e18239bd243bccf8671a678afb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRace: {fileID: 11400000, guid: df4ed6829b4de6b48ad7d88302d19a0e, type: 2}
 --- !u!114 &4092150372153248438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,20 +144,6 @@ MonoBehaviour:
   spellCaster: {fileID: 4304220602081029817}
   movementEffect: {fileID: 7590234846238662618, guid: 6b12e0f0193a1514883d49446593fbab, type: 3}
   agent: {fileID: 4092150372153248433}
---- !u!114 &4092150372153248439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4092150372153248444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b91392e18239bd243bccf8671a678afb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  race: {fileID: 11400000, guid: dc1f2b643637e9a4385a2019bedddd5e, type: 2}
-  OnPlayerDamaged: {fileID: 11400000, guid: cb0d6361547533c41a135027a47d469f, type: 2}
 --- !u!114 &3125271741887349869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,8 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f64b89d479b9642867cb9f4ab46852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OnDeath: {fileID: 11400000, guid: a612faacacec7794582728b866dc3c03, type: 2}
-  m_OnDamaged: {fileID: 11400000, guid: cb0d6361547533c41a135027a47d469f, type: 2}
 --- !u!114 &5464639896118133101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8c2ed41e096854eb2cc8a7bbb6ae9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnPlayerAttack: {fileID: 11400000, guid: b38bd7989e678794aa582aab107ac4e4, type: 2}
   movement: {fileID: 5464639896118133101}
 --- !u!114 &4304220602081029817
 MonoBehaviour:

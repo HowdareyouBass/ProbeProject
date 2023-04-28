@@ -57,7 +57,7 @@ public class Attack : MonoBehaviour
                 movement.LookAtTarget(target);
                 if (canAttack)
                 {
-                    OnPlayerAttack.TriggerEvent();
+                    OnPlayerAttack.Trigger();
                     entity.DamageTarget(target);
                     StartCoroutine(WaitForNextAttack());
                 }

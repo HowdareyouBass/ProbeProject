@@ -268,6 +268,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6746957540238612324, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: enemyRace
+      value: 
+      objectReference: {fileID: 11400000, guid: dc1f2b643637e9a4385a2019bedddd5e, type: 2}
     - target: {fileID: 6746957540238612335, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -278,25 +282,6 @@ PrefabInstance:
       objectReference: {fileID: 963194228}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
---- !u!1 &934710269 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6746957540238612335, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
-  m_PrefabInstance: {fileID: 849419265}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &934710270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 934710269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86f64b89d479b9642867cb9f4ab46852, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OnDeath: {fileID: 11400000, guid: 18ba38d9dbe979846b9303c2ec58518f, type: 2}
-  m_OnDamaged: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,6 +736,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6746957540238612324, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: enemyRace
+      value: 
+      objectReference: {fileID: 11400000, guid: dc1f2b643637e9a4385a2019bedddd5e, type: 2}
     - target: {fileID: 6746957540238612335, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
       propertyPath: m_Name
       value: Enemy (1)

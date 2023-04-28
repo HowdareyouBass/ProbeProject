@@ -28,7 +28,7 @@ public class Controller : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            playerController.StopAction();
+            playerController.StopActions();
         }
     }
     

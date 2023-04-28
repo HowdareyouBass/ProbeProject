@@ -11,19 +11,15 @@ public class StatusEffect
     [SerializeField] private int m_CountDelta;
     [SerializeField] private StatusEffectStats m_Stats;
     //[SerializeField] private UnityEvent m_CountDecrease;
-    [SerializeField] private GameEventListener m_DecreaseCount = new GameEventListener();
-
+    [SerializeField] private GameEvent m_DecreaseCount;
     private int m_CurrentCount;
 
     public IEnumerator StartEffect(IEntity entity)
     {
-        if (m_DecreaseCount.gameEvent != null)
+        if (m_DecreaseCount != null)
         {
-            //Adding function to Action wich will be called when event triggers
-            m_DecreaseCount.onEventTriggered += DecreaseCount;
+            m_DecreaseCount.Subscribe(DecreaseCount);
         }
-        //Adding this listener in count when the event triggers
-        m_DecreaseCount.gameEvent.AddListener(m_DecreaseCount);
 
         entity.ApplyStatusEffect(this);
 
@@ -40,7 +36,7 @@ public class StatusEffect
                 if (m_CurrentCount <= 0)
                 {
                     entity.DeapplyStatusEffect(this);
-                    m_DecreaseCount.gameEvent.RemoveListener(m_DecreaseCount);
+                    m_DecreaseCount.Unsubscribe(DecreaseCount);
                     yield break;
                 }
                 else

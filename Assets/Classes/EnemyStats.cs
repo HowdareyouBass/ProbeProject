@@ -4,9 +4,4 @@ using UnityEngine;
 
 public class EnemyStats : EntityStats
 {
-    public void SetType(EnemyType enemyType)
-    {
-        m_CurrentHealth = enemyType.health;
-        m_MaxHealth = enemyType.health;
-    }
 }

@@ -10,8 +10,6 @@ public class Movement : MonoBehaviour
     private NavMeshAgent agent;
     private Coroutine looking;
 
-    private Vector3 lr;
-
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -45,7 +43,6 @@ public class Movement : MonoBehaviour
             angle = Vector3.Angle(lookRotation, transform.forward);
             //Set y to 0 so that player GameObject don't rotate up and down
             lookRotation.y = 0;
-            lr = lookRotation;
             transform.forward = Vector3.MoveTowards(transform.forward, lookRotation, rotationSpeed * Time.deltaTime);
             yield return null;
         }
@@ -57,13 +54,5 @@ public class Movement : MonoBehaviour
         agent.SetDestination(transform.position);
         if (looking != null)
             StopCoroutine(looking);
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + lr);
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward);
     }
 }

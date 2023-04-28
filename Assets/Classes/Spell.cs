@@ -1,11 +1,12 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Spell : DatabaseItem
+public class Spell
 {
     public enum Types { none, projectile, directedAtEnemy, directedAtGround, playerCast, passive, passiveSwitchable }
 
     //For all spells
+    [SerializeField] private string m_Name;
     [SerializeField] private float m_SpellDamage;
     [SerializeField] private Types m_Type = Types.none;
     
@@ -44,6 +45,7 @@ public class Spell : DatabaseItem
 
     public bool HaveRadiusOnImpact { get => m_HaveRadiusOnImpact; }
 
+    public string GetName() { return m_Name; }
     public float GetDamage() { return m_SpellDamage; }
     public Types GetSpellType() { return m_Type; }
 

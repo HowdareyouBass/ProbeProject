@@ -4,14 +4,26 @@ using UnityEngine;
 
 public interface IEntity
 {
-    float GetAttackRange();
+    GameEvent GetOnDeathEvent();
+    GameEvent<float> GetOnDamageEvent();
+    float GetAttackRange() { return GetStats().GetAttackRange(); }
+    float GetAttackDamage() { return GetStats().GetAttackDamage(); }
     float GetAttackCooldown();
-    Spell GetCurrentSpell();
+    float GetMaxHealth() { return GetStats().GetMaxHealth(); }
     EntityStats GetStats();
-    void ApplyStatusEffect(StatusEffect effect);
-    void DeapplyStatusEffect(StatusEffect effect);
-    void SetCurrentSpell(int spellSlot);
-    void CastSpell(RaycastHit target);
+    EntityEquipment GetEquipment();
+    void ApplyStatusEffect(StatusEffect effect)
+    {
+        GetStats().ApplyStatusEffect(effect);
+    }
+    void DeapplyStatusEffect(StatusEffect effect)
+    {
+        GetStats().DeapplyStatusEffect(effect);
+    }
+    Spell GetSpellFromSlot(int spellSlot);
+    //Spell GetCurrentSpell();
+    //void SetCurrentSpell(int spellSlot);
+    //void CastSpell(RaycastHit target);
     void DamageTarget(RaycastHit target)
     {
         target.transform.GetComponent<Health>().Damage(GetStats().GetAttackDamage());
