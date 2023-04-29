@@ -144,9 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthRenderer: {fileID: 6746957540255858401}
-  OnEnemyDeath:
-    gameEvent: {fileID: 0}
-  type: {fileID: 11400000, guid: 56b88e1a4defd5444be092146250446b, type: 2}
+  enemyRace: {fileID: 0}
   damageEffect: {fileID: 8774903704942797486, guid: ac62a51afd08fe34891a0e937f088243, type: 3}
   isDead: 0
 --- !u!114 &7321791144483176232
@@ -161,8 +159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f64b89d479b9642867cb9f4ab46852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OnDeath: {fileID: 11400000, guid: 18ba38d9dbe979846b9303c2ec58518f, type: 2}
-  m_OnDamaged: {fileID: 0}
 --- !u!1 &6746957540255858415
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,6 +171,7 @@ GameObject:
   - component: {fileID: 6746957540255858400}
   - component: {fileID: 6746957540255858401}
   - component: {fileID: 6746957540255858403}
+  - component: {fileID: 4676792554295192174}
   m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
@@ -259,3 +256,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65acd50105e212f4bbbaf1d87212d9de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4676792554295192174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6746957540255858415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ecca002c457c12449f2a6e0069e971f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthRenderer: {fileID: 6746957540255858401}

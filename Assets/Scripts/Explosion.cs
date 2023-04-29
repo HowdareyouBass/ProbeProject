@@ -13,15 +13,8 @@ public class Explosion : MonoBehaviour
         int numberOfEnemiesHit = Physics.OverlapSphereNonAlloc(transform.position, spell.GetRadiusOnImpact(), hitEnemies, enemyLayer);
         for (int i = 0; i < numberOfEnemiesHit; i++)
         {
-            Enemy enemy = hitEnemies[i].transform.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.Damage(spell.GetDamage());
-            }
-            else
-            {
-                Debug.LogError("No EnemyBehavior component found on enemy. Try using prefab");
-            }
+            Health health = hitEnemies[i].transform.GetComponent<Health>();
+            health.TakeDamage(spell.GetDamage());
         }
     }
 }

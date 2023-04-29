@@ -6,10 +6,12 @@ public interface IEntity
 {
     GameEvent GetOnDeathEvent();
     GameEvent<float> GetOnDamageEvent();
+    GameEvent GetOnAttackEvent();
     float GetAttackRange() { return GetStats().GetAttackRange(); }
     float GetAttackDamage() { return GetStats().GetAttackDamage(); }
     float GetAttackCooldown();
     float GetMaxHealth() { return GetStats().GetMaxHealth(); }
+    float GetCurrentHealth() { return GetStats().GetCurrentHealth(); }
     EntityStats GetStats();
     EntityEquipment GetEquipment();
     void ApplyStatusEffect(StatusEffect effect)
@@ -26,7 +28,6 @@ public interface IEntity
     //void CastSpell(RaycastHit target);
     void DamageTarget(RaycastHit target)
     {
-        target.transform.GetComponent<Health>().Damage(GetStats().GetAttackDamage());
+        target.transform.GetComponent<Health>().TakeDamage(GetStats().GetAttackDamage());
     }
-    
 }

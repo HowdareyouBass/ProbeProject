@@ -12,20 +12,25 @@ public class Health : MonoBehaviour
 
     void Start()
     {
-        //Could not use floats because they just copy instead of referencing float from stats
-        IEntity entity = GetComponent<IEntity>();
+        IEntity entity = gameObject.GetComponent<IEntity>();
+        //Debug.Assert(entity != null);
         m_OnDeath = entity.GetOnDeathEvent();
         m_OnDamaged = entity.GetOnDamageEvent();
         stats = entity.GetStats();
+        //Debug.Assert(stats != null);
     }
 
-    public void Damage(float amount)
+    public void TakeDamage(float amount)
     {
         stats.TakeDamage(amount);
-        m_OnDamaged.Trigger(amount);
+        if (!m_OnDamaged.Trigger(amount))
+            Debug.Log("No action assigned to event " + nameof(m_OnDamaged) + " in gameobject " + gameObject.name);
+
+
         if (stats.GetCurrentHealth() <= 0)
         {
-            m_OnDeath.Trigger();
+            if (!m_OnDeath.Trigger())
+                Debug.Log("No action assigned to event " + nameof(m_OnDamaged) + " in gameobject " + gameObject.name);
         }
     }
 }

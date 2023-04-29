@@ -15,7 +15,7 @@ public class Player : MonoBehaviour, IEntity
 
     void Awake()
     {
-        stats = new PlayerStats();     
+        stats = new PlayerStats();   
         equipment = new PlayerEquipment();
         stats.ApplyRace(playerRace);
     }
@@ -38,8 +38,9 @@ public class Player : MonoBehaviour, IEntity
 
     public GameEvent<float> GetOnDamageEvent() { return events.OnPlayerDamaged; }
     public GameEvent GetOnDeathEvent() { return events.OnPlayerDeath; }
+    public GameEvent GetOnAttackEvent() { return events.OnPlayerAttack; } 
     public Spell GetSpellFromSlot(int spellSlot) { return equipment.GetSpell(spellSlot); }
     public float GetMaxHealth() { return stats.GetMaxHealth(); }
-    public EntityStats GetStats() { return stats; }
+    public EntityStats GetStats() { return (EntityStats) stats; }
     public EntityEquipment GetEquipment() { return equipment; }
 }

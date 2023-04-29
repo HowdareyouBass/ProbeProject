@@ -8,10 +8,9 @@ public class Attack : MonoBehaviour
 {
     [SerializeField] private IController controller;
     [SerializeField] private IEntity entity;
-
-    [SerializeField] private GameEvent OnPlayerAttack;
-
     [SerializeField] private Movement movement;
+
+    private GameEvent OnAttack;
     private Coroutine attacking;
     private bool canAttack = true;
 
@@ -19,6 +18,7 @@ public class Attack : MonoBehaviour
     {
         controller = GetComponent<IController>();
         entity = GetComponent<IEntity>();
+        OnAttack = entity.GetOnAttackEvent();
     }
 
     public void Stop()
@@ -57,7 +57,7 @@ public class Attack : MonoBehaviour
                 movement.LookAtTarget(target);
                 if (canAttack)
                 {
-                    OnPlayerAttack.Trigger();
+                    OnAttack.Trigger();
                     entity.DamageTarget(target);
                     StartCoroutine(WaitForNextAttack());
                 }

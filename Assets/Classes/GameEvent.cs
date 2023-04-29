@@ -8,9 +8,14 @@ public sealed class GameEvent<T>
 {
     private event Action<T> action;
 
-    public void Trigger(T value)
+    public bool Trigger(T value)
     {
-        action.Invoke(value);
+        if (action != null)
+        {
+            action.Invoke(value);
+            return true;
+        }
+        return false;
     }
     public void Subscribe(Action<T> func)
     {
@@ -25,14 +30,15 @@ public sealed class GameEvent
 {
     private event Action action;
 
-    public void Trigger()
+    //Returns false if action is not assigned
+    public bool Trigger()
     {
         if (action != null)
         {
             action.Invoke();
-            return;
+            return true;
         }
-        Debug.LogWarning("No action assigned to this event");
+        return false;
     }
     public void Subscribe(Action func)
     {

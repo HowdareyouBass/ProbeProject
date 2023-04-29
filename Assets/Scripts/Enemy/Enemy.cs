@@ -6,33 +6,27 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IEntity
 {
-    [SerializeField] private Renderer healthRenderer = new Renderer();
+    [SerializeField] private Renderer healthRenderer;
     [SerializeField] private Race enemyRace;
     [SerializeField] private GameObject damageEffect;
     private EnemyStats stats;
     private EnemyEquipment equipment;
-    private Spell currentSpell;
+    private EnemyEvents events;
     [HideInInspector] public bool isDead;
 
-    void Start()
+    void Awake()
     {
+        events = new EnemyEvents();
         stats = new EnemyStats();
         stats.ApplyRace(enemyRace);
+        events.OnEnemyDeath.Subscribe(Die);
+        events.OnEnemyDamaged.Subscribe(Damage);
     }
     public void Damage(float amount)
     {
         GameObject effect = Instantiate(damageEffect, transform.position, transform.rotation);
         effect.transform.SetParent(transform);
         effect.GetComponent<TextMeshPro>().text = amount.ToString();
-
-        stats.TakeDamage(amount);
-
-        healthRenderer.material.SetFloat("_Health", stats.GetCurrentHealth());
-
-        if (stats.GetCurrentHealth() <= 0)
-        {
-            Die();
-        }
     }
     private void Die()
     {
@@ -43,9 +37,10 @@ public class Enemy : MonoBehaviour, IEntity
         Destroy(transform.gameObject, 0.1f);
     }
 
-    public GameEvent GetOnDeathEvent() { return null; }
-    public GameEvent<float> GetOnDamageEvent() { return null; }
-    public EntityStats GetStats() { return stats; }
+    public GameEvent<float> GetOnDamageEvent() { return events.OnEnemyDamaged; }
+    public GameEvent GetOnDeathEvent() { return events.OnEnemyDeath; }
+    public GameEvent GetOnAttackEvent() { return null; } 
+    public EntityStats GetStats() { return (EntityStats) stats; }
     public EntityEquipment GetEquipment() { return equipment; }
     public float GetAttackCooldown()
     {
