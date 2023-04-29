@@ -7,12 +7,11 @@ using UnityEngine.Events;
 public class StatusEffect
 {
     [SerializeField] private float m_DurationInSeconds;
-    [SerializeField] private int m_StartCount;
-    [SerializeField] private int m_CountDelta;
+    [SerializeField] private float m_StartCount;
     [SerializeField] private StatusEffectStats m_Stats;
     //[SerializeField] private UnityEvent m_CountDecrease;
-    [SerializeField] private GameEvent m_DecreaseCount;
-    private int m_CurrentCount;
+    private GameEvent<float> m_DecreaseCount;
+    private float m_CurrentCount;
 
     public IEnumerator StartEffect(IEntity entity)
     {
@@ -48,10 +47,10 @@ public class StatusEffect
         yield break;
     }
 
-    private void DecreaseCount()
+    private void DecreaseCount(float amount)
     {
         Debug.Log("Decreased count");
-        m_CurrentCount -= m_CountDelta;
+        m_CurrentCount -= amount;
     }
 
     public StatusEffectStats GetStatusEffectStats() { return m_Stats; }

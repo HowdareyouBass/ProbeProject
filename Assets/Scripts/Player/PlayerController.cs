@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour, IController
     {
         attack.Stop();
         movement.Stop();
-        //spellCaster.Stop();
+        spellCaster.Stop();
     }
 
     public void OnClick(RaycastHit hit)
@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour, IController
 
     public void AttackTarget(RaycastHit target)
     {
-        StopActions();
         float targetHeight = target.collider.bounds.size.y;
         attack.AttackTarget(target);
         SpawnEffect(target.transform.position - new Vector3(0, targetHeight / 2, 0), Vector3.up);
@@ -81,26 +80,9 @@ public class PlayerController : MonoBehaviour, IController
         spellCaster.CastSpell(spellSlot, target);
     }
 
-    // private void FollowTarget(RaycastHit target)
-    // {
-    //     //Disable NavMeshObjstacle component so that agent dont't try to avoid it
-    //     if (targetNavMesh != null)
-    //         targetNavMesh.enabled = true;
-    //     targetNavMesh = target.transform.GetComponent<NavMeshObstacle>();
-    //     targetNavMesh.enabled = false;
-
-    //     StopAction();
-    //     Vector3 targetMesurments = target.collider.bounds.size;
-    //     playerIsFollowing = StartCoroutine(FollowTargetRoutine(target, targetMesurments.z));
-    //     SpawnEffect(target.transform.position - new Vector3(0, targetMesurments.y / 2, 0), Vector3.up);
-    // }
-    // private IEnumerator FollowTargetRoutine(RaycastHit target, float targetRadius)
-    // {
-    //     while(true)
-    //     {
-    //         MoveToEntity(target.transform.position, targetRadius);
-    //         yield return null;
-    //     }
-    // }
+    public void FollowTarget(RaycastHit target)
+    {
+        movement.FollowTarget(target);
+    }
 }
 

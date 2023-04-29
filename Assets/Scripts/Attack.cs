@@ -54,7 +54,7 @@ public class Attack : MonoBehaviour
             movement.Stop();
             while(EntityMath.VectorToNearestPoint(transform, target).magnitude <= entity.GetAttackRange())
             {
-                movement.LookAtTarget(target);
+                movement.LookAtTarget(target, true);
                 if (canAttack)
                 {
                     OnAttack.Trigger();

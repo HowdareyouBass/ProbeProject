@@ -33,8 +33,6 @@ MonoBehaviour:
       m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
-      m_DecreaseCount:
-        gameEvent: {fileID: 0}
     m_SwitchableStats:
       m_Stats:
       - m_AttackSpeed: 0
@@ -64,8 +62,6 @@ MonoBehaviour:
       m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
-      m_DecreaseCount:
-        gameEvent: {fileID: 0}
     m_SwitchableStats:
       m_Stats:
       - m_AttackSpeed: 0
@@ -95,8 +91,6 @@ MonoBehaviour:
       m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
-      m_DecreaseCount:
-        gameEvent: {fileID: 0}
     m_SwitchableStats:
       m_Stats:
       - m_AttackSpeed: 0
@@ -126,8 +120,6 @@ MonoBehaviour:
       m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
-      m_DecreaseCount:
-        gameEvent: {fileID: 0}
     m_SwitchableStats:
       m_Stats:
       - m_AttackSpeed: 0
@@ -157,8 +149,6 @@ MonoBehaviour:
       m_CountDelta: 1
       m_Stats:
         m_AttackSpeed: 200
-      m_DecreaseCount:
-        gameEvent: {fileID: 11400000, guid: b38bd7989e678794aa582aab107ac4e4, type: 2}
     m_SwitchableStats:
       m_Stats:
       - m_AttackSpeed: 0
@@ -188,12 +178,39 @@ MonoBehaviour:
       m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
-      m_DecreaseCount:
-        gameEvent: {fileID: 0}
     m_SwitchableStats:
       m_Stats:
       - m_AttackSpeed: 200
       - m_AttackSpeed: 100
+      m_Percents:
+      - m_AttackPercent: 0
+        m_MaxHealthPercent: 0
+      - m_AttackPercent: 0
+        m_MaxHealthPercent: 0
+  - m_Name: Instakill
+    m_SpellDamage: 0
+    m_Type: 5
+    m_EffectOnImpact: {fileID: 0}
+    m_CastRange: 0
+    m_Effect: {fileID: 0}
+    m_ProjectileSpeed: 0
+    m_HaveRadiusOnImpact: 0
+    m_RadiusOnImpact: 0
+    m_PassiveStats:
+      m_AttackSpeed: 1000
+    m_Percents:
+      m_AttackPercent: 0
+      m_MaxHealthPercent: 0
+    m_StatusEffect:
+      m_DurationInSeconds: 0
+      m_StartCount: 0
+      m_CountDelta: 0
+      m_Stats:
+        m_AttackSpeed: 0
+    m_SwitchableStats:
+      m_Stats:
+      - m_AttackSpeed: 0
+      - m_AttackSpeed: 0
       m_Percents:
       - m_AttackPercent: 0
         m_MaxHealthPercent: 0

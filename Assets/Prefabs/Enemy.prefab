@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthRenderer: {fileID: 6746957540255858401}
-  enemyRace: {fileID: 0}
+  enemyRace: {fileID: 11400000, guid: dc1f2b643637e9a4385a2019bedddd5e, type: 2}
   damageEffect: {fileID: 8774903704942797486, guid: ac62a51afd08fe34891a0e937f088243, type: 3}
   isDead: 0
 --- !u!114 &7321791144483176232

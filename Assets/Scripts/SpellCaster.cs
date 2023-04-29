@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Movement))]
 public class SpellCaster : MonoBehaviour
 {
     [SerializeField] private Movement movement;
@@ -19,20 +20,19 @@ public class SpellCaster : MonoBehaviour
 
     public void CastSpell(int spellSlot, RaycastHit target)
     {
+        controller.StopActions();
         currentSpell = entity.GetSpellFromSlot(spellSlot);
         spellType = currentSpell.GetSpellType();
 
-        controller.StopActions();
-
-        if (spellType == Spell.Types.projectile || spellType == Spell.Types.directedAtEnemy && target.transform.CompareTag("Enemy"))
+        if ((spellType == Spell.Types.projectile || spellType == Spell.Types.directedAtEnemy) && target.transform.CompareTag("Enemy"))
         {
             CastSpellOnEnemy(target);
         }
-        else if (spellType == Spell.Types.directedAtGround)
+        if (spellType == Spell.Types.directedAtGround)
         {
             CastSpellOnGround(target);
         }
-        else if (spellType == Spell.Types.playerCast || spellType == Spell.Types.passiveSwitchable)
+        if (spellType == Spell.Types.playerCast || spellType == Spell.Types.passiveSwitchable)
         {
             CastSpellSelf();
         }
@@ -49,33 +49,39 @@ public class SpellCaster : MonoBehaviour
         {
             targetRadius = target.collider.bounds.size.z;
         }
-        spellCasting = StartCoroutine(CastSpellRoutine(target, targetRadius, false));
+        spellCasting = StartCoroutine(CastSpellRoutine(target, targetRadius, true));
     }
     private void CastSpellOnGround(RaycastHit target)
     {
-        spellCasting = StartCoroutine(CastSpellRoutine(target, 0, true));
+        spellCasting = StartCoroutine(CastSpellRoutine(target, 0, false));
     }
     private void CastSpellSelf()
     {
         InstantiateSpell(new RaycastHit());
     }
-    private IEnumerator CastSpellRoutine(RaycastHit target, float targetRadius, bool isGround)
+    private Vector3 ds;
+    private IEnumerator CastSpellRoutine(RaycastHit target, float targetRadius, bool isEntity)
     {
+        //First we move while cast range
         float castRange = currentSpell.GetCastRange();
-        while(EntityMath.VectorToNearestPoint(transform, target).magnitude > castRange && castRange != 0)
+        Vector3 destinationVector = isEntity ? (EntityMath.VectorToNearestPoint(transform, target)) : (target.point - (transform.position));
+        ds =  destinationVector;
+        while(destinationVector.magnitude > castRange && castRange != 0)
         {
-            if (isGround)
+            if (isEntity)
             {
-                movement.MoveToPoint(target.point);
+                movement.MoveToEntity(target, targetRadius);
             }
             else
             {   
-                movement.MoveToEntity(target, targetRadius);
+                movement.MoveToPoint(target.point);
             }
+            destinationVector = isEntity ? (EntityMath.VectorToNearestPoint(transform, target)) : (target.point - transform.position);
+            ds = destinationVector;
             yield return null;
         }
         movement.Stop();
-        movement.LookAtTarget(target);
+        movement.LookAtTarget(target, isEntity);
         InstantiateSpell(target);
         yield break;
     }
@@ -125,6 +131,7 @@ public class SpellCaster : MonoBehaviour
         }
         if (currentSpell.GetSpellType() == Spell.Types.directedAtGround)
         {
+            Debug.Log("Atleast type is right");
             GameObject castEffect = Instantiate(currentSpell.GetEffectOnImpact(), target.point, Quaternion.identity);
             Explosion spellExplosionComponent = castEffect.AddComponent<Explosion>();
             spellExplosionComponent.spell = currentSpell;
@@ -138,5 +145,16 @@ public class SpellCaster : MonoBehaviour
             currentSpell.SwitchPassive();
             entity.GetEquipment().AddPassiveSpellsTo(entity.GetStats());
         }
+    }
+
+    public void Stop()
+    {
+        if (spellCasting != null)
+            StopCoroutine(spellCasting);
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + ds);
     }
 }
