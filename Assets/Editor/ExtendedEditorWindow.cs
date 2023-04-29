@@ -38,9 +38,11 @@ public class ExtendedEditorWindow : EditorWindow
         }
     }
 
-    protected void DrawPropertiesFromList(SerializedProperty prop, List<string> list, bool drawChildren)
+    protected void DrawPropertiesFromList(SerializedProperty property, List<string> list, bool drawChildren)
     {
-        foreach(SerializedProperty p in prop)
+        Debug.Log(property.displayName);
+
+        foreach(SerializedProperty p in GetChildren(property))
         {
             if (list.Contains(p.displayName))
             {
@@ -97,4 +99,25 @@ public class ExtendedEditorWindow : EditorWindow
         i -= digits;
         return Int32.Parse(path.Substring(i, digits));
     }
+
+    private IEnumerable<SerializedProperty> GetChildren(SerializedProperty serializedProperty)
+{
+    SerializedProperty currentProperty = serializedProperty.Copy();
+    SerializedProperty nextSiblingProperty = serializedProperty.Copy();
+    {
+        nextSiblingProperty.Next(false);
+    }
+ 
+    if (currentProperty.Next(true))
+    {
+        do
+        {
+            if (SerializedProperty.EqualContents(currentProperty, nextSiblingProperty))
+                break;
+ 
+            yield return currentProperty;
+        }
+        while (currentProperty.Next(false));
+    }
+}
 }
