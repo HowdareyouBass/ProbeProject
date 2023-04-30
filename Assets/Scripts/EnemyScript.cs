@@ -34,7 +34,8 @@ public class EnemyScript : EntityScript
         healthRenderer.enabled = false;
         this.GetComponent<CapsuleCollider>().enabled = false;
         this.GetComponent<NavMeshObstacle>().enabled = false;
-        Destroy(transform.gameObject, 0.1f);
+        this.GetComponent<MeshRenderer>().enabled = false;
+        Destroy(transform.gameObject, 1f);
     }
     public override Entity GetEntity()
     {

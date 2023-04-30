@@ -127,7 +127,7 @@ public class SpellCaster : MonoBehaviour
                 Explosion spellExplosionComponent = castEffect.AddComponent<Explosion>();
                 spellExplosionComponent.spell = currentSpell;
             }
-            GetComponent<Entity>().DamageTarget(target);
+            GetComponent<EntityScript>().GetEntity().DamageTarget(target);
         }
         if (currentSpell.GetSpellType() == Spell.Types.directedAtGround)
         {
