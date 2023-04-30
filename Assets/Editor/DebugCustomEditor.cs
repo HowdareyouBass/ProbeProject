@@ -12,7 +12,7 @@ public class DebugCustomEditor : Editor
     private void OnEnable()
     {
         debugManager = target as DebugManager;
-        debugManager.settingsSO.player = GameObject.Find("/Player").GetComponent<Player>();
+        debugManager.settingsSO.player = GameObject.Find("/Player").GetComponent<PlayerScript>().GetPlayer();
     }
 
     public override void OnInspectorGUI()

@@ -1,51 +1,41 @@
-using System.Collections;
 using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
 
-public sealed class GameEvent<T>
+public class GameEvent<T>
 {
     private event Action<T> action;
 
-    public bool Trigger(T value)
+    public void Trigger(T value)
     {
-        if (action != null)
-        {
-            action.Invoke(value);
-            return true;
-        }
-        return false;
+        action?.Invoke(value);
     }
-    public void Subscribe(Action<T> func)
+
+    public void Subscribe(Action<T> function)
     {
-        action += func;
+        action += function;
     }
-    public void Unsubscribe(Action<T> func)
+
+    public void Unsubscribe(Action<T> function)
     {
-        action -= func;
+        action -= function;
     }
 }
-public sealed class GameEvent
-{
-    private event Action action;
 
-    //Returns false if action is not assigned
-    public bool Trigger()
+public class GameEvent
+{
+    private Action action;
+
+    public void Trigger()
     {
-        if (action != null)
-        {
-            action.Invoke();
-            return true;
-        }
-        return false;
+        action?.Invoke();
     }
-    public void Subscribe(Action func)
+
+    public void Subscribe(Action function)
     {
-        action += func;
+        action += function;
     }
-    public void Unsubscribe(Action func)
+
+    public void Unsubscribe(Action function)
     {
-        action -= func;
+        action -= function;
     }
 }

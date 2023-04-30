@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpellCaster : MonoBehaviour
 {
     [SerializeField] private Movement movement;
-    private IEntity entity;
+    private Entity entity;
     private IController controller;
     private Coroutine spellCasting;
     private Spell.Types spellType;
@@ -14,7 +14,7 @@ public class SpellCaster : MonoBehaviour
 
     void Start()
     {
-        entity = GetComponent<IEntity>();
+        entity = GetComponent<EntityScript>().GetEntity();
         controller = GetComponent<IController>();
     }
 
@@ -127,7 +127,7 @@ public class SpellCaster : MonoBehaviour
                 Explosion spellExplosionComponent = castEffect.AddComponent<Explosion>();
                 spellExplosionComponent.spell = currentSpell;
             }
-            GetComponent<IEntity>().DamageTarget(target);
+            GetComponent<Entity>().DamageTarget(target);
         }
         if (currentSpell.GetSpellType() == Spell.Types.directedAtGround)
         {
@@ -143,7 +143,7 @@ public class SpellCaster : MonoBehaviour
         if (currentSpell.GetSpellType() == Spell.Types.passiveSwitchable)
         {
             currentSpell.SwitchPassive();
-            entity.GetEquipment().AddPassiveSpellsTo(entity.GetStats());
+            entity.ApplyAllPassiveSpells();
         }
     }
 

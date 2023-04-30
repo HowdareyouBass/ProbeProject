@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4092150372153248435}
   - component: {fileID: 4092150372153248434}
   - component: {fileID: 4092150372153248433}
-  - component: {fileID: 4092150372153248439}
+  - component: {fileID: 7208338598091520669}
   - component: {fileID: 4092150372153248438}
   - component: {fileID: 3125271741887349869}
   - component: {fileID: 5464639896118133101}
@@ -113,7 +113,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 2
---- !u!114 &4092150372153248439
+--- !u!114 &7208338598091520669
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,10 +122,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4092150372153248444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b91392e18239bd243bccf8671a678afb, type: 3}
+  m_Script: {fileID: 11500000, guid: 698d46278b6e5244d83bd9b0fcccbe92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRace: {fileID: 11400000, guid: df4ed6829b4de6b48ad7d88302d19a0e, type: 2}
+  race: {fileID: 11400000, guid: df4ed6829b4de6b48ad7d88302d19a0e, type: 2}
 --- !u!114 &4092150372153248438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,12 +138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46db636ed5c32041b1f9cf82accbe3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 3125271741887349869}
   attack: {fileID: 695730108043266242}
   movement: {fileID: 5464639896118133101}
   spellCaster: {fileID: 4304220602081029817}
   movementEffect: {fileID: 7590234846238662618, guid: 6b12e0f0193a1514883d49446593fbab, type: 3}
-  agent: {fileID: 4092150372153248433}
 --- !u!114 &3125271741887349869
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,12 +5,12 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Renderer healthRenderer;
-    private IEntity entity;
+    private Entity entity;
 
     void Start()
     {
-        entity = transform.root.GetComponent<IEntity>();
-        entity.GetOnDamageEvent().Subscribe(DecreaseHealthValue);
+        entity = transform.root.GetComponent<EntityScript>().GetEntity();
+        entity.GetOnDamageEvent()?.Subscribe(DecreaseHealthValue);
     }
 
     private void DecreaseHealthValue(float amount)

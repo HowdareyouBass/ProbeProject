@@ -6,14 +6,16 @@ using UnityEngine.UI;
 
 public class PlayerHealthBar : MonoBehaviour
 {
+    [SerializeField] private PlayerScript playerScript;
     [SerializeField] private Slider slider;
     [SerializeField] private Gradient gradient;
     [SerializeField] private Image fill;
-    //[SerializeField] private GameEventListener onPlayerDamaged = new GameEventListener();
+
     private Player player;
+    //[SerializeField] private GameEventListener onPlayerDamaged = new GameEventListener();
     void Start()
     {
-        player = GameObject.Find("/Player").GetComponent<Player>();
+        player = playerScript.GetPlayer();
         player.events.OnPlayerDamaged.Subscribe(DecreaseHealthbarValue);
         slider.maxValue = player.GetMaxHealth();
 

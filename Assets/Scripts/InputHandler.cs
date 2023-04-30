@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller : MonoBehaviour
+public class InputHandler : MonoBehaviour
 {
     [SerializeField] private PlayerController playerController;
     [SerializeField] private Camera playerCamera;
 
     private float timer = 0;
 
-    void Update()
+    private void Update()
     {
         MovementAndAttacking();
 
@@ -21,10 +19,6 @@ public class Controller : MonoBehaviour
             if (hit.colliderInstanceID == 0)
                 return;
             playerController.CastSpell(0, hit);
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            playerController.Damage(10);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {

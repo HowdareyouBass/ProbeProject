@@ -1,7 +1,6 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 [System.Serializable]
 public class StatusEffect
@@ -10,14 +9,14 @@ public class StatusEffect
     [SerializeField] private float m_StartCount;
     [SerializeField] private StatusEffectStats m_Stats;
     //[SerializeField] private UnityEvent m_CountDecrease;
-    private GameEvent<float> m_DecreaseCount;
+    private Action<float> m_DecreaseCount;
     private float m_CurrentCount;
 
-    public IEnumerator StartEffect(IEntity entity)
+    public IEnumerator StartEffect(Entity entity)
     {
         if (m_DecreaseCount != null)
         {
-            m_DecreaseCount.Subscribe(DecreaseCount);
+            m_DecreaseCount += DecreaseCount;
         }
 
         entity.ApplyStatusEffect(this);
@@ -30,19 +29,18 @@ public class StatusEffect
         if (m_StartCount != 0)
         {
             m_CurrentCount = m_StartCount;
-            while (true)
-            {
-                if (m_CurrentCount <= 0)
-                {
-                    entity.DeapplyStatusEffect(this);
-                    m_DecreaseCount.Unsubscribe(DecreaseCount);
-                    yield break;
-                }
-                else
-                {
-                    yield return null;
-                }
-            }
+            yield return WaitForCount();
+            entity.DeapplyStatusEffect(this);
+            m_DecreaseCount -= DecreaseCount;
+            yield break;
+        }
+        yield break;
+    }
+    private IEnumerator WaitForCount()
+    {
+        while (m_CurrentCount > 0)
+        {
+            yield return null;
         }
         yield break;
     }

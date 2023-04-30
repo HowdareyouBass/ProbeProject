@@ -40,8 +40,6 @@ public class ExtendedEditorWindow : EditorWindow
 
     protected void DrawPropertiesFromList(SerializedProperty property, List<string> list, bool drawChildren)
     {
-        Debug.Log(property.displayName);
-
         foreach(SerializedProperty p in GetChildren(property))
         {
             if (list.Contains(p.displayName))

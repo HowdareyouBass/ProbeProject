@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class Health : MonoBehaviour
 {
@@ -9,28 +6,27 @@ public class Health : MonoBehaviour
     private GameEvent<float> m_OnDamaged;
     
     private EntityStats stats;
+    Entity entity;
 
     void Start()
     {
-        IEntity entity = gameObject.GetComponent<IEntity>();
+        entity = gameObject.GetComponent<EntityScript>().GetEntity();
         //Debug.Assert(entity != null);
         m_OnDeath = entity.GetOnDeathEvent();
         m_OnDamaged = entity.GetOnDamageEvent();
-        stats = entity.GetStats();
+        if (m_OnDeath == null) Debug.LogWarning("No on damaged event on this object", gameObject);
+        if (m_OnDamaged == null) Debug.LogWarning("No on death event on this object", gameObject);
         //Debug.Assert(stats != null);
     }
 
     public void TakeDamage(float amount)
     {
-        stats.TakeDamage(amount);
-        if (!m_OnDamaged.Trigger(amount))
-            Debug.Log("No action assigned to event " + nameof(m_OnDamaged) + " in gameobject " + gameObject.name);
+        entity.TakeDamage(amount);
+        m_OnDamaged?.Trigger(amount);
 
-
-        if (stats.GetCurrentHealth() <= 0)
+        if (entity.GetCurrentHealth() <= 0)
         {
-            if (!m_OnDeath.Trigger())
-                Debug.Log("No action assigned to event " + nameof(m_OnDamaged) + " in gameobject " + gameObject.name);
+            m_OnDeath?.Trigger();
         }
     }
 }

@@ -3,50 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.AI;
+using System;
 
-public class Enemy : MonoBehaviour, IEntity
+public class Enemy : Entity
 {
-    [SerializeField] private Renderer healthRenderer;
-    [SerializeField] private Race enemyRace;
-    [SerializeField] private GameObject damageEffect;
-    private EnemyStats stats;
     private EnemyEquipment equipment;
-    private EnemyEvents events;
+    public GameEvents.EnemyEvents events { get; private set; }
     [HideInInspector] public bool isDead;
 
-    void Awake()
+    public Enemy()
     {
-        events = new EnemyEvents();
-        stats = new EnemyStats();
-        stats.ApplyRace(enemyRace);
-        events.OnEnemyDeath.Subscribe(Die);
-        events.OnEnemyDamaged.Subscribe(Damage);
-    }
-    public void Damage(float amount)
-    {
-        GameObject effect = Instantiate(damageEffect, transform.position, transform.rotation);
-        effect.transform.SetParent(transform);
-        effect.GetComponent<TextMeshPro>().text = amount.ToString();
-    }
-    private void Die()
-    {
-        isDead = true;
-        //healthRenderer.enabled = false;
-        this.GetComponent<CapsuleCollider>().enabled = false;
-        this.GetComponent<NavMeshObstacle>().enabled = false;
-        Destroy(transform.gameObject, 0.1f);
+        events = new GameEvents.EnemyEvents();
     }
 
-    public GameEvent<float> GetOnDamageEvent() { return events.OnEnemyDamaged; }
-    public GameEvent GetOnDeathEvent() { return events.OnEnemyDeath; }
-    public GameEvent GetOnAttackEvent() { return null; } 
-    public EntityStats GetStats() { return (EntityStats) stats; }
-    public EntityEquipment GetEquipment() { return equipment; }
-    public float GetAttackCooldown()
+    public void SetRace(Race race)
     {
-        return stats.GetBaseAttackSpeed() * 100 / (stats.GetAttackSpeed());
+        stats.ApplyRace(race);
     }
-    public Spell GetSpellFromSlot(int spellSlot) { return equipment.GetSpell(spellSlot); }
+
+    public override GameEvent<float> GetOnDamageEvent() { return events.OnEnemyDamaged; }
+    public override GameEvent GetOnDeathEvent() { return events.OnEnemyDeath; }
+
+    public override void ApplyAllPassiveSpells()
+    {
+        equipment.AddPassiveSpellsTo(stats);
+    }
+    public override Spell GetSpellFromSlot(int spellSlot) { return equipment.GetSpell(spellSlot); }
     //public Spell GetCurrentSpell() { return currentSpell; }
     //public void SetCurrentSpell(int spellSlot)
     //{

@@ -1,25 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-
-public class Player : MonoBehaviour, IEntity
+//MonoBehaviour, 
+public class Player : Entity
 {
-    [SerializeField] private Race playerRace;
-
     public const float PLAYER_RADIUS = 1f;
-    public PlayerEvents events = new PlayerEvents();
+    public GameEvents.PlayerEvents events;
 
-    private PlayerStats stats;
     private PlayerEquipment equipment;
 
-    void Awake()
+    public Player()
     {
-        stats = new PlayerStats();   
+        events = new GameEvents.PlayerEvents();
         equipment = new PlayerEquipment();
-        stats.ApplyRace(playerRace);
     }
 
+    public void SetRace(Race race)
+    {
+        stats.ApplyRace(race);
+    }
     public void EquipItem(Item item)
     {
         equipment.EquipItem(item);
@@ -29,18 +28,15 @@ public class Player : MonoBehaviour, IEntity
         equipment.EquipSpell(spell, spellSlot);
         equipment.AddPassiveSpellsTo(stats);
     }
-
-    public float GetAttackDamage() { return stats.GetAttackDamage(); }
-    public float GetAttackCooldown()
+    public override float GetAttackCooldown()
     { 
         return stats.GetBaseAttackSpeed() * 100 / (equipment.GetAttackSpeed() + stats.GetAttackSpeed());
     }
 
-    public GameEvent<float> GetOnDamageEvent() { return events.OnPlayerDamaged; }
-    public GameEvent GetOnDeathEvent() { return events.OnPlayerDeath; }
-    public GameEvent GetOnAttackEvent() { return events.OnPlayerAttack; } 
-    public Spell GetSpellFromSlot(int spellSlot) { return equipment.GetSpell(spellSlot); }
-    public float GetMaxHealth() { return stats.GetMaxHealth(); }
+    public override GameEvent<float> GetOnDamageEvent() { return events.OnPlayerDamaged; }
+    public override GameEvent GetOnDeathEvent() { return events.OnPlayerDeath; }
+    public override GameEvent GetOnAttackEvent() { return events.OnPlayerAttack; } 
+    public override Spell GetSpellFromSlot(int spellSlot) { return equipment.GetSpell(spellSlot); }
     public EntityStats GetStats() { return (EntityStats) stats; }
     public EntityEquipment GetEquipment() { return equipment; }
 }

@@ -1,13 +1,12 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 [RequireComponent(typeof(Movement))]
 public class Attack : MonoBehaviour
 {
     [SerializeField] private IController controller;
-    [SerializeField] private IEntity entity;
+    [SerializeField] private Entity entity;
     [SerializeField] private Movement movement;
 
     private GameEvent OnAttack;
@@ -17,7 +16,7 @@ public class Attack : MonoBehaviour
     void Start()
     {
         controller = GetComponent<IController>();
-        entity = GetComponent<IEntity>();
+        entity = GetComponent<EntityScript>().GetEntity();
         OnAttack = entity.GetOnAttackEvent();
     }
 
@@ -57,13 +56,13 @@ public class Attack : MonoBehaviour
                 movement.LookAtTarget(target, true);
                 if (canAttack)
                 {
-                    OnAttack.Trigger();
+                    OnAttack?.Trigger();
                     entity.DamageTarget(target);
                     StartCoroutine(WaitForNextAttack());
                 }
 
                 //Stops attacking enemy that already died
-                if(target.transform.GetComponent<Enemy>().isDead)
+                if(target.transform.GetComponent<EnemyScript>().isDead)
                 {
                     yield break;
                 }
