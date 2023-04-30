@@ -1,28 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.AI;
-using System;
 
+[System.Serializable]
 public class Enemy : Entity
 {
     private EnemyEquipment equipment;
-    public GameEvents.EnemyEvents events { get; private set; }
     [HideInInspector] public bool isDead;
-
-    public Enemy()
-    {
-        events = new GameEvents.EnemyEvents();
-    }
 
     public void SetRace(Race race)
     {
         stats.ApplyRace(race);
     }
-
-    public override GameEvent<float> GetOnDamageEvent() { return events.OnEnemyDamaged; }
-    public override GameEvent GetOnDeathEvent() { return events.OnEnemyDeath; }
 
     public override void ApplyAllPassiveSpells()
     {

@@ -1,19 +1,23 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
+//Debug pruposes
+[System.Serializable]
 public abstract class Entity
 {
     protected EntityStats stats { get; private set; }
+    public EntityEvents events;
 
     public Entity()
     {
         stats = new EntityStats();
+        events = new EntityEvents();
     }
 
-    public virtual GameEvent GetOnDeathEvent() { return null; }
-    public virtual GameEvent<float> GetOnDamageEvent() { return null; }
-    public virtual GameEvent GetOnAttackEvent() { return null; }
     public virtual Spell GetSpellFromSlot(int spellSlot) { return null; }
+
+    public virtual Dictionary<EventName,GameEvent> GetEvents() { return events.events; }
 
     public float GetAttackRange() { return stats.GetAttackRange(); }
     public float GetAttackDamage() { return stats.GetAttackDamage(); }

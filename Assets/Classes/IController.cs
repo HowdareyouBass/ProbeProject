@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IController
 {
-    public void StopActions();
+    public abstract void StopActions();
 }

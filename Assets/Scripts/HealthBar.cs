@@ -6,13 +6,18 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Renderer healthRenderer;
     private Entity entity;
+    private GameEvent<float> OnDamaged;
 
-    void Start()
+    private void OnEnable()
     {
         entity = transform.root.GetComponent<EntityScript>().GetEntity();
-        entity.GetOnDamageEvent()?.Subscribe(DecreaseHealthValue);
+        OnDamaged = entity.GetEvents()[EventName.OnDamaged] as GameEvent<float>;
+        OnDamaged?.Subscribe(DecreaseHealthValue);
     }
-
+    private void OnDisable()
+    {
+        OnDamaged?.Unsubscribe(DecreaseHealthValue);
+    }
     private void DecreaseHealthValue(float amount)
     {
         float currentHealth = entity.GetCurrentHealth();

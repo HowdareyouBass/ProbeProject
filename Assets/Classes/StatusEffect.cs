@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,18 +6,27 @@ public class StatusEffect
 {
     [SerializeField] private float m_DurationInSeconds;
     [SerializeField] private float m_StartCount;
+    [SerializeField] private float m_CountDelta;
     [SerializeField] private StatusEffectStats m_Stats;
+    [SerializeField] private EventName m_DecreaseCountEventName;
     //[SerializeField] private UnityEvent m_CountDecrease;
-    private Action<float> m_DecreaseCount;
     private float m_CurrentCount;
 
     public IEnumerator StartEffect(Entity entity)
     {
-        if (m_DecreaseCount != null)
-        {
-            m_DecreaseCount += DecreaseCount;
-        }
+        //Debug.Log(entity.GetEvents()[m_DecreaseCountEventName].GetType());
+        GameEvent<float> go = entity.GetEvents()[m_DecreaseCountEventName] as GameEvent<float>;
 
+        if (go != null)
+        {
+            go.Subscribe(DecreaseCount);
+        }
+        else
+        {
+            GameEvent g = entity.GetEvents()[m_DecreaseCountEventName];
+            g.Subscribe(DecreaseCountWithDelta);
+        }
+            
         entity.ApplyStatusEffect(this);
 
         if (m_DurationInSeconds != 0)
@@ -31,7 +39,7 @@ public class StatusEffect
             m_CurrentCount = m_StartCount;
             yield return WaitForCount();
             entity.DeapplyStatusEffect(this);
-            m_DecreaseCount -= DecreaseCount;
+            //entity.events.GetEvent(m_DecreaseCountEventName).Unsubscribe(DecreaseCount);
             yield break;
         }
         yield break;
@@ -45,10 +53,17 @@ public class StatusEffect
         yield break;
     }
 
+    private void DecreaseCountWithDelta()
+    {
+        Debug.Log("Decreased count with delta");
+        m_CurrentCount -= m_CountDelta;
+        Debug.Log(m_CurrentCount);
+    }
     private void DecreaseCount(float amount)
     {
         Debug.Log("Decreased count");
         m_CurrentCount -= amount;
+        Debug.Log(m_CurrentCount);
     }
 
     public StatusEffectStats GetStatusEffectStats() { return m_Stats; }

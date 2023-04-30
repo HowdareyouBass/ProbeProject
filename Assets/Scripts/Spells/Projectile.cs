@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour
     {
         if (collider.CompareTag("Enemy"))
         {
-            collider.transform.GetComponent<Health>().TakeDamage(spell.GetDamage());
+            //collider.transform.GetComponent<Health>().TakeDamage(spell.GetDamage());
             Destroy(transform.gameObject);
             if (spell.GetEffectOnImpact() == null)
             {
@@ -38,16 +38,5 @@ public class Projectile : MonoBehaviour
             }
             Instantiate(spell.GetEffectOnImpact(), transform);
         }
-        // if (collider.CompareTag("Obstacle") && !spell.IsSelfDirected)
-        // {
-        //     Destroy(transform.gameObject);
-        //     if (spell.GetEffectOnImpact() == null)
-        //     {
-        //         Debug.LogWarning("Spell Impact game object isn't assigned");
-        //         return;
-        //     }
-        //     Quaternion rot = Quaternion.LookRotation(collider.transform.position - transform.position);
-        //     Instantiate(spell.GetEffectOnImpact(), transform.position, rot);
-        // }
     }
 }

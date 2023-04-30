@@ -17,7 +17,7 @@ public class Attack : MonoBehaviour
     {
         controller = GetComponent<IController>();
         entity = GetComponent<EntityScript>().GetEntity();
-        OnAttack = entity.GetOnAttackEvent();
+        OnAttack = entity.GetEvents()[EventName.OnAttack];
     }
 
     public void Stop()

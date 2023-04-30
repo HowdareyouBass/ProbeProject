@@ -9,17 +9,26 @@ public class EnemyScript : EntityScript
     [SerializeField] private Renderer healthRenderer;
 
     private Enemy enemy;
+    private GameEvent<float> OnDamaged;
+    private GameEvent OnDeath;
     public bool isDead { get; private set; }
 
     private void Awake()
     {
         enemy = new Enemy();
         enemy.SetRace(race);
+        OnDamaged = enemy.GetEvents()[EventName.OnDamaged] as GameEvent<float>;
+        OnDeath = enemy.GetEvents()[EventName.OnDeath];
     }
-    private void Start()
+    private void OnEnable()
     {
-        enemy.events.OnEnemyDeath.Subscribe(Die);
-        enemy.events.OnEnemyDamaged.Subscribe(Damage);
+        OnDeath?.Subscribe(Die);
+        OnDamaged?.Subscribe(Damage);
+    }
+    private void OnDisable()
+    {
+        OnDeath?.Unsubscribe(Die);
+        OnDamaged?.Unsubscribe(Damage);
     }
 
     private void Damage(float amount)

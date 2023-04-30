@@ -3,7 +3,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     private GameEvent m_OnDeath;
-    private GameEvent<float> m_OnDamaged;
+    private GameEvent <float> m_OnDamaged;
     
     private EntityStats stats;
     Entity entity;
@@ -12,8 +12,8 @@ public class Health : MonoBehaviour
     {
         entity = gameObject.GetComponent<EntityScript>().GetEntity();
         //Debug.Assert(entity != null);
-        m_OnDeath = entity.GetOnDeathEvent();
-        m_OnDamaged = entity.GetOnDamageEvent();
+        m_OnDeath = entity.GetEvents()[EventName.OnDeath];
+        m_OnDamaged = entity.GetEvents()[EventName.OnDamaged] as GameEvent<float>;
         if (m_OnDeath == null) Debug.LogWarning("No on damaged event on this object", gameObject);
         if (m_OnDamaged == null) Debug.LogWarning("No on death event on this object", gameObject);
         //Debug.Assert(stats != null);

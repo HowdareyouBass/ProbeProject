@@ -33,6 +33,7 @@ MonoBehaviour:
       m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
+      m_DecreaseCountEventName: 0
     m_SwitchableStats:
       m_Stats:
       - m_AttackSpeed: 0
@@ -62,6 +63,7 @@ MonoBehaviour:
       m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
+      m_DecreaseCountEventName: 0
     m_SwitchableStats:
       m_Stats:
       - m_AttackSpeed: 0
@@ -91,6 +93,7 @@ MonoBehaviour:
       m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
+      m_DecreaseCountEventName: 0
     m_SwitchableStats:
       m_Stats:
       - m_AttackSpeed: 0
@@ -120,6 +123,7 @@ MonoBehaviour:
       m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
+      m_DecreaseCountEventName: 0
     m_SwitchableStats:
       m_Stats:
       - m_AttackSpeed: 0
@@ -149,6 +153,7 @@ MonoBehaviour:
       m_CountDelta: 1
       m_Stats:
         m_AttackSpeed: 200
+      m_DecreaseCountEventName: 2
     m_SwitchableStats:
       m_Stats:
       - m_AttackSpeed: 0
@@ -178,6 +183,7 @@ MonoBehaviour:
       m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
+      m_DecreaseCountEventName: 0
     m_SwitchableStats:
       m_Stats:
       - m_AttackSpeed: 200
@@ -199,7 +205,7 @@ MonoBehaviour:
     m_PassiveStats:
       m_AttackSpeed: 1000
     m_Percents:
-      m_AttackPercent: 0
+      m_AttackPercent: 10
       m_MaxHealthPercent: 0
     m_StatusEffect:
       m_DurationInSeconds: 0
@@ -207,6 +213,7 @@ MonoBehaviour:
       m_CountDelta: 0
       m_Stats:
         m_AttackSpeed: 0
+      m_DecreaseCountEventName: 0
     m_SwitchableStats:
       m_Stats:
       - m_AttackSpeed: 0

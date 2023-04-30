@@ -12,14 +12,26 @@ public class PlayerHealthBar : MonoBehaviour
     [SerializeField] private Image fill;
 
     private Player player;
+    private GameEvent<float> OnDamaged;
     //[SerializeField] private GameEventListener onPlayerDamaged = new GameEventListener();
-    void Start()
+    private void Awake()
+    {
+        
+    }
+    private void Start()
+    {
+        slider.maxValue = player.GetMaxHealth();
+        SetHealthbarValue(player.GetMaxHealth());
+    }
+    private void OnEnable()
     {
         player = playerScript.GetPlayer();
-        player.events.OnPlayerDamaged.Subscribe(DecreaseHealthbarValue);
-        slider.maxValue = player.GetMaxHealth();
-
-        SetHealthbarValue(player.GetMaxHealth());
+        OnDamaged = player.GetEvents()[EventName.OnDamaged] as GameEvent<float>;
+        OnDamaged?.Subscribe(DecreaseHealthbarValue);
+    }
+    private void OnDisable()
+    {
+        OnDamaged?.Unsubscribe(DecreaseHealthbarValue);
     }
 
     private void DecreaseHealthbarValue(float value)

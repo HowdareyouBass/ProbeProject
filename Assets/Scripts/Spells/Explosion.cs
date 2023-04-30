@@ -14,7 +14,7 @@ public class Explosion : MonoBehaviour
         for (int i = 0; i < numberOfEnemiesHit; i++)
         {
             Health health = hitEnemies[i].transform.GetComponent<Health>();
-            health.TakeDamage(spell.GetDamage());
+            //health.TakeDamage(spell.GetDamage());d
         }
     }
 }
