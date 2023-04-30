@@ -131,7 +131,6 @@ public class SpellCaster : MonoBehaviour
         }
         if (currentSpell.GetSpellType() == Spell.Types.directedAtGround)
         {
-            Debug.Log("Atleast type is right");
             GameObject castEffect = Instantiate(currentSpell.GetEffectOnImpact(), target.point, Quaternion.identity);
             Explosion spellExplosionComponent = castEffect.AddComponent<Explosion>();
             spellExplosionComponent.spell = currentSpell;

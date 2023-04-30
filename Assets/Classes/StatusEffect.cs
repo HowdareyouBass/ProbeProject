@@ -9,23 +9,16 @@ public class StatusEffect
     [SerializeField] private float m_CountDelta;
     [SerializeField] private StatusEffectStats m_Stats;
     [SerializeField] private EventName m_DecreaseCountEventName;
-    //[SerializeField] private UnityEvent m_CountDecrease;
     private float m_CurrentCount;
 
     public IEnumerator StartEffect(Entity entity)
     {
-        //Debug.Log(entity.GetEvents()[m_DecreaseCountEventName].GetType());
-        GameEvent<float> go = entity.GetEvents()[m_DecreaseCountEventName] as GameEvent<float>;
-
-        if (go != null)
-        {
-            go.Subscribe(DecreaseCount);
-        }
+        GameEvent decrease = entity.GetEvents()[m_DecreaseCountEventName];
+        GameEvent<float> decreaseFloat = decrease as GameEvent<float>;
+        if (decreaseFloat == null)
+            decrease.Subscribe(DecreaseCount);
         else
-        {
-            GameEvent g = entity.GetEvents()[m_DecreaseCountEventName];
-            g.Subscribe(DecreaseCountWithDelta);
-        }
+            decreaseFloat.Subscribe(DecreaseCount);
             
         entity.ApplyStatusEffect(this);
 
@@ -39,7 +32,7 @@ public class StatusEffect
             m_CurrentCount = m_StartCount;
             yield return WaitForCount();
             entity.DeapplyStatusEffect(this);
-            //entity.events.GetEvent(m_DecreaseCountEventName).Unsubscribe(DecreaseCount);
+            decrease.Unsubscribe(DecreaseCount);
             yield break;
         }
         yield break;
@@ -53,7 +46,7 @@ public class StatusEffect
         yield break;
     }
 
-    private void DecreaseCountWithDelta()
+    private void DecreaseCount()
     {
         Debug.Log("Decreased count with delta");
         m_CurrentCount -= m_CountDelta;
