@@ -13,7 +13,6 @@ public class PlayerHealthBar : MonoBehaviour
 
     private Player player;
     private GameEvent<float> OnDamaged;
-    //[SerializeField] private GameEventListener onPlayerDamaged = new GameEventListener();
     private void Awake()
     {
         

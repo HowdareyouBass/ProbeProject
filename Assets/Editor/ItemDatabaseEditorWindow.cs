@@ -6,8 +6,6 @@ using UnityEditor;
 public class ItemDatabaseEditorWindow : ExtendedEditorWindow
 {
     private static ItemDatabase db;
-    //private string searchName;
-
 
     public static void Open(ItemDatabase _db)
     {
@@ -59,16 +57,6 @@ public class ItemDatabaseEditorWindow : ExtendedEditorWindow
         EditorGUILayout.EndHorizontal();
 
         serializedObject.ApplyModifiedProperties();
-
-        //DrawPropertiess(serializedObject.FindProperty("items"), true);
-        
-        //EditorGUILayout.BeginHorizontal();
-        //if (GUILayout.Button("Add"))
-        //{
-        //    db.items.Add(new Item(""));
-        //    serializedObject.Update();
-        //}
-        //EditorGUILayout.EndHorizontal();
     }
 
     

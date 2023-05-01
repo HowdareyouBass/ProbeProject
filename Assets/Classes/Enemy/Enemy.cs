@@ -16,9 +16,4 @@ public class Enemy : Entity
         equipment.AddPassiveSpellsTo(stats);
     }
     public override Spell GetSpellFromSlot(int spellSlot) { return equipment.GetSpell(spellSlot); }
-    //public Spell GetCurrentSpell() { return currentSpell; }
-    //public void SetCurrentSpell(int spellSlot)
-    //{
-    //    currentSpell = equipment.GetSpell(spellSlot);
-    //}
 }

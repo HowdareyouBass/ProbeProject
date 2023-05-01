@@ -5,7 +5,6 @@ public class Item
 {
     [SerializeField] private string m_Name;
     [SerializeField] private int m_AttackSpeed;
-    //[SerializeField] private 
 
     public Item(string name)
     {

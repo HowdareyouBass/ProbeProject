@@ -95,6 +95,7 @@ public class ExtendedEditorWindow : EditorWindow
         for (; char.IsDigit(path[i]); digits++, i++);
         //Just to use same index
         i -= digits;
+        //Returning parsed number
         return Int32.Parse(path.Substring(i, digits));
     }
 

@@ -14,11 +14,7 @@ public class Projectile : MonoBehaviour
     {
         rb = transform.GetComponent<Rigidbody>();
         projectileSpeed = spell.GetProjectileSpeed();
-        //Destroy(this.gameObject, 20f);
-        //if (spell.IsSelfDirected)
-        //{
-            transform.forward = Vector3.Normalize(target.transform.position - transform.position) * Time.deltaTime * projectileSpeed;
-        //}
+        transform.forward = Vector3.Normalize(target.transform.position - transform.position) * Time.deltaTime * projectileSpeed;
     }
     void FixedUpdate()
     {
@@ -29,7 +25,7 @@ public class Projectile : MonoBehaviour
     {
         if (collider.CompareTag("Enemy"))
         {
-            //collider.transform.GetComponent<Health>().TakeDamage(spell.GetDamage());
+            collider.transform.GetComponent<Health>().TakeDamage(spell.GetDamage());
             Destroy(transform.gameObject);
             if (spell.GetEffectOnImpact() == null)
             {

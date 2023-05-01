@@ -62,7 +62,7 @@ public class SpellCaster : MonoBehaviour
     private Vector3 ds;
     private IEnumerator CastSpellRoutine(RaycastHit target, float targetRadius, bool isEntity)
     {
-        //First we move while cast range
+        //First we move while cast range is less then target pos
         float castRange = currentSpell.GetCastRange();
         Vector3 destinationVector = isEntity ? (EntityMath.VectorToNearestPoint(transform, target)) : (target.point - (transform.position));
         ds =  destinationVector;

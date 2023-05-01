@@ -11,30 +11,47 @@ public class StatusEffect
     [SerializeField] private StatusEffectStats m_Stats;
     [SerializeField] private EventName m_DecreaseCount;
     private float m_CurrentCount;
+    private Entity m_Entity;
 
     public IEnumerator StartEffect(Entity entity)
     {
-        GameEvent decrease = entity.GetEvent(m_DecreaseCount);
-        GameEvent<float> decreaseFloat = decrease as GameEvent<float>;
-        if (decreaseFloat == null)
-            decrease.Subscribe(DecreaseCount);
-        else
-            decreaseFloat.Subscribe(DecreaseCount);
-            
-        entity.ApplyStatusEffect(this);
+        m_Entity = entity;
 
+        GameEvent<float> decreaseByEvent = entity.GetEvent<float>(m_DecreaseCount);
+        GameEvent decreaseByDelta = null;
+        if (decreaseByEvent == null)
+        {
+            decreaseByDelta = entity.GetEvent(m_DecreaseCount);
+            decreaseByDelta.Subscribe(DecreaseCount);
+        }
+        else
+        {
+            decreaseByEvent.Subscribe(DecreaseCount);
+        }
+        
+        entity.ApplyStatusEffect(this);
+        yield return WaitDuration();
+        yield return WaitCount();
+        decreaseByEvent?.Unsubscribe(DecreaseCount);
+        decreaseByDelta?.Unsubscribe(DecreaseCount);
+        yield break;
+    }
+    private IEnumerator WaitDuration()
+    {
         if (m_DurationInSeconds != 0)
         {
             yield return new WaitForSeconds(m_DurationInSeconds);
-            entity.DeapplyStatusEffect(this);
+            m_Entity.DeapplyStatusEffect(this);
         }
+        yield break;
+    }
+    private IEnumerator WaitCount()
+    {
         if (m_StartCount != 0)
         {
             m_CurrentCount = m_StartCount;
             yield return WaitForCount();
-            entity.DeapplyStatusEffect(this);
-            decrease.Unsubscribe(DecreaseCount);
-            yield break;
+            m_Entity.DeapplyStatusEffect(this);
         }
         yield break;
     }

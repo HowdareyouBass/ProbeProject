@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Debug pruposes
-[System.Serializable]
 public abstract class Entity
 {
     protected EntityStats stats { get; private set; }
@@ -17,8 +15,13 @@ public abstract class Entity
 
     public virtual Spell GetSpellFromSlot(int spellSlot) { return null; }
 
-    //public virtual Dictionary<EventName,GameEvent> GetEvents() { return events.events; }
-    public GameEvent<T> GetEvent<T>(EventName name) { return events.events[name] as GameEvent<T>; }
+    public GameEvent<T> GetEvent<T>(EventName name) 
+    {
+        GameEvent<T> res = events.events[name] as GameEvent<T>;
+        if (res == null)
+            Debug.LogWarning("Wrong type of event");
+        return res; 
+    }
     public GameEvent GetEvent (EventName name) { return events.events[name]; }
 
     public float GetAttackRange() { return stats.GetAttackRange(); }

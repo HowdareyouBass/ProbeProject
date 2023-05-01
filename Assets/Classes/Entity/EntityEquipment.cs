@@ -20,6 +20,5 @@ public class EntityEquipment
                 stats.ApplyPassiveSpell(spell);
             }
         }
-        //return stats;
     }
 }
