@@ -26,7 +26,7 @@ public class PlayerHealthBar : MonoBehaviour
     private void OnEnable()
     {
         player = playerScript.GetPlayer();
-        OnDamaged = player.GetEvents()[EventName.OnDamaged] as GameEvent<float>;
+        OnDamaged = player.GetEvent<float>(EventName.OnDamaged);
         OnDamaged?.Subscribe(DecreaseHealthbarValue);
     }
     private void OnDisable()

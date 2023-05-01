@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine.Events;
 using UnityEngine;
 
 [System.Serializable]
@@ -8,12 +9,12 @@ public class StatusEffect
     [SerializeField] private float m_StartCount;
     [SerializeField] private float m_CountDelta;
     [SerializeField] private StatusEffectStats m_Stats;
-    [SerializeField] private EventName m_DecreaseCountEventName;
+    [SerializeField] private EventName m_DecreaseCount;
     private float m_CurrentCount;
 
     public IEnumerator StartEffect(Entity entity)
     {
-        GameEvent decrease = entity.GetEvents()[m_DecreaseCountEventName];
+        GameEvent decrease = entity.GetEvent(m_DecreaseCount);
         GameEvent<float> decreaseFloat = decrease as GameEvent<float>;
         if (decreaseFloat == null)
             decrease.Subscribe(DecreaseCount);

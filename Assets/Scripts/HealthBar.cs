@@ -11,7 +11,7 @@ public class HealthBar : MonoBehaviour
     private void OnEnable()
     {
         entity = transform.root.GetComponent<EntityScript>().GetEntity();
-        OnDamaged = entity.GetEvents()[EventName.OnDamaged] as GameEvent<float>;
+        OnDamaged = entity.GetEvent<float>(EventName.OnDamaged);
         OnDamaged?.Subscribe(DecreaseHealthValue);
     }
     private void OnDisable()

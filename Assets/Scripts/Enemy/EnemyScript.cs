@@ -17,8 +17,8 @@ public class EnemyScript : EntityScript
     {
         enemy = new Enemy();
         enemy.SetRace(race);
-        OnDamaged = enemy.GetEvents()[EventName.OnDamaged] as GameEvent<float>;
-        OnDeath = enemy.GetEvents()[EventName.OnDeath];
+        OnDamaged = enemy.GetEvent<float>(EventName.OnDamaged);
+        OnDeath = enemy.GetEvent(EventName.OnDeath);
     }
     private void OnEnable()
     {

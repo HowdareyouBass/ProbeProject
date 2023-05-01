@@ -17,7 +17,9 @@ public abstract class Entity
 
     public virtual Spell GetSpellFromSlot(int spellSlot) { return null; }
 
-    public virtual Dictionary<EventName,GameEvent> GetEvents() { return events.events; }
+    //public virtual Dictionary<EventName,GameEvent> GetEvents() { return events.events; }
+    public GameEvent<T> GetEvent<T>(EventName name) { return events.events[name] as GameEvent<T>; }
+    public GameEvent GetEvent (EventName name) { return events.events[name]; }
 
     public float GetAttackRange() { return stats.GetAttackRange(); }
     public float GetAttackDamage() { return stats.GetAttackDamage(); }

@@ -1,8 +1,9 @@
 using System;
+using UnityEngine.Events;
 
 public class GameEvent
 {
-    private Action action;
+    private event Action action;
 
     public virtual void Trigger()
     {
