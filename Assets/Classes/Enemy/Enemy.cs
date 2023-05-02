@@ -15,5 +15,5 @@ public class Enemy : Entity
     {
         equipment.AddPassiveSpellsTo(stats);
     }
-    public override Spell GetSpellFromSlot(int spellSlot) { return equipment.GetSpell(spellSlot); }
+    public override Spell1 GetSpellFromSlot(int spellSlot) { return equipment.GetSpell(spellSlot); }
 }

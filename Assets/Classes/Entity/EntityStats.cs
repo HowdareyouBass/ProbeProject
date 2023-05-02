@@ -36,7 +36,7 @@ public class EntityStats
         m_Evasion = race.evasion;
     }
 
-    public void ApplyPassiveSpell(Spell spell)
+    public void ApplyPassiveSpell(Spell1 spell)
     {
         //Adding passive spell stats
         PassiveSpellStats stats = spell.GetPassiveStats();

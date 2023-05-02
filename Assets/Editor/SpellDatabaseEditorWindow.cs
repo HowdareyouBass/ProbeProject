@@ -97,29 +97,29 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
         EditorGUILayout.BeginVertical("box", GUILayout.ExpandHeight(true));
         if (selectedProperty != null)
         {
-            Spell.Types spellType = db.spells[propertyIndex].GetSpellType();
+            Spell1.Types spellType = db.spells[propertyIndex].GetSpellType();
             
-            if (spellType == Spell.Types.projectile)
+            if (spellType == Spell1.Types.projectile)
             {
                 DrawPropertiesFromList(selectedProperty, projectileProperties, true);
             }
-            else if (spellType == Spell.Types.directedAtEnemy)
+            else if (spellType == Spell1.Types.directedAtEnemy)
             {
                 DrawPropertiesFromList(selectedProperty, directedAtEnemyProperties, true);
             }
-            else if (spellType == Spell.Types.directedAtGround)
+            else if (spellType == Spell1.Types.directedAtGround)
             {
                 DrawPropertiesFromList(selectedProperty, directedAtGroundProperties, true);
             }
-            else if (spellType == Spell.Types.passive)
+            else if (spellType == Spell1.Types.passive)
             {
                 DrawPropertiesFromList(selectedProperty, passiveProperties, true);
             }
-            else if (spellType == Spell.Types.playerCast)
+            else if (spellType == Spell1.Types.playerCast)
             {
                 DrawPropertiesFromList(selectedProperty, playerCastProperties, true);
             }
-            else if (spellType == Spell.Types.passiveSwitchable)
+            else if (spellType == Spell1.Types.passiveSwitchable)
             {
                 DrawPropertiesFromList(selectedProperty, passiveSwitchableProperties, true);
             }
@@ -145,7 +145,7 @@ public class SpellDatabaseEditorWindow : ExtendedEditorWindow
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Add"))
         {
-            db.spells.Add(new Spell(""));
+            db.spells.Add(new Spell1(""));
             serializedObject.Update();
         }
         EditorGUILayout.EndHorizontal();

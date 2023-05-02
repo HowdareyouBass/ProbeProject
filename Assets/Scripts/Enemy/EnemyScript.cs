@@ -33,8 +33,7 @@ public class EnemyScript : EntityScript
 
     private void Damage(float amount)
     {
-        GameObject effect = Instantiate(damageEffect, transform.position, transform.rotation);
-        effect.transform.SetParent(transform);
+        GameObject effect = Instantiate(damageEffect, transform);
         effect.GetComponent<TextMeshPro>().text = amount.ToString();
     }
     private void Die()

@@ -13,7 +13,7 @@ public abstract class Entity
         events = new EntityEvents();
     }
 
-    public virtual Spell GetSpellFromSlot(int spellSlot) { return null; }
+    public virtual Spell1 GetSpellFromSlot(int spellSlot) { return null; }
 
     public GameEvent<T> GetEvent<T>(EventName name) 
     {

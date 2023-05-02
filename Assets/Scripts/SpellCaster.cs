@@ -9,8 +9,8 @@ public class SpellCaster : MonoBehaviour
     private Entity entity;
     private IController controller;
     private Coroutine spellCasting;
-    private Spell.Types spellType;
-    private Spell currentSpell;
+    private Spell1.Types spellType;
+    private Spell1 currentSpell;
 
     void Start()
     {
@@ -24,15 +24,15 @@ public class SpellCaster : MonoBehaviour
         currentSpell = entity.GetSpellFromSlot(spellSlot);
         spellType = currentSpell.GetSpellType();
 
-        if ((spellType == Spell.Types.projectile || spellType == Spell.Types.directedAtEnemy) && target.transform.CompareTag("Enemy"))
+        if ((spellType == Spell1.Types.projectile || spellType == Spell1.Types.directedAtEnemy) && target.transform.CompareTag("Enemy"))
         {
             CastSpellOnEnemy(target);
         }
-        if (spellType == Spell.Types.directedAtGround)
+        if (spellType == Spell1.Types.directedAtGround)
         {
             CastSpellOnGround(target);
         }
-        if (spellType == Spell.Types.playerCast || spellType == Spell.Types.passiveSwitchable)
+        if (spellType == Spell1.Types.playerCast || spellType == Spell1.Types.passiveSwitchable)
         {
             CastSpellSelf();
         }
@@ -95,14 +95,14 @@ public class SpellCaster : MonoBehaviour
         }
 
         #if UNITY_EDITOR
-        if (currentSpell.GetSpellType() == Spell.Types.none)
+        if (currentSpell.GetSpellType() == Spell1.Types.none)
         {
             Debug.LogWarning("Spell Type is none");
             return;
         }
         #endif
 
-        if (currentSpell.GetSpellType() == Spell.Types.projectile)
+        if (currentSpell.GetSpellType() == Spell1.Types.projectile)
         {
             GameObject castEffect = Instantiate(currentSpell.GetEffect(), transform.position, transform.rotation);
             // If spell type is projectile then we move projectile
@@ -115,31 +115,32 @@ public class SpellCaster : MonoBehaviour
             collider.isTrigger = true;
 
             //And projectile component
-            Projectile spellProjectileComponent = castEffect.AddComponent<Projectile>();
-            spellProjectileComponent.spell = currentSpell;
-            spellProjectileComponent.target = target;
+            ProjectileScript spellProjectileComponent = castEffect.AddComponent<ProjectileScript>();
+            //FIXME: fix me later and uncomment this
+            //spellProjectileComponent.spell = currentSpell;
+            //spellProjectileComponent.target = target;
         }
-        if (currentSpell.GetSpellType() == Spell.Types.directedAtEnemy)
+        if (currentSpell.GetSpellType() == Spell1.Types.directedAtEnemy)
         {
             GameObject castEffect = Instantiate(currentSpell.GetEffectOnImpact(), target.transform.position, Quaternion.identity);
             if (currentSpell.HaveRadiusOnImpact)
             {
                 Explosion spellExplosionComponent = castEffect.AddComponent<Explosion>();
-                spellExplosionComponent.spell = currentSpell;
+                //spellExplosionComponent.spell = currentSpell;
             }
             GetComponent<EntityScript>().GetEntity().DamageTarget(target);
         }
-        if (currentSpell.GetSpellType() == Spell.Types.directedAtGround)
+        if (currentSpell.GetSpellType() == Spell1.Types.directedAtGround)
         {
             GameObject castEffect = Instantiate(currentSpell.GetEffectOnImpact(), target.point, Quaternion.identity);
             Explosion spellExplosionComponent = castEffect.AddComponent<Explosion>();
-            spellExplosionComponent.spell = currentSpell;
+            //spellExplosionComponent.spell = currentSpell;
         }
-        if (currentSpell.GetSpellType() == Spell.Types.playerCast)
+        if (currentSpell.GetSpellType() == Spell1.Types.playerCast)
         {
             StartCoroutine(currentSpell.GetStatusEffect().StartEffect(entity));
         }
-        if (currentSpell.GetSpellType() == Spell.Types.passiveSwitchable)
+        if (currentSpell.GetSpellType() == Spell1.Types.passiveSwitchable)
         {
             currentSpell.SwitchPassive();
             entity.ApplyAllPassiveSpells();

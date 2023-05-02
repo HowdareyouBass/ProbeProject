@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Spell
+public class Spell1
 {
     public enum Types { none, projectile, directedAtEnemy, directedAtGround, playerCast, passive, passiveSwitchable }
 
@@ -33,7 +33,7 @@ public class Spell
     [SerializeField] private SwitchablePassiveSpell m_SwitchableStats; 
 
 
-    public Spell(string name)
+    public Spell1(string name)
     {
         m_Name = name;
     }

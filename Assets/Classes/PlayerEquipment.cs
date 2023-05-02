@@ -9,10 +9,10 @@ public class PlayerEquipment : EntityEquipment
     public PlayerEquipment()
     {
         m_Items = new List<Item>();
-        m_Spells = new Spell[5];
+        m_Spells = new Spell1[5];
         for (int i = 0; i < 5; i++)
         {
-            m_Spells[i] = new Spell("");
+            m_Spells[i] = new Spell1("");
         }
     }
     public void EquipItem(Item eqipped)
@@ -20,7 +20,7 @@ public class PlayerEquipment : EntityEquipment
         m_Items.Add(eqipped);
     }
 
-    public void EquipSpell(Spell spell, int spellSlot)
+    public void EquipSpell(Spell1 spell, int spellSlot)
     {
         m_Spells[spellSlot] = spell;
     }

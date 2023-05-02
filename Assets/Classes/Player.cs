@@ -22,7 +22,7 @@ public class Player : Entity
     {
         equipment.EquipItem(item);
     }
-    public void EquipSpell(Spell spell, int spellSlot)
+    public void EquipSpell(Spell1 spell, int spellSlot)
     {
         equipment.EquipSpell(spell, spellSlot);
         equipment.AddPassiveSpellsTo(stats);
@@ -31,7 +31,7 @@ public class Player : Entity
     { 
         return stats.GetBaseAttackSpeed() * 100 / (equipment.GetAttackSpeed() + stats.GetAttackSpeed());
     }
-    public override Spell GetSpellFromSlot(int spellSlot) { return equipment.GetSpell(spellSlot); }
+    public override Spell1 GetSpellFromSlot(int spellSlot) { return equipment.GetSpell(spellSlot); }
     public EntityStats GetStats() { return (EntityStats) stats; }
     public EntityEquipment GetEquipment() { return equipment; }
 }
