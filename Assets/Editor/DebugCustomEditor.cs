@@ -8,85 +8,107 @@ public class DebugCustomEditor : Editor
 {
     private enum Slot { first, second, third, fourth, fifth }
     private bool showEquipSpell = false;
+    private bool showEquipItem = false;
     private Slot spellSlot;
     private bool isInPlaymode;
     private string spellName = string.Empty;
+    private string itemName = string.Empty;
+    private DebugManager settings;
 
+    private void OnEnable()
+    {
+        settings = target as DebugManager;
+        settings.settingsSO.player = GameObject.Find("/Player").GetComponent<PlayerBehaviour>();
+    }
 
     public override void OnInspectorGUI()
-    { 
+    {        
         isInPlaymode = Application.IsPlaying(target);
         if (!isInPlaymode)
         {
+            EquipSpellEditorWindow.isInPlaymode = false;
             base.OnInspectorGUI();
             return;
-        }
-
-        DebugManager settings = target as DebugManager;
-
-        settings.settingsSO.player = GameObject.Find("/Player").GetComponent<PlayerBehaviour>();
+        }        
 
         if (GUILayout.Button("Equip Spell"))
         {
-            OnEquipSpellClick(settings);
+            EquipSpellEditorWindow.Open(settings.settingsSO.spellDatabase, settings.settingsSO.player);
+            //OnEquipSpellClick();
         }
         if (showEquipSpell)
         {
-            EditorGUI.indentLevel++;
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Spell Name");
-            spellName = EditorGUILayout.TextField(spellName);
-            EditorGUILayout.EndHorizontal();
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Spell Slot");
-            spellSlot = (Slot)EditorGUILayout.EnumFlagsField(spellSlot);
-            EditorGUILayout.EndHorizontal();
-
-            EditorGUI.indentLevel--;
+            ShowEquipSpell();
         }
-    }
 
-    private void OnEquipSpellClick(DebugManager settings)
-    {
-        if (showEquipSpell)
+        if(GUILayout.Button("Equip Item"))
         {
-            if (string.IsNullOrEmpty(spellName))
-            {
-                Debug.LogWarning("Name is empty");
-                return;
-            }
-            Spell spell = FindSpellByName(settings.settingsSO.spellDatabase);
-
-            if (spell == null)
-            {
-                Debug.LogWarning("Spell not found");
-                return;
-            }
-            settings.settingsSO.player.EquipSpell(spell, (int)spellSlot);
+            EquipItemEditorWindow.Open(settings.settingsSO.itemDatabase, settings.settingsSO.player);
+            //OnEquipItemClick();
         }
-        showEquipSpell = !showEquipSpell;
+        if (showEquipItem)
+        {
+            ShowEquipItem();
+        }
     }
 
-    private Spell FindSpellByName(SpellDatabase db)
+    private void ShowEquipSpell()
     {
-       Spell spell = null;
+        EditorGUI.indentLevel++;
 
-        foreach (Spell sp in db.spells)
+        EditorGUILayout.BeginHorizontal();
+        spellName = EditorGUILayout.TextField("Spell Name", spellName);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        spellSlot = (Slot)EditorGUILayout.EnumPopup("Spell Slot", spellSlot);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUI.indentLevel--;
+    }
+    
+    private void ShowEquipItem()
+    {
+        EditorGUI.indentLevel++;
+
+        EditorGUILayout.BeginHorizontal();
+
+        itemName = EditorGUILayout.TextField("Item Name", itemName);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUI.indentLevel--;
+    }
+
+    private T FindByName<T>(List<T> list) where T : DatabaseItem
+    {
+        T item = null;
+
+        foreach (T sp in list)
         {
             if (sp.GetName().ToLower() == spellName.ToLower())
             {
-                spell = sp;
+                item = sp;
+                break;
+            }
+            if (sp.GetName().ToLower() == spellName.ToLower())
+            {
+                item = sp;
+                break;
             }
         }
         foreach (Spell sp in db.spells)
         {
-            if (sp.GetName().ToLower().Contains(spellName.ToLower()))
+            if (sp.GetName().Contains(spellName))
             {
-                spell = sp;
+                item = sp;
+                break;
+            }
+            if (sp.GetName().Contains(spellName.ToLower()))
+            {
+                item = sp;
+                break;
             }
         }
-        return spell;
+        return item;
     }
 }

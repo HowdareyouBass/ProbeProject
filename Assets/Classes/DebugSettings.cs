@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Debug Settings", menuName = "DebugSettings")]
 public class DebugSettings : ScriptableObject
 {
-    public PlayerBehaviour player;
+    [HideInInspector]public PlayerBehaviour player;
     public SpellDatabase spellDatabase;
+    public ItemDatabase itemDatabase;
 }

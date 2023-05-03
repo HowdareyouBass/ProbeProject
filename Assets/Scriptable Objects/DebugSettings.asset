@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   spellDatabase: {fileID: 11400000, guid: 6492cbfd84a5d9d40ab7ea1f5ea47c25, type: 2}
+  itemDatabase: {fileID: 11400000, guid: 42a129203578a54458655a99d83e3557, type: 2}
