@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 97a42fb9cd692c64ca059b56febee99b
+guid: b6bf2f2b768bdb844866df3d52854fa2
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -16,8 +16,7 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
-      human bone 'Hips' not found\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -25,7 +24,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -81,37 +80,7 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton:
-    - name: Person(Clone)
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Body
-      parentName: Person(Clone)
-      position: {x: 0.007106375, y: 1.1128149, z: 0.09572027}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 14.282398, y: 10.697806, z: 7.997229}
-    - name: "\u041A\u0430\u043C\u0435\u0440\u0430"
-      parentName: Person(Clone)
-      position: {x: -2.7554703, y: 3.3705912, z: 5.571852}
-      rotation: {x: -0.031035634, y: -0.9689203, z: 0.17818613, w: -0.16876017}
-      scale: {x: 100, y: 100, z: 100}
-    - name: Head3
-      parentName: Person(Clone)
-      position: {x: 0.007106375, y: 1.1128149, z: 0.09572027}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 14.282398, y: 10.697806, z: 7.9971685}
-    - name: "\u0425\u0430\u043B\u0430\u0442"
-      parentName: Person(Clone)
-      position: {x: 0.007106375, y: 1.1128149, z: 0.09572027}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 14.282398, y: 10.697806, z: 7.997229}
-    - name: "\u0412\u043E\u0440\u043E\u0442\u043D\u0438\u043A"
-      parentName: Person(Clone)
-      position: {x: 0.007106375, y: 1.1128149, z: 0.09572027}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 14.282398, y: 10.697806, z: 7.997229}
+    skeleton: []
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -122,13 +91,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
