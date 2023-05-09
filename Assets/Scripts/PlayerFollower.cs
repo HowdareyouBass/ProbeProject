@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class PlayerFollower : MonoBehaviour
 {
-    public Transform PlayerTransform;
-    public Vector3 Offset;
+    [SerializeField] private Transform m_PlayerTransform;
+    [SerializeField] private Vector2 m_Offset;
 
-    void Update()
+    private void Update()
     {
-        this.transform.position = PlayerTransform.position + Offset;
+        Vector3 position = new Vector3(m_PlayerTransform.position.x + m_Offset.x, m_PlayerTransform.position.y + m_Offset.y, m_PlayerTransform.position.z + m_Offset.x);
+        transform.position = position;
     }
 }

@@ -1,27 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Renderer healthRenderer;
-    private Entity entity;
-    private GameEvent<float> OnDamaged;
+    [SerializeField] private Renderer m_HealthRenderer;
+    [SerializeField] private GameObject m_DamageEffect;
+    private Entity m_Entity;
+    private GameEvent<float> m_OnHealthChanged;
+    private GameEvent<float> m_OnDamaged;
 
     private void OnEnable()
     {
-        entity = transform.root.GetComponent<EntityScript>().GetEntity();
-        OnDamaged = entity.GetEvent<float>(EventName.OnDamaged);
-        OnDamaged?.Subscribe(DecreaseHealthValue);
+        m_Entity = transform.root.GetComponent<EntityScript>().GetEntity();
+        m_OnHealthChanged = m_Entity.GetEvent<float>(EntityEventName.OnHealthChanged, true);
+        m_OnDamaged = m_Entity.GetEvent<float>(EntityEventName.OnDamaged, true);
+        m_OnHealthChanged?.Subscribe(SetHealthbarValue);
+        m_OnDamaged?.Subscribe(SpawnEffect);
     }
     private void OnDisable()
     {
-        OnDamaged?.Unsubscribe(DecreaseHealthValue);
+        m_OnHealthChanged?.Unsubscribe(SetHealthbarValue);
+        m_OnDamaged?.Unsubscribe(SpawnEffect);
     }
-    private void DecreaseHealthValue(float amount)
+
+    private void SetHealthbarValue(float amount)
     {
-        float currentHealth = entity.GetCurrentHealth();
-        float maxHealth = entity.GetMaxHealth();
-        healthRenderer.material.SetFloat("_Health", currentHealth / maxHealth);
+        float currentHealth = m_Entity.stats.currentHealth;
+        float maxHealth = m_Entity.stats.maxHealth;
+        m_HealthRenderer.material.SetFloat("_Health", currentHealth / maxHealth);
+    }
+
+    private void SpawnEffect(float effectHealthValue)
+    {
+        GameObject effect = Instantiate(m_DamageEffect, transform.parent);
+        effect.GetComponent<TextMeshPro>().text = effectHealthValue.ToString();
     }
 }

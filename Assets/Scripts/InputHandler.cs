@@ -2,53 +2,62 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
-    [SerializeField] private PlayerController playerController;
-    [SerializeField] private Camera playerCamera;
+    [SerializeField] private PlayerController m_PlayerController;
+    [SerializeField] private EnemyController m_EnemyController;
+    [SerializeField] private Camera m_PlayerCamera;
 
-    private float timer = 0;
+    private float m_Timer = 0;
 
     private void Update()
     {
-        MovementAndAttacking();
+        MovementAndAttackingPlayer();
+        MovementAndAttackingEnemy();
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && CastRayFromCamera(out RaycastHit hit))
         {
-            RaycastHit hit = CastRayFromCamera();
-
-            //If clicked on something
-            if (hit.colliderInstanceID == 0)
-                return;
-            playerController.CastSpell(0, hit);
+            m_PlayerController.CastSpell(0, new Target(hit));
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            playerController.StopActions();
+            m_PlayerController.StopActions();
         }
     }
-    
-    private void MovementAndAttacking()
-    {
-        if (timer >= 0.1f && Input.GetMouseButton(1))
-        {
-            RaycastHit hit = CastRayFromCamera();
 
-            //If clicked on something
-            if (hit.colliderInstanceID == 0)
-                return;
-            playerController.OnClick(hit);
-            timer = 0f;
+    private void MovementAndAttackingEnemy()
+    {
+        if (m_Timer >= 0.1f && Input.GetMouseButton(0))
+        {
+            if (CastRayFromCamera(out RaycastHit hit))
+            {
+                m_EnemyController.OnMouseClick(new Target(hit));
+                m_Timer = 0f;
+            }
         }
         else
         {
-            timer += Time.deltaTime;
+            m_Timer += Time.deltaTime;
+        }
+    }
+    
+    private void MovementAndAttackingPlayer()
+    {
+        if (m_Timer >= 0.1f && Input.GetMouseButton(1))
+        {
+            if (CastRayFromCamera(out RaycastHit hit))
+            {
+                m_PlayerController.OnMouseClick(new Target(hit));
+                m_Timer = 0f;
+            }
+        }
+        else
+        {
+            m_Timer += Time.deltaTime;
         }
     }
 
-    private RaycastHit CastRayFromCamera()
+    private bool CastRayFromCamera(out RaycastHit hit)
     {
-        RaycastHit hit;
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out hit);
-        return hit;
+        Ray ray = m_PlayerCamera.ScreenPointToRay(Input.mousePosition);
+        return Physics.Raycast(ray, out hit);
     }
 }

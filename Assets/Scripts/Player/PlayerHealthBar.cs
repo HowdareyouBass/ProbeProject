@@ -1,49 +1,42 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealthBar : MonoBehaviour
 {
-    [SerializeField] private PlayerScript playerScript;
-    [SerializeField] private Slider slider;
-    [SerializeField] private Gradient gradient;
-    [SerializeField] private Image fill;
+    [SerializeField] private PlayerScript m_PlayerScript;
+    [SerializeField] private Slider m_Slider;
+    [SerializeField] private Gradient m_Gradient;
+    [SerializeField] private Image m_Fill;
 
-    private Player player;
-    private GameEvent<float> OnDamaged;
-    private void Awake()
-    {
-        
-    }
+    private Entity m_Player;
+    private GameEvent<float> m_OnDamaged;
+
     private void Start()
     {
-        slider.maxValue = player.GetMaxHealth();
-        SetHealthbarValue(player.GetMaxHealth());
+        m_Slider.maxValue = m_Player.stats.maxHealth;
+        SetHealthbarValue(m_Player.stats.maxHealth);
     }
     private void OnEnable()
     {
-        player = playerScript.GetPlayer();
-        OnDamaged = player.GetEvent<float>(EventName.OnDamaged);
-        OnDamaged?.Subscribe(DecreaseHealthbarValue);
+        m_Player = m_PlayerScript.GetEntity();
+        m_OnDamaged = m_Player.GetEvent<float>(EntityEventName.OnDamaged, true);
+        m_OnDamaged?.Subscribe(DecreaseHealthbarValue);
     }
     private void OnDisable()
     {
-        OnDamaged?.Unsubscribe(DecreaseHealthbarValue);
+        m_OnDamaged?.Unsubscribe(DecreaseHealthbarValue);
     }
 
     private void DecreaseHealthbarValue(float value)
     {
         if (value < 0)
             throw new ArgumentException("Damage can not be negative.");
-        SetHealthbarValue(slider.value - value);
+        SetHealthbarValue(m_Slider.value - value);
     }
-
     private void SetHealthbarValue(float value)
     {
-        slider.value = value;
-        fill.color = gradient.Evaluate(slider.normalizedValue);
+        m_Slider.value = value;
+        m_Fill.color = m_Gradient.Evaluate(m_Slider.normalizedValue);
     }
-
 }

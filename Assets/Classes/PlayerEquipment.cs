@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerEquipment : EntityEquipment
 {
@@ -9,20 +6,10 @@ public class PlayerEquipment : EntityEquipment
     public PlayerEquipment()
     {
         m_Items = new List<Item>();
-        m_Spells = new Spell1[5];
-        for (int i = 0; i < 5; i++)
-        {
-            m_Spells[i] = new Spell1("");
-        }
     }
-    public void EquipItem(Item eqipped)
+    public void EquipItem(Item item)
     {
-        m_Items.Add(eqipped);
-    }
-
-    public void EquipSpell(Spell1 spell, int spellSlot)
-    {
-        m_Spells[spellSlot] = spell;
+        m_Items.Add(item);
     }
 
     public int GetAttackSpeed()
@@ -30,7 +17,7 @@ public class PlayerEquipment : EntityEquipment
         int sum = 0;
         foreach (Item item in m_Items)
         {
-            sum += item.GetAttackSpeed();
+            sum += item.attackSpeed;
         }
         return sum;
     }

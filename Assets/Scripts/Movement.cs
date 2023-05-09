@@ -1,76 +1,84 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private int rotationSpeed;
+    [SerializeField] private int m_RotationSpeed;
 
-    private NavMeshAgent agent;
-    private IController controller;
-    private Coroutine looking;
-    private Coroutine following;
+    private NavMeshAgent m_Agent;
+    private EntityController m_Controller;
+    private Entity m_Entity;
+    private Coroutine m_Looking;
 
-    void Start()
-    {
-        agent = GetComponent<NavMeshAgent>();
-        controller = GetComponent<IController>();
-    }
+    private Vector3 ls;
 
-    public void FollowTarget(RaycastHit target)
+    private void Start()
     {
-        controller.StopActions();
-        float targetRadius = target.collider.bounds.size.z;
-        following = StartCoroutine(FollowTargetRoutine(target, targetRadius));
-    }
-    public void MoveToEntity(RaycastHit target, float radiusOfEntity)
-    {
-        agent.SetDestination(transform.position + EntityMath.VectorToNearestPoint(transform, target));
-    }
-    public void MoveToPoint(Vector3 destination)
-    {
-        agent.SetDestination(destination);
-    }
-    public void LookAtTarget(RaycastHit target, bool isEntity)
-    {
-        if (looking != null)
-            StopCoroutine(looking);
-        looking = StartCoroutine(LookAtTargetRoutine(target, isEntity));
+        m_Entity = GetComponent<EntityScript>().GetEntity();
+        m_Agent = GetComponent<NavMeshAgent>();
+        m_Controller = GetComponent<EntityController>();
+        m_Entity.GetEvent(EntityEventName.OnMovementDisabled).Subscribe(Stop);
     }
 
-    private IEnumerator FollowTargetRoutine(RaycastHit target, float targetRadius)
+    public void Move(Vector3 destination)
     {
-        while(true)
+        if (m_Entity.canMove)
+            m_Agent.SetDestination(destination);
+    }
+    public IEnumerator FolowUntilInRange(Target target, int range)
+    {
+        //Move while range is less then vector to target magnitude
+        while(target.GetVector(transform).magnitude > range && range != 0)
         {
-            MoveToEntity(target, targetRadius);
+            Move(target.GetPoint());
             yield return null;
         }
+        Stop();
+        Look(target);
     }
-    private IEnumerator LookAtTargetRoutine(RaycastHit target, bool isEntity)
+    private void Look(Target target)
     {
-        //if target is entity then we look at it's position if it's ground or prop we look at point of raycasthit
-        Vector3 lookRotation = isEntity ? target.transform.position - transform.position : target.point - transform.position;
-        
+        if (m_Entity.canLook)
+        {
+	        if (m_Looking != null)
+	            StopCoroutine(m_Looking);
+	        m_Looking = StartCoroutine(LookRoutine(target));
+        }
+    }
+    private IEnumerator LookRoutine(Target target)
+    {
+        Vector3 lookRotation = Vector3.Normalize(target.GetVector(transform));
         float delta = 0.5f;
         float angle = Vector3.Angle(transform.forward, lookRotation);
+
         while(Mathf.Abs(angle) > delta)
         {
             if (target.transform == null)
                 yield break;
-            lookRotation = isEntity ? target.transform.position - transform.position : target.point - transform.position;
+            lookRotation = Vector3.Normalize(target.GetVector(transform));
+            ls = lookRotation;
             angle = Vector3.Angle(lookRotation, transform.forward);
             //Set y to 0 so that player GameObject don't rotate up and down
             lookRotation.y = 0;
-            transform.forward = Vector3.MoveTowards(transform.forward, lookRotation, rotationSpeed * Time.deltaTime);
+            transform.forward = Vector3.MoveTowards(transform.forward, lookRotation, m_RotationSpeed * Time.deltaTime);
             yield return null;
         }
         yield break;
     }
     public void Stop()
     {
-        agent.SetDestination(transform.position);
-        if (looking != null)
-            StopCoroutine(looking);
+        m_Agent.SetDestination(transform.position);
+        if (m_Looking != null)
+            StopCoroutine(m_Looking);
+    }
+
+    private void OnDrawGizmos() 
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + ls);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward);
     }
 }

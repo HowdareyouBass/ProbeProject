@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class EntityStats
 {
     //So i've found this post on stack overflow (https://stackoverflow.com/questions/3182653/are-protected-members-fields-really-that-bad) 
@@ -9,63 +5,59 @@ public class EntityStats
     //Not to repeat the code i did this monstrocity
     //Please if you see this and you're good at programming
     //Tell me how to design that so i don't need to do this
-    protected float m_CurrentHealth { get; private set; } = 0;
-    protected float m_MaxHealth { get; private set; } = 0;
-    protected float m_AttackSpeed { get; private set; } = 20;
-    protected float m_AttackDamage { get; private set; } = 0;
-    protected float m_AttackRange { get; private set; } = 10;
-    protected float m_BaseAttackSpeed { get; private set; } = 1;
-    protected float m_Evasion { get; private set; } = 0;
+    public float currentHealth { get; private set; } = 0;
+    public float maxHealth { get; private set; } = 0;
+    public float attackSpeed { get; private set; } = 20;
+    public float baseAttackSpeed { get; private set; } = 1;
+    public float attackDamage { get; private set; } = 0;
+    public int attackRange { get; private set; } = 10;
+    public float evasion { get; private set; } = 0;
+    public float regen { get => m_RegeneratePercent * m_RegenerateAmount; }
 
+    private float m_RegenerateAmount = 1;
+    private float m_RegeneratePercent = 1;
+
+
+    public void Heal(float amount)
+    {
+        if (currentHealth + amount < maxHealth)
+        {
+            currentHealth += amount;
+        }
+    }
     public void TakeDamage(float amount)
     {
-        m_CurrentHealth -= amount;
-        if (m_CurrentHealth < 0)
+        currentHealth -= amount;
+        if (currentHealth < 0)
         {
-            m_CurrentHealth = 0;
+            currentHealth = 0;
         }
     }
     public void ApplyRace(Race race)
     {
-        m_CurrentHealth = race.health;
-        m_MaxHealth = race.health;
-        m_AttackDamage = race.attack;
-        m_AttackRange = race.attackRange;
-        m_AttackSpeed = race.attackSpeed;
-        m_BaseAttackSpeed = race.baseAttackSpeed;
-        m_Evasion = race.evasion;
-    }
-
-    public void ApplyPassiveSpell(Spell1 spell)
-    {
-        //Adding passive spell stats
-        PassiveSpellStats stats = spell.GetPassiveStats();
-        m_AttackSpeed += stats.GetAttackSpeed();
-
-        //Multiplying percents of passive spell stats
-        Percents percents = spell.GetPercents();
-        m_AttackDamage *= 1 + percents.GetAttackPercent();
-        m_MaxHealth *= 1 + percents.GetMaxHealthPercent();
+        currentHealth = race.health;
+        maxHealth = race.health;
+        attackDamage = race.attack;
+        attackRange = race.attackRange;
+        attackSpeed = race.attackSpeed;
+        baseAttackSpeed = race.baseAttackSpeed;
+        evasion = race.evasion;
     }
 
     public void ApplyStatusEffect(StatusEffect effect)
     {
-        StatusEffectStats stats = effect.GetStatusEffectStats();
+        StatusEffectStats stats = effect.stats;
 
-        m_AttackSpeed += stats.GetAttackSpeed();
+        attackSpeed += stats.attackSpeed;
+        m_RegenerateAmount += stats.regenerate;
+        m_RegeneratePercent += stats.regeneratePercent;
     }
-
     public void DeapplyStatusEffect(StatusEffect effect)
     {
-        StatusEffectStats stats = effect.GetStatusEffectStats();
+        StatusEffectStats stats = effect.stats;
 
-        m_AttackSpeed -= stats.GetAttackSpeed();
+        attackSpeed -= stats.attackSpeed;
+        m_RegenerateAmount -= stats.regenerate;
+        m_RegeneratePercent -= stats.regeneratePercent;
     }
-
-    public float GetCurrentHealth() { return m_CurrentHealth; }
-    public float GetAttackDamage() { return m_AttackDamage; }
-    public float GetAttackSpeed() { return m_AttackSpeed; }
-    public float GetBaseAttackSpeed() { return m_BaseAttackSpeed; }
-    public float GetAttackRange() { return m_AttackRange; }
-    public float GetMaxHealth() { return m_MaxHealth; }
 }

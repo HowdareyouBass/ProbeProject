@@ -1,53 +1,38 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyScript : EntityScript
+public sealed class EnemyScript : EntityScript
 {
-    [SerializeField] private Race race;
-    [SerializeField] private GameObject damageEffect;
-    [SerializeField] private Renderer healthRenderer;
+    [SerializeField] private Race m_Race;
+    [SerializeField] private Renderer m_HealthRenderer;
 
-    private Enemy enemy;
-    private GameEvent<float> OnDamaged;
-    private GameEvent OnDeath;
-    public bool isDead { get; private set; }
+    private Enemy m_Enemy;
+    private GameEvent m_OnDeath;
 
     private void Awake()
     {
-        enemy = new Enemy();
-        enemy.SetRace(race);
-        OnDamaged = enemy.GetEvent<float>(EventName.OnDamaged);
-        OnDeath = enemy.GetEvent(EventName.OnDeath);
+        m_Enemy = new Enemy();
+        m_Enemy.SetRace(m_Race);
+        m_OnDeath = m_Enemy.GetEvent(EntityEventName.OnDeath);
     }
     private void OnEnable()
     {
-        OnDeath?.Subscribe(Die);
-        OnDamaged?.Subscribe(Damage);
+        m_OnDeath?.Subscribe(Die);
     }
     private void OnDisable()
     {
-        OnDeath?.Unsubscribe(Die);
-        OnDamaged?.Unsubscribe(Damage);
+        m_OnDeath?.Unsubscribe(Die);
     }
 
-    private void Damage(float amount)
+    protected override void Die()
     {
-        GameObject effect = Instantiate(damageEffect, transform);
-        effect.GetComponent<TextMeshPro>().text = amount.ToString();
+        base.Die();
+        m_HealthRenderer.enabled = false;
     }
-    private void Die()
-    {
-        isDead = true;
-        healthRenderer.enabled = false;
-        this.GetComponent<CapsuleCollider>().enabled = false;
-        this.GetComponent<NavMeshObstacle>().enabled = false;
-        this.GetComponent<MeshRenderer>().enabled = false;
-        Destroy(transform.gameObject, 1f);
-    }
+
     public override Entity GetEntity()
     {
-        Debug.Assert(enemy != null);
-        return enemy;
+        Debug.Assert(m_Enemy != null);
+        return m_Enemy;
     }
 }

@@ -1,29 +1,59 @@
 using System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
-public enum EventName
+public abstract class Events<T> where T : Enum
+{
+    protected static int m_MaxEventsNumber { get; private set; } = Enum.GetValues(typeof(T)).Cast<int>().Max();
+    public Dictionary<T,GameEvent> events { get; protected set; }
+
+    public Events()
+    {
+        events = new Dictionary<T, GameEvent>();
+        InitEvents();
+    }
+    protected abstract void InitEvents();
+}
+
+public enum EntityEventName
 {
     None,
     OnDeath,
     OnAttack,
     OnDamaged,
+    OnHealthChanged,
+    OnAttackDisabled,
+    OnMovementDisabled,
+    OnCastingDisabled,
+}
+public class EntityEvents : Events<EntityEventName>
+{
+    protected override void InitEvents()
+    {
+        events.Add(EntityEventName.None, new GameEvent());
+        events.Add(EntityEventName.OnDeath, new GameEvent());
+        events.Add(EntityEventName.OnAttack, new GameEvent<Transform>());
+        events.Add(EntityEventName.OnDamaged, new GameEvent<float>());
+        events.Add(EntityEventName.OnHealthChanged, new GameEvent<float>());
+        events.Add(EntityEventName.OnAttackDisabled, new GameEvent());
+        events.Add(EntityEventName.OnMovementDisabled, new GameEvent());
+        events.Add(EntityEventName.OnCastingDisabled, new GameEvent());
+    }
 }
 
-public class EntityEvents
+public enum SpellEventName
 {
-    //Creating array of all events that are inside enum
-    private static int m_MaxEventsNumber = Enum.GetValues(typeof(EventName)).Cast<int>().Max();
-    public Dictionary<EventName,GameEvent> events;
-    public EntityEvents()
+    None,
+    OnImpact,
+    OnCast
+}
+public class SpellEvents : Events<SpellEventName>
+{
+    protected override void InitEvents()
     {
-        events = new Dictionary<EventName, GameEvent>(m_MaxEventsNumber);
-        events.Add(EventName.None, new GameEvent());
-        events.Add(EventName.OnDeath, new GameEvent());
-        events.Add(EventName.OnAttack, new GameEvent());
-        events.Add(EventName.OnDamaged, new GameEvent<float>());
+        events.Add(SpellEventName.None, new GameEvent());
+        events.Add(SpellEventName.OnImpact, new GameEvent());
+        events.Add(SpellEventName.OnCast, new GameEvent());
     }
 }

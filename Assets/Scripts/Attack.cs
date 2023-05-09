@@ -1,82 +1,62 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Movement))]
 public class Attack : MonoBehaviour
 {
-    [SerializeField] private IController controller;
-    [SerializeField] private Entity entity;
-    [SerializeField] private Movement movement;
+    [SerializeField] private Movement m_Movement;
 
-    private GameEvent OnAttack;
-    private Coroutine attacking;
-    private bool canAttack = true;
+    private Entity m_Entity;
+    private EntityController m_Controller;
+    private GameEvent<Transform> m_OnAttack;
+    private Coroutine m_Attacking;
+    private bool m_CanAttack = true;
 
-    void Start()
+    private void Start()
     {
-        controller = GetComponent<IController>();
-        entity = GetComponent<EntityScript>().GetEntity();
-        OnAttack = entity.GetEvent(EventName.OnAttack);
+        m_Controller = GetComponent<EntityController>();
+        m_Entity = GetComponent<EntityScript>().GetEntity();
+        m_OnAttack = m_Entity.GetEvent<Transform>(EntityEventName.OnAttack, true);
+        m_Entity.GetEvent(EntityEventName.OnAttackDisabled).Subscribe(Stop);
     }
 
     public void Stop()
     {
-        if (attacking != null)
-            StopCoroutine(attacking);
+        if (m_Attacking != null)
+            StopCoroutine(m_Attacking);
     }
-    public void AttackTarget(RaycastHit target)
+    
+    public void AttackTarget(Target target)
     {
-        controller.StopActions();
-
-        float targetRadius;
-        if (target.transform.CompareTag("Player"))
-        {
-            targetRadius = Player.PLAYER_RADIUS;
-        }
-        else
-        {
-            targetRadius = target.collider.bounds.size.z;
-        }
-        attacking = StartCoroutine(AttackTargetRoutine(target, targetRadius));
+        m_Controller.StopActions();
+        m_Attacking = StartCoroutine(AttackTargetRoutine(target));
     }
 
-    private IEnumerator AttackTargetRoutine(RaycastHit target, float targetRadius)
+    private IEnumerator AttackTargetRoutine(Target target)
     {
         while (true)
         {
-            while(EntityMath.VectorToNearestPoint(transform, target).magnitude > entity.GetAttackRange())
+            yield return m_Movement.FolowUntilInRange(target, m_Entity.stats.attackRange);
+            if (m_CanAttack && m_Entity.canAttack)
             {
-                movement.MoveToEntity(target, targetRadius);
-                yield return null;
+                m_OnAttack?.Trigger(target.transform);
+                m_Entity.DamageTarget(target.transform);
+                StartCoroutine(WaitForNextAttack());
             }
-            movement.Stop();
-            while(EntityMath.VectorToNearestPoint(transform, target).magnitude <= entity.GetAttackRange())
+
+            //Stops m_Attacking enemy that already died
+            if(target.transform.GetComponent<EntityScript>().isDead)
             {
-                movement.LookAtTarget(target, true);
-                if (canAttack)
-                {
-                    OnAttack?.Trigger();
-                    entity.DamageTarget(target);
-                    StartCoroutine(WaitForNextAttack());
-                }
-
-                //Stops attacking enemy that already died
-                if(target.transform.GetComponent<EnemyScript>().isDead)
-                {
-                    yield break;
-                }
-
-                yield return null;;
+                yield break;
             }
+            yield return null;
         }
     }
 
     private IEnumerator WaitForNextAttack()
     {
-        canAttack = false;
-        yield return new WaitForSeconds(entity.GetAttackCooldown());
-        canAttack = true;
+        m_CanAttack = false;
+        yield return new WaitForSeconds(m_Entity.GetAttackCooldown());
+        m_CanAttack = true;
         yield break;
     }
 }

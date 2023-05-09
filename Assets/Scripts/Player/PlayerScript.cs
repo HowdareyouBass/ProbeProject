@@ -1,20 +1,17 @@
 using UnityEngine;
-public class PlayerScript : EntityScript
+
+public sealed class PlayerScript : EntityScript
 {
-    [SerializeField] private Race race;
-    private Player player;
+    [SerializeField] private Race m_Race;
+    private Player m_Player;
     private void Awake()
     {
-        player = new Player();
-        player.SetRace(race);
+        m_Player = new Player();
+        m_Player.SetRace(m_Race);
     }
 
     public override Entity GetEntity()
     {
-        return player;
-    }
-    public Player GetPlayer()
-    {
-        return player;
+        return m_Player;
     }
 }

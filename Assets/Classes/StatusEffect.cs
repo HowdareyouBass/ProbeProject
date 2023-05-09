@@ -1,27 +1,34 @@
 using System.Collections;
-using UnityEngine.Events;
 using UnityEngine;
 
 [System.Serializable]
 public class StatusEffect
 {
+    [SerializeField] private bool m_ApplySleep;
     [SerializeField] private float m_DurationInSeconds;
     [SerializeField] private float m_StartCount;
     [SerializeField] private float m_CountDelta;
     [SerializeField] private StatusEffectStats m_Stats;
-    [SerializeField] private EventName m_DecreaseCount;
+    [SerializeField] private EntityEventName m_DecreaseCount;
+
+    public bool applySleep { get => m_ApplySleep; }
+    public StatusEffectStats stats { get => m_Stats; }
+
     private float m_CurrentCount;
     private Entity m_Entity;
 
-    public IEnumerator StartEffect(Entity entity)
+    public IEnumerator StartEffectRoutine(Entity entity)
     {
+        if (m_StartCount == 0 && m_DurationInSeconds == 0) throw new System.Exception("Start count and Duration in seconds could not both be 0 aborting");
+
         m_Entity = entity;
 
-        GameEvent<float> decreaseByEvent = entity.GetEvent<float>(m_DecreaseCount);
+        GameEvent<float> decreaseByEvent = m_Entity.GetEvent<float>(m_DecreaseCount, false);
         GameEvent decreaseByDelta = null;
+
         if (decreaseByEvent == null)
         {
-            decreaseByDelta = entity.GetEvent(m_DecreaseCount);
+            decreaseByDelta = m_Entity.GetEvent(m_DecreaseCount);
             decreaseByDelta.Subscribe(DecreaseCount);
         }
         else
@@ -29,30 +36,12 @@ public class StatusEffect
             decreaseByEvent.Subscribe(DecreaseCount);
         }
         
-        entity.ApplyStatusEffect(this);
-        yield return WaitDuration();
-        yield return WaitCount();
+        m_Entity.ApplyStatusEffect(this);
+        yield return new WaitForSeconds(m_DurationInSeconds);
+        yield return WaitForCount();
         decreaseByEvent?.Unsubscribe(DecreaseCount);
         decreaseByDelta?.Unsubscribe(DecreaseCount);
-        yield break;
-    }
-    private IEnumerator WaitDuration()
-    {
-        if (m_DurationInSeconds != 0)
-        {
-            yield return new WaitForSeconds(m_DurationInSeconds);
-            m_Entity.DeapplyStatusEffect(this);
-        }
-        yield break;
-    }
-    private IEnumerator WaitCount()
-    {
-        if (m_StartCount != 0)
-        {
-            m_CurrentCount = m_StartCount;
-            yield return WaitForCount();
-            m_Entity.DeapplyStatusEffect(this);
-        }
+        m_Entity.DeapplyStatusEffect(this);
         yield break;
     }
     private IEnumerator WaitForCount()
@@ -66,7 +55,6 @@ public class StatusEffect
 
     private void DecreaseCount()
     {
-        Debug.Log("Decreased count with delta");
         m_CurrentCount -= m_CountDelta;
         Debug.Log(m_CurrentCount);
     }
@@ -76,6 +64,4 @@ public class StatusEffect
         m_CurrentCount -= amount;
         Debug.Log(m_CurrentCount);
     }
-
-    public StatusEffectStats GetStatusEffectStats() { return m_Stats; }
 }

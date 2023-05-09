@@ -1,44 +1,42 @@
 using System;
-using UnityEngine.Events;
 
 public class GameEvent
 {
-    private event Action action;
+    private Action m_Action;
 
-    public virtual void Trigger()
+    public void Trigger()
     {
-        action?.Invoke();
+        m_Action?.Invoke();
     }
 
     public void Subscribe(Action function)
     {
-        action += function;
+        m_Action += function;
     }
 
     public void Unsubscribe(Action function)
     {
-        action -= function;
+        m_Action -= function;
     }
 }
 
 public class GameEvent<T> : GameEvent
 {
-    private event Action<T> action;
+    private Action<T> m_Action;
 
     public void Trigger(T value)
     {
-        action?.Invoke(value);
+        base.Trigger();
+        m_Action?.Invoke(value);
     }
 
     public void Subscribe(Action<T> function)
     {
-        action += function;
+        m_Action += function;
     }
 
     public void Unsubscribe(Action<T> function)
     {
-        action -= function;
+        m_Action -= function;
     }
 }
-
-

@@ -1,34 +1,54 @@
 using UnityEngine;
 
-public class ProjectileScript : MonoBehaviour
+[RequireComponent(typeof(SpellScript))]
+[RequireComponent(typeof(ActiveSpell))]
+public class ProjectileScript : SpellComponent
 {
-    public Projectile spell;
-    public Transform target;
-    [SerializeField] private int projectileSpeed;
-    private Rigidbody rb;
-    private Vector3 targetRotation;
-    void Start()
+    [SerializeField] private bool m_IsHoming = true;
+    [SerializeField] private bool m_CanDamage = true;
+    [SerializeField] private float m_Damage = 10;
+    [SerializeField] private GameObject m_EffectOnImpact;
+    [SerializeField] private int m_Speed = 100;
+
+    private Rigidbody m_RigidBody;
+    private GameEvent m_OnImpact;
+
+    private void Start()
     {
-        rb = transform.GetComponent<Rigidbody>();
-        projectileSpeed = spell.projectileSpeed;
+        m_OnImpact = spellScript.GetEvent(SpellEventName.OnImpact);
+
+        SphereCollider collider;
+        if (!TryGetComponent<Rigidbody>(out m_RigidBody))
+        {
+            m_RigidBody = gameObject.AddComponent<Rigidbody>();
+            m_RigidBody.useGravity = false;
+        }
+        if (!TryGetComponent<SphereCollider>(out collider))
+        {
+            collider = gameObject.AddComponent<SphereCollider>();
+            collider.radius = 0.4f;
+            collider.isTrigger = true;
+        }
     }
     void FixedUpdate()
     {
-        transform.forward = Vector3.Normalize(target.position - transform.position) * Time.deltaTime * projectileSpeed;
-        rb.velocity = transform.forward * Time.deltaTime * projectileSpeed;   
+        if (m_IsHoming)
+        {
+            transform.forward = target.position - transform.position;
+        }
+        m_RigidBody.velocity = transform.forward * Time.deltaTime * m_Speed;
     }
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Enemy"))
+        if (collider.transform.TryGetComponent<Health>(out Health health) && collider.transform != caster)
         {
-            collider.transform.GetComponent<Health>().TakeDamage(spell.damage);
-            Destroy(transform.gameObject);
-            if (spell.effectOnImpact == null)
+            m_OnImpact.Trigger();
+            if (m_CanDamage)
             {
-                Debug.LogWarning("Spell Impact game object isn't assigned");
-                return;
+                health.TakeDamage(m_Damage);
             }
-            Instantiate(spell.effectOnImpact, transform);
+            Destroy(transform.gameObject);
+            Instantiate(m_EffectOnImpact, collider.ClosestPoint(transform.position), Quaternion.identity);
         }
     }
 }
