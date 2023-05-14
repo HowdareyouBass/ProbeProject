@@ -20,7 +20,7 @@ public class PlayerHealthBar : MonoBehaviour
     private void OnEnable()
     {
         m_Player = m_PlayerScript.GetEntity();
-        m_OnDamaged = m_Player.GetEvent<float>(EntityEventName.OnDamaged, true);
+        m_OnDamaged = m_Player.events.GetEvent<float>(EntityEventName.OnDamaged, true);
         m_OnDamaged?.Subscribe(DecreaseHealthbarValue);
     }
     private void OnDisable()

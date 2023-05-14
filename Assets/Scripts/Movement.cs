@@ -12,14 +12,12 @@ public class Movement : MonoBehaviour
     private Entity m_Entity;
     private Coroutine m_Looking;
 
-    private Vector3 ls;
-
     private void Start()
     {
         m_Entity = GetComponent<EntityScript>().GetEntity();
         m_Agent = GetComponent<NavMeshAgent>();
         m_Controller = GetComponent<EntityController>();
-        m_Entity.GetEvent(EntityEventName.OnMovementDisabled).Subscribe(Stop);
+        m_Entity.events.GetEvent(EntityEventName.OnMovementDisabled).Subscribe(Stop);
     }
 
     public void Move(Vector3 destination)
@@ -58,7 +56,6 @@ public class Movement : MonoBehaviour
             if (target.transform == null)
                 yield break;
             lookRotation = Vector3.Normalize(target.GetVector(transform));
-            ls = lookRotation;
             angle = Vector3.Angle(lookRotation, transform.forward);
             //Set y to 0 so that player GameObject don't rotate up and down
             lookRotation.y = 0;
@@ -72,13 +69,5 @@ public class Movement : MonoBehaviour
         m_Agent.SetDestination(transform.position);
         if (m_Looking != null)
             StopCoroutine(m_Looking);
-    }
-
-    private void OnDrawGizmos() 
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + ls);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward);
     }
 }

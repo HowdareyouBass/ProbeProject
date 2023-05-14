@@ -12,7 +12,7 @@ public class SelfCastSpell : SpellComponent, ICastable
 
     public void Cast(Transform caster, Transform target)
     {
-        spellScript.GetEvent(SpellEventName.OnCast).Trigger();
+        spellScript.events.GetEvent(SpellEventName.OnCast).Trigger();
         if (m_Effect != null)
             Instantiate(m_Effect, transform);
     }

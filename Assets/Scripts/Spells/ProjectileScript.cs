@@ -15,7 +15,7 @@ public class ProjectileScript : SpellComponent
 
     private void Start()
     {
-        m_OnImpact = spellScript.GetEvent(SpellEventName.OnImpact);
+        m_OnImpact = spellScript.events.GetEvent(SpellEventName.OnImpact);
 
         SphereCollider collider;
         if (!TryGetComponent<Rigidbody>(out m_RigidBody))
@@ -30,7 +30,7 @@ public class ProjectileScript : SpellComponent
             collider.isTrigger = true;
         }
     }
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (m_IsHoming)
         {
@@ -47,7 +47,7 @@ public class ProjectileScript : SpellComponent
             {
                 health.TakeDamage(m_Damage);
             }
-            Destroy(transform.gameObject);
+            Destroy(gameObject);
             Instantiate(m_EffectOnImpact, collider.ClosestPoint(transform.position), Quaternion.identity);
         }
     }

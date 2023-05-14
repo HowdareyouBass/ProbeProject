@@ -10,12 +10,12 @@ public class SpellScript : MonoBehaviour
     public Transform caster { get => m_Caster; }
     public Transform target { get => m_Target; }
 
-    private SpellEvents m_SpellEvents;
+    public SpellEvents events { get; private set; }
     private void Awake()
     {
         //TODO: delete this after completing all the spells
         Init(m_Caster, m_Target);
-        m_SpellEvents = new SpellEvents();
+        events = new SpellEvents();
     }
     public void Init(Transform caster, Transform target)
     {
@@ -27,10 +27,5 @@ public class SpellScript : MonoBehaviour
             component.target = target;
             component.spellScript = this;
         }
-    }
-
-    public GameEvent GetEvent(SpellEventName name)
-    {
-        return m_SpellEvents.events[name];
     }
 }

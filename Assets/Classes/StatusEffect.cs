@@ -1,8 +1,9 @@
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
-[System.Serializable]
-public class StatusEffect
+[CreateAssetMenu(menuName = "Status Effect", fileName = "New Status Effect")]
+public class StatusEffect : ScriptableObject
 {
     [SerializeField] private bool m_ApplySleep;
     [SerializeField] private float m_DurationInSeconds;
@@ -16,26 +17,36 @@ public class StatusEffect
 
     private float m_CurrentCount;
     private Entity m_Entity;
+    private float m_Time;
+
+    private bool m_IsActive => m_CurrentCount > 0 || m_Time > 0;
+
+    public void Start()
+    {
+        m_CurrentCount = m_StartCount;
+        m_Time = m_DurationInSeconds;
+    }
 
     public IEnumerator StartEffectRoutine(Entity entity)
     {
-        if (m_StartCount == 0 && m_DurationInSeconds == 0) throw new System.Exception("Start count and Duration in seconds could not both be 0 aborting");
+        m_CurrentCount = m_StartCount;
+        if (m_StartCount == 0 && m_DurationInSeconds == 0) Debug.LogWarning("Count and duration are both 0.", this);
 
         m_Entity = entity;
 
-        GameEvent<float> decreaseByEvent = m_Entity.GetEvent<float>(m_DecreaseCount, false);
+        GameEvent<float> decreaseByEvent = m_Entity.events.GetEvent<float>(m_DecreaseCount, false);
         GameEvent decreaseByDelta = null;
 
         if (decreaseByEvent == null)
         {
-            decreaseByDelta = m_Entity.GetEvent(m_DecreaseCount);
+            decreaseByDelta = m_Entity.events.GetEvent(m_DecreaseCount);
             decreaseByDelta.Subscribe(DecreaseCount);
         }
         else
         {
             decreaseByEvent.Subscribe(DecreaseCount);
         }
-        
+        //TODO: Adding status effect to some array!!!
         m_Entity.ApplyStatusEffect(this);
         yield return new WaitForSeconds(m_DurationInSeconds);
         yield return WaitForCount();

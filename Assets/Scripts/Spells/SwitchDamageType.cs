@@ -9,11 +9,11 @@ public class SwitchDamageType : SpellComponent
     }
     private void OnEnable()
     {
-        spellScript.GetEvent(SpellEventName.OnCast).Subscribe(Switch);
+        spellScript.events.GetEvent(SpellEventName.OnCast).Subscribe(Switch);
     }
     private void OnDisable()
     {
-        spellScript.GetEvent(SpellEventName.OnCast).Unsubscribe(Switch);
+        spellScript.events.GetEvent(SpellEventName.OnCast).Unsubscribe(Switch);
     }
 
     private void Switch()

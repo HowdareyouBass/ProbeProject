@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 8615511743137733101}
   - component: {fileID: 2322409631019214108}
   - component: {fileID: 5238513426292133042}
+  - component: {fileID: 8511518338150499408}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -180,10 +181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b86994828325744be7548981e9006f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Attack: {fileID: 8615511743137733101}
-  m_Movement: {fileID: 7376657689183883917}
-  m_SpellCaster: {fileID: 2322409631019214108}
-  m_MovementEffect: {fileID: 0}
 --- !u!114 &7376657689183883917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8c2ed41e096854eb2cc8a7bbb6ae9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Movement: {fileID: 7376657689183883917}
 --- !u!114 &2322409631019214108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10671db554ead0469bb57c163ab2d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Movement: {fileID: 7376657689183883917}
 --- !u!114 &5238513426292133042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +235,18 @@ MonoBehaviour:
   m_Spell3: {fileID: 0}
   m_Spell4: {fileID: 0}
   m_Spell5: {fileID: 0}
+--- !u!114 &8511518338150499408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6746957540238612335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ea0b1071bae944fb69e0abb7b22685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6746957540255858415
 GameObject:
   m_ObjectHideFlags: 0

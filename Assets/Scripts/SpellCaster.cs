@@ -4,9 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(SpellInventory))]
 public class SpellCaster : MonoBehaviour
 {
-    [SerializeField] private Movement m_Movement;
+    private Movement m_Movement;
     private Coroutine m_SpellCasting;
-    private Entity m_Entity;
+    private EntityEvents m_EntityEvents;
     private EntityController m_Controller;
     private SpellInventory m_Spells;
     private ActiveSpell m_Spell;
@@ -15,9 +15,9 @@ public class SpellCaster : MonoBehaviour
     {
         m_Movement = GetComponent<Movement>();
         m_Spells = GetComponent<SpellInventory>();
-        m_Entity = GetComponent<EntityScript>().GetEntity();
+        m_EntityEvents = GetComponent<EntityScript>().GetEntity().events;
         m_Controller = GetComponent<EntityController>();
-        m_Entity.GetEvent(EntityEventName.OnCastingDisabled).Subscribe(Stop);
+        m_EntityEvents.GetEvent(EntityEventName.OnCastingDisabled).Subscribe(Stop);
         UpdateSpells();
     }
     private void UpdateSpells()
@@ -54,7 +54,7 @@ public class SpellCaster : MonoBehaviour
     private IEnumerator CastSpellRoutine(Target target, int castRange)
     {
         yield return m_Movement.FolowUntilInRange(target, castRange);
-        m_Spell.Cast(transform, null);
+        m_Spell.Cast(transform, target.transform);
         yield break;
     }
 

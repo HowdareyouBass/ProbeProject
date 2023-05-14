@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed586d8c0787d0340aac06d40e4180ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellScript: {fileID: 0}
+  spellScript: {fileID: 3189298054437284453}
   caster: {fileID: 0}
   target: {fileID: 0}
   m_CastRange: 500
@@ -79,11 +79,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ff39a18e4c7d9f419f91b162128b1d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellScript: {fileID: 0}
+  spellScript: {fileID: 3189298054437284453}
   caster: {fileID: 0}
   target: {fileID: 0}
   m_IsHoming: 1
-  m_CanDamage: 0
+  m_CanDamage: 1
   m_Damage: 50
   m_EffectOnImpact: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   m_Speed: 50
@@ -99,16 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1e8b81383e425449dec16fc9823141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellScript: {fileID: 0}
+  spellScript: {fileID: 3189298054437284453}
   caster: {fileID: 0}
   target: {fileID: 0}
-  m_EventName: 1
+  m_SpellEventName: 1
+  m_EntityEventName: 0
   m_ApplyTo: 1
-  m_StatusEffect:
-    m_ApplySleep: 1
-    m_DurationInSeconds: 100
-    m_StartCount: 0
-    m_CountDelta: 0
-    m_Stats:
-      m_AttackSpeed: 0
-    m_DecreaseCount: 0
+  m_StatusEffect: {fileID: 11400000, guid: 4e508264a6cebea43a494c401f22f0ac, type: 2}

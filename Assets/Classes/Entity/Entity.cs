@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Entity
 {
+    //TODO: Разбить на интерфейсы для каждого из скриптов действий
     public EntityStats stats { get; private set; }
-    public EntityEvents events;
+    public EntityEvents events { get; private set; }
 
     public bool canAttack { get; private set; } = true;
     public bool canMove { get; private set; } = true;
@@ -17,14 +19,6 @@ public abstract class Entity
         events = new EntityEvents();
     }
 
-    public GameEvent<T> GetEvent<T>(EntityEventName name, bool canBeError) 
-    {
-        GameEvent<T> res = events.events[name] as GameEvent<T>;
-        if (res == null && canBeError)
-            Debug.LogWarning("Wrong type of event");
-        return res; 
-    }
-    public GameEvent GetEvent (EntityEventName name) { return events.events[name]; }
     public virtual float GetAttackCooldown() { return stats.baseAttackSpeed * 100 / stats.attackSpeed; }
 
     public void TakeDamage(float amount)
@@ -35,7 +29,7 @@ public abstract class Entity
     }
     public void Regenerate()
     {
-        if (stats.regen < 0)
+        if (stats.regen <= 0)
             return;
         stats.Heal(stats.regen * Time.deltaTime);
     }
@@ -44,11 +38,11 @@ public abstract class Entity
     {
         if (effect.applySleep)
         {
-            GetEvent(EntityEventName.OnAttackDisabled).Trigger();
+            events.GetEvent(EntityEventName.OnAttackDisabled).Trigger();
             canAttack = false;
-            GetEvent(EntityEventName.OnMovementDisabled).Trigger();
+            events.GetEvent(EntityEventName.OnMovementDisabled).Trigger();
             canMove = false;
-            GetEvent(EntityEventName.OnCastingDisabled).Trigger();
+            events.GetEvent(EntityEventName.OnCastingDisabled).Trigger();
             canCast = false;
         }
         stats.ApplyStatusEffect(effect);

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2375837738209953982}
   - component: {fileID: 2375837738209953983}
-  - component: {fileID: -1881718190722469285}
+  - component: {fileID: 1843491962372479128}
   - component: {fileID: 2375837738209953976}
   m_Layer: 0
   m_Name: TestSpell
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Caster: {fileID: 0}
   m_Target: {fileID: 0}
---- !u!114 &-1881718190722469285
+--- !u!114 &1843491962372479128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,15 +57,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2375837738209953977}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed586d8c0787d0340aac06d40e4180ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 37322bcc11956c044bba9cefe9e9502f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellScript: {fileID: 2375837738209953983}
+  spellScript: {fileID: 0}
   caster: {fileID: 0}
   target: {fileID: 0}
-  m_CastRange: 0
   m_Effect: {fileID: 0}
-  m_EffectPlacement: 0
 --- !u!114 &2375837738209953976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,14 +79,7 @@ MonoBehaviour:
   spellScript: {fileID: 2375837738209953983}
   caster: {fileID: 0}
   target: {fileID: 0}
-  m_SpellEvent: 2
-  m_EntityEvent: 0
-  m_ApplyTo: 1
-  m_StatusEffect:
-    m_ApplySleep: 1
-    m_DurationInSeconds: 3
-    m_StartCount: 0
-    m_CountDelta: 0
-    m_Stats:
-      m_AttackSpeed: 0
-    m_DecreaseCount: 0
+  m_SpellEventName: 2
+  m_EntityEventName: 0
+  m_ApplyTo: 0
+  m_StatusEffect: {fileID: 11400000, guid: f142efc7558912242bc0f6b0f76a9887, type: 2}

@@ -20,7 +20,7 @@ public class ActiveSpell : SpellComponent, ICastable
             spellStartPosition = target.position;
         
         GameObject spellGO = Instantiate(gameObject, spellStartPosition, Quaternion.identity);
-        spellGO.GetComponent<SpellScript>().GetEvent(SpellEventName.OnCast).Trigger();
+        spellGO.GetComponent<SpellScript>().events.GetEvent(SpellEventName.OnCast).Trigger();
         if (m_Effect != null)
             Instantiate(m_Effect, spellGO.transform);
     }

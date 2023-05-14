@@ -6,14 +6,35 @@ using UnityEngine;
 public abstract class Events<T> where T : Enum
 {
     protected static int m_MaxEventsNumber { get; private set; } = Enum.GetValues(typeof(T)).Cast<int>().Max();
-    public Dictionary<T,GameEvent> events { get; protected set; }
+    private Dictionary<T,GameEvent> m_Events;
 
     public Events()
     {
-        events = new Dictionary<T, GameEvent>();
+        m_Events = new Dictionary<T, GameEvent>();
         InitEvents();
     }
     protected abstract void InitEvents();
+
+    public GameEvent GetEvent(T name)
+    {
+        return m_Events[name];
+    }
+    public GameEvent<EventType> GetEvent<EventType>(T name, bool canBeError)
+    {
+        GameEvent<EventType> res = m_Events[name] as GameEvent<EventType>;
+        if (res == null && canBeError)
+            Debug.LogWarning("Wrong type of event");
+        return res;
+    }
+
+    protected void AddEvent<EventType>(T name)
+    {
+        m_Events.Add(name, new GameEvent<EventType>());
+    }
+    protected void AddEvent(T name)
+    {
+        m_Events.Add(name, new GameEvent());
+    }
 }
 
 public enum EntityEventName
@@ -31,14 +52,14 @@ public class EntityEvents : Events<EntityEventName>
 {
     protected override void InitEvents()
     {
-        events.Add(EntityEventName.None, new GameEvent());
-        events.Add(EntityEventName.OnDeath, new GameEvent());
-        events.Add(EntityEventName.OnAttack, new GameEvent<Transform>());
-        events.Add(EntityEventName.OnDamaged, new GameEvent<float>());
-        events.Add(EntityEventName.OnHealthChanged, new GameEvent<float>());
-        events.Add(EntityEventName.OnAttackDisabled, new GameEvent());
-        events.Add(EntityEventName.OnMovementDisabled, new GameEvent());
-        events.Add(EntityEventName.OnCastingDisabled, new GameEvent());
+        AddEvent(EntityEventName.None);
+        AddEvent(EntityEventName.OnDeath);
+        AddEvent<Transform>(EntityEventName.OnAttack);
+        AddEvent<float>(EntityEventName.OnDamaged);
+        AddEvent<float>(EntityEventName.OnHealthChanged);
+        AddEvent(EntityEventName.OnAttackDisabled);
+        AddEvent(EntityEventName.OnMovementDisabled);
+        AddEvent(EntityEventName.OnCastingDisabled);
     }
 }
 
@@ -52,8 +73,8 @@ public class SpellEvents : Events<SpellEventName>
 {
     protected override void InitEvents()
     {
-        events.Add(SpellEventName.None, new GameEvent());
-        events.Add(SpellEventName.OnImpact, new GameEvent());
-        events.Add(SpellEventName.OnCast, new GameEvent());
+        AddEvent(SpellEventName.None);
+        AddEvent(SpellEventName.OnImpact);
+        AddEvent(SpellEventName.OnCast);
     }
 }

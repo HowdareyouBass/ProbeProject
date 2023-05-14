@@ -1,11 +1,20 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EntityController : MonoBehaviour
 {
-    [SerializeField] private Attack m_Attack;
-    [SerializeField] private Movement m_Movement;
-    [SerializeField] private SpellCaster m_SpellCaster;
-    [SerializeField] private GameObject m_MovementEffect;
+    private Attack m_Attack;
+    private Movement m_Movement;
+    private SpellCaster m_SpellCaster;
+    private NavMeshAgent m_Agent;
+
+    private void Start()
+    {
+        m_Attack = GetComponent<Attack>();
+        m_Movement = GetComponent<Movement>();
+        m_SpellCaster = GetComponent<SpellCaster>();
+        m_Agent = GetComponent<NavMeshAgent>();
+    }
 
     public void StopActions()
     {
@@ -14,9 +23,9 @@ public class EntityController : MonoBehaviour
         m_SpellCaster?.Stop();
     }
 
-    public void OnMouseClick(Target target)
+    public virtual void OnMouseClick(Target target)
     {
-        SpawnEffect(target.GetPoint(), target.normal);
+        AvoidEntities();
         if (target.transform == transform)
             return;
         
@@ -37,6 +46,7 @@ public class EntityController : MonoBehaviour
 
     private void Attack(Target target)
     {
+        StopAvoidingEntities();
         m_Attack?.AttackTarget(target);
     }
     
@@ -46,10 +56,12 @@ public class EntityController : MonoBehaviour
         m_Movement?.Move(target.GetPoint());
     }
 
-    //TODO: Вынести в отдельный класс для спавна эффектов наверое?
-    private void SpawnEffect(Vector3 position, Vector3 rotation)
+    private void StopAvoidingEntities()
     {
-        if (m_MovementEffect != null)
-            Instantiate(m_MovementEffect, position, Quaternion.LookRotation(rotation));
+        m_Agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+    }
+    private void AvoidEntities()
+    {
+        m_Agent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
     }
 }

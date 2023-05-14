@@ -13,7 +13,7 @@ public sealed class EnemyScript : EntityScript
     {
         m_Enemy = new Enemy();
         m_Enemy.SetRace(m_Race);
-        m_OnDeath = m_Enemy.GetEvent(EntityEventName.OnDeath);
+        m_OnDeath = m_Enemy.events.GetEvent(EntityEventName.OnDeath);
     }
     private void OnEnable()
     {

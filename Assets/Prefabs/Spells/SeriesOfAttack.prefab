@@ -63,7 +63,7 @@ MonoBehaviour:
   spellScript: {fileID: 0}
   caster: {fileID: 0}
   target: {fileID: 0}
-  m_Effect: {fileID: 0}
+  m_Effect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
 --- !u!114 &3865797067636989382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,16 +79,7 @@ MonoBehaviour:
   spellScript: {fileID: 0}
   caster: {fileID: 0}
   target: {fileID: 0}
-  m_SpellEvent: 2
-  m_EntityEvent: 0
+  m_SpellEventName: 2
+  m_EntityEventName: 0
   m_ApplyTo: 0
-  m_StatusEffect:
-    m_ApplySleep: 0
-    m_DurationInSeconds: 0
-    m_StartCount: 5
-    m_CountDelta: 1
-    m_Stats:
-      m_AttackSpeed: 300
-      m_Regenerate: 0
-      m_RegeneratePercent: 0
-    m_DecreaseCount: 2
+  m_StatusEffect: {fileID: 11400000, guid: f142efc7558912242bc0f6b0f76a9887, type: 2}

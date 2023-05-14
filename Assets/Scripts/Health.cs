@@ -11,9 +11,9 @@ public class Health : MonoBehaviour
     {
         m_Entity = gameObject.GetComponent<EntityScript>().GetEntity();
 
-        m_OnDeath = m_Entity.GetEvent(EntityEventName.OnDeath);
-        m_OnDamaged = m_Entity.GetEvent<float>(EntityEventName.OnDamaged, true);
-        m_OnHealthChanged = m_Entity.GetEvent<float>(EntityEventName.OnHealthChanged, true);
+        m_OnDeath = m_Entity.events.GetEvent(EntityEventName.OnDeath);
+        m_OnDamaged = m_Entity.events.GetEvent<float>(EntityEventName.OnDamaged, true);
+        m_OnHealthChanged = m_Entity.events.GetEvent<float>(EntityEventName.OnHealthChanged, true);
     }
 
     private void FixedUpdate()

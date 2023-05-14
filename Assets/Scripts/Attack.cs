@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    [SerializeField] private Movement m_Movement;
-
+    private Movement m_Movement;
     private Entity m_Entity;
     private EntityController m_Controller;
     private GameEvent<Transform> m_OnAttack;
@@ -13,10 +12,11 @@ public class Attack : MonoBehaviour
 
     private void Start()
     {
+        m_Movement = GetComponent<Movement>();
         m_Controller = GetComponent<EntityController>();
         m_Entity = GetComponent<EntityScript>().GetEntity();
-        m_OnAttack = m_Entity.GetEvent<Transform>(EntityEventName.OnAttack, true);
-        m_Entity.GetEvent(EntityEventName.OnAttackDisabled).Subscribe(Stop);
+        m_OnAttack = m_Entity.events.GetEvent<Transform>(EntityEventName.OnAttack, true);
+        m_Entity.events.GetEvent(EntityEventName.OnAttackDisabled).Subscribe(Stop);
     }
 
     public void Stop()

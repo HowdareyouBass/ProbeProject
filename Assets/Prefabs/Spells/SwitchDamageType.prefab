@@ -95,16 +95,7 @@ MonoBehaviour:
   spellScript: {fileID: 5053995990233181711}
   caster: {fileID: 0}
   target: {fileID: 0}
-  m_SpellEvent: 0
-  m_EntityEvent: 2
+  m_SpellEventName: 0
+  m_EntityEventName: 0
   m_ApplyTo: 1
-  m_StatusEffect:
-    m_ApplySleep: 0
-    m_DurationInSeconds: 3
-    m_StartCount: 0
-    m_CountDelta: 0
-    m_Stats:
-      m_AttackSpeed: 0
-      m_Regenerate: -1.05
-      m_RegeneratePercent: 0
-    m_DecreaseCount: 0
+  m_StatusEffect: {fileID: 11400000, guid: 34a5cd2f659f73446902cf359d52c4d4, type: 2}
