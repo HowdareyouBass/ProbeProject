@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: AttackSerie
   m_EditorClassIdentifier: 
   m_ApplySleep: 0
-  m_DurationInSeconds: 3
-  m_StartCount: 0
-  m_CountDelta: 0
+  m_DurationInSeconds: 0
+  m_StartCount: 5
+  m_CountDelta: 1
   m_Stats:
     m_AttackSpeed: 100
     m_Regenerate: 0
-    m_RegeneratePercent: 0
+    m_RegeneratePercent: 1
   m_DecreaseCount: 2

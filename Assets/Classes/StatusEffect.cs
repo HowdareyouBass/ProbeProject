@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Status Effect", fileName = "New Status Effect")]

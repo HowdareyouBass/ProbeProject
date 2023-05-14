@@ -96,6 +96,6 @@ MonoBehaviour:
   caster: {fileID: 0}
   target: {fileID: 0}
   m_SpellEventName: 0
-  m_EntityEventName: 0
-  m_ApplyTo: 1
+  m_EntityEventName: 2
+  m_ApplyTo: 2
   m_StatusEffect: {fileID: 11400000, guid: 34a5cd2f659f73446902cf359d52c4d4, type: 2}
