@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3865797067636989379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.189279, y: -1.5969315, z: 5.2227316}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -82,4 +82,13 @@ MonoBehaviour:
   m_SpellEventName: 2
   m_EntityEventName: 0
   m_ApplyTo: 0
-  m_StatusEffect: {fileID: 11400000, guid: f142efc7558912242bc0f6b0f76a9887, type: 2}
+  m_StatusEffect:
+    m_ApplySleep: 0
+    m_DurationInSeconds: 0
+    m_StartCount: 4
+    m_CountDelta: 1
+    m_Stats:
+      m_AttackSpeed: 100
+      m_Regenerate: 0
+      m_RegeneratePercent: 0
+    m_DecreaseCount: 2

@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5053995990233181708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.05787, y: -0.7995375, z: 0.7282078}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -80,6 +80,7 @@ MonoBehaviour:
   spellScript: {fileID: 5053995990233181711}
   caster: {fileID: 0}
   target: {fileID: 0}
+  m_SlashingDamagePercent: 0.1
 --- !u!114 &5053995990233181704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,4 +99,13 @@ MonoBehaviour:
   m_SpellEventName: 0
   m_EntityEventName: 2
   m_ApplyTo: 2
-  m_StatusEffect: {fileID: 11400000, guid: 34a5cd2f659f73446902cf359d52c4d4, type: 2}
+  m_StatusEffect:
+    m_ApplySleep: 0
+    m_DurationInSeconds: 3
+    m_StartCount: 0
+    m_CountDelta: 0
+    m_Stats:
+      m_AttackSpeed: 0
+      m_Regenerate: -0.3
+      m_RegeneratePercent: 0
+    m_DecreaseCount: 0

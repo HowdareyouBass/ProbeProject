@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Status Effect", fileName = "New Status Effect")]
-public class StatusEffect : ScriptableObject
+[System.Serializable]
+public class StatusEffect
 {
     [SerializeField] private bool m_ApplySleep;
     [SerializeField] private float m_DurationInSeconds;
@@ -29,7 +29,7 @@ public class StatusEffect : ScriptableObject
     public IEnumerator StartEffectRoutine(Entity entity)
     {
         m_CurrentCount = m_StartCount;
-        if (m_StartCount == 0 && m_DurationInSeconds == 0) Debug.LogWarning("Count and duration are both 0.", this);
+        if (m_StartCount == 0 && m_DurationInSeconds == 0) Debug.LogWarning("Count and duration are both 0.");
 
         m_Entity = entity;
 

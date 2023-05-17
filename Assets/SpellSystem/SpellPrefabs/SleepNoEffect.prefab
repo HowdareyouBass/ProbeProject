@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3189298054437284454}
   - component: {fileID: 3189298054437284453}
   - component: {fileID: 2764445471322550335}
-  - component: {fileID: 3189298054437284455}
+  - component: {fileID: 7992229002605860101}
   - component: {fileID: 3189298054437284448}
   m_Layer: 0
   m_Name: SleepNoEffect
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3189298054437284449}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.3867407, y: 3, z: -5.54}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -65,9 +65,9 @@ MonoBehaviour:
   caster: {fileID: 0}
   target: {fileID: 0}
   m_CastRange: 500
-  m_Effect: {fileID: 7109850949513595945, guid: 4dcec31c226a64f4ab89333c73ffa670, type: 3}
+  m_Effect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   m_EffectPlacement: 1
---- !u!114 &3189298054437284455
+--- !u!114 &7992229002605860101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,17 +76,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3189298054437284449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff39a18e4c7d9f419f91b162128b1d5, type: 3}
+  m_Script: {fileID: 11500000, guid: ecf9fc0a50b3da444a22f8789aadc5c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spellScript: {fileID: 3189298054437284453}
   caster: {fileID: 0}
   target: {fileID: 0}
-  m_IsHoming: 1
-  m_CanDamage: 1
-  m_Damage: 50
-  m_EffectOnImpact: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-  m_Speed: 50
+  m_Damage: 10
 --- !u!114 &3189298054437284448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,4 +101,13 @@ MonoBehaviour:
   m_SpellEventName: 1
   m_EntityEventName: 0
   m_ApplyTo: 1
-  m_StatusEffect: {fileID: 11400000, guid: 4e508264a6cebea43a494c401f22f0ac, type: 2}
+  m_StatusEffect:
+    m_ApplySleep: 1
+    m_DurationInSeconds: 2
+    m_StartCount: 0
+    m_CountDelta: 0
+    m_Stats:
+      m_AttackSpeed: 0
+      m_Regenerate: 0
+      m_RegeneratePercent: 0
+    m_DecreaseCount: 0

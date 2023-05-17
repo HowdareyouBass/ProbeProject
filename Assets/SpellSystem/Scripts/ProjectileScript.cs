@@ -16,13 +16,12 @@ public class ProjectileScript : SpellComponent
     {
         m_OnImpact = spellScript.events.GetEvent(SpellEventName.OnImpact);
 
-        SphereCollider collider;
         if (!TryGetComponent<Rigidbody>(out m_RigidBody))
         {
             m_RigidBody = gameObject.AddComponent<Rigidbody>();
             m_RigidBody.useGravity = false;
         }
-        if (!TryGetComponent<SphereCollider>(out collider))
+        if (!TryGetComponent<SphereCollider>(out SphereCollider collider))
         {
             collider = gameObject.AddComponent<SphereCollider>();
             collider.radius = 0.4f;
