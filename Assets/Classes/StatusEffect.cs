@@ -45,7 +45,6 @@ public class StatusEffect : ScriptableObject
         {
             decreaseByEvent.Subscribe(DecreaseCount);
         }
-        //TODO: Adding status effect to some array!!!
         m_Entity.ApplyStatusEffect(this);
         yield return new WaitForSeconds(m_DurationInSeconds);
         yield return WaitForCount();

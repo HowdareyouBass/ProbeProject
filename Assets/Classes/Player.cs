@@ -1,7 +1,6 @@
 public class Player : Entity
 {
     private PlayerEquipment m_Equipment;
-
     public Player()
     {
         m_Equipment = new PlayerEquipment();
@@ -16,9 +15,9 @@ public class Player : Entity
     {
         m_Equipment.EquipItem(item);
     }
-    
+
     public override float GetAttackCooldown()
-    { 
-        return stats.baseAttackSpeed * 100 / (m_Equipment.GetAttackSpeed() + stats.attackSpeed);
+    {
+        return stats.baseAttackSpeed * 100 / (stats.attackSpeed + m_Equipment.GetAttackSpeed());
     }
 }

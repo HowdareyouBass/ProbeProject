@@ -44,9 +44,7 @@ public enum EntityEventName
     OnAttack,
     OnDamaged,
     OnHealthChanged,
-    OnAttackDisabled,
-    OnMovementDisabled,
-    OnCastingDisabled,
+    StopMovement
 }
 public class EntityEvents : Events<EntityEventName>
 {
@@ -57,9 +55,7 @@ public class EntityEvents : Events<EntityEventName>
         AddEvent<Transform>(EntityEventName.OnAttack);
         AddEvent<float>(EntityEventName.OnDamaged);
         AddEvent<float>(EntityEventName.OnHealthChanged);
-        AddEvent(EntityEventName.OnAttackDisabled);
-        AddEvent(EntityEventName.OnMovementDisabled);
-        AddEvent(EntityEventName.OnCastingDisabled);
+        AddEvent(EntityEventName.StopMovement);
     }
 }
 

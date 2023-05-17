@@ -5,7 +5,6 @@ using UnityEngine;
 public class ProjectileScript : SpellComponent
 {
     [SerializeField] private bool m_IsHoming = true;
-    [SerializeField] private bool m_CanDamage = true;
     [SerializeField] private float m_Damage = 10;
     [SerializeField] private GameObject m_EffectOnImpact;
     [SerializeField] private int m_Speed = 100;
@@ -43,10 +42,7 @@ public class ProjectileScript : SpellComponent
         if (collider.transform.TryGetComponent<Health>(out Health health) && collider.transform != caster)
         {
             m_OnImpact.Trigger();
-            if (m_CanDamage)
-            {
-                health.TakeDamage(m_Damage);
-            }
+            health.TakeDamage(m_Damage);
             Destroy(gameObject);
             Instantiate(m_EffectOnImpact, collider.ClosestPoint(transform.position), Quaternion.identity);
         }

@@ -1,8 +1,8 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
+//FIXME: there is no stoping event anymore so after entity put to sleep it continues moving
 public class Movement : MonoBehaviour
 {
     [SerializeField] private int m_RotationSpeed;
@@ -17,7 +17,7 @@ public class Movement : MonoBehaviour
         m_Entity = GetComponent<EntityScript>().GetEntity();
         m_Agent = GetComponent<NavMeshAgent>();
         m_Controller = GetComponent<EntityController>();
-        m_Entity.events.GetEvent(EntityEventName.OnMovementDisabled).Subscribe(Stop);
+        m_Entity.events.GetEvent(EntityEventName.StopMovement).Subscribe(Stop);
     }
 
     public void Move(Vector3 destination)

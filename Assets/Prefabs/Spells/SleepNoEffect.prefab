@@ -66,7 +66,7 @@ MonoBehaviour:
   target: {fileID: 0}
   m_CastRange: 500
   m_Effect: {fileID: 7109850949513595945, guid: 4dcec31c226a64f4ab89333c73ffa670, type: 3}
-  m_EffectPlacement: 0
+  m_EffectPlacement: 1
 --- !u!114 &3189298054437284455
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Entity
 {
-    //TODO: Разбить на интерфейсы для каждого из скриптов действий
     public EntityStats stats { get; private set; }
     public EntityEvents events { get; private set; }
 
@@ -18,8 +16,6 @@ public abstract class Entity
         stats = new EntityStats();
         events = new EntityEvents();
     }
-
-    public virtual float GetAttackCooldown() { return stats.baseAttackSpeed * 100 / stats.attackSpeed; }
 
     public void TakeDamage(float amount)
     {
@@ -38,11 +34,9 @@ public abstract class Entity
     {
         if (effect.applySleep)
         {
-            events.GetEvent(EntityEventName.OnAttackDisabled).Trigger();
+            events.GetEvent(EntityEventName.StopMovement).Trigger();
             canAttack = false;
-            events.GetEvent(EntityEventName.OnMovementDisabled).Trigger();
             canMove = false;
-            events.GetEvent(EntityEventName.OnCastingDisabled).Trigger();
             canCast = false;
         }
         stats.ApplyStatusEffect(effect);
@@ -60,5 +54,9 @@ public abstract class Entity
     public void DamageTarget(Transform target)
     {
         target.GetComponent<Health>().TakeDamage(stats.attackDamage);
+    }
+    public virtual float GetAttackCooldown()
+    {
+        return stats.baseAttackSpeed * 100 / stats.attackSpeed;
     }
 }

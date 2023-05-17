@@ -18,6 +18,6 @@ MonoBehaviour:
   m_CountDelta: 0
   m_Stats:
     m_AttackSpeed: 0
-    m_Regenerate: -0.3
+    m_Regenerate: -2
     m_RegeneratePercent: 0
   m_DecreaseCount: 2

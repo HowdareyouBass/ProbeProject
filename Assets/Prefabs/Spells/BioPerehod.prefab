@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5053995990233181705}
   - component: {fileID: 5053995990233181704}
   m_Layer: 0
-  m_Name: SwitchDamageType
+  m_Name: BioPerehod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

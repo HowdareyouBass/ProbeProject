@@ -16,7 +16,6 @@ public class Attack : MonoBehaviour
         m_Controller = GetComponent<EntityController>();
         m_Entity = GetComponent<EntityScript>().GetEntity();
         m_OnAttack = m_Entity.events.GetEvent<Transform>(EntityEventName.OnAttack, true);
-        m_Entity.events.GetEvent(EntityEventName.OnAttackDisabled).Subscribe(Stop);
     }
 
     public void Stop()

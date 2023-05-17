@@ -24,6 +24,11 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        if(amount == 0)
+        {
+            Debug.Log("Damage was 0");
+            return;
+        }
         m_Entity.TakeDamage(amount);
         m_OnDamaged?.Trigger(amount);
         if (m_Entity.stats.currentHealth <= 0)

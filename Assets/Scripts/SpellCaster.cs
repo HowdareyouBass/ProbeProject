@@ -17,7 +17,6 @@ public class SpellCaster : MonoBehaviour
         m_Spells = GetComponent<SpellInventory>();
         m_EntityEvents = GetComponent<EntityScript>().GetEntity().events;
         m_Controller = GetComponent<EntityController>();
-        m_EntityEvents.GetEvent(EntityEventName.OnCastingDisabled).Subscribe(Stop);
         UpdateSpells();
     }
     private void UpdateSpells()
