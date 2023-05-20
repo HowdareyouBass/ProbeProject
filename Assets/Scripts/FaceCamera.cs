@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FaceCamera : MonoBehaviour
 {
-    private Transform camTransform;
-    void Start()
+    private Transform m_MainCameraTransform;
+    private void Start()
     {
-        camTransform = Camera.main.transform;
+        m_MainCameraTransform = Camera.main.transform;
     }
-    void Update()
+    private void Update()
     {
-        transform.LookAt(camTransform);
+        transform.LookAt(m_MainCameraTransform);
         transform.forward = -transform.forward;
     }
 }

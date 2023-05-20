@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3865797067636989379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3865797067636989377}
+  - component: {fileID: 3865797067636989376}
+  - component: {fileID: -4491780619392598146}
+  - component: {fileID: 3865797067636989382}
+  m_Layer: 0
+  m_Name: SeriesOfAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3865797067636989377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865797067636989379}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3865797067636989376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865797067636989379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da170f26d26c11148b49b1edfed92458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Caster: {fileID: 0}
+  m_Target: {fileID: 0}
+--- !u!114 &-4491780619392598146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865797067636989379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37322bcc11956c044bba9cefe9e9502f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellScript: {fileID: 0}
+  caster: {fileID: 0}
+  target: {fileID: 0}
+  m_Effect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
+--- !u!114 &3865797067636989382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865797067636989379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1e8b81383e425449dec16fc9823141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellScript: {fileID: 0}
+  caster: {fileID: 0}
+  target: {fileID: 0}
+  m_SpellEventName: 2
+  m_EntityEventName: 0
+  m_ApplyTo: 0
+  m_StatusEffect:
+    m_ApplySleep: 0
+    m_DurationInSeconds: 0
+    m_StartCount: 4
+    m_CountDelta: 1
+    m_Stats:
+      m_AttackSpeed: 100
+      m_Regenerate: 0
+      m_RegeneratePercent: 0
+    m_DecreaseCount: 2

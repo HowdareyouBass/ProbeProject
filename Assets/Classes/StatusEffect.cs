@@ -1,62 +1,76 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 [System.Serializable]
 public class StatusEffect
 {
+    [SerializeField] private bool m_ApplySleep;
     [SerializeField] private float m_DurationInSeconds;
-    [SerializeField] private int m_StartCount;
-    [SerializeField] private int m_CountDelta;
+    [SerializeField] private float m_StartCount;
+    [SerializeField] private float m_CountDelta;
     [SerializeField] private StatusEffectStats m_Stats;
-    //[SerializeField] private UnityEvent m_CountDecrease;
-    [SerializeField] private GameEventListener m_DecreaseCount = new GameEventListener();
+    [SerializeField] private EntityEventName m_DecreaseCount;
 
-    private int m_CurrentCount;
+    public bool applySleep { get => m_ApplySleep; }
+    public StatusEffectStats stats { get => m_Stats; }
 
-    public IEnumerator StartEffect(PlayerBehaviour player)
+    private float m_CurrentCount;
+    private Entity m_Entity;
+    private float m_Time;
+
+    private bool m_IsActive => m_CurrentCount > 0 || m_Time > 0;
+
+    public void Start()
     {
-        if (m_DecreaseCount.gameEvent != null)
-        {
-            //Adding function to UnityEvent wich will be called when event triggers
-            m_DecreaseCount.onEventTriggered += DecreaseCount;
-        }
-        //Adding this listener in count when the event triggers
-        m_DecreaseCount.gameEvent.AddListener(m_DecreaseCount);
+        m_CurrentCount = m_StartCount;
+        m_Time = m_DurationInSeconds;
+    }
 
-        player.ApplyStatusEffect(this);
+    public IEnumerator StartEffectRoutine(Entity entity)
+    {
+        m_CurrentCount = m_StartCount;
+        if (m_StartCount == 0 && m_DurationInSeconds == 0) Debug.LogWarning("Count and duration are both 0.");
 
-        if (m_DurationInSeconds != 0)
+        m_Entity = entity;
+
+        GameEvent<float> decreaseByEvent = m_Entity.events.GetEvent<float>(m_DecreaseCount, false);
+        GameEvent decreaseByDelta = null;
+
+        if (decreaseByEvent == null)
         {
-            yield return new WaitForSeconds(m_DurationInSeconds);
-            player.DeapplyStatusEffect(this);
+            decreaseByDelta = m_Entity.events.GetEvent(m_DecreaseCount);
+            decreaseByDelta.Subscribe(DecreaseCount);
         }
-        if (m_StartCount != 0)
+        else
         {
-            m_CurrentCount = m_StartCount;
-            while (true)
-            {
-                if (m_CurrentCount <= 0)
-                {
-                    player.DeapplyStatusEffect(this);
-                    m_DecreaseCount.gameEvent.RemoveListener(m_DecreaseCount);
-                    yield break;
-                }
-                else
-                {
-                    yield return null;
-                }
-            }
+            decreaseByEvent.Subscribe(DecreaseCount);
+        }
+        m_Entity.ApplyStatusEffect(this);
+        yield return new WaitForSeconds(m_DurationInSeconds);
+        yield return WaitForCount();
+        decreaseByEvent?.Unsubscribe(DecreaseCount);
+        decreaseByDelta?.Unsubscribe(DecreaseCount);
+        m_Entity.DeapplyStatusEffect(this);
+        yield break;
+    }
+    private IEnumerator WaitForCount()
+    {
+        while (m_CurrentCount > 0)
+        {
+            yield return null;
         }
         yield break;
     }
 
     private void DecreaseCount()
     {
-        Debug.Log("Decreased count");
         m_CurrentCount -= m_CountDelta;
+        Debug.Log(m_CurrentCount);
     }
-
-    public StatusEffectStats GetStatusEffectStats() { return m_Stats; }
+    private void DecreaseCount(float amount)
+    {
+        Debug.Log("Decreased count");
+        m_CurrentCount -= amount;
+        Debug.Log(m_CurrentCount);
+    }
 }

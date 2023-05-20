@@ -20,5 +20,5 @@ MonoBehaviour:
   defense: 10
   counterAttack: 0.1
   evasion: 0.05
-  magicGift: 10
-  physicsGift: 10
+  magicGift: 1
+  physicsGift: 1
