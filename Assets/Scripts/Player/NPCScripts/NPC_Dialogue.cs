@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -72,7 +71,9 @@ public class NPC_Dialogue : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.tag == "Player")
+        Debug.Log("Player is near");
+
+        if (collision.gameObject.tag == "Player")
         {
             playerIsClose = true;
         }
