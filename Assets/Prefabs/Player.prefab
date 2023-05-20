@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4092150372153248433}
   - component: {fileID: 8806531885220856137}
   - component: {fileID: 7208338598091520669}
-  - component: {fileID: 4092150372153248438}
+  - component: {fileID: 947995155451105723}
   - component: {fileID: 3125271741887349869}
   - component: {fileID: 5464639896118133101}
   - component: {fileID: 695730108043266242}
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Race: {fileID: 11400000, guid: df4ed6829b4de6b48ad7d88302d19a0e, type: 2}
---- !u!114 &4092150372153248438
+--- !u!114 &947995155451105723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4092150372153248444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f46db636ed5c32041b1f9cf82accbe3b, type: 3}
+  m_Script: {fileID: 11500000, guid: 823bac300c181944a9110ec2d737ed6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_MovementEffect: {fileID: 7590234846238662618, guid: 6b12e0f0193a1514883d49446593fbab, type: 3}
