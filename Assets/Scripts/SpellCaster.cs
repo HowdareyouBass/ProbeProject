@@ -28,10 +28,8 @@ public class SpellCaster : MonoBehaviour
         {
             GameObject spellGO = m_Spells.GetSpell(i);
             if (spellGO == null) continue;
-            if (!spellGO.TryGetComponent<TargetCastSpell>(out var a))
-            {
-                Instantiate(spellGO, transform);
-            }
+            spellGO.GetComponent<SpellScript>().slot = i;
+            Instantiate(spellGO, transform);
         }
     }
 
@@ -39,26 +37,24 @@ public class SpellCaster : MonoBehaviour
     {
         m_Controller.StopActions();
         GameObject spellGO = m_Spells.GetSpell(spellSlot);
-        
-        if (spellGO.TryGetComponent<TargetCastSpell>(out TargetCastSpell activeSpell))
+
+        foreach (SpellScript spell in GetComponentsInChildren<SpellScript>())
         {
-            m_SpellCasting = StartCoroutine(CastSpellRoutine(target, activeSpell));
-            return;
-        }
-        int i = 0;
-        foreach (ICastable spell in GetComponentsInChildren<ICastable>())
-        {
-            if (i == spellSlot)
+            if (spell.slot == spellSlot)
             {
-                spell.Cast(transform, target.transform);
+                m_SpellCasting = StartCoroutine(CastSpellRoutine(target, spell));
             }
-            i++;
         }
     }
-    private IEnumerator CastSpellRoutine(Target target, TargetCastSpell spell)
-    {
-        yield return m_Movement.FolowUntilInRange(target, spell.castRange);
-        spell.Cast(transform, target.transform);
+    private IEnumerator CastSpellRoutine(Target target, SpellScript spell)
+    {   
+        Debug.Log("dH");
+        if (spell.TryGetComponent<TargetCastSpell>(out TargetCastSpell _spell))
+        {
+            Debug.Log("H");
+            yield return m_Movement.FolowUntilInRange(target, _spell.castRange);
+        }
+        spell.TryCast(transform, target.transform);
         yield break;
     }
 

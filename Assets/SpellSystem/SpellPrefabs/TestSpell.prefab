@@ -46,8 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da170f26d26c11148b49b1edfed92458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Caster: {fileID: 0}
-  m_Target: {fileID: 0}
 --- !u!114 &1843491962372479128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +61,9 @@ MonoBehaviour:
   spellScript: {fileID: 0}
   caster: {fileID: 0}
   target: {fileID: 0}
+  m_EnergyCost: 0
+  m_HeatlhCost: 0
+  m_CooldownInSeconds: 0
   m_Effect: {fileID: 0}
 --- !u!114 &2375837738209953976
 MonoBehaviour:
@@ -79,7 +80,19 @@ MonoBehaviour:
   spellScript: {fileID: 2375837738209953983}
   caster: {fileID: 0}
   target: {fileID: 0}
-  m_SpellEventName: 2
-  m_EntityEventName: 0
-  m_ApplyTo: 0
-  m_StatusEffect: {fileID: 11400000, guid: f142efc7558912242bc0f6b0f76a9887, type: 2}
+  m_SpellEventName: 0
+  m_EntityEventName: 2
+  m_ApplyTo: 2
+  m_StatusEffect:
+    m_ApplySleep: 0
+    m_DurationInSeconds: 3
+    m_StartCount: 0
+    m_CountDelta: 0
+    m_DecreaseCountBy: 0
+    m_DecreaseCount: 0
+    m_TickTimeInSeconds: 0.2
+    m_TickDamage: 1
+    m_Stats:
+      m_AttackSpeed: 0
+      m_Regenerate: 0
+      m_RegeneratePercent: 0

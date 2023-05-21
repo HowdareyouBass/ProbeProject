@@ -8,7 +8,7 @@ public class SelfCastSpell : ActiveSpell
         GetComponent<SpellScript>().Init(transform.parent, null);
     }
 
-    public override void Cast(Transform caster, Transform target)
+    protected override void Cast(Transform caster, Transform target)
     {
         base.Cast(caster, target);
         spellScript.events.GetEvent(SpellEventName.OnCast).Trigger();

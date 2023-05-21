@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SpellScript : MonoBehaviour
 {
+    public int slot;
+
     public Transform caster { get; private set; }
     public Transform target { get; private set; }
 
@@ -20,5 +22,9 @@ public class SpellScript : MonoBehaviour
             component.target = target;
             component.spellScript = this;
         }
+    }
+    public void TryCast(Transform caster, Transform target)
+    {
+        GetComponent<ICastable>().TryCast(caster, target);
     }
 }

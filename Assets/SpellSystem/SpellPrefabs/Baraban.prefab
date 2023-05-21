@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2212774208423753599}
   - component: {fileID: 3556764775192217360}
   - component: {fileID: 8739073126079527578}
+  - component: {fileID: 4417727211826023309}
   m_Layer: 0
   m_Name: Baraban
   m_TagString: Untagged
@@ -62,3 +63,36 @@ MonoBehaviour:
   target: {fileID: 0}
   m_EnergyCost: 20
   m_HeatlhCost: 0
+  m_CooldownInSeconds: 0
+  m_Effect: {fileID: 0}
+--- !u!114 &4417727211826023309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877394129750610045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1e8b81383e425449dec16fc9823141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellScript: {fileID: 0}
+  caster: {fileID: 0}
+  target: {fileID: 0}
+  m_SpellEventName: 0
+  m_EntityEventName: 0
+  m_ApplyTo: 0
+  m_StatusEffect:
+    m_ApplySleep: 0
+    m_DurationInSeconds: 0
+    m_StartCount: 0
+    m_CountDelta: 0
+    m_DecreaseCountBy: 0
+    m_DecreaseCount: 0
+    m_TickTimeInSeconds: 0
+    m_TickDamage: 0
+    m_Stats:
+      m_AttackSpeed: 0
+      m_Regenerate: 0
+      m_RegeneratePercent: 0

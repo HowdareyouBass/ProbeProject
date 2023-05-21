@@ -4,8 +4,13 @@ public class TargetCastSpell : ActiveSpell
 {
     [SerializeField] private int m_CastRange;
     public int castRange { get => m_CastRange / 100; }
+ 
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
 
-    public override void Cast(Transform caster, Transform target)
+    protected override void Cast(Transform caster, Transform target)
     {
         GetComponent<SpellScript>().Init(caster, target);
         base.Cast(caster, target);

@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface ICastable
 {
-    public void Cast(Transform caster, Transform target);
+    public void TryCast(Transform caster, Transform target);
 }
