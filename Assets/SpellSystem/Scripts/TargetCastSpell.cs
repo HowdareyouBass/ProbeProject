@@ -7,10 +7,11 @@ public class TargetCastSpell : ActiveSpell
 
     public override void Cast(Transform caster, Transform target)
     {
+        GetComponent<SpellScript>().Init(caster, target);
         base.Cast(caster, target);
         GameObject spellGO = Instantiate(gameObject, caster.transform.position, Quaternion.identity);
         spellGO.GetComponent<SpellScript>().events.GetEvent(SpellEventName.OnCast).Trigger();
-        if (m_Effect != null)
-            Instantiate(m_Effect, spellGO.transform);
+        if (effect != null)
+            Instantiate(effect, spellGO.transform);
     }
 }

@@ -13,9 +13,15 @@ public class InputHandler : MonoBehaviour
         MovementAndAttackingPlayer();
         MovementAndAttackingEnemy();
 
-        if (Input.GetKeyDown(KeyCode.Q) && CastRayFromCamera(out RaycastHit hit))
+        int i = 0;
+        foreach(KeyCode key in Controls.SpellKeys)
         {
-            m_PlayerController.CastSpell(0, new Target(hit));
+            if (Input.GetKeyDown(key) && CastRayFromCamera(out RaycastHit hit))
+            {
+                m_PlayerController.CastSpell(i, new Target(hit));
+                GlobalGameEvents.OnAnySpellCast.Trigger();
+            }
+            i++;
         }
         if (Input.GetKeyDown(KeyCode.S))
         {

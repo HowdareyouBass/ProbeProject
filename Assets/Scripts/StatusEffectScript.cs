@@ -17,9 +17,7 @@ public class StatusEffectScript : SpellComponent
     private void Awake() 
     {
         m_TargetTransform = GetTargetTransform(m_ApplyTo);
-        m_SpellEvent = spellScript.events.GetEvent(m_SpellEventName);
-        Entity entity = casterEntity;
-        m_EntityEvent = entity.events.GetEvent<Transform>(m_EntityEventName, true);
+        m_SpellEvent = spellScript.events.GetEvent(m_SpellEventName);   
     }
 
     private void OnEnable()
@@ -31,6 +29,7 @@ public class StatusEffectScript : SpellComponent
                 Debug.LogError("Event named " + m_EntityEventName.ToString() + " don't work yet.");
             return;
         }
+        m_EntityEvent = casterEntity.events.GetEvent<Transform>(m_EntityEventName, true);
         m_EntityEvent.Subscribe(ApplyStatusEffectToEventReturn);
     }
     private void OnDisable()

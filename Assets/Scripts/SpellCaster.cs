@@ -43,10 +43,16 @@ public class SpellCaster : MonoBehaviour
         if (spellGO.TryGetComponent<TargetCastSpell>(out TargetCastSpell activeSpell))
         {
             m_SpellCasting = StartCoroutine(CastSpellRoutine(target, activeSpell));
+            return;
         }
+        int i = 0;
         foreach (ICastable spell in GetComponentsInChildren<ICastable>())
         {
-            spell.Cast(transform, target.transform);
+            if (i == spellSlot)
+            {
+                spell.Cast(transform, target.transform);
+            }
+            i++;
         }
     }
     private IEnumerator CastSpellRoutine(Target target, TargetCastSpell spell)

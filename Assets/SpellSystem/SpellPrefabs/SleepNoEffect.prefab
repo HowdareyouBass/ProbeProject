@@ -47,8 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da170f26d26c11148b49b1edfed92458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Caster: {fileID: 0}
-  m_Target: {fileID: 0}
 --- !u!114 &646463451012230480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +64,9 @@ MonoBehaviour:
   target: {fileID: 0}
   m_EnergyCost: 20
   m_HeatlhCost: 0
-  m_CastRange: 0
+  m_CooldownInSeconds: 0
+  m_Effect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
+  m_CastRange: 200
 --- !u!114 &7992229002605860101
 MonoBehaviour:
   m_ObjectHideFlags: 0

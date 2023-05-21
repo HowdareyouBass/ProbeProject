@@ -74,7 +74,7 @@ public class StatusEffect
             }
             timer += Time.deltaTime;
             tickTimer += Time.deltaTime;
-            if (tickTimer >= m_TickTimeInSeconds)
+            if (tickTimer >= m_TickTimeInSeconds && m_TickTimeInSeconds != 0)
             {
                 tickTimer = 0;
                 m_Entity.TakeDamage(m_TickDamage);

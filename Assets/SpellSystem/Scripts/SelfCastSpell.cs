@@ -12,7 +12,7 @@ public class SelfCastSpell : ActiveSpell
     {
         base.Cast(caster, target);
         spellScript.events.GetEvent(SpellEventName.OnCast).Trigger();
-        if (m_Effect != null)
-            Instantiate(m_Effect, transform);
+        if (effect != null)
+            Instantiate(effect, transform);
     }
 }

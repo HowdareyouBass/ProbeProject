@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Spell1: {fileID: 5373929060235506386, guid: fc48094a7068496469d6783487f8f8a5, type: 3}
-  m_Spell2: {fileID: 0}
+  m_Spell2: {fileID: 3189298054437284449, guid: 604876cb784b1d943a970d9c378f8fb0, type: 3}
   m_Spell3: {fileID: 0}
   m_Spell4: {fileID: 0}
   m_Spell5: {fileID: 0}
