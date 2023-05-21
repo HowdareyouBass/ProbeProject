@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3189298054437284454}
   - component: {fileID: 3189298054437284453}
-  - component: {fileID: 2764445471322550335}
+  - component: {fileID: 646463451012230480}
   - component: {fileID: 7992229002605860101}
   - component: {fileID: 3189298054437284448}
   m_Layer: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Caster: {fileID: 0}
   m_Target: {fileID: 0}
---- !u!114 &2764445471322550335
+--- !u!114 &646463451012230480
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,15 +58,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3189298054437284449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed586d8c0787d0340aac06d40e4180ae, type: 3}
+  m_Script: {fileID: 11500000, guid: c758210288c7a27489a268024dc70e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellScript: {fileID: 3189298054437284453}
+  spellScript: {fileID: 0}
   caster: {fileID: 0}
   target: {fileID: 0}
-  m_CastRange: 500
-  m_Effect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-  m_EffectPlacement: 1
+  m_EnergyCost: 20
+  m_HeatlhCost: 0
+  m_CastRange: 0
 --- !u!114 &7992229002605860101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,8 +106,11 @@ MonoBehaviour:
     m_DurationInSeconds: 2
     m_StartCount: 0
     m_CountDelta: 0
+    m_DecreaseCountBy: 0
+    m_DecreaseCount: 0
+    m_TickTimeInSeconds: 0
+    m_TickDamage: 0
     m_Stats:
       m_AttackSpeed: 0
       m_Regenerate: 0
       m_RegeneratePercent: 0
-    m_DecreaseCount: 0

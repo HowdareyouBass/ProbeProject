@@ -1,17 +1,16 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SpellScript))]
-public class SelfCastSpell : SpellComponent, ICastable
+public class SelfCastSpell : ActiveSpell
 {
-    [SerializeField] private GameObject m_Effect;
-
     private void Awake()
     {
         GetComponent<SpellScript>().Init(transform.parent, null);
     }
 
-    public void Cast(Transform caster, Transform target)
+    public override void Cast(Transform caster, Transform target)
     {
+        base.Cast(caster, target);
         spellScript.events.GetEvent(SpellEventName.OnCast).Trigger();
         if (m_Effect != null)
             Instantiate(m_Effect, transform);

@@ -18,7 +18,7 @@ public class StatusEffectScript : SpellComponent
     {
         m_TargetTransform = GetTargetTransform(m_ApplyTo);
         m_SpellEvent = spellScript.events.GetEvent(m_SpellEventName);
-        Entity entity = caster.GetComponent<EntityScript>().GetEntity();
+        Entity entity = casterEntity;
         m_EntityEvent = entity.events.GetEvent<Transform>(m_EntityEventName, true);
     }
 

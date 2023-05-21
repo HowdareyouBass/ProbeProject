@@ -84,11 +84,14 @@ MonoBehaviour:
   m_ApplyTo: 0
   m_StatusEffect:
     m_ApplySleep: 0
-    m_DurationInSeconds: 0
+    m_DurationInSeconds: 5
     m_StartCount: 4
     m_CountDelta: 1
+    m_DecreaseCountBy: 2
+    m_DecreaseCount: 2
+    m_TickTimeInSeconds: 0
+    m_TickDamage: 0
     m_Stats:
       m_AttackSpeed: 100
       m_Regenerate: 0
       m_RegeneratePercent: 0
-    m_DecreaseCount: 2

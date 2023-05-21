@@ -9,7 +9,6 @@ public class SpellCaster : MonoBehaviour
     private EntityEvents m_EntityEvents;
     private EntityController m_Controller;
     private SpellInventory m_Spells;
-    private ActiveSpell m_Spell;
 
     private void Start()
     {
@@ -29,7 +28,7 @@ public class SpellCaster : MonoBehaviour
         {
             GameObject spellGO = m_Spells.GetSpell(i);
             if (spellGO == null) continue;
-            if (!spellGO.TryGetComponent<ActiveSpell>(out var a))
+            if (!spellGO.TryGetComponent<TargetCastSpell>(out var a))
             {
                 Instantiate(spellGO, transform);
             }
@@ -41,19 +40,19 @@ public class SpellCaster : MonoBehaviour
         m_Controller.StopActions();
         GameObject spellGO = m_Spells.GetSpell(spellSlot);
         
-        if (spellGO.TryGetComponent<ActiveSpell>(out m_Spell))
+        if (spellGO.TryGetComponent<TargetCastSpell>(out TargetCastSpell activeSpell))
         {
-            m_SpellCasting = StartCoroutine(CastSpellRoutine(target, m_Spell.castRange));
+            m_SpellCasting = StartCoroutine(CastSpellRoutine(target, activeSpell));
         }
         foreach (ICastable spell in GetComponentsInChildren<ICastable>())
         {
             spell.Cast(transform, target.transform);
         }
     }
-    private IEnumerator CastSpellRoutine(Target target, int castRange)
+    private IEnumerator CastSpellRoutine(Target target, TargetCastSpell spell)
     {
-        yield return m_Movement.FolowUntilInRange(target, castRange);
-        m_Spell.Cast(transform, target.transform);
+        yield return m_Movement.FolowUntilInRange(target, spell.castRange);
+        spell.Cast(transform, target.transform);
         yield break;
     }
 

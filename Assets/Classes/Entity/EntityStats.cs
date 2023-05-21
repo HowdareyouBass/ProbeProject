@@ -73,6 +73,6 @@ public class EntityStats
     {
         if (amount < 0)
             throw new System.ArgumentException(nameof(amount));
-        m_AttackPercent += amount;
+        m_AttackPercent -= amount;
     }
 }

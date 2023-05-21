@@ -22,12 +22,18 @@ public abstract class Entity
         if (amount < 0)
             throw new ArgumentOutOfRangeException(nameof(amount));
         stats.TakeDamage(amount);
+        events.GetEvent<float>(EntityEventName.OnDamaged, true).Trigger(amount);
+        if (stats.currentHealth <= 0)
+        {
+            events.GetEvent(EntityEventName.OnDeath).Trigger();
+        }
     }
     public void Regenerate()
     {
         if (stats.regen <= 0)
             return;
         stats.Heal(stats.regen * Time.deltaTime);
+        events.GetEvent<float>(EntityEventName.OnHealthChanged, true).Trigger(stats.regen);
     }
 
     public void ApplyStatusEffect(StatusEffect effect)
@@ -53,6 +59,7 @@ public abstract class Entity
     }
     public void DamageTarget(Transform target)
     {
+        events.GetEvent<Transform>(EntityEventName.OnAttack, true).Trigger(target);
         target.GetComponent<Health>().TakeDamage(stats.attackDamage);
     }
     public virtual float GetAttackCooldown()

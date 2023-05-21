@@ -1,28 +1,17 @@
 using UnityEngine;
 
-public class ActiveSpell : SpellComponent, ICastable
+public abstract class ActiveSpell : SpellComponent, ICastable
 {
+    [SerializeField] private uint m_EnergyCost;
+    [SerializeField] private uint m_HeatlhCost;
+
     private enum EffectPlacement { Caster, Target };
-    [SerializeField] private int m_CastRange;
-    [SerializeField] private GameObject m_Effect;
-    [SerializeField] private EffectPlacement m_EffectPlacement;
+    [SerializeField] protected GameObject m_Effect { get; private set; }
 
-    public int castRange { get => m_CastRange / 100; }
-
-    public void Cast(Transform caster, Transform target)
+    public virtual void Cast(Transform caster, Transform target)
     {
-        GetComponent<SpellScript>().Init(caster, target);
-        Vector3 spellStartPosition = Vector3.zero;
-
-        if (m_EffectPlacement == EffectPlacement.Caster)
-            spellStartPosition = caster.position;
-        if (m_EffectPlacement == EffectPlacement.Target)
-            spellStartPosition = target.position;
-        
-
-        GameObject spellGO = Instantiate(gameObject, spellStartPosition, Quaternion.identity);
-        spellGO.GetComponent<SpellScript>().events.GetEvent(SpellEventName.OnCast).Trigger();
-        if (m_Effect != null)
-            Instantiate(m_Effect, spellGO.transform);
+        Debug.Log("Casterd");
+        casterEntity.TakeDamage(m_HeatlhCost);
+        //TODO: Take Energy Cost
     }
 }

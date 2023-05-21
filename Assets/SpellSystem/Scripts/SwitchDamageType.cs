@@ -10,7 +10,7 @@ public class SwitchDamageType : SpellComponent
 
     private void Awake()
     {
-        m_EntityStats = caster.GetComponent<EntityScript>().GetEntity().stats;
+        m_EntityStats = casterEntity.stats;
         m_EntityStats.pureAttack = true;
         m_StatusEffect = GetComponent<StatusEffectScript>();
     }
