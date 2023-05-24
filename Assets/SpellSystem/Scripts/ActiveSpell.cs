@@ -1,15 +1,14 @@
-using System.Collections;
 using UnityEngine;
 
-public abstract class ActiveSpell : SpellComponent, ICastable
+public abstract class ActiveSpell : SpellComponent1
 {
     [SerializeField] private uint m_EnergyCost;
     [SerializeField] private uint m_HeatlhCost;
     [SerializeField] private float m_CooldownInSeconds;
     [SerializeField] private GameObject m_Effect;
 
-    protected bool m_OnCooldown { get; private set; } = false;
-    public float currentCooldown { get; protected set; }
+    protected bool m_OnCooldown { get => currentCooldown > 0; }
+    public float currentCooldown { get; protected set; } = 0;
     public GameObject effect { get => m_Effect; }
 
     public void TryCast(Transform caster, Transform target)
@@ -17,25 +16,16 @@ public abstract class ActiveSpell : SpellComponent, ICastable
         if (!m_OnCooldown)
         {
             currentCooldown = m_CooldownInSeconds;
-            StartCoroutine(CooldownRoutine());
-            //TODO: Take Energy Cost
             Cast(caster, target);
         }
     }
+    public void DecreaseCooldown()
+    {
+        currentCooldown -= Time.deltaTime;
+    }
     protected virtual void Cast(Transform caster, Transform target)
     {
+        //TODO: Take Energy Cost
         casterEntity.TakeDamage(m_HeatlhCost);
-    }
-
-    private IEnumerator CooldownRoutine()
-    {
-        m_OnCooldown = true;
-        while (currentCooldown > 0)
-        {
-            currentCooldown -= Time.deltaTime;
-            yield return null;
-        }
-        m_OnCooldown = false;
-        yield break;
     }
 }

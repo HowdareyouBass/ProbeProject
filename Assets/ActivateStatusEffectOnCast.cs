@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(SelfCastSpell))]
-public class ActivateStatusEffectOnCast : SpellComponent
+public class ActivateStatusEffectOnCast : SpellComponent1
 {
     [SerializeField] private StatusEffectScript m_StatusEffect;
     [SerializeField] private float m_DurationInSeconds;

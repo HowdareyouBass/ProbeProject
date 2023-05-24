@@ -16,15 +16,11 @@ public class SpellScript : MonoBehaviour
     {
         caster = _caster;
         target = _target;
-        foreach (SpellComponent component in GetComponents<SpellComponent>())
+        foreach (SpellComponent1 component in GetComponents<SpellComponent1>())
         {
             component.caster = caster;
             component.target = target;
             component.spellScript = this;
         }
-    }
-    public void TryCast(Transform caster, Transform target)
-    {
-        GetComponent<ICastable>().TryCast(caster, target);
     }
 }

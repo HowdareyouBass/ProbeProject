@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class SpellComponent : MonoBehaviour
+public abstract class SpellComponent1 : MonoBehaviour
 {
     [HideInInspector] public SpellScript spellScript;
     [HideInInspector] public Transform caster;

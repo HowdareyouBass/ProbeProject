@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SpellScript))]
-public class StatusEffectScript : SpellComponent
+public class StatusEffectScript : SpellComponent1
 {
     private enum StatusEffectTarget { Caster, CastTarget, EventReturn }
 

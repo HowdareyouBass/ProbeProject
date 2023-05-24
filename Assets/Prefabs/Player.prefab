@@ -217,9 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3b44399fd916842b4fc7e0ae5d4b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Spell1: {fileID: 0}
-  m_Spell2: {fileID: 3189298054437284449, guid: 604876cb784b1d943a970d9c378f8fb0, type: 3}
-  m_Spell3: {fileID: 3865797067636989379, guid: b86ea09d9ad3da34db7dbed7a46bef44, type: 3}
+  m_Spell1: {fileID: 3189298054437284449, guid: 604876cb784b1d943a970d9c378f8fb0, type: 3}
+  m_Spell2: {fileID: 0}
+  m_Spell3: {fileID: 0}
   m_Spell4: {fileID: 0}
   m_Spell5: {fileID: 0}
 --- !u!114 &506410295481686599

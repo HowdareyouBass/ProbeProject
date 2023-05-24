@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SwitchDamageType : SpellComponent
+public class SwitchDamageType : SpellComponent1
 {
     [SerializeField] private float m_SlashingDamagePercent = 0.1f;
 

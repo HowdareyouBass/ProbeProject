@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpellScript))]
 [RequireComponent(typeof(ActiveSpell))]
-public class ProjectileScript : SpellComponent
+public class ProjectileScript : SpellComponent1
 {
     [SerializeField] private bool m_IsHoming = true;
     [SerializeField] private float m_Damage = 10;

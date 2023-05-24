@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(TargetCastSpell))]
-public class DirectedAtEnemyScript : SpellComponent
+public class DirectedAtEnemyScript : SpellComponent1
 {
     [SerializeField] private float m_Damage = 10;
 

@@ -24,4 +24,11 @@ public class SpellInventory : MonoBehaviour
             throw new System.ArgumentOutOfRangeException();
         return m_Spells[spellSlot];
     }
+    public void DecreaseSpellsCooldown()
+    {
+        foreach (GameObject spellGO in m_Spells)
+        {
+            spellGO.GetComponent<ActiveSpell>().DecreaseCooldown();
+        }
+    }
 }

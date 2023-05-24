@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-//FIXME: there is no stoping event anymore so after entity put to sleep it continues moving
 public class Movement : MonoBehaviour
 {
     [SerializeField] private int m_RotationSpeed;
