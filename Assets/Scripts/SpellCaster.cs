@@ -16,50 +16,24 @@ public class SpellCaster : MonoBehaviour
         m_Spells = GetComponent<SpellInventory>();
         m_EntityEvents = GetComponent<EntityScript>().GetEntity().events;
         m_Controller = GetComponent<EntityController>();
-        // UpdateSpells();
     }
     private void Update()
     {
         m_Spells.DecreaseSpellsCooldown();
     }
-    // private void UpdateSpells()
-    // {
-    //     foreach (SpellScript spell in gameObject.GetComponentsInChildren<SpellScript>())
-    //     {
-    //         Destroy(spell.gameObject);
-    //     }
-    //     for (int i = 0; i < SpellInventory.MAXIMUM_SPELLS; i++)
-    //     {
-    //         GameObject spellGO = m_Spells.GetSpell(i);
-    //         if (spellGO == null) continue;
-    //         spellGO.GetComponent<SpellScript>().slot = i;
-    //         Instantiate(spellGO, transform);
-    //     }
-    // }
 
     public void CastSpell(int spellSlot, Target target)
     {
         m_Controller.StopActions();
-
-        // foreach (SpellScript spell in GetComponentsInChildren<SpellScript>())
-        // {
-        //     if (spell.slot == spellSlot)
-        //     {
-        //         m_SpellCasting = StartCoroutine(CastSpellRoutine(target, spell));
-        //     }
-        // }
-        ActiveSpell spell = m_Spells.GetSpell(spellSlot).GetComponent<ActiveSpell>();
-        m_SpellCasting = StartCoroutine(CastSpellRoutine(target, spell));
+        m_SpellCasting = StartCoroutine(CastSpellRoutine(target, m_Spells.GetSpell(spellSlot)));
     }
-    private IEnumerator CastSpellRoutine(Target target, ActiveSpell spell)
+    private IEnumerator CastSpellRoutine(Target target, Spell spell)
     {
-        Debug.Log("dH");
-        if (spell.TryGetComponent<TargetCastSpell>(out TargetCastSpell _spell))
+        if (spell.TryGetComponent<TargetCastSpellComponent>(out TargetCastSpellComponent targetCastSpell))
         {
-            Debug.Log("H");
-            yield return m_Movement.FolowUntilInRange(target, _spell.castRange);
+            yield return m_Movement.FolowUntilInRange(target, targetCastSpell.castRange);
         }
-        spell.TryCast(transform, target.transform);
+        spell.GetComponent<ActiveSpellComponent>().TryCast();
         yield break;
     }
 

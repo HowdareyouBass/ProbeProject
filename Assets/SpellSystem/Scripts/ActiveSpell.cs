@@ -21,7 +21,8 @@ public abstract class ActiveSpell : SpellComponent1
     }
     public void DecreaseCooldown()
     {
-        currentCooldown -= Time.deltaTime;
+        if (currentCooldown > 0)
+            currentCooldown -= Time.deltaTime;
     }
     protected virtual void Cast(Transform caster, Transform target)
     {

@@ -5,7 +5,7 @@ using UnityEditor;
 #endif
 
 [Serializable]
-public abstract class SpellComponent : ScriptableObject
+public class SpellComponent
 {
     public Spell spell;
     public Transform caster;
@@ -14,7 +14,7 @@ public abstract class SpellComponent : ScriptableObject
 
     public virtual void OnEnable()
     {
-        hideFlags = HideFlags.HideInHierarchy;
+        Debug.Log("OnEnable spellComponent called");
     }
     #if UNITY_EDITOR
     protected bool m_IsFolded { get; private set; }
@@ -28,15 +28,13 @@ public abstract class SpellComponent : ScriptableObject
             EditorGUI.indentLevel--;
         }
     }
-    public abstract void DrawGUI();
+    public virtual void DrawGUI()
+    {
+    }
     #endif
     //MEGA ULTRA SUPER DUPER KOSTYL
     public void AddSelf(Spell spell)
     {
-        spell.AddComponent(this);
-    }
-    public void Init()
-    {
-        
+        //spell.AddComponent(this);
     }
 }

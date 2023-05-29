@@ -2,23 +2,22 @@ using UnityEngine;
 
 public class SpellInventory : MonoBehaviour
 {
-    [SerializeField] private GameObject m_Spell1 = null, m_Spell2 = null, m_Spell3 = null, m_Spell4 = null, m_Spell5 = null;
-    private GameObject[] m_Spells;
+    [SerializeField] private Spell[] m_Spells;
     public const int MAXIMUM_SPELLS = 5;
 
-    private void Awake()
+    //TODO: Init spell on pickup
+    private void Start()
     {
-        m_Spells = new GameObject[]
+        foreach(Spell spell in m_Spells)
         {
-            m_Spell1,
-            m_Spell2,
-            m_Spell3,
-            m_Spell4,
-            m_Spell5
-        };
+            if (spell != null)
+            {
+                spell.Init(transform);
+            }
+        }
     }
 
-    public GameObject GetSpell(int spellSlot)
+    public Spell GetSpell(int spellSlot)
     {
         if (spellSlot < 0 || spellSlot > MAXIMUM_SPELLS)
             throw new System.ArgumentOutOfRangeException();
@@ -26,9 +25,10 @@ public class SpellInventory : MonoBehaviour
     }
     public void DecreaseSpellsCooldown()
     {
-        foreach (GameObject spellGO in m_Spells)
+        foreach (Spell spell in m_Spells)
         {
-            spellGO.GetComponent<ActiveSpell>().DecreaseCooldown();
+            if (spell != null)
+                spell.GetComponent<ActiveSpellComponent>().DecreaseCooldown();
         }
     }
 }

@@ -15,8 +15,8 @@ public class UpdateText : MonoBehaviour
         m_Text.text = "";
         for (int i = 0; i < SpellInventory.MAXIMUM_SPELLS; i++)
         {
-            if (m_SpellInventory.GetSpell(i))
-                m_Text.text += $"Spell {i + 1}: {m_SpellInventory.GetSpell(i).GetComponent<ActiveSpell>().currentCooldown}";
+            if (m_SpellInventory.GetSpell(i) != null)
+                m_Text.text += $"Spell {i + 1}: {m_SpellInventory.GetSpell(i).GetComponent<ActiveSpellComponent>().currentCooldown}";
             m_Text.text += "\n"; 
         }
     }

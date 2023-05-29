@@ -4,7 +4,7 @@ using UnityEditor;
 #endif
 
 [System.Serializable]
-public abstract class ActiveSpellComponent : SpellComponent
+public class ActiveSpellComponent : SpellComponent
 {
     [SerializeField] private int m_EnergyCost;
     [SerializeField] private int m_HeatlhCost;
@@ -17,7 +17,8 @@ public abstract class ActiveSpellComponent : SpellComponent
 
     public void DecreaseCooldown()
     {
-        currentCooldown -= Time.deltaTime;
+        if (currentCooldown >= 0)
+            currentCooldown -= Time.deltaTime;
     }
     public void TryCast()
     {
@@ -33,6 +34,7 @@ public abstract class ActiveSpellComponent : SpellComponent
         //TODO: Take Energy Cost
         casterEntity.TakeDamage(m_HeatlhCost);
         spell.events.GetEvent(SpellEventName.OnCast).Trigger();
+        //Instantiate(m_Effect, caster.position, Quaternion.identity);
     }
     #if UNITY_EDITOR
     public override void DrawGUI()
