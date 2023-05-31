@@ -35,27 +35,27 @@ public abstract class Entity
         stats.Heal(stats.regen * Time.deltaTime);
         events.GetEvent<float>(EntityEventName.OnHealthChanged, true).Trigger(stats.regen);
     }
-
+    //TODO: Nullify comment
     public void ApplyStatusEffect(StatusEffect effect)
     {
-        if (effect.applySleep)
-        {
-            events.GetEvent(EntityEventName.StopMovement).Trigger();
-            canAttack = false;
-            canMove = false;
-            canCast = false;
-        }
-        stats.ApplyStatusEffect(effect);
+        // if (effect.applySleep)
+        // {
+        //     events.GetEvent(EntityEventName.StopMovement).Trigger();
+        //     canAttack = false;
+        //     canMove = false;
+        //     canCast = false;
+        // }
+        // stats.ApplyStatusEffect(effect);
     }
     public void DeapplyStatusEffect(StatusEffect effect)
     {
-        if (effect.applySleep)
-        {
-            canAttack = true;
-            canMove = true;
-            canCast = true;
-        }
-        stats.DeapplyStatusEffect(effect);
+        // if (effect.applySleep)
+        // {
+        //     canAttack = true;
+        //     canMove = true;
+        //     canCast = true;
+        // }
+        // stats.DeapplyStatusEffect(effect);
     }
     public void DamageTarget(Transform target)
     {

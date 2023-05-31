@@ -25,7 +25,13 @@ public class SpellCaster : MonoBehaviour
     public void CastSpell(int spellSlot, Target target)
     {
         m_Controller.StopActions();
-        m_SpellCasting = StartCoroutine(CastSpellRoutine(target, m_Spells.GetSpell(spellSlot)));
+        Spell spell = m_Spells.GetSpell(spellSlot);
+        if (spell == null)
+        {
+            Debug.LogWarning("There is no spell in slot" + spellSlot);
+            return;
+        }
+        m_SpellCasting = StartCoroutine(CastSpellRoutine(target, spell));
     }
     private IEnumerator CastSpellRoutine(Target target, Spell spell)
     {
@@ -33,7 +39,7 @@ public class SpellCaster : MonoBehaviour
         {
             yield return m_Movement.FolowUntilInRange(target, targetCastSpell.castRange);
         }
-        spell.GetComponent<ActiveSpellComponent>().TryCast();
+        spell.Cast(target);
         yield break;
     }
 

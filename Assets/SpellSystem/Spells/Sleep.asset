@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2332b67b5d50b2429226faff526af16, type: 3}
+  m_Name: Sleep
+  m_EditorClassIdentifier: 
+  m_Components:
+  - rid: 8585123824952410114
+  - rid: 8585123824952410116
+  spellGameObject: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 8585123824952410114
+      type: {class: TargetCastSpellComponent, ns: , asm: Assembly-CSharp}
+      data:
+        spell: {fileID: 0}
+        caster: {fileID: 0}
+        m_EnergyCost: 300
+        m_HeatlhCost: 20
+        m_CooldownInSeconds: 5
+        m_Effect: {fileID: 1084998522222095862, guid: 9db013d6353cbc241817a792501be25c, type: 3}
+        m_CastRange: 300
+    - rid: 8585123824952410116
+      type: {class: SpellStatusEffectComponent, ns: , asm: Assembly-CSharp}
+      data:
+        spell: {fileID: 0}
+        caster: {fileID: 0}
+        m_StatusEffect: {fileID: 11400000, guid: 75cd626edaf851644b72bd1792f96940, type: 2}

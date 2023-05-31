@@ -224,6 +224,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5238513426292133042, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: m_Spells.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: ae4134f63e98c324ba01071b93e32048, type: 2}
     - target: {fileID: 6746957540238612323, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1071,6 +1075,10 @@ PrefabInstance:
       propertyPath: m_Spell1
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8655082464642284201, guid: 246d79f6324159048816970c26672a50, type: 3}
+      propertyPath: m_Spells.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b8fc9c7223e8cd4a9c352c6e41fc1f1, type: 2}
     m_RemovedComponents:
     - {fileID: 2807703551398912101, guid: 246d79f6324159048816970c26672a50, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 246d79f6324159048816970c26672a50, type: 3}

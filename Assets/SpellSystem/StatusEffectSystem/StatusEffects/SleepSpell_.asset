@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2332b67b5d50b2429226faff526af16, type: 3}
-  m_Name: New Spell
+  m_Script: {fileID: 11500000, guid: 877416c99eddb0543acdd97f2119cf79, type: 3}
+  m_Name: SleepSpell_
   m_EditorClassIdentifier: 
-  spellGameObject: {fileID: 0}
-  m_Components: []

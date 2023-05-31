@@ -1,47 +1,47 @@
 using UnityEngine;
 using System.Collections.Generic;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
+//Didn't add component base because Unity doesn't support generic classes serializaiton
 [CreateAssetMenu(menuName = "Spell", fileName = "New Spell")]
-[System.Serializable]
 public class Spell : ScriptableObject
 {
-    [HideInInspector] public GameObject spellGameObject;
     [SerializeReference] private List<SpellComponent> m_Components;
-    public List<SpellComponent> components { get => m_Components; }
+    
+    [HideInInspector] public GameObject spellGameObject;
     public SpellEvents events { get; private set; }
+
+    public List<SpellComponent> components { get => m_Components; }
 
     public void OnEnable()
     {
-        //Debug.Log(m_Components == null);
+        if (m_Components == null)
+            m_Components = new List<SpellComponent>();
         if (events == null)
             events = new SpellEvents();
-        if (components == null)
-            m_Components = new List<SpellComponent>();
-        //hideFlags = HideFlags.HideAndDontSave;
     }
 
     public void Init(Transform caster)
     {
-        foreach (SpellComponent component in m_Components)
+        foreach (SpellComponent component in components)
         {
             component.caster = caster;
-            //component.spell = this;
+            component.spell = this;
         }
     }
-    public void Cast(Transform target)
+    public void Cast(Target target)
     {
-        foreach (SpellComponent component in m_Components)
+        foreach (SpellComponent component in components)
         {
             component.target = target;
         }
-        foreach (ActiveSpellComponent active in m_Components)
+        foreach (ActiveSpellComponent active in components)
         {
             active.TryCast();
         }
     }
+#region Components
+    //Everything related to components
+
     //Opana kostyli
     //TODO: Refactor this dude it looks so fucking bad
     public T GetComponent<T>() where T : SpellComponent
@@ -56,7 +56,7 @@ public class Spell : ScriptableObject
             if (component1.GetType().IsSubclassOf(typeof(T)))
                 return (T)component1;
         }
-        return null;
+        return default(T);
     }
     public bool TryGetComponent<T>(out T component) where T : SpellComponent
     {
@@ -80,14 +80,5 @@ public class Spell : ScriptableObject
         if (m_Components.Count != 0)
             m_Components.RemoveAt(m_Components.Count - 1);
     }
-    #if UNITY_EDITOR
-    public void OnGUI()
-    {
-        foreach (SpellComponent component in m_Components)
-        {
-            component.OnGUI();
-            EditorGUILayout.Space();
-        }
-    }
-    #endif
+#endregion
 }
