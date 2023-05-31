@@ -24,14 +24,18 @@ public class SpellCaster : MonoBehaviour
 
     public void CastSpell(int spellSlot, Target target)
     {
-        m_Controller.StopActions();
         Spell spell = m_Spells.GetSpell(spellSlot);
+        
         if (spell == null)
         {
             Debug.LogWarning("There is no spell in slot" + spellSlot);
             return;
         }
-        m_SpellCasting = StartCoroutine(CastSpellRoutine(target, spell));
+        if (spell.TryGetComponent<ActiveSpellComponent>(out var a) && !a.onCooldown)
+        {
+            m_Controller.StopActions();
+            m_SpellCasting = StartCoroutine(CastSpellRoutine(target, spell));
+        }
     }
     private IEnumerator CastSpellRoutine(Target target, Spell spell)
     {

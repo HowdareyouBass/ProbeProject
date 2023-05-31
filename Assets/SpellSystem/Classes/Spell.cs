@@ -22,7 +22,7 @@ public class Spell : ScriptableObject
 
     public void Init(Transform caster)
     {
-        foreach (SpellComponent component in components)
+        foreach (SpellComponent component in m_Components)
         {
             component.caster = caster;
             component.spell = this;
@@ -30,13 +30,13 @@ public class Spell : ScriptableObject
     }
     public void Cast(Target target)
     {
-        foreach (SpellComponent component in components)
+        foreach (SpellComponent component in m_Components)
         {
             component.target = target;
         }
-        foreach (ActiveSpellComponent active in components)
+        if (TryGetComponent<ActiveSpellComponent>(out ActiveSpellComponent component1))
         {
-            active.TryCast();
+            component1.TryCast();
         }
     }
 #region Components

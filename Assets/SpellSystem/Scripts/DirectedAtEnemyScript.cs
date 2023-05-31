@@ -1,17 +1,20 @@
 using UnityEngine;
 
-[RequireComponent(typeof(TargetCastSpell))]
-public class DirectedAtEnemyScript : SpellComponent1
+namespace obsolete
 {
-    [SerializeField] private float m_Damage = 10;
-
-    private void Start()
+    [RequireComponent(typeof(TargetCastSpell))]
+    public class DirectedAtEnemyScript : SpellComponent1
     {
-        if (target.TryGetComponent<Health>(out Health health))
+        [SerializeField] private float m_Damage = 10;
+
+        private void Start()
         {
-            spellScript.events.GetEvent(SpellEventName.OnImpact).Trigger();
-            health.TakeDamage(m_Damage);
-            Destroy(gameObject, 10);
+            if (target.TryGetComponent<Health>(out Health health))
+            {
+                spellScript.events.GetEvent(SpellEventName.OnImpact).Trigger();
+                health.TakeDamage(m_Damage);
+                Destroy(gameObject, 10);
+            }
         }
     }
 }

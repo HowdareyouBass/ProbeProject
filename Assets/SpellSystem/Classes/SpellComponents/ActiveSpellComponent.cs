@@ -8,7 +8,7 @@ public class ActiveSpellComponent : SpellComponent
     [SerializeField] private float m_CooldownInSeconds = 5;
     [SerializeField] private GameObject m_Effect;
 
-    protected bool m_OnCooldown { get => currentCooldown > 0; }
+    public bool onCooldown { get => currentCooldown > 0; }
     public float currentCooldown { get; protected set; } = 0;
     public GameObject effect { get => m_Effect; }
 
@@ -19,7 +19,7 @@ public class ActiveSpellComponent : SpellComponent
     }
     public void TryCast()
     {
-        if (!m_OnCooldown)
+        if (!onCooldown)
         {
             currentCooldown = m_CooldownInSeconds;
             spell.events.GetEvent(SpellEventName.OnCast).Trigger();
