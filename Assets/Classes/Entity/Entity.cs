@@ -57,6 +57,19 @@ public abstract class Entity
         // }
         // stats.DeapplyStatusEffect(effect);
     }
+    public void Sleep()
+    {
+        events.GetEvent(EntityEventName.StopMovement).Trigger();
+        canMove = false;
+        canAttack = false;
+        canCast = false;
+    }
+    public void Awake()
+    {
+        canMove = true;
+        canAttack = true;
+        canCast = true;
+    }
     public void DamageTarget(Transform target)
     {
         events.GetEvent<Transform>(EntityEventName.OnAttack, true).Trigger(target);

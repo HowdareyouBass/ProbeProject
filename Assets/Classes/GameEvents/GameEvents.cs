@@ -19,6 +19,7 @@ public abstract class Events<T> where T : Enum
     {
         return m_Events[name];
     }
+    //                                                      False if you handle null value by yourself
     public GameEvent<EventType> GetEvent<EventType>(T name, bool canBeError)
     {
         GameEvent<EventType> res = m_Events[name] as GameEvent<EventType>;

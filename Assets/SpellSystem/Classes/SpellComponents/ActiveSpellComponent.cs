@@ -17,12 +17,15 @@ public class ActiveSpellComponent : SpellComponent
         if (currentCooldown >= 0)
             currentCooldown -= Time.deltaTime;
     }
+    public override void Init()
+    {
+        spell.events.GetEvent(SpellEventName.OnCast).Subscribe(TryCast);
+    }
     public void TryCast()
     {
         if (!onCooldown)
         {
             currentCooldown = m_CooldownInSeconds;
-            spell.events.GetEvent(SpellEventName.OnCast).Trigger();
             Cast(caster, target);
         }
     }
@@ -30,7 +33,7 @@ public class ActiveSpellComponent : SpellComponent
     {
         //TODO: Take Energy Cost
         casterEntity.TakeDamage(m_HeatlhCost);
-        spell.events.GetEvent(SpellEventName.OnCast).Trigger();
+        //spell.events.GetEvent(SpellEventName.OnCast).Trigger();
         GameObject.Instantiate(m_Effect, target.GetPoint(), Quaternion.identity);
     }
 }

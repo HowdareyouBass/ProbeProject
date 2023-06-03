@@ -12,7 +12,6 @@ public class InputHandler : MonoBehaviour
     {
         MovementAndAttackingPlayer();
         MovementAndAttackingEnemy();
-
         int i = 0;
         foreach(KeyCode key in Controls.SpellKeys)
         {

@@ -26,6 +26,7 @@ public class Spell : ScriptableObject
         {
             component.caster = caster;
             component.spell = this;
+            component.Init();
         }
     }
     public void Cast(Target target)
@@ -34,10 +35,7 @@ public class Spell : ScriptableObject
         {
             component.target = target;
         }
-        if (TryGetComponent<ActiveSpellComponent>(out ActiveSpellComponent component1))
-        {
-            component1.TryCast();
-        }
+        events.GetEvent(SpellEventName.OnCast).Trigger();
     }
 #region Components
     //Everything related to components

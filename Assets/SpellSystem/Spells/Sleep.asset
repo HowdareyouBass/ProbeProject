@@ -34,4 +34,7 @@ MonoBehaviour:
       data:
         spell: {fileID: 0}
         caster: {fileID: 0}
-        m_StatusEffect: {fileID: 11400000, guid: 75cd626edaf851644b72bd1792f96940, type: 2}
+        m_SpellEvent: 2
+        m_EntityEvent: 0
+        m_ApplyTo: 1
+        m_StatusEffect: {fileID: 11400000, guid: 1666d0cbcad4b8e4eafc711d07b351cd, type: 2}

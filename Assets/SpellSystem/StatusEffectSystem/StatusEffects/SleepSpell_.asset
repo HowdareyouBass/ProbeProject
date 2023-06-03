@@ -12,3 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877416c99eddb0543acdd97f2119cf79, type: 3}
   m_Name: SleepSpell_
   m_EditorClassIdentifier: 
+  m_DefaultDuration: 3
+  m_Components:
+  - rid: 6641090947582001152
+  references:
+    version: 2
+    RefIds:
+    - rid: 6641090947582001152
+      type: {class: SleepComponent, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffect: {fileID: 0}
+        m_DurationInSeconds: 4
