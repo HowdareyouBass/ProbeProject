@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/USS/align-horizontal.uss?fileID=7433441132597879392&amp;guid=4f0eff6c2b9b73947939afc38945b8fe&amp;type=3#align-horizontal" />
+    <ui:VisualElement class="align-horizontal">
+        <uie:FloatField label="Float Field" value="42,2" name="stat-value" class="flex-grow" />
+        <uie:FloatField value="0" name="per-level" style="min-width: 35px;" />
+    </ui:VisualElement>
+</ui:UXML>

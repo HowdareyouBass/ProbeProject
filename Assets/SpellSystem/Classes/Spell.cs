@@ -20,6 +20,7 @@ public class Spell : ScriptableObject
             events = new SpellEvents();
     }
 
+    //Ugly
     public void Init(Transform caster)
     {
         foreach (SpellComponent component in m_Components)
@@ -27,6 +28,10 @@ public class Spell : ScriptableObject
             component.caster = caster;
             component.spell = this;
             component.Init();
+        }
+        foreach (SpellComponent component1 in m_Components)
+        {
+            component1.LateInit();
         }
     }
     public void Cast(Target target)

@@ -1,14 +1,17 @@
-using UnityEngine;
+using System;
 
+[Serializable]
 public class S_SwitchablePassive : SpellComponent
 {
-    [SerializeField] private SpellStats m_Passive1;
-    [SerializeField] private SpellStats m_Passive2;
+    protected PassiveStats m_Passive1;
+    protected PassiveStats m_Passive2;
+    public event Action OnSwitch;
 
-    private bool m_IsSwitched;
+    public bool isSwitched { get; private set; }
 
     public override void Init()
     {
+        targetEntity.ApplyPassive(m_Passive1);
         spell.events.GetEvent(SpellEventName.OnCast).Subscribe(Switch);
     }
     public override void Destroy()
@@ -18,16 +21,17 @@ public class S_SwitchablePassive : SpellComponent
 
     private void Switch()
     {
-        m_IsSwitched = !m_IsSwitched;
-        if (m_IsSwitched)
+        OnSwitch?.Invoke();
+        isSwitched = !isSwitched;
+        if (isSwitched)
         {
-            //targetEntity.DeapplyPassive(m_Passive1);
-            //targetEntity.ApplyPassive(m_Passive2);
+            targetEntity.DeapplyPassive(m_Passive1);
+            targetEntity.ApplyPassive(m_Passive2);
         }
         else
         {
-            //targetEntity.ApplyPassive(m_Passive1);
-            //targetEntity.DeapplyPassive(m_Passive2);
+            targetEntity.ApplyPassive(m_Passive1);
+            targetEntity.DeapplyPassive(m_Passive2);
         }
     }
 }

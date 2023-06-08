@@ -12,10 +12,13 @@ public class HealthBar : MonoBehaviour
     private void OnEnable()
     {
         m_Entity = transform.root.GetComponent<EntityScript>().GetEntity();
+
         m_OnHealthChanged = m_Entity.events.GetEvent<float>(EntityEventName.OnHealthChanged, true);
         m_OnDamaged = m_Entity.events.GetEvent<float>(EntityEventName.OnDamaged, true);
+
         m_OnHealthChanged?.Subscribe(SetHealthbarValue);
         m_OnDamaged?.Subscribe(SpawnEffect);
+        m_OnDamaged?.Subscribe(SetHealthbarValue);
     }
     private void OnDisable()
     {
@@ -25,6 +28,7 @@ public class HealthBar : MonoBehaviour
 
     private void SetHealthbarValue(float amount)
     {
+        Debug.Log("Should set");
         float currentHealth = m_Entity.stats.currentHealth;
         float maxHealth = m_Entity.stats.maxHealth;
         m_HealthRenderer.material.SetFloat("_Health", currentHealth / maxHealth);

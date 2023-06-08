@@ -54,6 +54,7 @@ public class EntityEvents : Events<EntityEventName>
         AddEvent(EntityEventName.None);
         AddEvent(EntityEventName.OnDeath);
         AddEvent<Transform>(EntityEventName.OnAttack);
+        //TODO: change event name from on health changed to regen applied!
         AddEvent<float>(EntityEventName.OnDamaged);
         AddEvent<float>(EntityEventName.OnHealthChanged);
         AddEvent(EntityEventName.StopMovement);

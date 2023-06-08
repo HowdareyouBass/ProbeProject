@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class SE_PassiveStatsCount : SE_CountComponent
 {
-    [SerializeField] private StatusEffectStats m_Stats;
+    [SerializeField] private PassiveStats m_Stats;
 
     public override void Init()
     {

@@ -45,16 +45,18 @@ public class EntityStats
         baseAttackSpeed = race.baseAttackSpeed;
         evasion = race.evasion;
     }
-    //TODO: Nullify comments
-    public void ApplyStatusEffect(StatusEffectStats stats)
+    //TODO: Rename this func
+    public void ApplyStatusEffect(PassiveStats stats)
     {
+        m_AttackPercent += stats.attackPercent;
         attackSpeed += stats.attackSpeed;
         m_RegenerateAmount += stats.regenerate;
         m_RegeneratePercent += stats.regeneratePercent;
     }
     
-    public void DeapplyStatusEffect(StatusEffectStats stats)
+    public void DeapplyStatusEffect(PassiveStats stats)
     {
+        m_AttackPercent -= stats.attackPercent;
         attackSpeed -= stats.attackSpeed;
         m_RegenerateAmount -= stats.regenerate;
         m_RegeneratePercent -= stats.regeneratePercent;

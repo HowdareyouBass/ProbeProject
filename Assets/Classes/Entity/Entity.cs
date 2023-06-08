@@ -21,7 +21,8 @@ public abstract class Entity
     {
         if (amount < 0)
             throw new ArgumentOutOfRangeException(nameof(amount));
-        stats.TakeDamage(amount);
+        stats.TakeDamage(amount);  
+        //FIXME: Doesn't trigger
         events.GetEvent<float>(EntityEventName.OnDamaged, true).Trigger(amount);
         if (stats.currentHealth <= 0)
         {
@@ -33,17 +34,19 @@ public abstract class Entity
         if (stats.regen <= 0)
             return;
         stats.Heal(stats.regen * Time.deltaTime);
-        events.GetEvent<float>(EntityEventName.OnHealthChanged, true).Trigger(stats.regen);
+        if (stats.currentHealth < stats.maxHealth)
+            events.GetEvent<float>(EntityEventName.OnHealthChanged, true).Trigger(stats.regen);
     }
-    //TODO: Nullify comment
-    public void ApplyPassive(StatusEffectStats effectStats)
+
+    public void ApplyPassive(PassiveStats effectStats)
     {
         stats.ApplyStatusEffect(effectStats);
     }
-    public void DeapplyPassive(StatusEffectStats effectStats)
+    public void DeapplyPassive(PassiveStats effectStats)
     {
         stats.DeapplyStatusEffect(effectStats);
     }
+
     public void Sleep()
     {
         events.GetEvent(EntityEventName.StopMovement).Trigger();
@@ -59,8 +62,8 @@ public abstract class Entity
     }
     public void DamageTarget(Transform target)
     {
-        events.GetEvent<Transform>(EntityEventName.OnAttack, true).Trigger(target);
         target.GetComponent<Health>().TakeDamage(stats.attackDamage);
+        events.GetEvent<Transform>(EntityEventName.OnAttack, true).Trigger(target);
     }
     public virtual float GetAttackCooldown()
     {

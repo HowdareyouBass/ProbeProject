@@ -18,10 +18,10 @@ namespace obsolete
         [Header("Tick")]
         [SerializeField] private float m_TickTimeInSeconds;
         [SerializeField] private float m_TickDamage;
-        [SerializeField] private StatusEffectStats m_Stats;
+        [SerializeField] private PassiveStats m_Stats;
 
         public bool applySleep { get => m_ApplySleep; }
-        public StatusEffectStats stats { get => m_Stats; }
+        public PassiveStats stats { get => m_Stats; }
 
         private float m_CurrentCount;
         private Entity m_Entity;
