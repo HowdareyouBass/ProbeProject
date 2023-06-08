@@ -64,7 +64,8 @@ public enum SpellEventName
 {
     None,
     OnImpact,
-    OnCast
+    OnCast,
+    OnTryCast
 }
 public class SpellEvents : Events<SpellEventName>
 {
@@ -73,5 +74,6 @@ public class SpellEvents : Events<SpellEventName>
         AddEvent(SpellEventName.None);
         AddEvent(SpellEventName.OnImpact);
         AddEvent(SpellEventName.OnCast);
+        AddEvent(SpellEventName.OnTryCast);
     }
 }

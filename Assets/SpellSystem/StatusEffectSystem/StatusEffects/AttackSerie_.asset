@@ -10,17 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 877416c99eddb0543acdd97f2119cf79, type: 3}
-  m_Name: SleepSpell_
+  m_Name: AttackSerie_
   m_EditorClassIdentifier: 
   m_DefaultDuration: 3
   m_Components:
-  - rid: 6641091019292803072
+  - rid: 6641091020323553280
   references:
     version: 2
     RefIds:
-    - rid: 6641091019292803072
-      type: {class: SE_SleepComponent, ns: , asm: Assembly-CSharp}
+    - rid: 6641091020323553280
+      type: {class: SE_PassiveStatsCount, ns: , asm: Assembly-CSharp}
       data:
         statusEffect: {fileID: 0}
         target: {fileID: 0}
-        m_DurationInSeconds: 3
+        m_StartCount: 5
+        m_EntityEvent: 2
+        m_DecreaseBy: 0
+        m_CountDelta: -1
+        m_Stats:
+          m_AttackSpeed: 300
+          m_Regenerate: 0
+          m_RegeneratePercent: 0

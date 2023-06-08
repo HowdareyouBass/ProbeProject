@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class StatusEffectHandler : MonoBehaviour
 {
-    //TODO: nullify comments
     private List<StatusEffect> m_StatusEffects;
     private void Awake()
     {
@@ -15,9 +14,11 @@ public class StatusEffectHandler : MonoBehaviour
         effect.Init(transform);
         effect.OnEffectEnd += RemoveEffect;
         m_StatusEffects.Add(effect);
+        effect.StartEffect();
     }
     private void RemoveEffect(StatusEffect effect)
     {
         m_StatusEffects.Remove(effect);
+        Destroy(effect);
     }
 }

@@ -37,8 +37,8 @@ public class StatusEffectCustomInspector : Editor
         SerializedProperty property = serializedObject.FindProperty("m_Components");
         foreach (SerializedProperty prop in property)
         {
-            //the 15 deletes Assembly CSharp before real type
-            EditorGUILayout.PropertyField(prop, new GUIContent(prop.managedReferenceFullTypename.Substring(15)), true);
+            //the 18 deletes Assembly CSharp before real type
+            EditorGUILayout.PropertyField(prop, new GUIContent(prop.managedReferenceFullTypename.Substring(19)), true);
         }
         if (GUILayout.Button("Add Component"))
         {

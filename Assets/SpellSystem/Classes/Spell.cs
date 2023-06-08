@@ -35,7 +35,7 @@ public class Spell : ScriptableObject
         {
             component.target = target;
         }
-        events.GetEvent(SpellEventName.OnCast).Trigger();
+        events.GetEvent(SpellEventName.OnTryCast).Trigger();
     }
 #region Components
     //Everything related to components

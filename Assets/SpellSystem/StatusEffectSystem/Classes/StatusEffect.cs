@@ -15,9 +15,6 @@ public class StatusEffect : ScriptableObject
 
     public CancellationToken stopEffectToken { get; private set; }
     public float defaultDuration { get => m_DefaultDuration; }
-    public Transform targetTransform { get; private set; }
-    public Entity targetEntity { get => targetTransform.GetComponent<EntityScript>().GetEntity(); }
-
 
     public event Action<StatusEffect> OnEffectEnd;
 
@@ -36,23 +33,27 @@ public class StatusEffect : ScriptableObject
         foreach (StatusEffectComponent component in m_Components)
         {
             component.statusEffect = this;
-            targetTransform = target;
+            component.target = target;
             component.Init();
         }
         // foreach (Task task in effectTasks)
         // {
         //     task.Start();
         // }
-        Task.Run(StartEffect);
     }
     public void StopEffect()
     {
         m_StopEffectSource.Cancel();
     }
 
-    private async Task StartEffect()
+    public async void StartEffect()
     {
         await Task.WhenAll(effectTasks);
+        //Idk can't debug target ????? FIXME:
+        foreach (StatusEffectComponent component in m_Components)
+        {
+            component.Destroy();
+        }
         OnEffectEnd.Invoke(this);
     }
 #region Components

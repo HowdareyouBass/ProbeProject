@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpellStatusEffectComponent : SpellComponent
+public class S_StatusEffectComponent : SpellComponent
 {
     private enum TargetName { Caster, Target, EventReturn }
 

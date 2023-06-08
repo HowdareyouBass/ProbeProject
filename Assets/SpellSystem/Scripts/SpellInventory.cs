@@ -36,7 +36,7 @@ public class SpellInventory : MonoBehaviour
         foreach (Spell spell in m_SpellCopies)
         {
             if (spell != null)
-                spell.GetComponent<ActiveSpellComponent>().DecreaseCooldown();
+                spell.GetComponent<S_ActiveSpellComponent>().DecreaseCooldown();
         }
     }
 }

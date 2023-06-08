@@ -31,7 +31,7 @@ public class SpellCaster : MonoBehaviour
             Debug.LogWarning("There is no spell in slot" + spellSlot);
             return;
         }
-        if (spell.TryGetComponent<ActiveSpellComponent>(out var a) && !a.onCooldown)
+        if (spell.TryGetComponent<S_ActiveSpellComponent>(out var a) && !a.onCooldown)
         {
             m_Controller.StopActions();
             m_SpellCasting = StartCoroutine(CastSpellRoutine(target, spell));
@@ -39,7 +39,7 @@ public class SpellCaster : MonoBehaviour
     }
     private IEnumerator CastSpellRoutine(Target target, Spell spell)
     {
-        if (spell.TryGetComponent<TargetCastSpellComponent>(out TargetCastSpellComponent targetCastSpell))
+        if (spell.TryGetComponent<S_TargetCastSpellComponent>(out S_TargetCastSpellComponent targetCastSpell))
         {
             yield return m_Movement.FolowUntilInRange(target, targetCastSpell.castRange);
         }

@@ -36,26 +36,13 @@ public abstract class Entity
         events.GetEvent<float>(EntityEventName.OnHealthChanged, true).Trigger(stats.regen);
     }
     //TODO: Nullify comment
-    public void ApplyStatusEffect(StatusEffect effect)
+    public void ApplyPassive(StatusEffectStats effectStats)
     {
-        // if (effect.applySleep)
-        // {
-        //     events.GetEvent(EntityEventName.StopMovement).Trigger();
-        //     canAttack = false;
-        //     canMove = false;
-        //     canCast = false;
-        // }
-        // stats.ApplyStatusEffect(effect);
+        stats.ApplyStatusEffect(effectStats);
     }
-    public void DeapplyStatusEffect(StatusEffect effect)
+    public void DeapplyPassive(StatusEffectStats effectStats)
     {
-        // if (effect.applySleep)
-        // {
-        //     canAttack = true;
-        //     canMove = true;
-        //     canCast = true;
-        // }
-        // stats.DeapplyStatusEffect(effect);
+        stats.DeapplyStatusEffect(effectStats);
     }
     public void Sleep()
     {

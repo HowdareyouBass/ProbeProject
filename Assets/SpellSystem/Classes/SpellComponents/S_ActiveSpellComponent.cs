@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class ActiveSpellComponent : SpellComponent
+public class S_ActiveSpellComponent : SpellComponent
 {
     [SerializeField] private int m_EnergyCost;
     [SerializeField] private int m_HeatlhCost;
@@ -19,21 +19,24 @@ public class ActiveSpellComponent : SpellComponent
     }
     public override void Init()
     {
-        spell.events.GetEvent(SpellEventName.OnCast).Subscribe(TryCast);
+        spell.events.GetEvent(SpellEventName.OnTryCast).Subscribe(TryCast);
     }
     public void TryCast()
     {
         if (!onCooldown)
         {
             currentCooldown = m_CooldownInSeconds;
-            Cast(caster, target);
+            Cast(caster, target, target.GetPoint());
         }
     }
-    protected virtual void Cast(Transform caster, Target target)
+    protected virtual void Cast(Transform caster, Target target, Vector3 effectPostion)
     {
         //TODO: Take Energy Cost
         casterEntity.TakeDamage(m_HeatlhCost);
-        //spell.events.GetEvent(SpellEventName.OnCast).Trigger();
-        GameObject.Instantiate(m_Effect, target.GetPoint(), Quaternion.identity);
+        spell.events.GetEvent(SpellEventName.OnCast).Trigger();
+        if (m_Effect != null)
+            GameObject.Instantiate(m_Effect, effectPostion, Quaternion.identity);
+        else
+            Debug.Log("No spell effect");
     }
 }

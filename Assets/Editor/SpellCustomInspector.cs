@@ -25,7 +25,7 @@ public class SpellCustomInspector : Editor
             m_DerivedListNames.Add("None");
             foreach (Type type in m_DerivedList)
             {
-                m_DerivedListNames.Add(type.ToString());
+                m_DerivedListNames.Add(type.ToString().Substring(2));
             }
         }
     }
@@ -36,8 +36,8 @@ public class SpellCustomInspector : Editor
         SerializedProperty property = serializedObject.FindProperty("m_Components");
         foreach (SerializedProperty prop in property)
         {
-            //the 15 deletes Assembly CSharp before real type
-            EditorGUILayout.PropertyField(prop, new GUIContent(prop.managedReferenceFullTypename.Substring(15)), true);
+            //the 17 deletes Assembly CSharp before real type
+            EditorGUILayout.PropertyField(prop, new GUIContent(prop.managedReferenceFullTypename.Substring(18)), true);
         }
         if (GUILayout.Button("Add Component"))
         {

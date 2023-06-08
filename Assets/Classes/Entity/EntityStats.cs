@@ -46,22 +46,18 @@ public class EntityStats
         evasion = race.evasion;
     }
     //TODO: Nullify comments
-    public void ApplyStatusEffect(StatusEffect effect)
+    public void ApplyStatusEffect(StatusEffectStats stats)
     {
-        // StatusEffectStats stats = effect.stats;
-
-        // attackSpeed += stats.attackSpeed;
-        // m_RegenerateAmount += stats.regenerate;
-        // m_RegeneratePercent += stats.regeneratePercent;
+        attackSpeed += stats.attackSpeed;
+        m_RegenerateAmount += stats.regenerate;
+        m_RegeneratePercent += stats.regeneratePercent;
     }
     
-    public void DeapplyStatusEffect(StatusEffect effect)
+    public void DeapplyStatusEffect(StatusEffectStats stats)
     {
-        // StatusEffectStats stats = effect.stats;
-
-        // attackSpeed -= stats.attackSpeed;
-        // m_RegenerateAmount -= stats.regenerate;
-        // m_RegeneratePercent -= stats.regeneratePercent;
+        attackSpeed -= stats.attackSpeed;
+        m_RegenerateAmount -= stats.regenerate;
+        m_RegeneratePercent -= stats.regeneratePercent;
     }
 
     public void AddAttackPercent(float amount)

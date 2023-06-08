@@ -89,13 +89,10 @@ namespace obsolete
         private void DecreaseCount()
         {
             m_CurrentCount -= m_CountDelta;
-            Debug.Log(m_CurrentCount);
         }
         private void DecreaseCount(float amount)
         {
-            Debug.Log("Decreased count");
             m_CurrentCount -= amount;
-            Debug.Log(m_CurrentCount);
         }
     }
 }

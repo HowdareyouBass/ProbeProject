@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class TargetCastSpellComponent : ActiveSpellComponent
+public class S_TargetCastSpellComponent : S_ActiveSpellComponent
 {
     [SerializeField] private int m_CastRange;
 
