@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class S_BioTransition : S_SwitchablePassive
+public sealed class S_BioTransition : S_SwitchablePassive
 {
     [Range(0, 6)][SerializeField] private float m_SlashingAttackPercent;
 

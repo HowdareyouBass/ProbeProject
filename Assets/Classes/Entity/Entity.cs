@@ -21,8 +21,7 @@ public abstract class Entity
     {
         if (amount < 0)
             throw new ArgumentOutOfRangeException(nameof(amount));
-        stats.TakeDamage(amount);  
-        //FIXME: Doesn't trigger
+        stats.TakeDamage(amount);
         events.GetEvent<float>(EntityEventName.OnDamaged, true).Trigger(amount);
         if (stats.currentHealth <= 0)
         {

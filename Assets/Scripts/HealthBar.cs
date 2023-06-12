@@ -28,7 +28,6 @@ public class HealthBar : MonoBehaviour
 
     private void SetHealthbarValue(float amount)
     {
-        Debug.Log("Should set");
         float currentHealth = m_Entity.stats.currentHealth;
         float maxHealth = m_Entity.stats.maxHealth;
         m_HealthRenderer.material.SetFloat("_Health", currentHealth / maxHealth);

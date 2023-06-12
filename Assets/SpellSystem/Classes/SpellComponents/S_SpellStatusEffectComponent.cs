@@ -14,22 +14,7 @@ public class S_StatusEffectComponent : SpellComponent
     public override void Init()
     {
         m_StatusEffectCopy = ScriptableObject.Instantiate(m_StatusEffect);
-
-        if (m_ApplyTo == TargetName.EventReturn)
-        {
-            GameEvent<Transform> entityEvent = casterEntity.events.GetEvent<Transform>(m_EntityEvent, false);
-            if (entityEvent == null)
-            {
-                Debug.Log("Event named " + m_EntityEvent + " doesn't have Transform return can't use EventReturn");
-            }
-            else
-            {
-                entityEvent.Subscribe(ActivateEventReturn);
-            }
-            return;
-        }
-        spell.events.GetEvent(m_SpellEvent).Subscribe(Activate);
-        casterEntity.events.GetEvent(m_EntityEvent).Subscribe(Activate);
+        Enable();
     }
     public override void Enable()
     {

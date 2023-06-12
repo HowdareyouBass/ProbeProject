@@ -36,10 +36,6 @@ public class StatusEffect : ScriptableObject
             component.target = target;
             component.Init();
         }
-        // foreach (Task task in effectTasks)
-        // {
-        //     task.Start();
-        // }
     }
     public void StopEffect()
     {

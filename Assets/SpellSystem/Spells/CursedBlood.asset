@@ -10,37 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2332b67b5d50b2429226faff526af16, type: 3}
-  m_Name: BioTransition
+  m_Name: CursedBlood
   m_EditorClassIdentifier: 
   m_Components:
-  - rid: 6641091107328884741
-  - rid: 6641091107328884743
-  - rid: 6641091107328884744
+  - rid: 6641091107328884747
+  - rid: 6641091178290216961
   spellGameObject: {fileID: 0}
   references:
     version: 2
     RefIds:
-    - rid: 6641091107328884741
+    - rid: 6641091107328884747
       type: {class: S_SelfCastSpell, ns: , asm: Assembly-CSharp}
       data:
         spell: {fileID: 0}
         caster: {fileID: 0}
         m_EnergyCost: 0
-        m_HeatlhCost: 0
+        m_HeatlhCost: 20
         m_CooldownInSeconds: 5
         m_Effect: {fileID: 0}
-    - rid: 6641091107328884743
-      type: {class: S_BioTransition, ns: , asm: Assembly-CSharp}
-      data:
-        spell: {fileID: 0}
-        caster: {fileID: 0}
-        m_SlashingAttackPercent: 0.2
-    - rid: 6641091107328884744
+    - rid: 6641091178290216961
       type: {class: S_StatusEffectComponent, ns: , asm: Assembly-CSharp}
       data:
         spell: {fileID: 0}
         caster: {fileID: 0}
-        m_SpellEvent: 0
-        m_EntityEvent: 2
-        m_ApplyTo: 2
-        m_StatusEffect: {fileID: 11400000, guid: 6b73a752171d9b54da94debb3be23f91, type: 2}
+        m_SpellEvent: 2
+        m_EntityEvent: 0
+        m_ApplyTo: 0
+        m_StatusEffect: {fileID: 11400000, guid: a2c5069053f538148af2a60308da9ce6, type: 2}

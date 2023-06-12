@@ -10,22 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 877416c99eddb0543acdd97f2119cf79, type: 3}
-  m_Name: BioTransition_
+  m_Name: CursedBlood_
   m_EditorClassIdentifier: 
   m_DefaultDuration: 3
   m_Components:
-  - rid: 6641091107328884746
+  - rid: 6641091130740178950
   references:
     version: 2
     RefIds:
-    - rid: 6641091107328884746
-      type: {class: SE_PassiveTimeComponent, ns: , asm: Assembly-CSharp}
+    - rid: 6641091130740178950
+      type: {class: SE_StatusEffectTimeComponent, ns: , asm: Assembly-CSharp}
       data:
         statusEffect: {fileID: 0}
         target: {fileID: 0}
-        m_DurationInSeconds: 3
-        m_Stats:
-          <attackPercent>k__BackingField: 0
-          <attackSpeed>k__BackingField: 0
-          <regenerate>k__BackingField: -10
-          <regeneratePercent>k__BackingField: 0
+        <DurationInSeconds>k__BackingField: 5
+        m_EntityEvent: 2
+        m_ApplyTo: 2
+        m_StatusEffect: {fileID: 11400000, guid: d980952899db49045a1389bf39e26d74, type: 2}
