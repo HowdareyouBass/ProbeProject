@@ -59,6 +59,18 @@ public abstract class Entity
         canAttack = true;
         canCast = true;
     }
+
+    public void Silence()
+    {
+        Debug.Log("Should silence");
+        canCast = false;
+    }
+    public void Desilence()
+    {
+        Debug.Log("should desilence");
+        canCast = true;
+    }
+
     public void DamageTarget(Transform target)
     {
         target.GetComponent<Health>().TakeDamage(stats.attackDamage);

@@ -17,7 +17,6 @@ public sealed class S_BlinkComponent : S_ActiveSpellComponent
             return;
         }
         Vector2 finalPoint = desiredPoint;
-        Debug.Log(Vector2.Distance(casterPoint, desiredPoint));
 
         if (Vector2.Distance(casterPoint, desiredPoint) > m_MaxDistance / 100)
         {
@@ -41,10 +40,6 @@ public sealed class S_BlinkComponent : S_ActiveSpellComponent
         {
             finalPosition.y = hit1.point.y;
         }
-
-        GameObject.Instantiate(new GameObject("Final Point"), new Vector3(finalPoint.x, 0, finalPoint.y), Quaternion.identity);
-        GameObject.Instantiate(new GameObject("Final pos"), finalPosition, Quaternion.identity);
-        GameObject.Instantiate(new GameObject("Desired pos"), new Vector3(desiredPoint.x, 0, desiredPoint.y), Quaternion.identity);
         caster.position = finalPosition;
         caster.GetComponent<NavMeshAgent>().SetDestination(finalPosition);
     }
