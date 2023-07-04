@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2332b67b5d50b2429226faff526af16, type: 3}
-  m_Name: Sleep
+  m_Name: Blink
   m_EditorClassIdentifier: 
   m_Components:
-  - rid: 6641091019292803074
-  - rid: 6641091019292803075
+  - rid: 6641091198702321664
   spellGameObject: {fileID: 0}
   references:
     version: 2
     RefIds:
-    - rid: 6641091019292803074
-      type: {class: S_TargetCastSpellComponent, ns: , asm: Assembly-CSharp}
+    - rid: 6641091198702321664
+      type: {class: S_BlinkComponent, ns: , asm: Assembly-CSharp}
       data:
         spell: {fileID: 0}
         caster: {fileID: 0}
@@ -28,13 +27,4 @@ MonoBehaviour:
         m_HeatlhCost: 0
         m_CooldownInSeconds: 5
         m_Effect: {fileID: 0}
-        m_CastRange: 1000
-    - rid: 6641091019292803075
-      type: {class: S_StatusEffectComponent, ns: , asm: Assembly-CSharp}
-      data:
-        spell: {fileID: 0}
-        caster: {fileID: 0}
-        m_SpellEvent: 2
-        m_EntityEvent: 0
-        m_ApplyTo: 1
-        m_StatusEffect: {fileID: 11400000, guid: 1666d0cbcad4b8e4eafc711d07b351cd, type: 2}
+        m_MaxDistance: 400

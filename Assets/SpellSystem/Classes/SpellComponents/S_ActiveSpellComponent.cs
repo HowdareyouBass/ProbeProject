@@ -12,6 +12,8 @@ public class S_ActiveSpellComponent : SpellComponent
     public float currentCooldown { get; protected set; } = 0;
     public GameObject effect { get => m_Effect; }
 
+    protected Vector3 effectPosition;
+
     public void DecreaseCooldown()
     {
         if (currentCooldown >= 0)
@@ -25,17 +27,18 @@ public class S_ActiveSpellComponent : SpellComponent
     {
         if (!onCooldown)
         {
+            effectPosition = target.GetPoint();
             currentCooldown = m_CooldownInSeconds;
-            Cast(caster, target, target.GetPoint());
+            Cast(caster, target);
         }
     }
-    protected virtual void Cast(Transform caster, Target target, Vector3 effectPostion)
+    protected virtual void Cast(Transform caster, Target target)
     {
         //TODO: Take Energy Cost
         casterEntity.TakeDamage(m_HeatlhCost);
         spell.events.GetEvent(SpellEventName.OnCast).Trigger();
         if (m_Effect != null)
-            GameObject.Instantiate(m_Effect, effectPostion, Quaternion.identity);
+            GameObject.Instantiate(m_Effect, effectPosition, Quaternion.identity);
         else
             Debug.Log("No spell effect");
     }

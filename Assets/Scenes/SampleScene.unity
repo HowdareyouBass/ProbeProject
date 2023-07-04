@@ -1075,6 +1075,10 @@ PrefabInstance:
       propertyPath: m_Spell1
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8655082464642284201, guid: 246d79f6324159048816970c26672a50, type: 3}
+      propertyPath: m_Spells.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b8fc9c7223e8cd4a9c352c6e41fc1f1, type: 2}
     m_RemovedComponents:
     - {fileID: 2807703551398912101, guid: 246d79f6324159048816970c26672a50, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 246d79f6324159048816970c26672a50, type: 3}
