@@ -37,4 +37,4 @@ MonoBehaviour:
         m_SpellEvent: 2
         m_EntityEvent: 0
         m_ApplyTo: 1
-        m_StatusEffect: {fileID: 0}
+        m_StatusEffect: {fileID: 11400000, guid: 7e6f07e0f5efa114bba08391bd69bf16, type: 2}

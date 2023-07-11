@@ -31,8 +31,13 @@ public class SpellCaster : MonoBehaviour
             Debug.LogWarning("There is no spell in slot" + spellSlot);
             return;
         }
-        if (spell.TryGetComponent<S_ActiveSpellComponent>(out var a) && !a.onCooldown)
+        if (spell.TryGetComponent<S_ActiveSpellComponent>(out var s) && !s.onCooldown)
         {
+            //If spell needs entity as target then we don't cast it
+            if (spell.HasComponentOfType<S_TargetCastSpellComponent>() && !target.isEntity)
+            {
+                return;
+            }
             m_Controller.StopActions();
             m_SpellCasting = StartCoroutine(CastSpellRoutine(target, spell));
         }

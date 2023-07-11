@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-//Didn't add component base because Unity doesn't support generic classes serializaiton
+//TODO: Should derive from some component base class
 [CreateAssetMenu(menuName = "Spell", fileName = "New Spell")]
 public class Spell : ScriptableObject
 {
@@ -60,6 +60,10 @@ public class Spell : ScriptableObject
                 return (T)component1;
         }
         return default(T);
+    }
+    public bool HasComponentOfType<T>() where T : SpellComponent
+    {
+        return GetComponent<T>() != null;
     }
     public bool TryGetComponent<T>(out T component) where T : SpellComponent
     {

@@ -23,4 +23,4 @@ MonoBehaviour:
       data:
         statusEffect: {fileID: 0}
         target: {fileID: 0}
-        m_DurationInSeconds: 3
+        <DurationInSeconds>k__BackingField: 2
