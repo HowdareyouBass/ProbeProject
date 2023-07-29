@@ -1,13 +1,11 @@
 
 
-public class SE_BarrierComponent : StatusEffectComponent
+public class SE_BarrierComponent : SE_CountComponent
 {
     public override void Init()
     {
-        throw new System.NotImplementedException();
-    }
-    public override void Destroy()
-    {
-        throw new System.NotImplementedException();
+        OnEffectApplied += targetEntity.EnableBarrier;
+        OnEffectDeapplied += targetEntity.DisableBarrier;
+        base.Init();
     }
 }

@@ -18,7 +18,6 @@ public class HealthBar : MonoBehaviour
 
         m_OnHealthChanged?.Subscribe(SetHealthbarValue);
         m_OnDamaged?.Subscribe(SpawnEffect);
-        m_OnDamaged?.Subscribe(SetHealthbarValue);
     }
     private void OnDisable()
     {
@@ -28,8 +27,8 @@ public class HealthBar : MonoBehaviour
 
     private void SetHealthbarValue(float amount)
     {
-        float currentHealth = m_Entity.stats.currentHealth;
-        float maxHealth = m_Entity.stats.maxHealth;
+        float currentHealth = m_Entity.stats.CurrentHealth;
+        float maxHealth = m_Entity.stats.MaxHealth;
         m_HealthRenderer.material.SetFloat("_Health", currentHealth / maxHealth);
     }
 

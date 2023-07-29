@@ -1,65 +1,67 @@
+using UnityEngine;
+
 public class EntityStats
 {
-    //So i've found this post on stack overflow (https://stackoverflow.com/questions/3182653/are-protected-members-fields-really-that-bad) 
-    //I have PlayerStats and EnemyStats i don't yet know do they deffer or they don't
-    //Not to repeat the code i did this monstrocity
-    //I don't really like this
-    public float currentHealth { get; private set; } = 0;
-    public float maxHealth { get; private set; } = 0;
-    public float attackSpeed { get; private set; } = 20;
-    public float baseAttackSpeed { get; private set; } = 1;
-    public float attackDamage { get => m_Attack * (pureAttack ? 1 : 0.1f) * m_AttackPercent; } //TODO: стили маг и физ ( рендж и ближ )
-    public int attackRange { get; private set; } = 10;
-    public float evasion { get; private set; } = 0;
-    public float regen { get => m_RegeneratePercent * m_RegenerateAmount; }
+    //TODO: may be instead of float use some kind of class just not to use -= or += and use reduce and add functions
+    public float CurrentHealth { get; private set; } = 0;
+    public float MaxHealth { get; private set; } = 0;
+    public float AttackSpeed { get; private set; } = 20;
+    public float BaseAttackSpeed { get; private set; } = 1;
+    public int AttackRange { get; private set; } = 10;
+    public float Evasion { get; private set; } = 0;
+    public float HitChance { get; private set; } = 1;
+    public float SpellCooldownCoefficient { get; private set; } = 1;
+    public float AttackDamage { get => m_Attack * (PureAttack ? 1 : 0.1f) * m_AttackPercent; } //TODO: стили маг и физ ( рендж и ближ )
+    public float Regeneration { get => m_RegeneratePercent * m_RegenerateAmount; }
 
     private float m_Attack = 0;
     private float m_RegenerateAmount = 1;
     private float m_RegeneratePercent = 1;
     private float m_AttackPercent = 1;
-
-    public bool pureAttack = false;
+    
+    public bool PureAttack = false;
+    public bool BarrierIsSet = false;
 
     public void Heal(float amount)
     {
-        if (currentHealth + amount < maxHealth)
-        {
-            currentHealth += amount;
-        }
+        CurrentHealth += amount;
+        Mathf.Clamp(CurrentHealth, 0, MaxHealth);
     }
-    public void TakeDamage(float amount)
-    {
-        currentHealth -= amount;
-        if (currentHealth < 0)
-        {
-            currentHealth = 0;
-        }
+    public void DecreaseHealth(float amount)
+    {   
+        CurrentHealth -= amount;
+        Mathf.Clamp(CurrentHealth, 0, MaxHealth);
     }
+
     public void ApplyRace(Race race)
     {
-        currentHealth = race.health;
-        maxHealth = race.health;
-        m_Attack = race.attack;
-        attackRange = race.attackRange;
-        attackSpeed = race.attackSpeed;
-        baseAttackSpeed = race.baseAttackSpeed;
-        evasion = race.evasion;
+        CurrentHealth = race.Health;
+        MaxHealth = race.Health;
+        m_Attack = race.Attack;
+        AttackRange = race.AttackRange;
+        AttackSpeed = race.AttackSpeed;
+        BaseAttackSpeed = race.BaseAttackSpeed;
+        Evasion = race.Evasion;
     }
     //TODO: Rename this func
-    public void ApplyStatusEffect(PassiveStats stats)
+    public void AddPassiveStats(PassiveStats stats)
     {
-        m_AttackPercent += stats.attackPercent;
-        attackSpeed += stats.attackSpeed;
-        m_RegenerateAmount += stats.regenerate;
-        m_RegeneratePercent += stats.regeneratePercent;
+        m_AttackPercent += stats.AttackPercent;
+        AttackSpeed += stats.AttackSpeed;
+        m_RegenerateAmount += stats.Regenerate;
+        m_RegeneratePercent += stats.RegeneratePercent;
+        SpellCooldownCoefficient -= stats.CooldownReductionInPercents;
+        HitChance -= stats.HitChanceReduction;
     }
     
-    public void DeapplyStatusEffect(PassiveStats stats)
+    public void SubtractPassiveStats(PassiveStats stats)
     {
-        m_AttackPercent -= stats.attackPercent;
-        attackSpeed -= stats.attackSpeed;
-        m_RegenerateAmount -= stats.regenerate;
-        m_RegeneratePercent -= stats.regeneratePercent;
+        m_AttackPercent -= stats.AttackPercent;
+        AttackSpeed -= stats.AttackSpeed;
+        m_RegenerateAmount -= stats.Regenerate;
+        m_RegeneratePercent -= stats.RegeneratePercent;
+        SpellCooldownCoefficient += stats.CooldownReductionInPercents;
+        HitChance += stats.HitChanceReduction;
     }
 
     public void AddAttackPercent(float amount)

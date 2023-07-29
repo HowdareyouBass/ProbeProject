@@ -18,6 +18,6 @@ public class Player : Entity
 
     public override float GetAttackCooldown()
     {
-        return stats.baseAttackSpeed * 100 / (stats.attackSpeed + m_Equipment.GetAttackSpeed());
+        return stats.BaseAttackSpeed * 100 / (stats.AttackSpeed + m_Equipment.GetAttackSpeed());
     }
 }

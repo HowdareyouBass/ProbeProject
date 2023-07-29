@@ -8,16 +8,15 @@ public class S_ActiveSpellComponent : SpellComponent
     [SerializeField] private float m_CooldownInSeconds = 5;
     [SerializeField] private GameObject m_Effect;
 
-    public bool onCooldown { get => currentCooldown > 0; }
-    public float currentCooldown { get; protected set; } = 0;
-    public GameObject effect { get => m_Effect; }
+    public bool OnCooldown => CurrentCooldown > 0;
+    public float CurrentCooldown { get; private set; } = 0;
 
     protected Vector3 effectPosition;
 
     public void DecreaseCooldown()
     {
-        if (currentCooldown >= 0)
-            currentCooldown -= Time.deltaTime;
+        if (OnCooldown)
+            CurrentCooldown -= Time.deltaTime;
     }
     public override void Init()
     {
@@ -25,10 +24,10 @@ public class S_ActiveSpellComponent : SpellComponent
     }
     public void TryCast()
     {
-        if (!onCooldown)
+        if (!OnCooldown)
         {
             effectPosition = target.GetPoint();
-            currentCooldown = m_CooldownInSeconds;
+            CurrentCooldown = m_CooldownInSeconds * casterEntity.stats.SpellCooldownCoefficient;
             Cast(caster, target);
         }
     }

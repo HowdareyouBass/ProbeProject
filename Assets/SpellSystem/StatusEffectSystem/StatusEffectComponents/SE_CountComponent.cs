@@ -7,22 +7,27 @@ public abstract class SE_CountComponent : StatusEffectComponent
 {
     private enum CountDecreaseSource { CountDelta, EventReturn }
 
-    [SerializeField] private int m_StartCount;
+    [SerializeField] private float m_MinimumCount = 0;
+    [SerializeField] private float m_MaximumCount = float.MaxValue;
+    [SerializeField] private float m_StartCount;
     [SerializeField] private EntityEventName m_EntityEvent;
     [SerializeField] private CountDecreaseSource m_DecreaseBy;
-    [SerializeField] private int m_CountDelta;
+    [SerializeField] private float m_CountDelta;
 
-    private int m_CurrentCount;
+    [SerializeField] private bool m_ReverseEventReturnValue;
+
+    public float CurrentCount { get; private set; }
     
     public event Action OnEffectApplied;
-    public event Action OnEffectDeapplied;
+    public event Action<float> OnEffectDeapplied;
 
     public override void Init()
     {
-        m_CurrentCount = m_StartCount;
+        CurrentCount = m_StartCount;
         if (m_DecreaseBy == CountDecreaseSource.EventReturn)
         {
             targetEntity.events.GetEvent<int>(m_EntityEvent, true)?.Subscribe(ChangeCountByEvent);
+            targetEntity.events.GetEvent<float>(m_EntityEvent, true)?.Subscribe(ChangeCountByEvent);
         }
         else
         {
@@ -35,24 +40,37 @@ public abstract class SE_CountComponent : StatusEffectComponent
     {
         targetEntity.events.GetEvent(m_EntityEvent).Unsubscribe(ChangeCountByDelta);
         targetEntity.events.GetEvent<int>(m_EntityEvent, false)?.Unsubscribe(ChangeCountByEvent);
+        targetEntity.events.GetEvent<float>(m_EntityEvent, false)?.Unsubscribe(ChangeCountByEvent);
     }
 
     private async Task StartCount()
     {
         OnEffectApplied?.Invoke();
-        while (!statusEffect.stopEffectToken.IsCancellationRequested && m_CurrentCount > 0)
+        while (!statusEffect.stopEffectToken.IsCancellationRequested && CurrentCount > m_MinimumCount && CurrentCount < m_MaximumCount)
         {
             await Task.Yield();
         }
-        OnEffectDeapplied?.Invoke();
+        OnEffectDeapplied?.Invoke(-CurrentCount);
     }
     private void ChangeCountByEvent(int amount)
     {
-        m_CurrentCount += amount;
+        if (m_ReverseEventReturnValue)
+        {
+            amount = -amount;
+        }
+        CurrentCount += amount;
+    }
+    private void ChangeCountByEvent(float amount)
+    {
+        if (m_ReverseEventReturnValue)
+        {
+            amount = -amount;
+        }
+        CurrentCount += amount;
     }
     private void ChangeCountByDelta()
     {
-        Debug.Log(m_CurrentCount);
-        m_CurrentCount += m_CountDelta;
+        Debug.Log(CurrentCount);
+        CurrentCount += m_CountDelta;
     }
 }

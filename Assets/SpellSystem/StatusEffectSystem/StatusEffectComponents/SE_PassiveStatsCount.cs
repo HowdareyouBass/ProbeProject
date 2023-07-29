@@ -8,7 +8,7 @@ public class SE_PassiveStatsCount : SE_CountComponent
     public override void Init()
     {
         OnEffectApplied += ApplyStats;
-        OnEffectDeapplied += DeapplyStats;
+        OnEffectDeapplied += (float amountOverpassed) => { DeapplyStats(); };
         base.Init();
     }
 

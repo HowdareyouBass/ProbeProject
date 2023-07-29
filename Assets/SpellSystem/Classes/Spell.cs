@@ -20,7 +20,6 @@ public class Spell : ScriptableObject
             events = new SpellEvents();
     }
 
-    //Ugly
     public void Init(Transform caster)
     {
         foreach (SpellComponent component in m_Components)
@@ -45,21 +44,25 @@ public class Spell : ScriptableObject
 #region Components
     //Everything related to components
 
-    //Opana kostyli
-    //TODO: Refactor this dude it looks so fucking bad
+    //In this method we give priority to exactly same type, if there is no such we take first of subclass
+    //And if we have no subclass types we return default value wich for SpellComponent is null
     public T GetComponent<T>() where T : SpellComponent
     {
+        bool isSubclassFound = false;
+        T result = default(T);
         foreach (SpellComponent component in m_Components)
         {
             if (component.GetType() == typeof(T))
+            {
                 return (T)component;
+            }
+            if (component.GetType().IsSubclassOf(typeof(T)) && !isSubclassFound)
+            {
+                result = (T)component;
+                isSubclassFound = true;
+            }
         }
-        foreach (SpellComponent component1 in m_Components)
-        {
-            if (component1.GetType().IsSubclassOf(typeof(T)))
-                return (T)component1;
-        }
-        return default(T);
+        return result;
     }
     public bool HasComponentOfType<T>() where T : SpellComponent
     {

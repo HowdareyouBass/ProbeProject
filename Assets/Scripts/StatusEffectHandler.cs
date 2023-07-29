@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 public class StatusEffectHandler : MonoBehaviour
 {
+    public ReadOnlyCollection<StatusEffect> Effects => m_StatusEffects.AsReadOnly();
     private List<StatusEffect> m_StatusEffects;
+
     private void Awake()
     {
         m_StatusEffects = new List<StatusEffect>(50);

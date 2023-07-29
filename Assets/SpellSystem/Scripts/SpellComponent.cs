@@ -1,9 +1,0 @@
-using UnityEngine;
-
-public abstract class SpellComponent1 : MonoBehaviour
-{
-    [HideInInspector] public SpellScript spellScript;
-    [HideInInspector] public Transform caster;
-    [HideInInspector] public Transform target;
-    public Entity casterEntity => caster.GetComponent<EntityScript>().GetEntity();
-}

@@ -4,21 +4,19 @@ using UnityEngine;
 using System.Linq;
 using System;
 using System.Collections.Generic;
-using BinaryEgo.Editor.UI;
-using BinaryEgo.UI;
-using UnityEngine.UIElements;
-using UnityEditor.UIElements;
+//using BinaryEgo.Editor.UI;
 
 //2 inspectors cuz unity can't serialize generic types
 //TODO:Should do 1 inspector and derive from it
 //And try Unity UI Toolkit
+
 [CustomEditor(typeof(Spell))]
 [CanEditMultipleObjects]
 public class SpellCustomInspector : Editor 
 {
     private List<Type> m_DerivedList;
     private List<string> m_DerivedListNames;
-    private GenericMenuPopup m_Popup;
+    //private GenericMenuPopup m_Popup;
     private Spell m_Object;
     //For old UI
     private bool m_ShowPopup = false;

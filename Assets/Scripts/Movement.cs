@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private int m_RotationSpeed;
-
+    
     private NavMeshAgent m_Agent;
     private EntityController m_Controller;
     private Entity m_Entity;

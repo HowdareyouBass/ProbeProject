@@ -5,16 +5,18 @@ using System.Threading;
 using System;
 
 //TODO: Rethink about tasks and everything
-//Didn't add component base because Unity doesn't support generic classes serializaiton
+//TODO: Component base
 [CreateAssetMenu(menuName = "Status Effect", fileName = "New Status Effect")]
 public class StatusEffect : ScriptableObject
 {
+    //[SerializeField] private string m_Name;
     [SerializeField] private float m_DefaultDuration = 3;
     private CancellationTokenSource m_StopEffectSource;
     public List<Task> effectTasks { get; private set; }
 
     public CancellationToken stopEffectToken { get; private set; }
     public float defaultDuration { get => m_DefaultDuration; }
+    public string Name { get => name; }
 
     public event Action<StatusEffect> OnEffectEnd;
 

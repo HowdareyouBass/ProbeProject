@@ -32,10 +32,10 @@ public class Attack : MonoBehaviour
     {
         while (true)
         {
-            yield return m_Movement.FolowUntilInRange(target, m_Entity.stats.attackRange);
+            yield return m_Movement.FolowUntilInRange(target, m_Entity.stats.AttackRange);
             if (m_CanAttack && m_Entity.canAttack)
             {
-                m_Entity.DamageTarget(target.transform);
+                m_Entity.AttackTarget(target);
                 StartCoroutine(WaitForNextAttack());
             }
 

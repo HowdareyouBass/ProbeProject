@@ -31,9 +31,9 @@ public class SpellCaster : MonoBehaviour
             Debug.LogWarning("There is no spell in slot" + spellSlot);
             return;
         }
-        if (spell.TryGetComponent<S_ActiveSpellComponent>(out var s) && !s.onCooldown)
+        if (spell.TryGetComponent<S_ActiveSpellComponent>(out var s) && !s.OnCooldown)
         {
-            //If spell needs entity as target then we don't cast it
+            //If spell needs entity as target then we don't cast
             if (spell.HasComponentOfType<S_TargetCastSpellComponent>() && !target.isEntity)
             {
                 return;
@@ -49,6 +49,7 @@ public class SpellCaster : MonoBehaviour
             yield return m_Movement.FolowUntilInRange(target, targetCastSpell.castRange);
         }
         spell.Cast(target);
+        m_EntityEvents.GetEvent(EntityEventName.OnAnySpellCasted).Trigger();
         yield break;
     }
 

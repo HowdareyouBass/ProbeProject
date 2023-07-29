@@ -33,7 +33,8 @@ public class StatusEffectCustomInspector : Editor
 
     public override void OnInspectorGUI()
     {
-        StatusEffect obj = ((StatusEffect)target);
+        StatusEffect obj = (StatusEffect)target;
+
         SerializedProperty property = serializedObject.FindProperty("m_Components");
         foreach (SerializedProperty prop in property)
         {

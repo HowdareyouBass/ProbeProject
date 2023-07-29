@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 877416c99eddb0543acdd97f2119cf79, type: 3}
+  m_Name: Barrier.effect
+  m_EditorClassIdentifier: 
+  m_DefaultDuration: 3
+  m_Components:
+  - rid: 7643260124454453248
+  references:
+    version: 2
+    RefIds:
+    - rid: 7643260124454453248
+      type: {class: SE_BarrierComponent, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffect: {fileID: 0}
+        target: {fileID: 0}
+        m_MinimumCount: 0
+        m_MaximumCount: 3.4028235e+38
+        m_StartCount: 5
+        m_EntityEvent: 7
+        m_DecreaseBy: 1
+        m_CountDelta: 0
+        m_ReverseEventReturnValue: 1

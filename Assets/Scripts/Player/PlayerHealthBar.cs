@@ -10,28 +10,26 @@ public class PlayerHealthBar : MonoBehaviour
     [SerializeField] private Image m_Fill;
 
     private Entity m_Player;
-    private GameEvent<float> m_OnDamaged;
+    private GameEvent<float> m_OnHealthChanged;
 
     private void Start()
     {
-        m_Slider.maxValue = m_Player.stats.maxHealth;
-        SetHealthbarValue(m_Player.stats.maxHealth);
+        m_Slider.maxValue = m_Player.stats.MaxHealth;
+        SetHealthbarValue(m_Player.stats.MaxHealth);
     }
     private void OnEnable()
     {
         m_Player = m_PlayerScript.GetEntity();
-        m_OnDamaged = m_Player.events.GetEvent<float>(EntityEventName.OnDamaged, true);
-        m_OnDamaged?.Subscribe(DecreaseHealthbarValue);
+        m_OnHealthChanged = m_Player.events.GetEvent<float>(EntityEventName.OnHealthChanged, true);
+        m_OnHealthChanged?.Subscribe(ChangeHealthbarValue);
     }
     private void OnDisable()
     {
-        m_OnDamaged?.Unsubscribe(DecreaseHealthbarValue);
+        m_OnHealthChanged?.Unsubscribe(ChangeHealthbarValue);
     }
 
-    private void DecreaseHealthbarValue(float value)
+    private void ChangeHealthbarValue(float value)
     {
-        if (value < 0)
-            throw new ArgumentException("Damage can not be negative.");
         SetHealthbarValue(m_Slider.value - value);
     }
     private void SetHealthbarValue(float value)
