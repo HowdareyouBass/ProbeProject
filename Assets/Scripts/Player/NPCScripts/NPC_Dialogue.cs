@@ -22,9 +22,11 @@ public class NPC_Dialogue : MonoBehaviour
             if(dialoguePanel.activeInHierarchy)
             {
                 zeroText();
+                StopAllCoroutines();
             }
             else
             {
+                zeroText();
                 dialoguePanel.SetActive(true);
                 StartCoroutine(Typing());
             }
