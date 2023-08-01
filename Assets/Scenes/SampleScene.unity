@@ -5543,7 +5543,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 711645283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa3da93435bde8544a0559e64ab88c6b, type: 3}
+  m_Script: {fileID: 11500000, guid: 20df5010c6ae27240abf96a09aedbfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
@@ -14495,13 +14495,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2034544432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60fe70ca2f6ccc54ab2506056d060019, type: 3}
+  m_Script: {fileID: 11500000, guid: cff513669455119489354db3adbc8068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryManager: {fileID: 979717391}
   itemsToPick:
-  - {fileID: 11400000, guid: edd5733e0685896489859904183b48de, type: 2}
   - {fileID: 11400000, guid: e46b308d127e51a4aa13e15a9c6c24c5, type: 2}
+  - {fileID: 11400000, guid: edd5733e0685896489859904183b48de, type: 2}
 --- !u!114 &2034544435
 MonoBehaviour:
   m_ObjectHideFlags: 0

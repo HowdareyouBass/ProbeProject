@@ -4,7 +4,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerStatsScript : MonoBehaviour
+public class PlayerGuiStatsScript : MonoBehaviour
 {
     [Header("PlayerStats")]
     public int maxHealth = 100;
