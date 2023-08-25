@@ -9,8 +9,11 @@ using UnityEngine.UI;
 public class Tooltip : MonoBehaviour
 {
     public TextMeshProUGUI headerField;
+    public TextMeshProUGUI raceField;
+    public TextMeshProUGUI relationsField;
+    public TextMeshProUGUI statsField;
     public TextMeshProUGUI contentField;
-
+  
     public LayoutElement layoutElement;
 
     public int characterWrapLimit;
@@ -22,7 +25,7 @@ public class Tooltip : MonoBehaviour
        rectTransform = GetComponent<RectTransform>();
     }
 
-    public void SetText(string content, string header = "")
+    public void SetText(string content, string race, string relations, string stats, string header = "")
     {
         if (string.IsNullOrEmpty(header))
         {
@@ -35,11 +38,20 @@ public class Tooltip : MonoBehaviour
         }
 
         contentField.text = content;
+        raceField.text = "Race: " + race;
+        relationsField.text = "Relations: " + relations;
+        statsField.text = "Statistics: " + stats;
 
         int headerLenght = headerField.text.Length;
         int contentLenght = contentField.text.Length;
+        int raceLenght = raceField.text.Length;
+        int relationsLenght = relationsField.text.Length;
 
-        layoutElement.enabled = (headerLenght > characterWrapLimit || contentLenght > characterWrapLimit) ? true : false;
+        layoutElement.enabled = (headerLenght > characterWrapLimit ||
+                                 contentLenght > characterWrapLimit ||
+                                 raceLenght > characterWrapLimit ||
+                                 relationsLenght > characterWrapLimit) ? true : false;
+
     }
 
     private void Update()

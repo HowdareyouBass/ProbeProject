@@ -8,6 +8,9 @@ public class TooltipTrigger : MonoBehaviour
 {
     public string content;
     public string header;
+    public string race;
+    public string relations;
+    public string stats;
     private bool mouseOver;
 
     public void OnMouseEnter()
@@ -27,7 +30,7 @@ public class TooltipTrigger : MonoBehaviour
     {
         if (mouseOver && Input.GetMouseButtonDown(0))
         {
-            TooltipScript.Show(content, header);
+            TooltipScript.Show(content, race, relations, stats, header);
         }
     }
 }

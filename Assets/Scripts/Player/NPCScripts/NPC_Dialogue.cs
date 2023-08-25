@@ -5,29 +5,53 @@ using UnityEngine.UI;
 
 public class NPC_Dialogue : MonoBehaviour
 {
-    public GameObject dialoguePanel;
-    public Text dialogueText;
-    public string[] dialogue;
-    private int index;
+    [Header("TypingSound")]
+    public AudioClip[] typingSound;
+    public AudioSource typingSoundSource;
 
+    [Header("Game Objects")]
+    public GameObject dialoguePanel;
+    public Image NPCPhoto;
+    public Text NPCName;
+    public Text dialogueText;
     public GameObject contButton;
+    public GameObject skipButton;
+
+    [Header("Character description")]
+    public string NPCNameText;
+    public string[] dialogue;
+    public string[] badRepDialogue;
+    public Sprite NPCPhotoSprite;
+
+    [Header("Typing speed")]
     public float wordSpeed;
-    public bool playerIsClose;
-    
-    // Update is called once per frame
+
+    [HideInInspector] private int index;
+    [HideInInspector] public bool playerIsClose;
+    [HideInInspector] public int respectPoints = 10;
+
     void Update()
     {
        if(Input.GetKeyDown(KeyCode.E) && playerIsClose)
         {
             if(dialoguePanel.activeInHierarchy)
             {
+                SkipTyping();
+                respectPoints -= 1;
                 zeroText();
-                StopAllCoroutines();
             }
             else
             {
+                NPCPhoto.sprite = NPCPhotoSprite;
+                NPCName.text = NPCNameText;
                 zeroText();
                 dialoguePanel.SetActive(true);
+
+                if (respectPoints <= 0)
+                {
+                    dialogue = badRepDialogue;
+                }
+
                 StartCoroutine(Typing());
             }
         }
@@ -35,6 +59,7 @@ public class NPC_Dialogue : MonoBehaviour
        if (dialogueText.text == dialogue[index])
         {
             contButton.SetActive(true);
+            skipButton.SetActive(false);
         }
     }
 
@@ -48,16 +73,28 @@ public class NPC_Dialogue : MonoBehaviour
 
     IEnumerator Typing()
     {
-        foreach(char letter in dialogue[index].ToCharArray())
+        int randNum = Random.Range(0, typingSound.Length);
+
+        typingSoundSource.PlayOneShot(typingSound[randNum]);
+
+        foreach (char letter in dialogue[index].ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
         }
     }
 
+    public void SkipTyping()
+    {
+        StopAllCoroutines();
+        respectPoints -= 1;
+        dialogueText.text = dialogue[index];
+    }
+
     public void NextLine()
     {
         contButton.SetActive(false);
+        skipButton.SetActive(true);
 
         if(index < dialogue.Length - 1)
         {
@@ -85,6 +122,11 @@ public class NPC_Dialogue : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            if (index < dialogue.Length - 1 || dialogueText.text != dialogue[index])
+            {
+                respectPoints -= 1;
+            }
+
             playerIsClose = false;
             zeroText();
         }
