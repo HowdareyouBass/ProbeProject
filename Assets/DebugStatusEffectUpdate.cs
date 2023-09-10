@@ -16,7 +16,7 @@ public class DebugStatusEffectUpdate : MonoBehaviour
         int i = 1;
         foreach (StatusEffect effect in m_StatusEffectHandler.Effects)
         {
-            m_Text.text = $"{i} {effect.Name.Substring(0, effect.Name.LastIndexOf("(Clone)"))} ";
+            m_Text.text = $"{i} {effect.Name} ";
             if (effect.TryGetComponent<SE_TimeComponent>(out SE_TimeComponent time))
             {
                 m_Text.text += $"TimeLeft: {time.LeftTime}\n";

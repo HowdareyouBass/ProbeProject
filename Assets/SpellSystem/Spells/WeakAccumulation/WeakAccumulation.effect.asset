@@ -13,7 +13,21 @@ MonoBehaviour:
   m_Name: WeakAccumulation.effect
   m_EditorClassIdentifier: 
   m_DefaultDuration: 3
-  m_Components: []
+  m_Components:
+  - rid: 5463700934550880256
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5463700934550880256
+      type: {class: SE_AccumulationComponent, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffect: {fileID: 0}
+        target: {fileID: 0}
+        m_MinimumCount: -1
+        m_MaximumCount: 500
+        m_StartCount: 0
+        m_EntityEvent: 3
+        m_DecreaseBy: 1
+        m_CountDelta: 0
+        m_ReverseEventReturnValue: 0
+        <EffectAppliedAfterAccumulated>k__BackingField: {fileID: 0}

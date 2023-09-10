@@ -50,7 +50,11 @@ public abstract class SE_CountComponent : StatusEffectComponent
         {
             await Task.Yield();
         }
-        OnEffectDeapplied?.Invoke(-CurrentCount);
+        // Only awake effect deapplied if effect was not canseled from another place
+        if (!statusEffect.stopEffectToken.IsCancellationRequested)
+        {
+            OnEffectDeapplied?.Invoke(-CurrentCount);
+        }
     }
     private void ChangeCountByEvent(int amount)
     {

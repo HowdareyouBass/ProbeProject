@@ -16,7 +16,25 @@ public class StatusEffect : ScriptableObject
 
     public CancellationToken stopEffectToken { get; private set; }
     public float defaultDuration { get => m_DefaultDuration; }
-    public string Name { get => name; }
+    /// <summary>
+    /// Returns formatted name of StatusEffect
+    /// </summary>
+    public string Name
+    { 
+        get
+        {
+            string result = name;
+            if (result.LastIndexOf("(Clone)") != -1)
+            {
+                result = result.Substring(0, result.LastIndexOf("(Clone)"));
+            }
+            if (result.LastIndexOf(".effect") != -1)
+            {
+                result = result.Substring(0, result.LastIndexOf(".effect"));
+            }
+            return result;
+        }
+    }
 
     public event Action<StatusEffect> OnEffectEnd;
 
@@ -43,11 +61,10 @@ public class StatusEffect : ScriptableObject
     {
         m_StopEffectSource.Cancel();
     }
-
+    // Unity cannot be used in asyng task methods because unity api only works on 1 thread
     public async void StartEffect()
     {
         await Task.WhenAll(effectTasks);
-        //Idk can't debug target ????? FIXME:
         foreach (StatusEffectComponent component in m_Components)
         {
             component.Destroy();

@@ -38,7 +38,11 @@ public abstract class SE_TimeComponent : StatusEffectComponent
             LeftTime--;
             await Task.Delay(1);
         }
-        OnEffectDeapplied?.Invoke();
+        // Only awake effect deapplied if effect was not canseled from another place
+        if (!statusEffect.stopEffectToken.IsCancellationRequested)
+        {
+            OnEffectDeapplied?.Invoke();
+        }
     }
 
     protected virtual void PerMillisecond()

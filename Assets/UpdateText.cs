@@ -15,8 +15,16 @@ public class UpdateText : MonoBehaviour
         m_Text.text = "";
         for (int i = 0; i < SpellInventory.MAXIMUM_SPELLS; i++)
         {
-            if (m_SpellInventory.GetSpell(i) != null)
-                m_Text.text += $"Spell {i + 1}: {Mathf.Round(m_SpellInventory.GetSpell(i).GetComponent<S_ActiveSpellComponent>().CurrentCooldown)}";
+            Spell spell = m_SpellInventory.GetSpell(i);
+            if (spell != null && spell.TryGetComponent<S_ActiveSpellComponent>(out S_ActiveSpellComponent activeSpellComponent))
+            {
+                m_Text.text += spell.Name;
+                m_Text.text += $" slot:{i + 1} : {Mathf.Round(activeSpellComponent.CurrentCooldown)}";
+            }
+            else
+            {
+                m_Text.text += "No spell in slot: " + (i+1).ToString();
+            }
             m_Text.text += "\n";
         }
     }

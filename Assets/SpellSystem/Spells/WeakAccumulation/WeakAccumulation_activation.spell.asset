@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2332b67b5d50b2429226faff526af16, type: 3}
-  m_Name: WeakAccumulation.spell
+  m_Name: WeakAccumulation_activation.spell
   m_EditorClassIdentifier: 
   m_Components:
-  - rid: 7643259739865874433
-  - rid: 7643259739865874434
-  spellGameObject: {fileID: 0}
+  - rid: 5463700931033694212
+  - rid: 5463700931033694213
+  - rid: 5463700931033694216
   references:
     version: 2
     RefIds:
-    - rid: 7643259739865874433
+    - rid: 5463700931033694212
       type: {class: S_SelfCastSpell, ns: , asm: Assembly-CSharp}
       data:
         spell: {fileID: 0}
@@ -28,7 +28,14 @@ MonoBehaviour:
         m_HeatlhCost: 0
         m_CooldownInSeconds: 5
         m_Effect: {fileID: 0}
-    - rid: 7643259739865874434
+    - rid: 5463700931033694213
+      type: {class: S_SwitchSpell, ns: , asm: Assembly-CSharp}
+      data:
+        spell: {fileID: 0}
+        caster: {fileID: 0}
+        m_SpellToSwitchTo: {fileID: 11400000, guid: 6cc5e867dd6a9df40818c04b06838ba2, type: 2}
+        m_CooldownAfterSwitch: 0
+    - rid: 5463700931033694216
       type: {class: S_StatusEffectComponent, ns: , asm: Assembly-CSharp}
       data:
         spell: {fileID: 0}

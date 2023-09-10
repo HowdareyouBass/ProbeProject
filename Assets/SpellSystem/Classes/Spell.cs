@@ -7,8 +7,24 @@ public class Spell : ScriptableObject
 {
     [SerializeReference] private List<SpellComponent> m_Components;
     
-    [HideInInspector] public GameObject spellGameObject;
     public SpellEvents events { get; private set; }
+    public int InventorySlot { get; private set; }
+    public string Name
+    { 
+        get
+        {
+            string result = name;
+            if (name.LastIndexOf("(Clone)") != -1)
+            {
+                result = result.Substring(0, result.LastIndexOf("(Clone)"));
+            }
+            if (name.LastIndexOf(".spell") != -1)
+            {
+                result = result.Substring(0, result.LastIndexOf(".spell"));
+            }
+            return result;
+        }
+    }
 
     public List<SpellComponent> components { get => m_Components; }
 
@@ -20,8 +36,9 @@ public class Spell : ScriptableObject
             events = new SpellEvents();
     }
 
-    public void Init(Transform caster)
+    public void Init(Transform caster, int spellSlot)
     {
+        InventorySlot = spellSlot;
         foreach (SpellComponent component in m_Components)
         {
             component.caster = caster;

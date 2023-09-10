@@ -15,6 +15,7 @@ public abstract class Events<T> where T : Enum
     }
     protected abstract void InitEvents();
 
+    // TODO: Need to find a way to just use GetEvent for all the types
     public GameEvent GetEvent(T name)
     {
         return m_Events[name];

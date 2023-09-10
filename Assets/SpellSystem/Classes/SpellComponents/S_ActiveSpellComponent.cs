@@ -18,6 +18,10 @@ public class S_ActiveSpellComponent : SpellComponent
         if (OnCooldown)
             CurrentCooldown -= Time.deltaTime;
     }
+    public void GoOnCooldown()
+    {
+        CurrentCooldown = m_CooldownInSeconds * casterEntity.stats.SpellCooldownCoefficient;
+    }
     public override void Init()
     {
         spell.events.GetEvent(SpellEventName.OnTryCast).Subscribe(TryCast);
@@ -27,7 +31,7 @@ public class S_ActiveSpellComponent : SpellComponent
         if (!OnCooldown)
         {
             effectPosition = target.GetPoint();
-            CurrentCooldown = m_CooldownInSeconds * casterEntity.stats.SpellCooldownCoefficient;
+            GoOnCooldown();
             Cast(caster, target);
         }
     }

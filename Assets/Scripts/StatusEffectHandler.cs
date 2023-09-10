@@ -19,6 +19,16 @@ public class StatusEffectHandler : MonoBehaviour
         m_StatusEffects.Add(effect);
         effect.StartEffect();
     }
+    public void DeleteStatusEffect(StatusEffect effect)
+    {
+        foreach(StatusEffect active in m_StatusEffects)
+        {
+            if (active.Name == effect.Name)
+            {
+                active.StopEffect();
+            }
+        }
+    }
     private void RemoveEffect(StatusEffect effect)
     {
         m_StatusEffects.Remove(effect);

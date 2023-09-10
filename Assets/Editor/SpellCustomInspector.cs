@@ -47,7 +47,7 @@ public class SpellCustomInspector : Editor
         }
     }
     //FIXME: Doesn't update in realtime
-    //TODO: Implement new UI for spells and status effects
+    //TODO: Implement new UI for spells and status effects using UnityUI toolkit
     // public override VisualElement CreateInspectorGUI()
     // {
     //     VisualElement root = new VisualElement();

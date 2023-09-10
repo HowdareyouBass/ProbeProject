@@ -49,7 +49,7 @@ public class S_StatusEffectComponent : SpellComponent
         }
         else
         {
-            Debug.Log("There is no StatusEffectHandler component ");
+            Debug.Log("Can't get status effect handler component");
         }
     }
     //TODO: Might change it from Transform to Target

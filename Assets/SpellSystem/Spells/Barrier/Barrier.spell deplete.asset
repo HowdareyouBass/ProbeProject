@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2332b67b5d50b2429226faff526af16, type: 3}
-  m_Name: Barrier.spell
+  m_Name: Barrier.spell deplete
   m_EditorClassIdentifier: 
   m_Components:
-  - rid: 447834599051755521
-  - rid: 447834599051755522
+  - rid: 7643259576443994112
+  - rid: 7643259576443994113
+  spellGameObject: {fileID: 0}
   references:
     version: 2
     RefIds:
-    - rid: 447834599051755521
+    - rid: 7643259576443994112
       type: {class: S_SelfCastSpell, ns: , asm: Assembly-CSharp}
       data:
         spell: {fileID: 0}
@@ -27,7 +28,7 @@ MonoBehaviour:
         m_HeatlhCost: 0
         m_CooldownInSeconds: 5
         m_Effect: {fileID: 0}
-    - rid: 447834599051755522
+    - rid: 7643259576443994113
       type: {class: S_StatusEffectComponent, ns: , asm: Assembly-CSharp}
       data:
         spell: {fileID: 0}

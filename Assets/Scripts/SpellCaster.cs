@@ -48,6 +48,10 @@ public class SpellCaster : MonoBehaviour
         {
             yield return m_Movement.FolowUntilInRange(target, targetCastSpell.castRange);
         }
+        if (spell.TryGetComponent<S_SpotCastSpell>(out S_SpotCastSpell spotCastSpell))
+        {
+            yield return m_Movement.FolowUntilInRange(target, spotCastSpell.castRange);
+        }
         spell.Cast(target);
         m_EntityEvents.GetEvent(EntityEventName.OnAnySpellCasted).Trigger();
         yield break;
