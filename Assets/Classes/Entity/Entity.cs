@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+//God object problem maybe? FIXME:
 public abstract class Entity
 {
     public EntityStats stats { get; private set; }
@@ -21,42 +22,84 @@ public abstract class Entity
     {
         if (amount < 0)
             throw new ArgumentOutOfRangeException(nameof(amount));
-        stats.TakeDamage(amount);
+        events.GetEvent<float>(EntityEventName.OnHitTaken, true).Trigger(amount);
+        if (stats.BarrierIsSet)
+        {
+            Debug.Log("Barrier is set");
+            return;
+        }
+        stats.DecreaseHealth(amount);
+        events.GetEvent<float>(EntityEventName.OnDamaged, true).Trigger(amount);
+        events.GetEvent<float>(EntityEventName.OnHealthChanged, true).Trigger(amount);
+        if (stats.CurrentHealth <= 0)
+        {
+            events.GetEvent(EntityEventName.OnDeath).Trigger();
+        }
+    }
+    public void EnableBarrier()
+    {
+        stats.BarrierIsSet = true;
+    }
+    public void DisableBarrier(float barrierDamageOverpassed)
+    {
+        stats.BarrierIsSet = false;
+        TakeDamage(barrierDamageOverpassed);
     }
     public void Regenerate()
     {
-        if (stats.regen <= 0)
+        if (stats.Regeneration <= 0)
             return;
-        stats.Heal(stats.regen * Time.deltaTime);
+        stats.Heal(stats.Regeneration * Time.deltaTime);
+        if (stats.CurrentHealth < stats.MaxHealth)
+            events.GetEvent<float>(EntityEventName.OnHealthChanged, true).Trigger(stats.Regeneration);
     }
 
-    public void ApplyStatusEffect(StatusEffect effect)
+    public void ApplyPassive(PassiveStats effectStats)
     {
-        if (effect.applySleep)
-        {
-            events.GetEvent(EntityEventName.StopMovement).Trigger();
-            canAttack = false;
-            canMove = false;
-            canCast = false;
-        }
-        stats.ApplyStatusEffect(effect);
+        stats.AddPassiveStats(effectStats);
     }
-    public void DeapplyStatusEffect(StatusEffect effect)
+    public void DeapplyPassive(PassiveStats effectStats)
     {
-        if (effect.applySleep)
-        {
-            canAttack = true;
-            canMove = true;
-            canCast = true;
-        }
-        stats.DeapplyStatusEffect(effect);
+        stats.SubtractPassiveStats(effectStats);
     }
-    public void DamageTarget(Transform target)
+
+    public void Sleep()
     {
-        target.GetComponent<Health>().TakeDamage(stats.attackDamage);
+        events.GetEvent(EntityEventName.StopMovement).Trigger();
+        canMove = false;
+        canAttack = false;
+        canCast = false;
+    }
+    public void Awake()
+    {
+        canMove = true;
+        canAttack = true;
+        canCast = true;
+    }
+
+    public void Silence()
+    {
+        Debug.Log("Should silence");
+        canCast = false;
+    }
+    public void Desilence()
+    {
+        Debug.Log("should desilence");
+        canCast = true;
+    }
+
+    public void AttackTarget(Target target)
+    {
+        if (UnityEngine.Random.value >= stats.HitChance - target.TargetEntity.stats.Evasion)
+        {
+            Debug.Log("Miss");
+            return;
+        }
+        target.TargetEntity.TakeDamage(stats.AttackDamage);
+        events.GetEvent<Transform>(EntityEventName.OnAttack, true).Trigger(target.transform);
     }
     public virtual float GetAttackCooldown()
     {
-        return stats.baseAttackSpeed * 100 / stats.attackSpeed;
+        return stats.BaseAttackSpeed * 100 / stats.AttackSpeed;
     }
 }

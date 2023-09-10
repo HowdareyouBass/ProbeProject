@@ -104,8 +104,11 @@ MonoBehaviour:
     m_DurationInSeconds: 3
     m_StartCount: 0
     m_CountDelta: 0
+    m_DecreaseCountBy: 0
+    m_DecreaseCount: 0
+    m_TickTimeInSeconds: 0
+    m_TickDamage: 0
     m_Stats:
       m_AttackSpeed: 0
-      m_Regenerate: -0.3
+      m_Regenerate: -4.6
       m_RegeneratePercent: 0
-    m_DecreaseCount: 0

@@ -15,10 +15,12 @@ public abstract class Events<T> where T : Enum
     }
     protected abstract void InitEvents();
 
+    // TODO: Need to find a way to just use GetEvent for all the types
     public GameEvent GetEvent(T name)
     {
         return m_Events[name];
     }
+    //canBeError False if you handle null value by yourself
     public GameEvent<EventType> GetEvent<EventType>(T name, bool canBeError)
     {
         GameEvent<EventType> res = m_Events[name] as GameEvent<EventType>;
@@ -44,7 +46,9 @@ public enum EntityEventName
     OnAttack,
     OnDamaged,
     OnHealthChanged,
-    StopMovement
+    StopMovement,
+    OnAnySpellCasted,
+    OnHitTaken
 }
 public class EntityEvents : Events<EntityEventName>
 {
@@ -53,9 +57,12 @@ public class EntityEvents : Events<EntityEventName>
         AddEvent(EntityEventName.None);
         AddEvent(EntityEventName.OnDeath);
         AddEvent<Transform>(EntityEventName.OnAttack);
+        //TODO: change event name from on health changed to regen applied!
         AddEvent<float>(EntityEventName.OnDamaged);
         AddEvent<float>(EntityEventName.OnHealthChanged);
         AddEvent(EntityEventName.StopMovement);
+        AddEvent(EntityEventName.OnAnySpellCasted);
+        AddEvent<float>(EntityEventName.OnHitTaken);
     }
 }
 
@@ -63,7 +70,8 @@ public enum SpellEventName
 {
     None,
     OnImpact,
-    OnCast
+    OnCast,
+    OnTryCast
 }
 public class SpellEvents : Events<SpellEventName>
 {
@@ -72,5 +80,6 @@ public class SpellEvents : Events<SpellEventName>
         AddEvent(SpellEventName.None);
         AddEvent(SpellEventName.OnImpact);
         AddEvent(SpellEventName.OnCast);
+        AddEvent(SpellEventName.OnTryCast);
     }
 }

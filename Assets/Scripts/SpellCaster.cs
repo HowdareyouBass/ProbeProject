@@ -9,7 +9,6 @@ public class SpellCaster : MonoBehaviour
     private EntityEvents m_EntityEvents;
     private EntityController m_Controller;
     private SpellInventory m_Spells;
-    private ActiveSpell m_Spell;
 
     private void Start()
     {
@@ -17,43 +16,44 @@ public class SpellCaster : MonoBehaviour
         m_Spells = GetComponent<SpellInventory>();
         m_EntityEvents = GetComponent<EntityScript>().GetEntity().events;
         m_Controller = GetComponent<EntityController>();
-        UpdateSpells();
     }
-    private void UpdateSpells()
+    private void Update()
     {
-        foreach (SpellScript spell in gameObject.GetComponentsInChildren<SpellScript>())
-        {
-            Destroy(spell.gameObject);
-        }
-        for (int i = 0; i < SpellInventory.MAXIMUM_SPELLS; i++)
-        {
-            GameObject spellGO = m_Spells.GetSpell(i);
-            if (spellGO == null) continue;
-            if (!spellGO.TryGetComponent<ActiveSpell>(out var a))
-            {
-                Instantiate(spellGO, transform);
-            }
-        }
+        m_Spells.DecreaseSpellsCooldown();
     }
 
     public void CastSpell(int spellSlot, Target target)
     {
-        m_Controller.StopActions();
-        GameObject spellGO = m_Spells.GetSpell(spellSlot);
+        Spell spell = m_Spells.GetSpell(spellSlot);
         
-        if (spellGO.TryGetComponent<ActiveSpell>(out m_Spell))
+        if (spell == null)
         {
-            m_SpellCasting = StartCoroutine(CastSpellRoutine(target, m_Spell.castRange));
+            Debug.LogWarning("There is no spell in slot" + spellSlot);
+            return;
         }
-        foreach (ICastable spell in GetComponentsInChildren<ICastable>())
+        if (spell.TryGetComponent<S_ActiveSpellComponent>(out var s) && !s.OnCooldown)
         {
-            spell.Cast(transform, target.transform);
+            //If spell needs entity as target then we don't cast
+            if (spell.HasComponentOfType<S_TargetCastSpellComponent>() && !target.isEntity)
+            {
+                return;
+            }
+            m_Controller.StopActions();
+            m_SpellCasting = StartCoroutine(CastSpellRoutine(target, spell));
         }
     }
-    private IEnumerator CastSpellRoutine(Target target, int castRange)
+    private IEnumerator CastSpellRoutine(Target target, Spell spell)
     {
-        yield return m_Movement.FolowUntilInRange(target, castRange);
-        m_Spell.Cast(transform, target.transform);
+        if (spell.TryGetComponent<S_TargetCastSpellComponent>(out S_TargetCastSpellComponent targetCastSpell))
+        {
+            yield return m_Movement.FolowUntilInRange(target, targetCastSpell.castRange);
+        }
+        if (spell.TryGetComponent<S_SpotCastSpell>(out S_SpotCastSpell spotCastSpell))
+        {
+            yield return m_Movement.FolowUntilInRange(target, spotCastSpell.castRange);
+        }
+        spell.Cast(target);
+        m_EntityEvents.GetEvent(EntityEventName.OnAnySpellCasted).Trigger();
         yield break;
     }
 

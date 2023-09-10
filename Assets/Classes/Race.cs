@@ -3,14 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Race", menuName = "Race")]
 public class Race : ScriptableObject
 {
-    public float attack;
-    public int attackRange;
-    public float attackSpeed;
-    [Range(1f, 1.7f)] public float baseAttackSpeed;
-    public float health;
-    public float defense;
-    public float counterAttack;
-    [Range(0f, 1f)] public float evasion;
-    [Range(0f, 1f)] public float magicGift;
-    [Range(0f, 1f)] public float physicsGift;
+    [field: SerializeField] public float Attack { get; private set; }
+    [field: SerializeField] public int AttackRange { get; private set; }
+    [field: SerializeField] public float AttackSpeed { get; private set; }
+    [field: SerializeField] [field: Range(1f, 1.7f)] public float BaseAttackSpeed { get; private set; }
+    [field: SerializeField] public float Health { get; private set; }
+    [field: SerializeField] public float Defense { get; private set; }
+    [field: SerializeField] public float CounterAttack { get; private set; }
+    [field: SerializeField] [field: Range(0f, 1f)] public float Evasion { get; private set; }
+    [field: SerializeField] [field: Range(0f, 1f)] public float MagicGift { get; private set; }
+    [field: SerializeField] [field: Range(0f, 1f)] public float PhysicsGift { get; private set; }
 }
