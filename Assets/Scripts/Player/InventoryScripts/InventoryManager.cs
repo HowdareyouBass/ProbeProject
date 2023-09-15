@@ -5,14 +5,23 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public int maxStackedItems = 64;
+    public int avalableSlots = 2;
+    public int maxAvalableSlots = 8;
     public InventorySlot[] inventorySlots;
     public GameObject InventoryItemPrefab;
+    public InventorySlot[] toolBarSlots;
 
     int selectedSlot = -1;
 
 
     private void Start()
     {
+        for (int i = 0; i < toolBarSlots.Length; ++i)
+        {
+            toolBarSlots[i].gameObject.SetActive(false);
+        }
+
+        changeSlotAmount();
         ChangeSelectedSlot(0);
     }
 
@@ -21,10 +30,18 @@ public class InventoryManager : MonoBehaviour
         if (Input.inputString != null)
         {
             bool isNumber = int.TryParse(Input.inputString, out int number);
-            if (isNumber && number > 0 && number < 10)
+            if (isNumber && number > 0 && number < avalableSlots + 1)
             {
                 ChangeSelectedSlot(number - 1);
             }
+        }
+    }
+
+    public void changeSlotAmount()
+    {
+        for (int i = 0; i < avalableSlots; ++i) 
+        {
+            toolBarSlots[i].gameObject.SetActive(true);
         }
     }
 
@@ -43,28 +60,34 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < inventorySlots.Length; ++i)
         {
-            InventorySlot slot = inventorySlots[i];
-            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-            if (itemInSlot != null && 
-                itemInSlot.item == item &&
-                itemInSlot.count < maxStackedItems &&
-                itemInSlot.item.Stackable)
+            if (inventorySlots[i].gameObject.activeSelf)
             {
-                ++itemInSlot.count;
-                itemInSlot.RefreshCount();
-                return true;
-            }
+                InventorySlot slot = inventorySlots[i];
+                InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+                if (itemInSlot != null &&
+                    itemInSlot.item == item &&
+                    itemInSlot.count < maxStackedItems &&
+                    itemInSlot.item.Stackable)
+                {
+                    ++itemInSlot.count;
+                    itemInSlot.RefreshCount();
+                    return true;
+                }
+            }       
         } 
 
         for (int i = 0; i < inventorySlots.Length; ++i)
         {
-            InventorySlot slot = inventorySlots[i];
-            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-            if (itemInSlot == null)
+            if (inventorySlots[i].gameObject.activeSelf)
             {
-                SpawnNewItem(item, slot);
-                return true;
-            }
+                InventorySlot slot = inventorySlots[i];
+                InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+                if (itemInSlot == null)
+                {
+                    SpawnNewItem(item, slot);
+                    return true;
+                }
+            } 
         }
 
         return false;

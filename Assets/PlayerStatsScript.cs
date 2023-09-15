@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class PlayerStatsScript : MonoBehaviour
 {
     [Header("PlayerStats")]
+    public int level = 1;
+    public int experience = 0;
+    public int nextLevelExperience = 100;
     public int maxHealth = 100;
     public float currentHealth;
     public int maxStamina = 100;
@@ -52,6 +55,12 @@ public class PlayerStatsScript : MonoBehaviour
         IntelligenceText.text = "Intelligence: " + Intelligence.ToString("F0") + "/" + maxIntelligence.ToString("F0");
         AgilityText.text = "Agility: " + Agility.ToString("F0") + "/" + maxAgility.ToString("F0");
         LuckText.text = "Luck: " + Luck.ToString("F0") + "/" + maxLuck.ToString("F0");
+    }
+
+    public void addExperience()
+    {
+        experience += 100;
+        Debug.Log("Experience added");
     }
 
     public HealthBar healthBar;
@@ -110,4 +119,6 @@ public class PlayerStatsScript : MonoBehaviour
 
         staminaBar.SetStamina(currentStamina);
     }
+
+    
 }
