@@ -651,21 +651,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 0afbffff
+      m_ExpandedIDs: 46e7ffff0afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: "\u0421\u043E\u0441\u0443\u043B\u044C\u043A\u0438"
+        m_OriginalName: "\u0421\u043E\u0441\u0443\u043B\u044C\u043A\u0438"
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -6330
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -967,9 +967,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -3.8813565, y: 4.849152, z: -4.7508106}
+    m_Target: {x: 0.66371423, y: 5.7197747, z: -8.525473}
     speed: 2
-    m_Value: {x: 0.408, y: 2.267, z: 3.531}
+    m_Value: {x: 0.66371423, y: 5.7197747, z: -8.525473}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1016,13 +1016,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.24018069, y: 0.06408485, z: -0.01610794, w: 0.96851486}
+    m_Target: {x: 0.2486697, y: 0.075527996, z: -0.019670274, w: 0.96547824}
     speed: 2
-    m_Value: {x: -0.24018069, y: -0.06408486, z: 0.01610794, w: -0.96851486}
+    m_Value: {x: 0.24712126, y: 0.07989992, z: -0.020668447, w: 0.9654636}
   m_Size:
-    m_Target: 1.0683422
+    m_Target: 1.0202668
     speed: 2
-    m_Value: 10
+    m_Value: 1.0683422
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1182,21 +1182,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Prefabs/Ice Hail
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 53
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Prefabs/Ice Hail
   m_LastFoldersGridSize: 53
   m_LastProjectPath: F:\ProbeProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 111}
-    m_SelectedIDs: 985b0000
-    m_LastClickedID: 23448
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 085c0000
+    m_LastClickedID: 23560
     m_ExpandedIDs: 00000000965b0000985b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1252,7 +1252,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000000000001c6e0000685f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

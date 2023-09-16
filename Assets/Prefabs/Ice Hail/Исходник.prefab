@@ -5381,7 +5381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3828939471159898029}
   m_Layer: 0
-  m_Name: Ice Hail
+  m_Name: "\u0418\u0441\u0445\u043E\u0434\u043D\u0438\u043A"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
