@@ -61,7 +61,7 @@ public class PlayerGuiStatsScript : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        //FIXME: healthBar.SetMaxHealth(maxHealth);
         currentStamina = maxStamina;
         staminaBar.SetMaxStamina(maxStamina);
 
@@ -93,7 +93,7 @@ public class PlayerGuiStatsScript : MonoBehaviour
 
 
         UpdateStats();
-        healthBar.SetHealth(currentHealth);
+        //FIXME: healthBar.SetHealth(currentHealth);
         staminaBar.SetStamina(currentStamina);
     }
 
@@ -101,7 +101,7 @@ public class PlayerGuiStatsScript : MonoBehaviour
     {
         currentHealth -= damage;
 
-        healthBar.SetHealth(currentHealth);
+        //FIXME: healthBar.SetHealth(currentHealth);
     }
 
     void UseStamina(int usedStamina)
