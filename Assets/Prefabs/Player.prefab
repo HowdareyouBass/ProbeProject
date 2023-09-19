@@ -213,9 +213,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Spells:
-  - {fileID: 11400000, guid: 9fd661d190bee4e4ca51a09b33a57908, type: 2}
+  - {fileID: 11400000, guid: 2f2d80413440db34eb3d4fbf92d1362b, type: 2}
   - {fileID: 11400000, guid: b9ecd2562297acd4ea2513a03e77058d, type: 2}
-  - {fileID: 11400000, guid: 3afe7d42f2f3e2e4181f6b74bae36f08, type: 2}
+  - {fileID: 11400000, guid: adc46cc74c6592e489fae7e5a5aa05be, type: 2}
   - {fileID: 11400000, guid: 720a5b88b01abb74995e335be19e85de, type: 2}
   - {fileID: 0}
   m_SpellCopies: []

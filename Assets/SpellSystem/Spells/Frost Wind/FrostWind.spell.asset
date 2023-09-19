@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2332b67b5d50b2429226faff526af16, type: 3}
-  m_Name: Flame.spell
+  m_Name: FrostWind.spell
   m_EditorClassIdentifier: 
   m_Components:
-  - rid: 447834599051755523
-  - rid: 447834619434500096
+  - rid: 447834716389769216
+  - rid: 447834716389769217
   references:
     version: 2
     RefIds:
-    - rid: 447834599051755523
-      type: {class: S_SpotCastSpell, ns: , asm: Assembly-CSharp}
+    - rid: 447834716389769216
+      type: {class: S_TargetCastSpellComponent, ns: , asm: Assembly-CSharp}
       data:
         spell: {fileID: 0}
         caster: {fileID: 0}
@@ -27,14 +27,13 @@ MonoBehaviour:
         m_HeatlhCost: 0
         m_CooldownInSeconds: 5
         m_Effect: {fileID: 0}
-        m_CastRange: 300
-    - rid: 447834619434500096
-      type: {class: S_ProjectileComponent, ns: , asm: Assembly-CSharp}
+        m_CastRange: 0
+    - rid: 447834716389769217
+      type: {class: S_StatusEffectComponent, ns: , asm: Assembly-CSharp}
       data:
         spell: {fileID: 0}
         caster: {fileID: 0}
-        m_TravelSpeed: 5
-        m_DecayTimeInSeconds: 3
-        m_Damage: 10
-        m_DecayOnCollision: 0
-        m_ProjectileObject: {fileID: 8487429180969515810, guid: 35d60c18cb3fdd34da4cdbbb9b77617d, type: 3}
+        m_SpellEvent: 2
+        m_EntityEvent: 0
+        m_ApplyTo: 1
+        m_StatusEffect: {fileID: 11400000, guid: edf13f8f4c3840a45b21e5b0f8f03cf7, type: 2}
