@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class S_ProjectileComponent : SpellComponent
 {
-    [SerializeField] private GameObject m_ProjectileObject;    
+
+    [SerializeField] private float m_TravelSpeed;
+    [SerializeField] private float m_DecayTimeInSeconds;
+    [SerializeField] private float m_Damage;
+    [SerializeField] private bool m_DecayOnCollision;
+    [SerializeField] private GameObject m_ProjectileObject;
 
     public override void Init()
     {
@@ -12,6 +17,13 @@ public class S_ProjectileComponent : SpellComponent
     private void SpawnProjectile()
     {
         GameObject projectileObject = GameObject.Instantiate(m_ProjectileObject);
-        
+        projectileObject.transform.position = target.GetPoint();
+
+        Projectile projectileComponent = projectileObject.GetComponent<Projectile>();
+        projectileComponent.TravelSpeed = m_TravelSpeed;
+        projectileComponent.Direction = Vector3.Normalize(target.GetPoint() - caster.position);
+        projectileComponent.DecayTimeInSeconds = m_DecayTimeInSeconds;
+        projectileComponent.Damage = m_Damage;
+        projectileComponent.DecayOnCollision = m_DecayOnCollision;
     }
 }
