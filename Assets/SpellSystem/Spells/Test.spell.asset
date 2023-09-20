@@ -14,14 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Components:
   - rid: 5463700934550880259
-  - rid: 5463700934550880260
-  - rid: 5463700984071716864
-  - rid: 5463700984071716865
-  - rid: 5463700984071716866
-  - rid: 5463700984071716867
+  - rid: 447834855010467840
   references:
     version: 2
     RefIds:
+    - rid: 447834855010467840
+      type: {class: S_StatusEffectComponent, ns: , asm: Assembly-CSharp}
+      data:
+        spell: {fileID: 0}
+        caster: {fileID: 0}
+        m_SpellEvent: 2
+        m_EntityEvent: 0
+        m_ApplyTo: 0
+        m_StatusEffect: {fileID: 11400000, guid: e4baa55233b8f05418babd4bc83f7d64, type: 2}
     - rid: 5463700934550880259
       type: {class: S_SelfCastSpell, ns: , asm: Assembly-CSharp}
       data:
@@ -31,41 +36,3 @@ MonoBehaviour:
         m_HeatlhCost: 0
         m_CooldownInSeconds: 5
         m_Effect: {fileID: 0}
-    - rid: 5463700934550880260
-      type: {class: S_DeleteStatusEffect, ns: , asm: Assembly-CSharp}
-      data:
-        spell: {fileID: 0}
-        caster: {fileID: 0}
-        m_EffectToDelete: {fileID: 11400000, guid: 5a2c6461beaff05489aa5468174c0289, type: 2}
-    - rid: 5463700984071716864
-      type: {class: S_BioTransition, ns: , asm: Assembly-CSharp}
-      data:
-        spell: {fileID: 0}
-        caster: {fileID: 0}
-        m_SlashingAttackPercent: 0
-    - rid: 5463700984071716865
-      type: {class: S_StatusEffectComponent, ns: , asm: Assembly-CSharp}
-      data:
-        spell: {fileID: 0}
-        caster: {fileID: 0}
-        m_SpellEvent: 0
-        m_EntityEvent: 0
-        m_ApplyTo: 0
-        m_StatusEffect: {fileID: 0}
-    - rid: 5463700984071716866
-      type: {class: S_SwitchSpell, ns: , asm: Assembly-CSharp}
-      data:
-        spell: {fileID: 0}
-        caster: {fileID: 0}
-        m_SpellToSwitchTo: {fileID: 0}
-        m_GoOnCooldownAfterSwitch: 0
-    - rid: 5463700984071716867
-      type: {class: S_TargetCastSpellComponent, ns: , asm: Assembly-CSharp}
-      data:
-        spell: {fileID: 0}
-        caster: {fileID: 0}
-        m_EnergyCost: 0
-        m_HeatlhCost: 0
-        m_CooldownInSeconds: 5
-        m_Effect: {fileID: 0}
-        m_CastRange: 0

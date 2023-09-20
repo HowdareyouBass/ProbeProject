@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Spells:
-  - {fileID: 11400000, guid: 2f2d80413440db34eb3d4fbf92d1362b, type: 2}
+  - {fileID: 11400000, guid: 0be35f0d51d27c94d9b9011e76b90891, type: 2}
   - {fileID: 11400000, guid: b9ecd2562297acd4ea2513a03e77058d, type: 2}
   - {fileID: 11400000, guid: adc46cc74c6592e489fae7e5a5aa05be, type: 2}
   - {fileID: 11400000, guid: 720a5b88b01abb74995e335be19e85de, type: 2}

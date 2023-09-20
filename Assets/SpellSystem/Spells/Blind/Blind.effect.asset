@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877416c99eddb0543acdd97f2119cf79, type: 3}
   m_Name: Blind.effect
   m_EditorClassIdentifier: 
-  Name: 
+  m_EffectSprite: {fileID: 21300000, guid: aea25ed5f86cab246ac2abb823cb999b, type: 3}
   m_DefaultDuration: 3
   m_Components:
   - rid: 7643259987007373312
@@ -24,7 +24,7 @@ MonoBehaviour:
       data:
         statusEffect: {fileID: 0}
         target: {fileID: 0}
-        <DurationInSeconds>k__BackingField: 10
+        <DurationInSeconds>k__BackingField: 3
         m_Stats:
           <AttackPercent>k__BackingField: 0
           <AttackSpeed>k__BackingField: 0

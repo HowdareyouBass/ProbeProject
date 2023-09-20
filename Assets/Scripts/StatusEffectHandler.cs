@@ -7,6 +7,8 @@ public class StatusEffectHandler : MonoBehaviour
     public ReadOnlyCollection<StatusEffect> Effects => m_StatusEffects.AsReadOnly();
     private List<StatusEffect> m_StatusEffects;
 
+    public event System.Action<StatusEffect> OnEffectAdded;
+
     private void Awake()
     {
         m_StatusEffects = new List<StatusEffect>(50);
@@ -18,6 +20,7 @@ public class StatusEffectHandler : MonoBehaviour
         effect.OnEffectEnd += RemoveEffect;
         m_StatusEffects.Add(effect);
         effect.StartEffect();
+        OnEffectAdded.Invoke(effect);
     }
     public void DeleteStatusEffect(StatusEffect effect)
     {

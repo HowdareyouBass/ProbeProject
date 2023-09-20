@@ -9,6 +9,7 @@ public class S_ActiveSpellComponent : SpellComponent
     [SerializeField] private GameObject m_Effect;
 
     public bool OnCooldown => CurrentCooldown > 0;
+    public bool EnoughResources => casterEntity.stats.CurrentStamina >= m_EnergyCost && casterEntity.stats.CurrentHealth >= m_HeatlhCost;
     public float CurrentCooldown { get; private set; } = 0;
 
     protected Vector3 effectPosition;
@@ -28,7 +29,7 @@ public class S_ActiveSpellComponent : SpellComponent
     }
     public void TryCast()
     {
-        if (!OnCooldown)
+        if (!OnCooldown && EnoughResources)
         {
             effectPosition = target.GetPoint();
             GoOnCooldown();
@@ -37,8 +38,8 @@ public class S_ActiveSpellComponent : SpellComponent
     }
     protected virtual void Cast(Transform caster, Target target)
     {
-        //TODO: Take Energy Cost
         casterEntity.TakeDamage(m_HeatlhCost);
+        casterEntity.SpendStamina(m_EnergyCost);
         spell.events.GetEvent(SpellEventName.OnCast).Trigger();
         if (m_Effect != null)
             GameObject.Instantiate(m_Effect, effectPosition, Quaternion.identity);

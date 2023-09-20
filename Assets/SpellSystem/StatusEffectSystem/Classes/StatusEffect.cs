@@ -10,6 +10,10 @@ using System;
 public class StatusEffect : ScriptableObject
 {
     //[SerializeField] private string m_Name;
+    // Can't find method to find serializedProperty by name with field: thingy
+    [SerializeField] private Sprite m_EffectSprite;
+    public Sprite EffectSprite { get => m_EffectSprite; }
+    
     [SerializeField] private float m_DefaultDuration = 3;
     private CancellationTokenSource m_StopEffectSource;
     public List<Task> effectTasks { get; private set; }

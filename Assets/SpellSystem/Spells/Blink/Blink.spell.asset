@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Components:
   - rid: 6641091198702321664
-  spellGameObject: {fileID: 0}
   references:
     version: 2
     RefIds:
@@ -23,8 +22,8 @@ MonoBehaviour:
       data:
         spell: {fileID: 0}
         caster: {fileID: 0}
-        m_EnergyCost: 0
+        m_EnergyCost: 10
         m_HeatlhCost: 0
-        m_CooldownInSeconds: 5
+        m_CooldownInSeconds: 1
         m_Effect: {fileID: 0}
         m_MaxDistance: 400

@@ -46,6 +46,7 @@ public enum EntityEventName
     OnAttack,
     OnDamaged,
     OnHealthChanged,
+    OnStaminaChanged,
     StopMovement,
     OnAnySpellCasted,
     OnHitTaken
@@ -57,9 +58,9 @@ public class EntityEvents : Events<EntityEventName>
         AddEvent(EntityEventName.None);
         AddEvent(EntityEventName.OnDeath);
         AddEvent<Transform>(EntityEventName.OnAttack);
-        //TODO: change event name from on health changed to regen applied!
         AddEvent<float>(EntityEventName.OnDamaged);
         AddEvent<float>(EntityEventName.OnHealthChanged);
+        AddEvent<float>(EntityEventName.OnStaminaChanged);
         AddEvent(EntityEventName.StopMovement);
         AddEvent(EntityEventName.OnAnySpellCasted);
         AddEvent<float>(EntityEventName.OnHitTaken);

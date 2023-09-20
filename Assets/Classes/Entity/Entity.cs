@@ -18,6 +18,13 @@ public abstract class Entity
         events = new EntityEvents();
     }
 
+    public void SpendStamina(float amount)
+    {
+        if (amount < 0)
+            throw new ArgumentOutOfRangeException(nameof(amount));
+        stats.SpendStamina(amount);
+        events.GetEvent<float>(EntityEventName.OnStaminaChanged, true).Trigger(amount);
+    }
     public void TakeDamage(float amount)
     {
         if (amount < 0)

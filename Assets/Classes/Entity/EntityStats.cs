@@ -5,6 +5,9 @@ public class EntityStats
     //TODO: may be instead of float use some kind of class just not to use -= or += and use reduce and add functions
     public float CurrentHealth { get; private set; } = 0;
     public float MaxHealth { get; private set; } = 0;
+    public float CurrentStamina { get; private set; } = 0;
+    public float MaxStamina { get; private set; } = 0;
+
     public float AttackSpeed { get; private set; } = 20;
     public float BaseAttackSpeed { get; private set; } = 1;
     public int AttackRange { get; private set; } = 10;
@@ -32,11 +35,19 @@ public class EntityStats
         CurrentHealth -= amount;
         Mathf.Clamp(CurrentHealth, 0, MaxHealth);
     }
+    public void SpendStamina(float amount)
+    {
+        CurrentStamina -= amount;
+        Mathf.Clamp(CurrentStamina, 0, MaxStamina);
+    }
 
     public void ApplyRace(Race race)
     {
         CurrentHealth = race.Health;
+        CurrentStamina = race.Stamina;
         MaxHealth = race.Health;
+        MaxStamina = race.Stamina;
+        
         m_Attack = race.Attack;
         AttackRange = race.AttackRange;
         AttackSpeed = race.AttackSpeed;
