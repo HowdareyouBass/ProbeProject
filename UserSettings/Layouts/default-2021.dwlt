@@ -746,18 +746,18 @@ MonoBehaviour:
       m_ExpandedIDs: 0cfbffff6c5a00006e5e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: "\u0421\u043E\u0441\u0443\u043B\u044C\u043A\u0438"
-        m_OriginalName: "\u0421\u043E\u0441\u0443\u043B\u044C\u043A\u0438"
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -6330
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 6}
       m_SearchString: 
