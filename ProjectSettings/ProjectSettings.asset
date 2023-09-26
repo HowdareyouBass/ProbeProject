@@ -155,7 +155,8 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Standalone: com.DefaultCompany.FirstAttemts
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -372,6 +373,7 @@ PlayerSettings:
     m_EncodingQuality: 2
   - m_BuildTarget: Windows Store Apps
     m_EncodingQuality: 2
+  m_BuildTargetGroupHDRCubemapEncodingQuality: []
   m_BuildTargetGroupLightmapSettings: []
   m_BuildTargetGroupLoadStoreDebugModeSettings: []
   m_BuildTargetNormalMapEncoding:

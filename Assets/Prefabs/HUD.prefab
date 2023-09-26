@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 7389579739960055460}
   - component: {fileID: 7512642423153783319}
   - component: {fileID: 7125655500937975842}
-  - component: {fileID: 5164707838335874114}
+  - component: {fileID: 6836643945856819133}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -719,7 +719,7 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &5164707838335874114
+--- !u!114 &6836643945856819133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3558,7 +3558,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
