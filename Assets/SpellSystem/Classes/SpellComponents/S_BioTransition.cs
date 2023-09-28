@@ -11,7 +11,7 @@ public sealed class S_BioTransition : S_SwitchablePassive
     public override void Init()
     {
         OnSwitch += DisableRegenDecrease;
-        targetEntity.stats.PureAttack = true;
+        targetStats.PureAttack = true;
         m_SlashingStats = new PassiveStats(m_SlashingAttackPercent);
         m_Passive1 = new PassiveStats();
         m_Passive2 = m_SlashingStats;

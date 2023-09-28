@@ -20,7 +20,7 @@ public class S_StatusEffectComponent : SpellComponent
     {
         if (m_ApplyTo == TargetName.EventReturn)
         {
-            GameEvent<Transform> entityEvent = casterEntity.events.GetEvent<Transform>(m_EntityEvent, false);
+            GameEvent<Transform> entityEvent = casterEntity.Events.GetEvent<Transform>(m_EntityEvent, false);
             if (entityEvent == null)
             {
                 Debug.Log("Event named " + m_EntityEvent + " doesn't have Transform return can't use EventReturn");
@@ -32,13 +32,13 @@ public class S_StatusEffectComponent : SpellComponent
             return;
         }
         spell.events.GetEvent(m_SpellEvent).Subscribe(Activate);
-        casterEntity.events.GetEvent(m_EntityEvent).Subscribe(Activate);
+        casterEntity.Events.GetEvent(m_EntityEvent).Subscribe(Activate);
     }
     public override void Disable()
     {
         spell.events.GetEvent(m_SpellEvent)?.Unsubscribe(Activate);
-        casterEntity.events.GetEvent(m_EntityEvent).Unsubscribe(Activate);
-        casterEntity.events.GetEvent<Transform>(m_EntityEvent, false)?.Unsubscribe(ActivateEventReturn);
+        casterEntity.Events.GetEvent(m_EntityEvent).Unsubscribe(Activate);
+        casterEntity.Events.GetEvent<Transform>(m_EntityEvent, false)?.Unsubscribe(ActivateEventReturn);
     }
 
     private void Activate()

@@ -3,7 +3,12 @@ using UnityEngine;
 public sealed class PlayerScript : EntityScript
 {
     [SerializeField] private Race m_Race;
+    [SerializeField] private PlayerLevelRequirementsSO m_LevelDb;
+
     private Player m_Player;
+
+    public PlayerEvents events { get; private set; }
+
     private void Awake()
     {
         m_Player = new Player();

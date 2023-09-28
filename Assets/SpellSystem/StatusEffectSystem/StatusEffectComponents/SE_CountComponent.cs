@@ -26,21 +26,21 @@ public abstract class SE_CountComponent : StatusEffectComponent
         CurrentCount = m_StartCount;
         if (m_DecreaseBy == CountDecreaseSource.EventReturn)
         {
-            targetEntity.events.GetEvent<int>(m_EntityEvent, true)?.Subscribe(ChangeCountByEvent);
-            targetEntity.events.GetEvent<float>(m_EntityEvent, true)?.Subscribe(ChangeCountByEvent);
+            targetEntity.Events.GetEvent<int>(m_EntityEvent, true)?.Subscribe(ChangeCountByEvent);
+            targetEntity.Events.GetEvent<float>(m_EntityEvent, true)?.Subscribe(ChangeCountByEvent);
         }
         else
         {
-            targetEntity.events.GetEvent(m_EntityEvent).Subscribe(ChangeCountByDelta);
+            targetEntity.Events.GetEvent(m_EntityEvent).Subscribe(ChangeCountByDelta);
         }
         statusEffect.effectTasks.Add(StartCount());
     }
 
     public override void Destroy()
     {
-        targetEntity.events.GetEvent(m_EntityEvent).Unsubscribe(ChangeCountByDelta);
-        targetEntity.events.GetEvent<int>(m_EntityEvent, false)?.Unsubscribe(ChangeCountByEvent);
-        targetEntity.events.GetEvent<float>(m_EntityEvent, false)?.Unsubscribe(ChangeCountByEvent);
+        targetEntity.Events.GetEvent(m_EntityEvent).Unsubscribe(ChangeCountByDelta);
+        targetEntity.Events.GetEvent<int>(m_EntityEvent, false)?.Unsubscribe(ChangeCountByEvent);
+        targetEntity.Events.GetEvent<float>(m_EntityEvent, false)?.Unsubscribe(ChangeCountByEvent);
     }
 
     private async Task StartCount()

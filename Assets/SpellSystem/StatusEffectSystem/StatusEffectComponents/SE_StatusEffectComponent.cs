@@ -23,7 +23,7 @@ public class SE_StatusEffectTimeComponent : SE_TimeComponent
     {
         if (m_ApplyTo == TargetName.EventReturn)
         {
-            GameEvent<Transform> entityEvent = targetEntity.events.GetEvent<Transform>(m_EntityEvent, false);
+            GameEvent<Transform> entityEvent = targetEntity.Events.GetEvent<Transform>(m_EntityEvent, false);
             if (entityEvent == null)
             {
                 Debug.Log("Event named " + m_EntityEvent + " doesn't have Transform return can't use EventReturn");
@@ -34,13 +34,13 @@ public class SE_StatusEffectTimeComponent : SE_TimeComponent
             }
             return;
         }
-        targetEntity.events.GetEvent(m_EntityEvent).Subscribe(Activate);
+        targetEntity.Events.GetEvent(m_EntityEvent).Subscribe(Activate);
     }
 
     private void DisableEffectApplification()
     {
-        targetEntity.events.GetEvent(m_EntityEvent).Unsubscribe(Activate);
-        targetEntity.events.GetEvent<Transform>(m_EntityEvent, false)?.Unsubscribe(ActivateEventReturn);
+        targetEntity.Events.GetEvent(m_EntityEvent).Unsubscribe(Activate);
+        targetEntity.Events.GetEvent<Transform>(m_EntityEvent, false)?.Unsubscribe(ActivateEventReturn);
     }
     public override void Destroy()
     {

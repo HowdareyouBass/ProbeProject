@@ -14,13 +14,13 @@ public class PlayerHealthBar : MonoBehaviour
 
     private void Start()
     {
-        m_Slider.maxValue = m_Player.stats.MaxHealth;
-        SetHealthbarValue(m_Player.stats.MaxHealth);
+        m_Slider.maxValue = m_Player.Stats.MaxHealth;
+        SetHealthbarValue(m_Player.Stats.MaxHealth);
     }
     private void OnEnable()
     {
         m_Player = m_PlayerScript.GetEntity();
-        m_OnHealthChanged = m_Player.events.GetEvent<float>(EntityEventName.OnHealthChanged, true);
+        m_OnHealthChanged = m_Player.Events.GetEvent<float>(EntityEventName.OnHealthChanged, true);
         m_OnHealthChanged?.Subscribe(ChangeHealthbarValue);
     }
     private void OnDisable()

@@ -16,13 +16,13 @@ public class StaminaGuiBar : MonoBehaviour
 
     private void Start()
     {
-        m_Slider.maxValue = m_Player.stats.MaxStamina;
-        SetStaminabarValue(m_Player.stats.MaxStamina);
+        m_Slider.maxValue = m_Player.Stats.MaxStamina;
+        SetStaminabarValue(m_Player.Stats.MaxStamina);
     }
     private void OnEnable()
     {
         m_Player = m_PlayerScript.GetEntity();
-        m_OnStaminaChanged = m_Player.events.GetEvent<float>(EntityEventName.OnStaminaChanged, true);
+        m_OnStaminaChanged = m_Player.Events.GetEvent<float>(EntityEventName.OnStaminaChanged, true);
         m_OnStaminaChanged?.Subscribe(ChangeStaminabarValue);
     }
     private void OnDisable()

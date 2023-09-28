@@ -5,6 +5,9 @@ using System.Collections.Generic;
 [CreateAssetMenu(menuName = "Spell", fileName = "New Spell")]
 public class Spell : ScriptableObject
 {
+    [SerializeField] private AnimationClip m_SpellAnimation;
+    public AnimationClip SpellAnimation { get => m_SpellAnimation; }
+
     [SerializeReference] private List<SpellComponent> m_Components;
     
     public SpellEvents events { get; private set; }

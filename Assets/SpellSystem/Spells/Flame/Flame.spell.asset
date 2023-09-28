@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2332b67b5d50b2429226faff526af16, type: 3}
   m_Name: Flame.spell
   m_EditorClassIdentifier: 
+  m_SpellAnimation: {fileID: -203655887218126122, guid: 5bb8124989440b64983af6d778610784, type: 3}
   m_Components:
   - rid: 447834599051755523
   - rid: 447834619434500096

@@ -14,7 +14,7 @@ public class SpellCaster : MonoBehaviour
     {
         m_Movement = GetComponent<Movement>();
         m_Spells = GetComponent<SpellInventory>();
-        m_EntityEvents = GetComponent<EntityScript>().GetEntity().events;
+        m_EntityEvents = GetComponent<EntityScript>().GetEntity().Events;
         m_Controller = GetComponent<EntityController>();
     }
     private void Update()

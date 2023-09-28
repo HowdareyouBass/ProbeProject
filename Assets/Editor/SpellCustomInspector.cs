@@ -81,6 +81,7 @@ public class SpellCustomInspector : Editor
     public override void OnInspectorGUI()
     {
         m_Object = ((Spell)target);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("m_SpellAnimation"));
         SerializedProperty property = serializedObject.FindProperty("m_Components");
         foreach (SerializedProperty prop in property)
         {

@@ -9,7 +9,7 @@ public class S_ActiveSpellComponent : SpellComponent
     [SerializeField] private GameObject m_Effect;
 
     public bool OnCooldown => CurrentCooldown > 0;
-    public bool EnoughResources => casterEntity.stats.CurrentStamina >= m_EnergyCost && casterEntity.stats.CurrentHealth >= m_HeatlhCost;
+    public bool EnoughResources => casterStats.CurrentStamina >= m_EnergyCost && casterStats.CurrentHealth >= m_HeatlhCost;
     public float CurrentCooldown { get; private set; } = 0;
 
     protected Vector3 effectPosition;
@@ -21,7 +21,7 @@ public class S_ActiveSpellComponent : SpellComponent
     }
     public void GoOnCooldown()
     {
-        CurrentCooldown = m_CooldownInSeconds * casterEntity.stats.SpellCooldownCoefficient;
+        CurrentCooldown = m_CooldownInSeconds * casterStats.SpellCooldownCoefficient;
     }
     public override void Init()
     {

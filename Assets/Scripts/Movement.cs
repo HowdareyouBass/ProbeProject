@@ -16,12 +16,12 @@ public class Movement : MonoBehaviour
         m_Entity = GetComponent<EntityScript>().GetEntity();
         m_Agent = GetComponent<NavMeshAgent>();
         m_Controller = GetComponent<EntityController>();
-        m_Entity.events.GetEvent(EntityEventName.StopMovement).Subscribe(Stop);
+        m_Entity.Events.GetEvent(EntityEventName.StopMovement).Subscribe(Stop);
     }
 
     public void Move(Vector3 destination)
     {
-        if (m_Entity.canMove)
+        if (m_Entity.CanMove)
             m_Agent.SetDestination(destination);
     }
     public IEnumerator FolowUntilInRange(Target target, int range)
@@ -37,7 +37,7 @@ public class Movement : MonoBehaviour
     }
     private void Look(Target target)
     {
-        if (m_Entity.canLook)
+        if (m_Entity.CanLook)
         {
 	        if (m_Looking != null)
 	            StopCoroutine(m_Looking);

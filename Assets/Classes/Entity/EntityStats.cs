@@ -25,6 +25,13 @@ public class EntityStats
     public bool PureAttack = false;
     public bool BarrierIsSet = false;
 
+    public float TestFloat = 1.1f;
+
+    public void TestMod()
+    {
+        TestFloat = 2.0f;
+    }
+
     public void Heal(float amount)
     {
         CurrentHealth += amount;

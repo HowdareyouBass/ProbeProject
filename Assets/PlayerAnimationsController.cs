@@ -18,6 +18,6 @@ public class PlayerAnimationsController : MonoBehaviour
 
     private void Update()
     {
-        m_Animator.SetFloat(m_SpeedHash, m_Agent.velocity.magnitude);
+        m_Animator.SetFloat(m_SpeedHash, m_Agent.velocity.magnitude / m_Agent.speed);
     }
 }

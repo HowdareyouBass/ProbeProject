@@ -1,112 +1,112 @@
 using System;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 //God object problem maybe? FIXME:
 public abstract class Entity
 {
-    public EntityStats stats { get; private set; }
-    public EntityEvents events { get; private set; }
+    public abstract EntityStats Stats { get; }
+    public EntityEvents Events { get; private set; }
 
-    public bool canAttack { get; private set; } = true;
-    public bool canMove { get; private set; } = true;
-    public bool canCast { get; private set; } = true;
-    public bool canLook { get; private set; } = true;
+    public bool CanAttack { get; private set; } = true;
+    public bool CanMove { get; private set; } = true;
+    public bool CanCast { get; private set; } = true;
+    public bool CanLook { get; private set; } = true;
 
     public Entity()
     {
-        stats = new EntityStats();
-        events = new EntityEvents();
+        Events = new EntityEvents();
     }
 
     public void SpendStamina(float amount)
     {
         if (amount < 0)
             throw new ArgumentOutOfRangeException(nameof(amount));
-        stats.SpendStamina(amount);
-        events.GetEvent<float>(EntityEventName.OnStaminaChanged, true).Trigger(amount);
+        Stats.SpendStamina(amount);
+        Events.GetEvent<float>(EntityEventName.OnStaminaChanged, true).Trigger(amount);
     }
     public void TakeDamage(float amount)
     {
         if (amount < 0)
             throw new ArgumentOutOfRangeException(nameof(amount));
-        events.GetEvent<float>(EntityEventName.OnHitTaken, true).Trigger(amount);
-        if (stats.BarrierIsSet)
+        Events.GetEvent<float>(EntityEventName.OnHitTaken, true).Trigger(amount);
+        if (Stats.BarrierIsSet)
         {
             Debug.Log("Barrier is set");
             return;
         }
-        stats.DecreaseHealth(amount);
-        events.GetEvent<float>(EntityEventName.OnDamaged, true).Trigger(amount);
-        events.GetEvent<float>(EntityEventName.OnHealthChanged, true).Trigger(amount);
-        if (stats.CurrentHealth <= 0)
+        Stats.DecreaseHealth(amount);
+        Events.GetEvent<float>(EntityEventName.OnDamaged, true).Trigger(amount);
+        Events.GetEvent<float>(EntityEventName.OnHealthChanged, true).Trigger(amount);
+        if (Stats.CurrentHealth <= 0)
         {
-            events.GetEvent(EntityEventName.OnDeath).Trigger();
+            Events.GetEvent(EntityEventName.OnDeath).Trigger();
         }
     }
     public void EnableBarrier()
     {
-        stats.BarrierIsSet = true;
+        Stats.BarrierIsSet = true;
     }
     public void DisableBarrier(float barrierDamageOverpassed)
     {
-        stats.BarrierIsSet = false;
+        Stats.BarrierIsSet = false;
         TakeDamage(barrierDamageOverpassed);
     }
     public void Regenerate()
     {
-        if (stats.Regeneration <= 0)
+        if (Stats.Regeneration <= 0)
             return;
-        stats.Heal(stats.Regeneration * Time.deltaTime);
-        if (stats.CurrentHealth < stats.MaxHealth)
-            events.GetEvent<float>(EntityEventName.OnHealthChanged, true).Trigger(stats.Regeneration);
+        Stats.Heal(Stats.Regeneration * Time.deltaTime);
+        if (Stats.CurrentHealth < Stats.MaxHealth)
+            Events.GetEvent<float>(EntityEventName.OnHealthChanged, true).Trigger(Stats.Regeneration);
     }
 
     public void ApplyPassive(PassiveStats effectStats)
     {
-        stats.AddPassiveStats(effectStats);
+        Stats.AddPassiveStats(effectStats);
     }
     public void DeapplyPassive(PassiveStats effectStats)
     {
-        stats.SubtractPassiveStats(effectStats);
+        Stats.SubtractPassiveStats(effectStats);
     }
 
     public void Sleep()
     {
-        events.GetEvent(EntityEventName.StopMovement).Trigger();
-        canMove = false;
-        canAttack = false;
-        canCast = false;
+        Events.GetEvent(EntityEventName.StopMovement).Trigger();
+        CanMove = false;
+        CanAttack = false;
+        CanCast = false;
     }
     public void Awake()
     {
-        canMove = true;
-        canAttack = true;
-        canCast = true;
+        CanMove = true;
+        CanAttack = true;
+        CanCast = true;
     }
 
     public void Silence()
     {
         Debug.Log("Should silence");
-        canCast = false;
+        CanCast = false;
     }
     public void Desilence()
     {
         Debug.Log("should desilence");
-        canCast = true;
+        CanCast = true;
     }
 
     public void AttackTarget(Target target)
     {
-        if (UnityEngine.Random.value >= stats.HitChance - target.TargetEntity.stats.Evasion)
+        if (UnityEngine.Random.value >= Stats.HitChance - target.TargetEntity.Stats.Evasion)
         {
             Debug.Log("Miss");
             return;
         }
-        target.TargetEntity.TakeDamage(stats.AttackDamage);
-        events.GetEvent<Transform>(EntityEventName.OnAttack, true).Trigger(target.transform);
+        target.TargetEntity.TakeDamage(Stats.AttackDamage);
+        Events.GetEvent<Transform>(EntityEventName.OnAttack, true).Trigger(target.transform);
     }
     public virtual float GetAttackCooldown()
     {
-        return stats.BaseAttackSpeed * 100 / stats.AttackSpeed;
+        return Stats.AttackSpeed / (Stats.BaseAttackSpeed * 100);
     }
 }
