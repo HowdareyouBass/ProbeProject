@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,17 +10,26 @@ public class Attack : MonoBehaviour
     private Coroutine m_Attacking;
     private bool m_CanAttack = true;
 
+    // public event Action OnAttackPerformed; 
+
+    // Some problem with coroutines cuz if you use StopCoroutine function the coroutine that stopped doesn't become null
+    public bool IsAttacking;
+
     private void Start()
     {
+        IsAttacking = false;
         m_Movement = GetComponent<Movement>();
         m_Controller = GetComponent<EntityController>();
         m_Entity = GetComponent<EntityScript>().GetEntity();
     }
 
     public void Stop()
-    {
+    { 
         if (m_Attacking != null)
+        {
+            IsAttacking = false;
             StopCoroutine(m_Attacking);
+        }
     }
     
     public void AttackTarget(Target target)
@@ -33,8 +43,11 @@ public class Attack : MonoBehaviour
         while (true)
         {
             yield return m_Movement.FolowUntilInRange(target, m_Entity.Stats.AttackRange);
+
             if (m_CanAttack && m_Entity.CanAttack)
             {
+                IsAttacking = true;
+                // OnAttackPerformed.Invoke();
                 m_Entity.AttackTarget(target);
                 StartCoroutine(WaitForNextAttack());
             }
@@ -42,6 +55,7 @@ public class Attack : MonoBehaviour
             //Stops m_Attacking enemy that already died
             if(target.transform.GetComponent<EntityScript>().isDead)
             {
+                IsAttacking = false;
                 yield break;
             }
             yield return null;

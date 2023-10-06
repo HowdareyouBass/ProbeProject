@@ -55997,6 +55997,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4092150372153248433, guid: 246d79f6324159048816970c26672a50, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4092150372153248434, guid: 246d79f6324159048816970c26672a50, type: 3}
       propertyPath: m_Enabled
       value: 0

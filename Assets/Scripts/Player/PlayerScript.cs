@@ -11,6 +11,7 @@ public sealed class PlayerScript : EntityScript
 
     private void Awake()
     {
+        events = new PlayerEvents();
         m_Player = new Player();
         m_Player.SetRace(m_Race);
     }

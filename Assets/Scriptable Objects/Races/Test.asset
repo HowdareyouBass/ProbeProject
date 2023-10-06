@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ff1e0d195ec5745884838694990d60, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  <Attack>k__BackingField: 100
-  <AttackRange>k__BackingField: 150
+  <Attack>k__BackingField: 10
+  <AttackRange>k__BackingField: 3
   <AttackSpeed>k__BackingField: 100
   <BaseAttackSpeed>k__BackingField: 1
   <Health>k__BackingField: 100
