@@ -17,8 +17,12 @@ TagManager:
   - Player
   - Spells
   - Enemy
+<<<<<<< HEAD
   - Entity
   - 
+=======
+  - Minimap
+>>>>>>> origin/CharacterUi
   - 
   - 
   - 
