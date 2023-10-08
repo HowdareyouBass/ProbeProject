@@ -16,5 +16,6 @@ MonoBehaviour:
   type: 3
   actionType: 3
   range: {x: 5, y: 4}
+  cost: 10
   Stackable: 1
   image: {fileID: 21300000, guid: 3abd946f2fb3f77408e205d582abe55f, type: 3}

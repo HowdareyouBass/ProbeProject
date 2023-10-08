@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,34 +9,20 @@ public class BuildingDialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI dialogueWindow;
     public Image buildingImage;
-
+   
     public string welcomeText;
     public Sprite buildingImageSprite;
-    public float typingSpeed;
+   
 
-    public IEnumerator PrintText(string text)
+
+    public void printWelcomeText()
     {
-        dialogueWindow.text = "";
-
-        foreach (char character in text)
-        {
-            dialogueWindow.text += character;
-
-            yield return new WaitForSeconds(typingSpeed);
-        }
+        buildingImage.sprite = buildingImageSprite;
+        dialogueWindow.text = welcomeText;
     }
 
     public void printTextButton(string text)
     {
-        StopAllCoroutines();
-        StartCoroutine(PrintText(text));
-    }
-
-
-    void Start()
-    {
-        buildingImage.sprite = buildingImageSprite;
-
-        StartCoroutine(PrintText(welcomeText));
+        dialogueWindow.text = text;
     }
 }

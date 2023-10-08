@@ -7,18 +7,22 @@ public class DemoInventoryScript : MonoBehaviour
     public InventoryManager inventoryManager;
     public ItemStats[] itemsToPick;
     
-    public void PickupItem(int id)
+    public bool PickupItem(int id)
     {
         bool result = inventoryManager.AddItem(itemsToPick[id]);
 
         if (result)
         {
             Debug.Log("Item added");
+            return true;
         }
         else
         {
             Debug.Log("Item was not added");
+            return false;
         }
+
+        return false;
     }
 
     public void GetSelectedItem()

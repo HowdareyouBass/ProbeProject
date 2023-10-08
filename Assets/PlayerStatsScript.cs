@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerStatsScript : MonoBehaviour
 {
     [Header("PlayerStats")]
+    public int money = 1000;
     public int level = 1;
     public int experience = 0;
     public int nextLevelExperience = 100;
@@ -30,6 +31,7 @@ public class PlayerStatsScript : MonoBehaviour
     public int maxLuck = 10;
 
     [Header("StatsText")]
+    public Text MoneyText;
     public Text HealthText;
     public Text StaminaText;
     public Text StrenghtText;
@@ -46,6 +48,7 @@ public class PlayerStatsScript : MonoBehaviour
 
     public void UpdateStats()
     {
+        MoneyText.text = "Money: " + money.ToString("F0");
         HealthText.text = "Health: " + currentHealth.ToString("F0") + "/" + maxHealth.ToString("F0");
         StaminaText.text = "Stamina: " + currentStamina.ToString("F0") + "/" + maxStamina.ToString("F0");
         StrenghtText.text = "Strenght: " + Strength.ToString("F0") + "/" + maxStrength.ToString("F0");
@@ -64,7 +67,7 @@ public class PlayerStatsScript : MonoBehaviour
     }
 
     public HealthBar healthBar;
-    public StaminaBar staminaBar;
+    public StaminaGuiBar staminaBar;
 
 
     void Start()
