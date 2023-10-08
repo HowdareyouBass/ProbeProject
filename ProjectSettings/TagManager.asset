@@ -3,26 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Enemy
-  - Spell
-  - Obstacle
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - GUI
+  - 
   - Water
   - UI
-  - Player
-  - Spells
-  - Enemy
-<<<<<<< HEAD
-  - Entity
   - 
-=======
-  - Minimap
->>>>>>> origin/CharacterUi
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
