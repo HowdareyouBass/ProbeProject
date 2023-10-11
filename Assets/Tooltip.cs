@@ -37,9 +37,37 @@ public class Tooltip : MonoBehaviour
             headerField.text = header;
         }
 
+        if (string.IsNullOrEmpty(race))
+        {
+            raceField.gameObject.SetActive(false);
+        }
+        else
+        {
+            raceField.gameObject.SetActive(true);
+            raceField.text = "Race: " + race;
+        }
+
+        if (string.IsNullOrEmpty(relations))
+        {
+            relationsField.gameObject.SetActive(false);
+        }
+        else
+        {
+            relationsField.gameObject.SetActive(true);
+            relationsField.text = "Relations: " + relations;
+        }
+
+        if (string.IsNullOrEmpty(stats))
+        {
+            statsField.gameObject.SetActive(false);
+        }
+        else
+        {
+            statsField.gameObject.SetActive(true);
+            statsField.text = "Statistics: " + stats;
+        }
+
         contentField.text = content;
-        raceField.text = "Race: " + race;
-        relationsField.text = "Relations: " + relations;
         statsField.text = "Statistics: " + stats;
 
         int headerLenght = headerField.text.Length;
