@@ -13,7 +13,7 @@ public class Attack : MonoBehaviour
     // public event Action OnAttackPerformed; 
 
     // Some problem with coroutines cuz if you use StopCoroutine function the coroutine that stopped doesn't become null
-    public bool IsAttacking;
+    public bool IsAttacking { get; private set; }
 
     private void Start()
     {

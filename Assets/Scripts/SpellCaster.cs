@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class SpellCaster : MonoBehaviour
     private EntityEvents m_EntityEvents;
     private EntityController m_Controller;
     private SpellInventory m_Spells;
+
+    public event Action<Spell> OnSpellCast;
 
     private void Start()
     {
@@ -45,6 +48,7 @@ public class SpellCaster : MonoBehaviour
     private IEnumerator CastSpellRoutine(Target target, Spell spell)
     {
         //TODO: Clean this
+        // May be do class or interface named Requiremoving
         if (spell.TryGetComponent<S_TargetCastSpellComponent>(out S_TargetCastSpellComponent targetCastSpell))
         {
             yield return m_Movement.FolowUntilInRange(target, targetCastSpell.castRange);
@@ -53,6 +57,7 @@ public class SpellCaster : MonoBehaviour
         {
             yield return m_Movement.FolowUntilInRange(target, spotCastSpell.castRange);
         }
+        OnSpellCast.Invoke(spell);
         spell.Cast(target);
         m_EntityEvents.GetEvent(EntityEventName.OnAnySpellCasted).Trigger();
         yield break;
