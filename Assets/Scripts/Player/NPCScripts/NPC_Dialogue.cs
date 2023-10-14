@@ -16,7 +16,6 @@ public class NPC_Dialogue : MonoBehaviour
     public Text dialogueText;
     public GameObject contButton;
     public GameObject skipButton;
-    public GameObject minimap;
 
     [Header("Character description")]
     public string NPCNameText;
@@ -24,12 +23,13 @@ public class NPC_Dialogue : MonoBehaviour
     public string[] badRepDialogue;
     public Sprite NPCPhotoSprite;
 
-    [Header("Typing speed")]
+    [Header("Character statistics")]
     public float wordSpeed;
+    public int respectPoints = 10;
 
     [HideInInspector] private int index;
     [HideInInspector] public bool playerIsClose;
-    [HideInInspector] public int respectPoints = 10;
+    
 
     void Update()
     {
@@ -37,14 +37,12 @@ public class NPC_Dialogue : MonoBehaviour
         {
             if(dialoguePanel.activeInHierarchy)
             {
-                minimap.SetActive(true);
                 SkipTyping();
                 respectPoints -= 1;
                 zeroText();
             }
             else
             {
-                minimap.SetActive(false);
                 NPCPhoto.sprite = NPCPhotoSprite;
                 NPCName.text = NPCNameText;
                 zeroText();
