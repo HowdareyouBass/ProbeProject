@@ -7,6 +7,7 @@ public class SpellCaster : MonoBehaviour
 {
     private Movement m_Movement;
     private Coroutine m_SpellCasting;
+    private Coroutine m_DelayedCast;
     private EntityEvents m_EntityEvents;
     private EntityController m_Controller;
     private SpellInventory m_Spells;
@@ -58,8 +59,16 @@ public class SpellCaster : MonoBehaviour
             yield return m_Movement.FolowUntilInRange(target, spotCastSpell.castRange);
         }
         OnSpellCast.Invoke(spell);
+        m_DelayedCast = StartCoroutine(DelayedSpellCasting(spell, target));
         spell.Cast(target);
         m_EntityEvents.GetEvent(EntityEventName.OnAnySpellCasted).Trigger();
+        yield break;
+    }
+
+    private IEnumerator DelayedSpellCasting(Spell spell, Target target)
+    {
+        yield return new WaitForSeconds(spell.SpellAnimation.length / 2);
+        spell.Cast(target);
         yield break;
     }
 
@@ -67,5 +76,7 @@ public class SpellCaster : MonoBehaviour
     {
         if (m_SpellCasting != null)
             StopCoroutine(m_SpellCasting);
+        if (m_DelayedCast != null)
+            StopCoroutine(m_DelayedCast);
     }
 }

@@ -8,16 +8,16 @@ public class Attack : MonoBehaviour
     private Entity m_Entity;
     private EntityController m_Controller;
     private Coroutine m_Attacking;
+    private Coroutine m_DelayedAttack;
     private bool m_CanAttack = true;
 
-    // public event Action OnAttackPerformed; 
+    public event Action StartAttackAnimation;
 
     // Some problem with coroutines cuz if you use StopCoroutine function the coroutine that stopped doesn't become null
-    public bool IsAttacking { get; private set; }
+   //  public bool IsAttacking { get; private set; }
 
     private void Start()
     {
-        IsAttacking = false;
         m_Movement = GetComponent<Movement>();
         m_Controller = GetComponent<EntityController>();
         m_Entity = GetComponent<EntityScript>().GetEntity();
@@ -27,8 +27,11 @@ public class Attack : MonoBehaviour
     { 
         if (m_Attacking != null)
         {
-            IsAttacking = false;
             StopCoroutine(m_Attacking);
+        }
+        if (m_DelayedAttack != null)
+        {
+            StopCoroutine(m_DelayedAttack);
         }
     }
     
@@ -46,20 +49,28 @@ public class Attack : MonoBehaviour
 
             if (m_CanAttack && m_Entity.CanAttack)
             {
-                IsAttacking = true;
-                // OnAttackPerformed.Invoke();
-                m_Entity.AttackTarget(target);
+                // IsAttacking = true;
+                StartAttackAnimation.Invoke();
+                m_DelayedAttack = StartCoroutine(DelayedAttackTarget(target));
+                // m_Entity.AttackTarget(target);
                 StartCoroutine(WaitForNextAttack());
             }
 
             //Stops m_Attacking enemy that already died
             if(target.transform.GetComponent<EntityScript>().isDead)
             {
-                IsAttacking = false;
+                // IsAttacking = false;
                 yield break;
             }
             yield return null;
         }
+    }
+
+    private IEnumerator DelayedAttackTarget(Target target)
+    {
+        yield return new WaitForSeconds(0.3f);
+        m_Entity.AttackTarget(target);
+        yield break;
     }
 
     private IEnumerator WaitForNextAttack()

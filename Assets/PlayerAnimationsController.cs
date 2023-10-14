@@ -37,11 +37,18 @@ public class PlayerAnimationsController : MonoBehaviour
         m_PlayerScript = GetComponent<PlayerScript>();
 
         m_SpellCasterScript.OnSpellCast += ChangeSpellAnimation;
+        m_AttackScript.StartAttackAnimation += StartAttackAnimation;
+    }
+
+    private void StartAttackAnimation()
+    {
+        m_Animator.SetTrigger("AttackPerformed");
     }
 
     private void ChangeSpellAnimation(Spell spell)
     {
-        m_AnimatorOverride["CastSpell"] = spell.SpellAnimation;
+        m_AnimatorOverride["CastSleep"] = spell.SpellAnimation;
+        m_Animator.runtimeAnimatorController = m_AnimatorOverride;
         m_Animator.SetTrigger(m_SpellHash);
         // m_Animator.Play("CastSpell");
     }
@@ -49,7 +56,7 @@ public class PlayerAnimationsController : MonoBehaviour
     private void Update()
     {
         m_Animator.SetFloat(m_SpeedHash, m_Agent.velocity.magnitude / m_Agent.speed);
-        m_Animator.SetBool(m_AttackHash, m_AttackScript.IsAttacking);
+        // m_Animator.SetBool(m_AttackHash, m_AttackScript.IsAttacking);
         m_Animator.SetFloat(m_AttackAnimationSpeedHash, m_PlayerScript.GetEntity().GetAttackCooldown() / 1.113f);// Animation duration
     }
 }
