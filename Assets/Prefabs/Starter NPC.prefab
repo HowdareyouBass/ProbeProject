@@ -1,0 +1,309 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5542451409719411127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2406642994129959387}
+  - component: {fileID: 5174177567310381986}
+  - component: {fileID: 8199775984542833043}
+  - component: {fileID: 8788653723270927600}
+  - component: {fileID: 1674717270266065358}
+  - component: {fileID: 4347873000903975387}
+  - component: {fileID: 3095054717662979727}
+  - component: {fileID: 510698117634084475}
+  m_Layer: 0
+  m_Name: Starter NPC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2406642994129959387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542451409719411127}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.66, y: 0.9, z: -1.66}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5174177567310381986
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542451409719411127}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &8199775984542833043
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542451409719411127}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &8788653723270927600
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542451409719411127}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &1674717270266065358
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542451409719411127}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &4347873000903975387
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542451409719411127}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &3095054717662979727
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542451409719411127}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 3, z: 4}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &510698117634084475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542451409719411127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13ed8eba9880254e83979e2e91359d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _typingSound:
+  - {fileID: 8300000, guid: 6b0415fd6f2cfb44cafc02be69472a91, type: 3}
+  - {fileID: 8300000, guid: 8302fb7ef82027847a6ae2f29eeb9af1, type: 3}
+  - {fileID: 8300000, guid: 416802eb13067264284b6bf078a20e81, type: 3}
+  - {fileID: 8300000, guid: 941a86d6be133964185180195f455240, type: 3}
+  _typingSoundSource: {fileID: 0}
+  _dialoguePanel: {fileID: 0}
+  _NPCPhoto: {fileID: 0}
+  _NPCName: {fileID: 0}
+  _dialogueText: {fileID: 0}
+  _contButton: {fileID: 0}
+  _skipButton: {fileID: 0}
+  _contButtonText: {fileID: 0}
+  _NPCNameText:
+  - "\u0420\u043E\u0431\u0435\u0440\u0442"
+  - "\u041F\u044B\u043B\u0441\u043E\u043D"
+  - "\u041F\u044B\u043B\u0441\u043E\u043D"
+  - "\u0420\u043E\u0431\u0435\u0440\u0442"
+  - "\u0420\u043E\u0431\u0435\u0440\u0442"
+  - "\u041F\u044B\u043B\u0441\u043E\u043D"
+  _dialogue:
+  - "\u042F \u043F\u043E\u043D\u0438\u043C\u0430\u044E, \u0447\u0442\u043E \u0443
+    \u043D\u0430\u0441 \u0441\u0435\u0439\u0447\u0430\u0441 \u0442\u044F\u0436\u0435\u043B\u044B\u0435
+    \u0432\u0440\u0435\u043C\u0435\u043D\u0430, \u043D\u043E \u044E\u0437\u0435\u0440\u043D\u0435\u0439\u043C,
+    \u0437\u043D\u0430\u0435\u0448\u044C \u044F \u0443\u0436\u0435 \u0434\u0430\u0436\u0435
+    \u043D\u0435 \u0443\u0432\u0435\u0440\u0435\u043D, \u0430 \u0437\u0430\u0447\u0435\u043C
+    \u043C\u044B \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u0435\u043C \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043E\u0432\u0430\u0442\u044C.
+    \u0422\u0435\u043F\u043B\u043E\u2026 \u0441\u0432\u0435\u0442, \u0432\u0441\u0451
+    \u044D\u0442\u043E \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C \u0432 \u043F\u0440\u043E\u0448\u043B\u043E\u043C,
+    \u043F\u0440\u043E\u0448\u0451\u043B \u0432\u0441\u0435\u0433\u043E \u043E\u0434\u0438\u043D
+    \u0433\u043E\u0434, \u0430 \u043F\u043E \u0441\u043E\u0431\u044B\u0442\u0438\u0435\u043C,
+    \u0445\u0443\u0436\u0435 \u043D\u0435 \u0431\u044B\u043B\u043E \u043D\u0438 \u0440\u0430\u0437\u0443
+    \u0432 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043D\u0430\u0448\u0435\u0433\u043E
+    \u043C\u0438\u0440\u0430."
+  - "\u0414\u0430, \u043D\u043E \u0434\u0430\u0432\u0430\u0439 \u043F\u043E\u043F\u043B\u0430\u0447\u0435\u043C\u0441\u044F
+    \u043F\u043E\u0442\u043E\u043C, \u043C\u044B \u0442\u0443\u0442 \u0441\u043E\u0431\u0440\u0430\u043B\u0438\u0441\u044C
+    \u043D\u0435 \u0434\u043B\u044F \u044D\u0442\u043E\u0433\u043E. \u041F\u0435\u0440\u0435\u0439\u0434\u0451\u043C
+    \u043A \u043E\u0431\u0441\u0443\u0436\u0434\u0435\u043D\u0438\u044E \u0438 \u0432\u0432\u0435\u0434\u0435\u043D\u0438\u0435
+    \u043D\u043E\u0432\u0438\u0447\u043A\u0430 \u0432 \u043A\u0443\u0440\u0441 \u0434\u0435\u043B\u0430."
+  - "\u0412\u043D\u0438\u043A\u0430\u0439, \u043D\u0430\u0448 \u043A\u043B\u0443\u0431
+    \u043E\u0431\u0440\u0430\u0437\u043E\u0432\u0430\u043B\u0441\u044F \u0441 \u043D\u0430\u0447\u0430\u043B\u043E\u043C
+    \u043C\u0438\u0440\u043E\u0432\u043E\u0433\u043E \u043A\u0440\u0438\u0437\u0438\u0441\u0430,
+    \u0432\u0441\u0435\u0433\u043E \u0447\u0435\u0440\u0435\u0437 \u043F\u0430\u0440\u0443
+    \u0434\u043D\u0435\u0439 \u043F\u043E\u0441\u043B\u0435 \u043F\u0440\u043E\u043F\u0430\u0436\u0438
+    \u0441\u0432\u0435\u0442\u0430\u2026 \u0422\u043E\u0433\u0434\u0430 \u043C\u044B
+    \u0441\u043E\u0431\u0438\u0440\u0430\u043B\u0438\u0441\u044C \u0442\u0443\u0442
+    \u043B\u0438\u0448\u044C \u0434\u043B\u044F \u0442\u043E\u0433\u043E, \u0447\u0442\u043E\u0431\u044B
+    \u0443\u0437\u043D\u0430\u0442\u044C, \u0447\u0442\u043E \u043F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442
+    \u0432 \u043C\u0438\u0440\u0435, \u043F\u043E\u0441\u043F\u043B\u0435\u0442\u043D\u0438\u0447\u0430\u0442\u044C,
+    \u0443\u0441\u043F\u043E\u043A\u043E\u0438\u0442\u044C\u0441\u044F..., \u043D\u043E
+    \u0432\u0441\u043A\u043E\u0440\u0435 \u043C\u044B \u0443\u0436\u0435 \u043F\u043E\u043D\u044F\u043B\u0438,
+    \u0447\u0442\u043E \u044D\u0442\u043E\u0433\u043E \u043C\u0430\u043B\u043E, \u043C\u0430\u043B\u043E
+    \u0432\u0441\u0435\u0433\u043E \u043B\u0438\u0448\u044C \u0433\u043E\u0432\u043E\u0440\u0438\u0442\u044C,
+    \u043C\u044B \u0434\u043E\u043B\u0436\u043D\u044B \u0434\u0435\u0439\u0441\u0442\u0432\u043E\u0432\u0430\u0442\u044C,
+    \u0432\u0441\u0451 \u043B\u0438\u0448\u044C \u0431\u044B \u043D\u0435 \u0441\u043E\u0439\u0442\u0438
+    \u0441 \u0443\u043C\u0430 \u043E\u0442 \u043F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u044F\u0449\u0435\u0433\u043E.
+    \u041E\u0431\u0440\u0430\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043A\u043B\u0443\u0431\u0430
+    \u0441\u0442\u0430\u043B\u043E \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u044B\u043C
+    \u043B\u0438\u0448\u044C \u043F\u043E\u0442\u043E\u043C\u0443 \u0447\u0442\u043E
+    \u044D\u0442\u043E \u043C\u0435\u0441\u0442\u043E \u0432\u0441\u0435\u0433\u0434\u0430
+    \u0431\u044B\u043B\u043E \u043F\u043E\u043B\u043D\u043E \u0432\u0441\u044F\u043A\u0438\u043C\u0438
+    \u043F\u0443\u0442\u043D\u0438\u043A\u0430\u043C\u0438, \u0447\u0442\u043E \u043D\u0430
+    \u0441\u0432\u043E\u0438\u0445 \u0434\u0432\u043E\u0438\u0445 \u043F\u043E\u0431\u044B\u0432\u0430\u043B\u0438
+    \u0432 \u0441\u0430\u043C\u044B\u0445 \u0440\u0430\u0437\u043D\u044B\u0445 \u043C\u0435\u0441\u0442\u0430\u0445
+    \u043D\u0430\u0448\u0435\u0433\u043E \u0441\u0432\u0435\u0442\u0430."
+  - "\u0421\u0435\u0439\u0447\u0430\u0441 \u043C\u044B \u0437\u0430\u043D\u0438\u043C\u0430\u0435\u043C\u0441\u044F
+    \u0442\u0435\u043C, \u0447\u0442\u043E \u0432\u0435\u0440\u0435\u0444\u0438\u0446\u0438\u0440\u0443\u0435\u043C,
+    \u0434\u043E\u0431\u044B\u0432\u0430\u0435\u043C, \u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u043C
+    \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E. \u0412 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0435\u0435
+    \u0432\u0440\u0435\u043C\u044F \u0443 \u043D\u0430\u0441 \u0432\u0441\u0451 \u043C\u0435\u043D\u044C\u0448\u0435
+    \u043B\u044E\u0434\u0435\u0439, \u043D\u0430\u0448\u0430 \u0440\u0430\u0431\u043E\u0442\u0430
+    \u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u043E\u043F\u0430\u0441\u043D\u0430\u044F,
+    \u0438 \u043C\u043D\u043E\u0433\u0438\u0435 \u043F\u0440\u043E\u0441\u0442\u043E
+    \u0443\u043C\u0438\u0440\u0430\u043B\u0438 \u0432 \u043F\u0440\u043E\u0446\u0435\u0441\u0441\u0435.
+    \u0422\u0430\u043A \u043C\u044B \u0438 \u043F\u0440\u0438\u0448\u043B\u0438 \u043A
+    \u043D\u0430\u0431\u043E\u0440\u0443 \u043D\u043E\u0432\u0438\u0447\u043A\u043E\u0432. "
+  - "\u0421\u0435\u0439\u0447\u0430\u0441 \u043C\u044B \u0441\u043E\u0431\u0438\u0440\u0430\u0435\u043C
+    \u0432\u0441\u044E \u0432\u0430\u0437\u043C\u043E\u0436\u043D\u0443\u044E \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E,
+    \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043A\u0430\u0441\u0430\u0435\u0442\u0441\u044F
+    \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0445 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0439,
+    \u0437\u0430\u043F\u043E\u043C\u043D\u0438 \u043E\u0434\u043D\u043E \u0438\u0437
+    \u043D\u0430\u0448\u0438\u0445 \u0432\u0430\u0436\u043D\u0435\u0439\u0448\u0438\u0445
+    \u043F\u0440\u0430\u0432\u0438\u043B, \u0443 \u043D\u0430\u0441 \u0442\u0443\u0442
+    \u043E\u0441\u043E\u0431\u043E \u043D\u0435\u0442 \u043D\u0438\u043A\u0430\u043A\u043E\u0439
+    \u0432\u0430\u043B\u044E\u0442\u044B, \u043A\u0440\u043E\u043C\u0435 \u043E\u0434\u043D\u043E\u0439
+    - \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F. \u0421\u0435\u0439\u0447\u0430\u0441
+    \u043C\u044B \u0440\u0430\u0441\u0441\u043A\u0430\u0436\u0435\u0438 \u0442\u0435\u0431\u0435,
+    \u0447\u0442\u043E \u0437\u043D\u0430\u0435\u043C \u0430\u0432\u0430\u043D\u0441\u043E\u043C,
+    \u043D\u043E \u043F\u043E\u0437\u0436\u0435 \u0442\u044B \u0442\u0430\u043A\u0436\u0435
+    \u0434\u043E\u043B\u0436\u0435\u043D \u0434\u043E\u043D\u0435\u0441\u0442\u0438
+    \u0434\u043E \u043D\u0430\u0441 \u043D\u0435\u0447\u0442\u043E \u0438\u043D\u0442\u0435\u0440\u0435\u0441\u0443\u044E\u0449\u0435\u0435
+    \u043D\u0430\u0448 \u043A\u043B\u0443\u0431."
+  - "\u0417\u0430\u043F\u043E\u043C\u043D\u0438 \u0435\u0449\u0451 \u0432\u043E\u0442
+    \u0447\u0442\u043E, \u043F\u0440\u0435\u0436\u0434\u0435, \u0447\u0435\u043C
+    \u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C \u0432 \u043D\u0430\u0448\u0438\u0445
+    \u0440\u044F\u0434\u0430\u0445, \u0443\u043B\u0430\u0434\u044C \u0432\u0441\u0435
+    \u0441\u0432\u043E\u0438 \u0434\u0435\u043B\u0430, \u0432 \u044D\u0442\u043E\u043C
+    \u043C\u0435\u0441\u0442\u0435 \u043D\u0438\u043A\u043E\u0433\u0434\u0430 \u043D\u0435
+    \u0437\u043D\u0430\u0435\u0448\u044C, \u043A\u043E\u0433\u0434\u0430 \u0437\u0430
+    \u0442\u043E\u0431\u043E\u0439 \u043F\u0440\u0438\u0434\u0451\u0442 \u0441\u043C\u0435\u0440..(\u0434\u0438\u0430\u043B\u043E\u0433
+    \u043E\u0431\u0440\u044B\u0432\u0430\u0435\u0442\u0441\u044F)"
+  _badRepDialogue: []
+  _NPCPhotoSprite:
+  - {fileID: 21300000, guid: f9d4d1a6e0f2f6842a1d66d20918786d, type: 3}
+  - {fileID: 21300000, guid: 37bde47aa23a68f4c82010094e640392, type: 3}
+  - {fileID: 21300000, guid: 37bde47aa23a68f4c82010094e640392, type: 3}
+  - {fileID: 21300000, guid: f9d4d1a6e0f2f6842a1d66d20918786d, type: 3}
+  - {fileID: 21300000, guid: f9d4d1a6e0f2f6842a1d66d20918786d, type: 3}
+  - {fileID: 21300000, guid: 37bde47aa23a68f4c82010094e640392, type: 3}
+  _characterLines:
+  - 
+  - ...
+  - 
+  - 
+  - 
+  - 
+  _wordSpeed: 0.06
+  _respectPoints: 100000
+  _playerIsClose: 0
