@@ -38,11 +38,18 @@ public class PlayerAnimationsController : MonoBehaviour
 
         m_SpellCasterScript.OnSpellCast += ChangeSpellAnimation;
         m_AttackScript.StartAttackAnimation += StartAttackAnimation;
+        m_AttackScript.StopAttackAnimation += StopAttackAnimation;
     }
 
     private void StartAttackAnimation()
     {
+        m_Animator.ResetTrigger("AttackInterrupted");
         m_Animator.SetTrigger("AttackPerformed");
+    }
+
+    private void StopAttackAnimation()
+    {
+        m_Animator.SetTrigger("AttackInterrupted");
     }
 
     private void ChangeSpellAnimation(Spell spell)

@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 
 public class InputHandler : MonoBehaviour
 {
+    private const float m_ClickInterval = 0.3f;
     [SerializeField] private PlayerController m_PlayerController;
     [SerializeField] private EnemyController m_EnemyController;
     [SerializeField] private Camera m_PlayerCamera;
@@ -47,7 +48,7 @@ public class InputHandler : MonoBehaviour
     
     private void MovementAndAttackingPlayer()
     {
-        if (m_Timer >= 0.1f && Input.GetMouseButton(1))
+        if (m_Timer >= m_ClickInterval && Input.GetMouseButton(1))
         {
             if (CastRayFromCamera(out RaycastHit hit))
             {

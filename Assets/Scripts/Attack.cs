@@ -9,9 +9,11 @@ public class Attack : MonoBehaviour
     private EntityController m_Controller;
     private Coroutine m_Attacking;
     private Coroutine m_DelayedAttack;
-    private bool m_CanAttack = true;
+    private bool m_AttackNotOnCooldown = true;
+    private Target m_CurrentTarget;
 
     public event Action StartAttackAnimation;
+    public event Action StopAttackAnimation;
 
     // Some problem with coroutines cuz if you use StopCoroutine function the coroutine that stopped doesn't become null
    //  public bool IsAttacking { get; private set; }
@@ -24,7 +26,9 @@ public class Attack : MonoBehaviour
     }
 
     public void Stop()
-    { 
+    {
+        m_CurrentTarget = null;
+        StopAttackAnimation.Invoke();
         if (m_Attacking != null)
         {
             StopCoroutine(m_Attacking);
@@ -37,27 +41,30 @@ public class Attack : MonoBehaviour
     
     public void AttackTarget(Target target)
     {
+        //Already attacking
+        if (target.transform == m_CurrentTarget?.transform) return;
         m_Controller.StopActions();
-        m_Attacking = StartCoroutine(AttackTargetRoutine(target));
+        m_CurrentTarget = target;
+        m_Attacking = StartCoroutine(AttackTargetRoutine());
     }
 
-    private IEnumerator AttackTargetRoutine(Target target)
+    private IEnumerator AttackTargetRoutine()
     {
         while (true)
         {
-            yield return m_Movement.FolowUntilInRange(target, m_Entity.Stats.AttackRange);
+            yield return m_Movement.FolowUntilInRange(m_CurrentTarget, m_Entity.Stats.AttackRange);
 
-            if (m_CanAttack && m_Entity.CanAttack)
+            if (m_AttackNotOnCooldown && m_Entity.CanAttack)
             {
                 // IsAttacking = true;
                 StartAttackAnimation.Invoke();
-                m_DelayedAttack = StartCoroutine(DelayedAttackTarget(target));
+                m_DelayedAttack = StartCoroutine(DelayedAttackTarget());
                 // m_Entity.AttackTarget(target);
                 StartCoroutine(WaitForNextAttack());
             }
 
             //Stops m_Attacking enemy that already died
-            if(target.transform.GetComponent<EntityScript>().isDead)
+            if(m_CurrentTarget.transform.GetComponent<EntityScript>().isDead)
             {
                 // IsAttacking = false;
                 yield break;
@@ -66,18 +73,18 @@ public class Attack : MonoBehaviour
         }
     }
 
-    private IEnumerator DelayedAttackTarget(Target target)
+    private IEnumerator DelayedAttackTarget()
     {
         yield return new WaitForSeconds(0.3f);
-        m_Entity.AttackTarget(target);
+        m_Entity.AttackTarget(m_CurrentTarget);
         yield break;
     }
 
     private IEnumerator WaitForNextAttack()
     {
-        m_CanAttack = false;
+        m_AttackNotOnCooldown = false;
         yield return new WaitForSeconds(m_Entity.GetAttackCooldown());
-        m_CanAttack = true;
+        m_AttackNotOnCooldown = true;
         yield break;
     }
 }
