@@ -52272,6 +52272,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5238513426292133042, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: m_Spells.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238513426292133042, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: m_Spells.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9fd661d190bee4e4ca51a09b33a57908, type: 2}
     - target: {fileID: 6746957540238612321, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -52294,7 +52302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6746957540238612323, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.06
+      value: 0.981
       objectReference: {fileID: 0}
     - target: {fileID: 6746957540238612323, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -52328,6 +52336,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6746957540238612325, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2087080732}
+    - target: {fileID: 6746957540238612325, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: enemyEye
+      value: 
+      objectReference: {fileID: 1740587037}
+    - target: {fileID: 6746957540238612325, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: detectionDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6746957540238612325, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: distanceToChangeGoal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6746957540238612334, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: m_Center.y
+      value: 0.48
+      objectReference: {fileID: 0}
     - target: {fileID: 6746957540238612335, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -52347,6 +52375,14 @@ PrefabInstance:
     - target: {fileID: 6746957540255858415, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7518579385952539628, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7518579385952539628, guid: 33bb73832536ef548b687270cb0b58ad, type: 3}
+      propertyPath: m_BaseOffset
+      value: 0.48
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

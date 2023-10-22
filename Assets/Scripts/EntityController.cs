@@ -3,9 +3,9 @@ using UnityEngine.AI;
 
 public class EntityController : MonoBehaviour
 {
-    private Attack m_Attack;
-    private Movement m_Movement;
-    private SpellCaster m_SpellCaster;
+    protected Attack m_Attack;
+    protected Movement m_Movement;
+    protected SpellCaster m_SpellCaster;
     private NavMeshAgent m_Agent;
 
     private void Start()
@@ -44,13 +44,13 @@ public class EntityController : MonoBehaviour
         m_SpellCaster?.CastSpell(spellSlot, target);
     }
 
-    private void Attack(Target target)
+    public void Attack(Target target)
     {
         StopAvoidingEntities();
         m_Attack?.AttackTarget(target);
     }
     
-    private void Move(Target target)
+    public void Move(Target target)
     {
         StopActions();
         m_Movement?.Move(target.GetPoint());

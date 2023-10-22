@@ -28,7 +28,7 @@ public class Attack : MonoBehaviour
     public void Stop()
     {
         m_CurrentTarget = null;
-        StopAttackAnimation.Invoke();
+        StopAttackAnimation?.Invoke();
         if (m_Attacking != null)
         {
             StopCoroutine(m_Attacking);
@@ -57,7 +57,7 @@ public class Attack : MonoBehaviour
             if (m_AttackNotOnCooldown && m_Entity.CanAttack)
             {
                 // IsAttacking = true;
-                StartAttackAnimation.Invoke();
+                StartAttackAnimation?.Invoke();
                 m_DelayedAttack = StartCoroutine(DelayedAttackTarget());
                 // m_Entity.AttackTarget(target);
                 StartCoroutine(WaitForNextAttack());

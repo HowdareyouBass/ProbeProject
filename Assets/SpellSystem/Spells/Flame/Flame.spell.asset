@@ -39,3 +39,4 @@ MonoBehaviour:
         m_Damage: 10
         m_DecayOnCollision: 0
         m_ProjectileObject: {fileID: 8487429180969515810, guid: 35d60c18cb3fdd34da4cdbbb9b77617d, type: 3}
+        m_StickToFloor: 0

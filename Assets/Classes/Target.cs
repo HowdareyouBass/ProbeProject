@@ -13,6 +13,12 @@ public class Target
     private Collider m_Collider;
     private Vector3 m_Position;
 
+    public Target(Transform target)
+    {
+        transform = target;
+        m_Collider = target.GetComponent<Collider>();
+        m_Position = target.position;
+    }
     public Target(Transform target, Vector3 point, Collider collider)
     {
         transform = target;

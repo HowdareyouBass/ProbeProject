@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class S_ProjectileComponent : SpellComponent
@@ -8,6 +9,7 @@ public class S_ProjectileComponent : SpellComponent
     [SerializeField] private float m_Damage;
     [SerializeField] private bool m_DecayOnCollision;
     [SerializeField] private GameObject m_ProjectileObject;
+    [SerializeField] private bool m_StickToFloor;
 
     public override void Init()
     {

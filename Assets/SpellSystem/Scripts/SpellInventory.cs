@@ -37,6 +37,34 @@ public class SpellInventory : MonoBehaviour
             activeSpellComponent.GoOnCooldown();
         }
     }
+
+    public bool AllSpellsOnCooldown()
+    {
+        foreach (Spell spell in m_SpellCopies)
+        {
+            if (spell == null) continue;
+            if (spell.TryGetComponent<S_ActiveSpellComponent>(out var activeSpell) && !activeSpell.OnCooldown)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public int GetIndexOfFirstSpellNotOnCooldown()
+    {
+        for (int i = 0; i < m_SpellCopies.Length; i++)
+        {
+            if (m_SpellCopies[i] == null) continue;
+            if (m_SpellCopies[i].TryGetComponent<S_ActiveSpellComponent>(out var activeSpell) && !activeSpell.OnCooldown)
+            {
+                Debug.Log(i);
+                return i;
+            }
+        }
+        Debug.LogWarning("All spells are on cooldown");
+        return 0;
+    }
+
     public Spell GetSpell(int spellSlot)
     {
         if (spellSlot < 0 || spellSlot >= m_Spells.Length)

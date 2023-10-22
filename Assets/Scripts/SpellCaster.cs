@@ -14,6 +14,9 @@ public class SpellCaster : MonoBehaviour
 
     public event Action<Spell> OnSpellCast;
 
+    private Target m_CurrentTarget = null;
+    private int m_CurrentSpellSlot = -1;
+
     private void Start()
     {
         m_Movement = GetComponent<Movement>();
@@ -28,6 +31,15 @@ public class SpellCaster : MonoBehaviour
 
     public void CastSpell(int spellSlot, Target target)
     {
+        if (target.transform == m_CurrentTarget?.transform && spellSlot == m_CurrentSpellSlot)
+        {
+            Debug.Log("Blocked spell casting cuz same spell slot and target");
+            Debug.Log(target.transform);
+            Debug.Log(m_CurrentSpellSlot);
+            Debug.Log(spellSlot);
+        }
+
+        m_CurrentSpellSlot = spellSlot;
         Spell spell = m_Spells.GetSpell(spellSlot);
         
         if (spell == null)
@@ -42,6 +54,7 @@ public class SpellCaster : MonoBehaviour
             {
                 return;
             }
+            m_CurrentTarget = target;
             m_Controller.StopActions();
             m_SpellCasting = StartCoroutine(CastSpellRoutine(target, spell));
         }
@@ -58,9 +71,10 @@ public class SpellCaster : MonoBehaviour
         {
             yield return m_Movement.FolowUntilInRange(target, spotCastSpell.castRange);
         }
-        OnSpellCast.Invoke(spell);
+        OnSpellCast?.Invoke(spell);
         m_DelayedCast = StartCoroutine(DelayedSpellCasting(spell, target));
         spell.Cast(target);
+        m_CurrentSpellSlot = -1;
         m_EntityEvents.GetEvent(EntityEventName.OnAnySpellCasted).Trigger();
         yield break;
     }
@@ -78,5 +92,6 @@ public class SpellCaster : MonoBehaviour
             StopCoroutine(m_SpellCasting);
         if (m_DelayedCast != null)
             StopCoroutine(m_DelayedCast);
+        m_CurrentSpellSlot = -1;
     }
 }
