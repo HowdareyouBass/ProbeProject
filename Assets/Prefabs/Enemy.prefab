@@ -116,7 +116,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &7518579385952539628
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 2
 --- !u!114 &4384767212058990661
@@ -165,6 +165,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df20e5442c40fa5459b3eb3b8a52b26f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  viewAngle: 90
+  viewDistance: 15
+  detectionDistance: 6
+  enemyEye: {fileID: 6746957540238612323}
+  goals: []
+  distanceToChangeGoal: 1
+  player: {fileID: 0}
 --- !u!114 &3743772165625383500
 MonoBehaviour:
   m_ObjectHideFlags: 0
