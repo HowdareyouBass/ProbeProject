@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877416c99eddb0543acdd97f2119cf79, type: 3}
   m_Name: CursedBlood.effect
   m_EditorClassIdentifier: 
+  m_EffectSprite: {fileID: 0}
+  m_Effect: {fileID: 0}
   m_DefaultDuration: 3
   m_Components:
   - rid: 6641091130740178950
@@ -23,7 +25,7 @@ MonoBehaviour:
       data:
         statusEffect: {fileID: 0}
         target: {fileID: 0}
-        <DurationInSeconds>k__BackingField: 5
+        <DurationInSeconds>k__BackingField: 3
         m_EntityEvent: 2
         m_ApplyTo: 2
         m_StatusEffect: {fileID: 11400000, guid: d980952899db49045a1389bf39e26d74, type: 2}

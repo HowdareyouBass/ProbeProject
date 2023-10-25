@@ -20,7 +20,7 @@ public class StatusEffectHandler : MonoBehaviour
         effect.OnEffectEnd += RemoveEffect;
         m_StatusEffects.Add(effect);
         effect.StartEffect();
-        OnEffectAdded.Invoke(effect);
+        OnEffectAdded?.Invoke(effect);
     }
     public void DeleteStatusEffect(StatusEffect effect)
     {

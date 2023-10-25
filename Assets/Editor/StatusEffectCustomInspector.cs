@@ -35,6 +35,7 @@ public class StatusEffectCustomInspector : Editor
     {
         StatusEffect obj = (StatusEffect)target;
 
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("m_Effect"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("m_EffectSprite"));
 
         SerializedProperty property = serializedObject.FindProperty("m_Components");

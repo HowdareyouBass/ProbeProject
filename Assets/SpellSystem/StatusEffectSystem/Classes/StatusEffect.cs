@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using System;
+using Unity.VisualScripting;
 
 //TODO: Rethink about tasks and everything
 //TODO: Component base
@@ -12,12 +13,10 @@ public class StatusEffect : ScriptableObject
     //[SerializeField] private string m_Name;
     // Can't find method to find serializedProperty by name with field: thingy
     [SerializeField] private Sprite m_EffectSprite;
-    public Sprite EffectSprite { get => m_EffectSprite; }
-    
+    [SerializeField] private GameObject m_Effect;
     [SerializeField] private float m_DefaultDuration = 3;
-    private CancellationTokenSource m_StopEffectSource;
+    public Sprite EffectSprite { get => m_EffectSprite; }
     public List<Task> effectTasks { get; private set; }
-
     public CancellationToken stopEffectToken { get; private set; }
     public float defaultDuration { get => m_DefaultDuration; }
     /// <summary>
@@ -42,6 +41,9 @@ public class StatusEffect : ScriptableObject
 
     public event Action<StatusEffect> OnEffectEnd;
 
+    private CancellationTokenSource m_StopEffectSource;
+    private GameObject m_EffectCopy;
+
     public void OnEnable()
     {
         effectTasks = new List<Task>();
@@ -60,6 +62,8 @@ public class StatusEffect : ScriptableObject
             component.target = target;
             component.Init();
         }
+        if (m_Effect != null)
+            m_EffectCopy = GameObject.Instantiate(m_Effect, target);
     }
     public void StopEffect()
     {
@@ -73,6 +77,7 @@ public class StatusEffect : ScriptableObject
         {
             component.Destroy();
         }
+        Destroy(m_EffectCopy);
         OnEffectEnd.Invoke(this);
     }
 #region Components

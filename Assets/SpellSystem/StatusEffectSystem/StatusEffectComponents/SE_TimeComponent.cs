@@ -24,13 +24,15 @@ public abstract class SE_TimeComponent : StatusEffectComponent
 
     private async Task Timer()
     {
+        Debug.Log(statusEffect.Name);
         int timer = 0;
         OnEffectApplied?.Invoke();
         while(!statusEffect.stopEffectToken.IsCancellationRequested && LeftTime > 0)
         {
+            Debug.Log(timer);
             PerMillisecond();
             timer++;
-            if (timer == 1000)
+            if (timer >= 1000)
             {
                 PerSecond();
                 timer = 0;
