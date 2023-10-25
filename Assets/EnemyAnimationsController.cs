@@ -10,7 +10,7 @@ public class EnemyAnimationsController : MonoBehaviour
 
     private Attack m_AttackScript;
     private SpellCaster m_SpellCasterScript;
-    private EnemyScript m_PlayerScript;
+    private EnemyScript m_EnemyScript;
     private NavMeshAgent m_Agent;
 
     private int m_SpeedHash;
@@ -34,11 +34,16 @@ public class EnemyAnimationsController : MonoBehaviour
         m_AttackScript = GetComponent<Attack>();
         m_SpellCasterScript = GetComponent<SpellCaster>();
         m_Agent = GetComponent<NavMeshAgent>();
-        m_PlayerScript = GetComponent<EnemyScript>();
+        m_EnemyScript = GetComponent<EnemyScript>();
 
         m_SpellCasterScript.OnSpellCast += ChangeSpellAnimation;
         m_AttackScript.StartAttackAnimation += StartAttackAnimation;
         m_AttackScript.StopAttackAnimation += StopAttackAnimation;
+        m_EnemyScript.GetEntity().Events.GetEvent(EntityEventName.OnDeath).Subscribe(PlayDeathAnimation);
+    }
+    private void PlayDeathAnimation()
+    {
+        m_Animator.Play("Death");
     }
 
     private void StartAttackAnimation()
@@ -66,6 +71,6 @@ public class EnemyAnimationsController : MonoBehaviour
     {
         m_Animator.SetFloat(m_SpeedHash, m_Agent.velocity.magnitude / m_Agent.speed);
         // m_Animator.SetBool(m_AttackHash, m_AttackScript.IsAttacking);
-        m_Animator.SetFloat(m_AttackAnimationSpeedHash, m_PlayerScript.GetEntity().GetAttackCooldown() / 1.113f);// Animation duration
+        m_Animator.SetFloat(m_AttackAnimationSpeedHash, m_EnemyScript.GetEntity().GetAttackCooldown() / 1.113f);// Animation duration
     }
 }

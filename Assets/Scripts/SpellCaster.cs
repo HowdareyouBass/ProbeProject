@@ -81,6 +81,8 @@ public class SpellCaster : MonoBehaviour
 
     private IEnumerator DelayedSpellCasting(Spell spell, Target target)
     {
+        if (spell.SpellAnimation == null)
+            yield break;
         yield return new WaitForSeconds(spell.SpellAnimation.length / 2);
         spell.Cast(target);
         yield break;

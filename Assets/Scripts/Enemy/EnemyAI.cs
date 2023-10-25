@@ -28,7 +28,8 @@ public class EnemyAI : MonoBehaviour
 
         // If No patrol object don't do the convesion
         m_CheckingForPlayer = StartCoroutine(CheckForPlayerRoutine());
-
+        if (m_PatrolObject == null)
+            return;
         Transform[] patrolObjects = m_PatrolObject.GetComponentsInChildren<Transform>();
         if (patrolObjects.Length == 1)
             return;
@@ -44,18 +45,18 @@ public class EnemyAI : MonoBehaviour
     {
         while (true)
         {
+            if (player == null)
+                yield break;
             float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
             if (distanceToPlayer <= detectionDistance || IsInView())
             {
                 if (m_Controller.AllSpellsOnCooldown())
                 {
-                    Debug.Log("Should attack");
                     m_Controller.Attack(new Target(player));
                 }
                 else
                 {
-                    Debug.Log("Should cast");
                     m_Controller.CastSpellNotOnCooldown(new Target(player));
                 }
             }

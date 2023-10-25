@@ -57,7 +57,6 @@ public class SpellInventory : MonoBehaviour
             if (m_SpellCopies[i] == null) continue;
             if (m_SpellCopies[i].TryGetComponent<S_ActiveSpellComponent>(out var activeSpell) && !activeSpell.OnCooldown)
             {
-                Debug.Log(i);
                 return i;
             }
         }

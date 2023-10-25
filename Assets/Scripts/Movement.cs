@@ -27,11 +27,12 @@ public class Movement : MonoBehaviour
     private void OnDisable()
     {
         m_Entity.Events.GetEvent(EntityEventName.StopMovement).Unsubscribe(Stop);
+        StopAllCoroutines();
     }
 
     public void Move(Vector3 destination)
     {
-        if (m_Entity.CanMove)
+        if (m_Entity.CanMove && m_Agent != null && m_Agent.enabled)
             m_Agent.SetDestination(destination);
     }
     public IEnumerator FollowUntilInRange(Target target, int range)
@@ -105,7 +106,8 @@ public class Movement : MonoBehaviour
     
     public void Stop()
     {
-        m_Agent.SetDestination(transform.position);
+        if (m_Agent != null && m_Agent.enabled)
+            m_Agent.SetDestination(transform.position);
         if (m_Looking != null)
             StopCoroutine(m_Looking);
         if (m_Patroling != null)
