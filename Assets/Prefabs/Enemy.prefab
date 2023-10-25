@@ -168,9 +168,8 @@ MonoBehaviour:
   viewAngle: 90
   viewDistance: 15
   detectionDistance: 6
+  m_PatrolObject: {fileID: 0}
   enemyEye: {fileID: 6746957540238612323}
-  goals: []
-  distanceToChangeGoal: 1
   player: {fileID: 0}
 --- !u!114 &3743772165625383500
 MonoBehaviour:

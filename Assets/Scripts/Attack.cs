@@ -52,7 +52,7 @@ public class Attack : MonoBehaviour
     {
         while (true)
         {
-            yield return m_Movement.FolowUntilInRange(m_CurrentTarget, m_Entity.Stats.AttackRange);
+            yield return m_Movement.FollowUntilInRange(m_CurrentTarget, m_Entity.Stats.AttackRange);
 
             if (m_AttackNotOnCooldown && m_Entity.CanAttack)
             {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -54,6 +55,12 @@ public class EntityController : MonoBehaviour
     {
         StopActions();
         m_Movement?.Move(target.GetPoint());
+    }
+
+    public void PatrolPoints(LinkedList<Vector3> points)
+    {
+        StopActions();
+        m_Movement?.PatrolPoints(points);
     }
 
     private void StopAvoidingEntities()

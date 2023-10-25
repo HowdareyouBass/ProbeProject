@@ -25,7 +25,7 @@ public class S_ProjectileComponent : SpellComponent
         projectileComponent.TravelSpeed = m_TravelSpeed;
         projectileComponent.Direction = Vector3.Normalize(target.GetPoint() - caster.position);
         projectileComponent.DecayTimeInSeconds = m_DecayTimeInSeconds;
-        projectileComponent.Damage = m_Damage;
+        projectileComponent.Damage = m_Damage * casterEntity.Stats.Attack;
         projectileComponent.DecayOnCollision = m_DecayOnCollision;
     }
 }

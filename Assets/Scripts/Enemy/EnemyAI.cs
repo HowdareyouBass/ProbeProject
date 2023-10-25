@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,23 +11,33 @@ public class EnemyAI : MonoBehaviour
     public float viewDistance = 15f;
     public float detectionDistance = 3f;
 
+    [SerializeField] private Transform m_PatrolObject;
+
     public Transform enemyEye;
-    public Transform[] goals;
-    public float distanceToChangeGoal;
-
-    private int currentGoal = 0;
-
     public Transform player;
-
     private Coroutine m_CheckingForPlayer;
-
     private EnemyController m_Controller;
+
+    private LinkedList<Vector3> m_PatrolPoints;
 
     private void Start()
     {
+
         m_Controller = GetComponent<EnemyController>();
 
+
+        // If No patrol object don't do the convesion
         m_CheckingForPlayer = StartCoroutine(CheckForPlayerRoutine());
+
+        Transform[] patrolObjects = m_PatrolObject.GetComponentsInChildren<Transform>();
+        if (patrolObjects.Length == 1)
+            return;
+        m_PatrolPoints = new LinkedList<Vector3>();
+        for (int i = 1; i < patrolObjects.Length; i++)
+        {
+            m_PatrolPoints.AddFirst(new LinkedListNode<Vector3>(patrolObjects[i].position));
+        }
+        m_Controller.PatrolPoints(m_PatrolPoints);
     }
 
     private IEnumerator CheckForPlayerRoutine()
@@ -47,6 +59,10 @@ public class EnemyAI : MonoBehaviour
                     m_Controller.CastSpellNotOnCooldown(new Target(player));
                 }
             }
+            // else
+            // {
+            //     m_Controller.PatrolPoints(m_PatrolPoints);
+            // }
 
             // if (agent.remainingDistance < distanceToChangeGoal)
             // {

@@ -6,7 +6,7 @@ public class Target
     public Vector3 normal { get; private set; } = Vector3.up;
     public Entity TargetEntity => transform.GetComponent<EntityScript>().GetEntity();
 
-    public bool isEntity => transform.TryGetComponent<EntityScript>(out var a);
+    public bool isEntity => transform != null && transform.TryGetComponent<EntityScript>(out var a);
     public float height { get => m_Collider.bounds.size.y; }
     public float radius { get => m_Collider.bounds.size.x; }
 
@@ -18,6 +18,12 @@ public class Target
         transform = target;
         m_Collider = target.GetComponent<Collider>();
         m_Position = target.position;
+    }
+    public Target(Vector3 point)
+    {
+        transform = null;
+        m_Collider = null;
+        m_Position = point;
     }
     public Target(Transform target, Vector3 point, Collider collider)
     {

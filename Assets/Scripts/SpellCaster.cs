@@ -65,11 +65,11 @@ public class SpellCaster : MonoBehaviour
         // May be do class or interface named Requiremoving
         if (spell.TryGetComponent<S_TargetCastSpellComponent>(out S_TargetCastSpellComponent targetCastSpell))
         {
-            yield return m_Movement.FolowUntilInRange(target, targetCastSpell.castRange);
+            yield return m_Movement.FollowUntilInRange(target, targetCastSpell.castRange);
         }
         if (spell.TryGetComponent<S_SpotCastSpell>(out S_SpotCastSpell spotCastSpell))
         {
-            yield return m_Movement.FolowUntilInRange(target, spotCastSpell.castRange);
+            yield return m_Movement.FollowUntilInRange(target, spotCastSpell.castRange);
         }
         OnSpellCast?.Invoke(spell);
         m_DelayedCast = StartCoroutine(DelayedSpellCasting(spell, target));

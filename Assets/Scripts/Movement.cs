@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,13 +12,21 @@ public class Movement : MonoBehaviour
     private EntityController m_Controller;
     private Entity m_Entity;
     private Coroutine m_Looking;
+    private Coroutine m_Patroling;
 
-    private void Start()
+    private void Awake()
     {
         m_Entity = GetComponent<EntityScript>().GetEntity();
         m_Agent = GetComponent<NavMeshAgent>();
         m_Controller = GetComponent<EntityController>();
+    }
+    private void OnEnable()
+    {
         m_Entity.Events.GetEvent(EntityEventName.StopMovement).Subscribe(Stop);
+    }
+    private void OnDisable()
+    {
+        m_Entity.Events.GetEvent(EntityEventName.StopMovement).Unsubscribe(Stop);
     }
 
     public void Move(Vector3 destination)
@@ -24,7 +34,7 @@ public class Movement : MonoBehaviour
         if (m_Entity.CanMove)
             m_Agent.SetDestination(destination);
     }
-    public IEnumerator FolowUntilInRange(Target target, int range)
+    public IEnumerator FollowUntilInRange(Target target, int range)
     {
         //Move while range is less then vector to target magnitude
         while(target.GetVector(transform).magnitude > range && range != 0)
@@ -34,6 +44,35 @@ public class Movement : MonoBehaviour
         }
         Stop();
         Look(target);
+    }
+
+    public void PatrolPoints(LinkedList<Vector3> points)
+    {
+        m_Patroling = StartCoroutine(PatrolingPointsRoutine(points));
+    }
+    private IEnumerator PatrolingPointsRoutine(LinkedList<Vector3> points)
+    {
+        LinkedListNode<Vector3> point = points.First;
+        // while (point != null)
+        // {
+        //     GameObject go = Instantiate(GameObject.CreatePrimitive(PrimitiveType.Sphere));
+        //     go.transform.position = point.Value;
+        //     point = point.Next;
+        // }
+        while (point != null)
+        {
+            Move(point.Value);
+            while (m_Agent.remainingDistance > 0.1f)
+            {
+                yield return null;
+            }
+            if (point == points.Last)
+            {
+                point = points.First;
+                continue;
+            }
+            point = point.Next;
+        }
     }
     private void Look(Target target)
     {
@@ -63,10 +102,13 @@ public class Movement : MonoBehaviour
         }
         yield break;
     }
+    
     public void Stop()
     {
         m_Agent.SetDestination(transform.position);
         if (m_Looking != null)
             StopCoroutine(m_Looking);
+        if (m_Patroling != null)
+            StopCoroutine(m_Patroling);
     }
 }

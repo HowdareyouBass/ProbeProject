@@ -14,10 +14,10 @@ public class EntityStats
     public float Evasion { get; private set; } = 0;
     public float HitChance { get; private set; } = 1;
     public float SpellCooldownCoefficient { get; private set; } = 1;
-    public float AttackDamage { get => m_Attack * (PureAttack ? 1 : 0.1f) * m_AttackPercent; } //TODO: стили маг и физ ( рендж и ближ )
+    public float AttackDamage { get => Attack * (PureAttack ? 1 : 0.1f) * m_AttackPercent; } //TODO: стили маг и физ ( рендж и ближ )
     public float Regeneration { get => m_RegeneratePercent * m_RegenerateAmount; }
 
-    private float m_Attack = 0;
+    public float Attack { get; private set; } = 0;
     private float m_RegenerateAmount = 1;
     private float m_RegeneratePercent = 1;
     private float m_AttackPercent = 1;
@@ -55,7 +55,7 @@ public class EntityStats
         MaxHealth = race.Health;
         MaxStamina = race.Stamina;
         
-        m_Attack = race.Attack;
+        Attack = race.Attack;
         AttackRange = race.AttackRange;
         AttackSpeed = race.AttackSpeed;
         BaseAttackSpeed = race.BaseAttackSpeed;

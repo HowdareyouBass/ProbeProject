@@ -6,6 +6,6 @@ public class S_AreaDamage : S_AreaComponent
 
     protected override void ActionPerEntity(Entity entity)
     {
-        entity.TakeDamage(m_Damage);
+        entity.TakeDamage(m_Damage * casterEntity.Stats.Attack);
     }
 }
