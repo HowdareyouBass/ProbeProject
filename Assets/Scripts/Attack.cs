@@ -66,7 +66,7 @@ public class Attack : MonoBehaviour
             //Stops m_Attacking enemy that already died
             if(m_CurrentTarget.transform.GetComponent<EntityScript>().isDead)
             {
-                // IsAttacking = false;
+                StopAttackAnimation?.Invoke();
                 yield break;
             }
             yield return null;

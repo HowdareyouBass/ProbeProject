@@ -54,6 +54,8 @@ public class EnemyAnimationsController : MonoBehaviour
 
     private void ChangeSpellAnimation(Spell spell)
     {
+        // If have no spell animation do nothing
+        if (spell.SpellAnimation == null) return;
         m_AnimatorOverride["CastSleep"] = spell.SpellAnimation;
         m_Animator.runtimeAnimatorController = m_AnimatorOverride;
         m_Animator.SetTrigger(m_SpellHash);

@@ -39,8 +39,13 @@ public class PlayerAnimationsController : MonoBehaviour
         m_SpellCasterScript.OnSpellCast += ChangeSpellAnimation;
         m_AttackScript.StartAttackAnimation += StartAttackAnimation;
         m_AttackScript.StopAttackAnimation += StopAttackAnimation;
+        m_PlayerScript.GetEntity().Events.GetEvent(EntityEventName.OnDeath).Subscribe(PlayDeathAnimation);
     }
 
+    private void PlayDeathAnimation()
+    {
+        m_Animator.Play("Death");
+    }
     private void StartAttackAnimation()
     {
         m_Animator.ResetTrigger("AttackInterrupted");
@@ -54,6 +59,8 @@ public class PlayerAnimationsController : MonoBehaviour
 
     private void ChangeSpellAnimation(Spell spell)
     {
+        // If have no spell animation do nothing
+        if (spell.SpellAnimation == null) return;
         m_AnimatorOverride["CastSleep"] = spell.SpellAnimation;
         m_Animator.runtimeAnimatorController = m_AnimatorOverride;
         m_Animator.SetTrigger(m_SpellHash);

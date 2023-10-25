@@ -1,5 +1,5 @@
 public class PlayerStats : EntityStats
 {
-    int Level;
-    float Experience;
+    int m_Level;
+    float m_Experience;
 }

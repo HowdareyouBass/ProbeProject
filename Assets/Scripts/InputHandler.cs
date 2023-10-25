@@ -12,6 +12,11 @@ public class InputHandler : MonoBehaviour
 
     private void Update()
     {
+        if (m_PlayerController == null)
+        {
+            // There is no Player Controller attached or player died.
+            return;
+        }
         MovementAndAttackingPlayer();
         MovementAndAttackingEnemy();
         int i = 0;

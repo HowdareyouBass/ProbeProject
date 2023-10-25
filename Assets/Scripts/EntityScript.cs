@@ -11,9 +11,9 @@ public abstract class EntityScript : MonoBehaviour
     {
         isDead = true;
         
-        this.GetComponent<CapsuleCollider>().enabled = false;
-        this.GetComponent<NavMeshAgent>().enabled = false;
-        this.GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<NavMeshAgent>().enabled = false;
+        // GetComponent<MeshRenderer>().enabled = false;
         Destroy(transform.gameObject, 1f);
     }
 }

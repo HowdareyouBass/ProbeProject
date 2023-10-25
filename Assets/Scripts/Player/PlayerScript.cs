@@ -9,13 +9,28 @@ public sealed class PlayerScript : EntityScript
 
     public PlayerEvents events { get; private set; }
 
+    private GameEvent m_OnDeath;
+
     private void Awake()
     {
         events = new PlayerEvents();
         m_Player = new Player();
         m_Player.SetRace(m_Race);
+        m_OnDeath = GetEntity().Events.GetEvent(EntityEventName.OnDeath);
     }
-
+    private void OnEnable()
+    {
+        m_OnDeath?.Subscribe(Die);
+    }
+    private void OnDisable()
+    {
+        m_OnDeath?.Unsubscribe(Die);
+    }
+    protected override void Die()
+    {
+        base.Die();
+    }
+    
     public override Entity GetEntity()
     {
         return m_Player;
