@@ -6,9 +6,12 @@ public class Target
     public Vector3 normal { get; private set; } = Vector3.up;
     public Entity TargetEntity => transform.GetComponent<EntityScript>().GetEntity();
 
-    public bool isEntity => transform != null && transform.TryGetComponent<EntityScript>(out var a);
+    public bool isEntity { get => transform.TryGetComponent<EntityScript>(out var a); }
+    public bool isInterractable { get => isEntity || transform.TryGetComponent<InterractablePropScript>(out var a); }
+    public bool isInterractableProp { get => !isEntity && isInterractable; }
     public float height { get => m_Collider.bounds.size.y; }
     public float radius { get => m_Collider.bounds.size.x; }
+    
 
     private Collider m_Collider;
     private Vector3 m_Position;
@@ -42,7 +45,7 @@ public class Target
     //Returns vector to target
     public Vector3 GetVector(Transform from)
     {
-        if (isEntity)
+        if (isInterractable)
         {
             return EntityMath.VectorToNearestPoint(from, this);
         }
@@ -53,7 +56,7 @@ public class Target
     }
     public Vector3 GetPoint()
     {
-        if (isEntity)
+        if (isInterractable)
         {
             Vector3 result = transform.position;
             result.y -= height/2;

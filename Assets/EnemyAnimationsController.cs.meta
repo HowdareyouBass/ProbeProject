@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/EnemyAnimationsController.cs.meta
 guid: c1b2e7247a8f530489afdad4f329fce1
+========
+guid: 3e0c1cec3efec914fb100b297b42fd6a
+>>>>>>>> try_to_help_scenees:Assets/BuildingDialogueManager.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

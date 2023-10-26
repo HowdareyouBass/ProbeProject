@@ -5,13 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Spell
   - Obstacle
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - GUI
+  - 
   - Water
   - UI
   - Player

@@ -1,17 +1,18 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Renderer m_HealthRenderer;
-    [SerializeField] private GameObject m_DamageEffect;
-    private Entity m_Entity;
-    private GameEvent<float> m_OnHealthChanged;
-    private GameEvent<float> m_OnDamaged;
 
-    private void OnEnable()
+    public Slider slider;
+    public Gradient gradient;
+    public Image fill;
+
+    public void SetMaxHealth(int health)
     {
-        m_Entity = transform.root.GetComponent<EntityScript>().GetEntity();
+        slider.maxValue = health;
+        slider.value = health;
 
         m_OnHealthChanged = m_Entity.Events.GetEvent<float>(EntityEventName.OnHealthChanged, true);
         m_OnDamaged = m_Entity.Events.GetEvent<float>(EntityEventName.OnDamaged, true);
@@ -25,7 +26,7 @@ public class HealthBar : MonoBehaviour
         m_OnDamaged?.Unsubscribe(SpawnEffect);
     }
 
-    private void SetHealthbarValue(float amount)
+    public void SetHealth(float health)
     {
         float currentHealth = m_Entity.Stats.CurrentHealth;
         float maxHealth = m_Entity.Stats.MaxHealth;

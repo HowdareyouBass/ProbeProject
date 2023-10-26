@@ -16,6 +16,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 43
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
     width: 1920
     height: 997
   m_ShowMode: 4
@@ -27,6 +31,17 @@ MonoBehaviour:
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 421}
 >>>>>>> Stashed changes
+<<<<<<< HEAD
+=======
+=======
+    width: 1858
+    height: 1157
+  m_ShowMode: 4
+  m_Title: Scene
+  m_RootView: {fileID: 6}
+  m_MinSize: {x: 875, y: 300}
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -198,22 +213,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
+<<<<<<< HEAD
   - {fileID: 9}
   - {fileID: 4}
   - {fileID: 10}
+=======
+<<<<<<< HEAD
+  - {fileID: 9}
+  - {fileID: 4}
+  - {fileID: 10}
+=======
+  - {fileID: 7}
+  - {fileID: 2}
+  - {fileID: 8}
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1920
     height: 997
+=======
+<<<<<<< HEAD
+    width: 1920
+    height: 997
+=======
+    width: 1858
+    height: 1157
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
   m_UseBottomView: 1
   m_BottomViewHeight: 20
+<<<<<<< HEAD
 --- !u!114 &9
+=======
+<<<<<<< HEAD
+--- !u!114 &9
+=======
+--- !u!114 &7
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,7 +283,15 @@ MonoBehaviour:
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
   m_LastLoadedLayoutName: 
+<<<<<<< HEAD
 --- !u!114 &10
+=======
+<<<<<<< HEAD
+--- !u!114 &10
+=======
+--- !u!114 &8
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,6 +309,10 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
     y: 977
     width: 1920
     height: 20
@@ -265,6 +322,17 @@ MonoBehaviour:
 --- !u!114 &11
 =======
 --- !u!114 &5
+<<<<<<< HEAD
+=======
+=======
+    y: 1137
+    width: 1858
+    height: 20
+  m_MinSize: {x: 0, y: 0}
+  m_MaxSize: {x: 0, y: 0}
+--- !u!114 &9
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,6 +350,10 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
     y: 30
     width: 1920
     height: 947
@@ -396,6 +468,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
+  m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
   - {fileID: 13}
@@ -403,6 +476,19 @@ MonoBehaviour:
   m_LastSelected: 0
 --- !u!114 &9
 >>>>>>> Stashed changes
+<<<<<<< HEAD
+=======
+=======
+    y: 0
+    width: 1414
+    height: 655
+  m_MinSize: {x: 200, y: 100}
+  m_MaxSize: {x: 16192, y: 8096}
+  vertical: 0
+  controlID: 34
+--- !u!114 &11
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -418,6 +504,10 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
 <<<<<<< Updated upstream
     x: 257
     y: 0
@@ -461,12 +551,27 @@ MonoBehaviour:
     height: 100
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
+<<<<<<< HEAD
+=======
+=======
+    x: 335
+    y: 0
+    width: 1079
+    height: 655
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
   - {fileID: 16}
   m_Selected: 0
   m_LastSelected: 1
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -478,6 +583,7 @@ MonoBehaviour:
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: InspectorWindow
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -486,6 +592,7 @@ MonoBehaviour:
     y: 0
     width: 415
     height: 947
+  m_MinSize: {x: 275, y: 50}
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
@@ -528,6 +635,12 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
 --- !u!114 &15
+<<<<<<< HEAD
+=======
+=======
+--- !u!114 &12
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -548,9 +661,21 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 73
     width: 256
     height: 193
+=======
+<<<<<<< HEAD
+    y: 73
+    width: 256
+    height: 193
+=======
+    y: 728
+    width: 1413
+    height: 431
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -568,6 +693,10 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
     m_Folders: []
     m_Globs: []
     m_OriginalText: 
@@ -583,6 +712,56 @@ MonoBehaviour:
     m_SelectedIDs: a05c0000
     m_LastClickedID: 23712
     m_ExpandedIDs: 00000000365c0000385c00003a5c00003c5c00003e5c0000405c0000425c0000445c0000465c0000485c00004a5c00004c5c00004e5c0000505c0000525c0000545c0000565c0000585c00005a5c0000
+<<<<<<< HEAD
+=======
+=======
+    m_Folders:
+    - Assets/Pics
+    m_Globs: []
+    m_OriginalText: 
+  m_ViewMode: 1
+  m_StartGridSize: 64
+  m_LastFolders:
+  - Assets/Pics
+  m_LastFoldersGridSize: -1
+  m_LastProjectPath: D:\Projects\probeproject
+  m_LockTracker:
+    m_IsLocked: 0
+  m_FolderTreeState:
+    scrollPos: {x: 0, y: 85}
+    m_SelectedIDs: b2610000
+    m_LastClickedID: 25010
+    m_ExpandedIDs: 000000002c6100002e610000306100003261000034610000366100009261000000ca9a3bffffff7f
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: 
+      m_OriginalName: 
+      m_EditFieldRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      m_UserData: 0
+      m_IsWaitingForDelay: 0
+      m_IsRenaming: 0
+      m_OriginalEventType: 11
+      m_IsRenamingFilename: 1
+      m_ClientGUIView: {fileID: 5}
+    m_SearchString: 
+    m_CreateAssetUtility:
+      m_EndAction: {fileID: 0}
+      m_InstanceID: 0
+      m_Path: 
+      m_Icon: {fileID: 0}
+      m_ResourceFile: 
+  m_AssetTreeState:
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 000000002c6100002e61000030610000326100003461000036610000
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -606,6 +785,10 @@ MonoBehaviour:
       m_Path: 
       m_Icon: {fileID: 0}
       m_ResourceFile: 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
   m_AssetTreeState:
     scrollPos: {x: 0, y: 420}
     m_SelectedIDs: 
@@ -639,6 +822,13 @@ MonoBehaviour:
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
+=======
+  m_ListAreaState:
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c62300008c6e0000625e00007e780000000000007e5f0000a25f0000
+>>>>>>> origin/CharacterUi
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -654,7 +844,14 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
+<<<<<<< HEAD
       m_ClientGUIView: {fileID: 0}
+<<<<<<< HEAD
+=======
+=======
+      m_ClientGUIView: {fileID: 5}
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -666,7 +863,15 @@ MonoBehaviour:
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
+<<<<<<< HEAD
 --- !u!114 &16
+=======
+<<<<<<< HEAD
+--- !u!114 &16
+=======
+--- !u!114 &13
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -686,10 +891,23 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
     x: 1504
     y: 73
     width: 415
     height: 926
+<<<<<<< HEAD
+=======
+=======
+    x: 1414
+    y: 73
+    width: 443
+    height: 1086
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -710,7 +928,15 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
+<<<<<<< HEAD
 --- !u!114 &17
+=======
+<<<<<<< HEAD
+--- !u!114 &17
+=======
+--- !u!114 &14
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -731,9 +957,21 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 287
     width: 256
     height: 418
+=======
+<<<<<<< HEAD
+    y: 287
+    width: 256
+    height: 418
+=======
+    y: 73
+    width: 334
+    height: 634
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -742,7 +980,15 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
       m_SelectedIDs: a05c0000
+=======
+<<<<<<< HEAD
+      m_SelectedIDs: a05c0000
+=======
+      m_SelectedIDs: 805f0000
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
       m_LastClickedID: 0
       m_ExpandedIDs: 0cfbffff6c5a00006e5e0000
       m_RenameOverlay:
@@ -760,7 +1006,15 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
+<<<<<<< HEAD
         m_ClientGUIView: {fileID: 6}
+=======
+<<<<<<< HEAD
+        m_ClientGUIView: {fileID: 6}
+=======
+        m_ClientGUIView: {fileID: 4}
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -768,11 +1022,21 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
 --- !u!114 &18
 =======
   m_LastSelected: 2
 --- !u!114 &12
 >>>>>>> Stashed changes
+<<<<<<< HEAD
+=======
+=======
+--- !u!114 &15
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -792,6 +1056,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
 <<<<<<< Updated upstream
     x: 257
     y: 73
@@ -803,6 +1071,15 @@ MonoBehaviour:
     width: 1144
     height: 826
 >>>>>>> Stashed changes
+<<<<<<< HEAD
+=======
+=======
+    x: 335
+    y: 73
+    width: 1077
+    height: 634
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1001,7 +1278,10 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
+<<<<<<< HEAD
       snapOffset: {x: 0, y: 0}
+=======
+>>>>>>> try_to_help_scenees
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 3
       id: Scene View/Particles
@@ -1073,6 +1353,10 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
 <<<<<<< Updated upstream
     m_Target: {x: -1.7771144, y: 2.55377, z: -7.8067875}
     speed: 2
@@ -1082,6 +1366,14 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 2.4656525, y: -39.283257, z: -54.348595}
 >>>>>>> Stashed changes
+<<<<<<< HEAD
+=======
+=======
+    m_Target: {x: 527.96405, y: 36.477974, z: -106.185104}
+    speed: 2
+    m_Value: {x: 527.96405, y: 36.477974, z: -106.185104}
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1129,6 +1421,10 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
 <<<<<<< Updated upstream
     m_Target: {x: 0.098962165, y: 0.43222603, z: -0.05085218, w: 0.89490545}
     speed: 2
@@ -1146,6 +1442,18 @@ MonoBehaviour:
     speed: 2
     m_Value: 69.22876
 >>>>>>> Stashed changes
+<<<<<<< HEAD
+=======
+=======
+    m_Target: {x: 0.04915875, y: -0.021874852, z: -0.0010877079, w: -0.9985805}
+    speed: 2
+    m_Value: {x: 0.04915875, y: -0.021874852, z: -0.0010877079, w: -0.9985805}
+  m_Size:
+    m_Target: 244.84003
+    speed: 2
+    m_Value: 244.84003
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1175,7 +1483,15 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
+<<<<<<< HEAD
 --- !u!114 &19
+=======
+<<<<<<< HEAD
+--- !u!114 &19
+=======
+--- !u!114 &16
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1195,6 +1511,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
     x: 257
     y: 73
 <<<<<<< Updated upstream
@@ -1204,19 +1524,43 @@ MonoBehaviour:
     width: 358
     height: 826
 >>>>>>> Stashed changes
+<<<<<<< HEAD
+=======
+=======
+    x: 335
+    y: 73
+    width: 1077
+    height: 634
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_SerializedViewNames: []
   m_SerializedViewValues: []
   m_PlayModeViewName: GameView
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
+<<<<<<< HEAD
   m_TargetSize: {x: 1086, y: 611}
+=======
+<<<<<<< HEAD
+  m_TargetSize: {x: 1086, y: 611}
+=======
+  m_TargetSize: {x: 1920, y: 1080}
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -1231,10 +1575,23 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
     m_HBaseRangeMin: -543
     m_HBaseRangeMax: 543
     m_VBaseRangeMin: -305.5
     m_VBaseRangeMax: 305.5
+<<<<<<< HEAD
+=======
+=======
+    m_HBaseRangeMin: -960
+    m_HBaseRangeMax: 960
+    m_VBaseRangeMin: -540
+    m_VBaseRangeMax: 540
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -1253,16 +1610,33 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
       width: 1245
       height: 611
     m_Scale: {x: 1, y: 1}
     m_Translation: {x: 622.5, y: 305.5}
+<<<<<<< HEAD
+=======
+=======
+      width: 1077
+      height: 613
+    m_Scale: {x: 0.5609375, y: 0.5609375}
+    m_Translation: {x: 538.49994, y: 306.5}
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
       x: -622.5
       y: -305.5
       width: 1245
@@ -1270,11 +1644,27 @@ MonoBehaviour:
     m_MinimalGUI: 1
   m_defaultScale: 1
   m_LastWindowPixelSize: {x: 1245, y: 632}
+<<<<<<< HEAD
+=======
+=======
+      x: -959.9999
+      y: -546.4067
+      width: 1919.9999
+      height: 1092.8134
+    m_MinimalGUI: 1
+  m_defaultScale: 0.5609375
+  m_LastWindowPixelSize: {x: 1077, y: 634}
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
   m_XRRenderMode: 0
   m_RenderTexture: {fileID: 0}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
 --- !u!114 &20
 =======
   m_SceneHierarchy:
@@ -1478,6 +1868,12 @@ MonoBehaviour:
   m_DirectoriesAreaWidth: 207
 --- !u!114 &16
 >>>>>>> Stashed changes
+<<<<<<< HEAD
+=======
+=======
+--- !u!114 &17
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1498,14 +1894,30 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 726
     width: 1503
     height: 273
+=======
+<<<<<<< HEAD
+    y: 726
+    width: 1503
+    height: 273
+=======
+    y: 728
+    width: 1413
+    height: 431
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> try_to_help_scenees
 <<<<<<< Updated upstream
 =======
 --- !u!114 &17
@@ -1704,3 +2116,8 @@ MonoBehaviour:
   m_XRRenderMode: 0
   m_RenderTexture: {fileID: 0}
 >>>>>>> Stashed changes
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/CharacterUi
+>>>>>>> try_to_help_scenees

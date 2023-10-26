@@ -4,14 +4,16 @@ using UnityEngine.AI;
 
 public class EntityController : MonoBehaviour
 {
-    protected Attack m_Attack;
-    protected Movement m_Movement;
-    protected SpellCaster m_SpellCaster;
+    private Attack m_Attack;
+    private Movement m_Movement;
+    private InterractScript m_Interract;
+    private SpellCaster m_SpellCaster;
     private NavMeshAgent m_Agent;
 
     private void Start()
     {
         m_Attack = GetComponent<Attack>();
+        m_Interract = GetComponent<InterractScript>();
         m_Movement = GetComponent<Movement>();
         m_SpellCaster = GetComponent<SpellCaster>();
         m_Agent = GetComponent<NavMeshAgent>();
@@ -19,6 +21,7 @@ public class EntityController : MonoBehaviour
 
     public void StopActions()
     {
+        m_Interract?.Stop();
         m_Attack?.Stop();
         m_Movement?.Stop();
         m_SpellCaster?.Stop();
@@ -30,10 +33,15 @@ public class EntityController : MonoBehaviour
         if (target.transform == transform)
             return;
         
+        if (target.isInterractableProp)
+        {
+            Interract(target);
+        }
         if (target.isEntity)
         {
             Attack(target);
         }
+        
         else
         {
             Move(target);
@@ -49,6 +57,11 @@ public class EntityController : MonoBehaviour
     {
         StopAvoidingEntities();
         m_Attack?.AttackTarget(target);
+    }
+
+    private void Interract(Target target)
+    {
+        m_Interract?.Interract(target);
     }
     
     public void Move(Target target)
