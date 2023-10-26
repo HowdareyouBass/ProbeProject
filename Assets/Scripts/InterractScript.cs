@@ -31,7 +31,7 @@ public class InterractScript : MonoBehaviour
     {
         while (true)
         {
-            yield return m_Movement.FolowUntilInRange(target, m_InterractionRange);
+            yield return m_Movement.FollowUntilInRange(target, m_InterractionRange);
             target.transform.GetComponent<InterractablePropScript>().Interract();
             yield break;
         }    

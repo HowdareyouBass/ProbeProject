@@ -4,11 +4,11 @@ using UnityEngine.AI;
 
 public class EntityController : MonoBehaviour
 {
-    private Attack m_Attack;
-    private Movement m_Movement;
-    private InterractScript m_Interract;
-    private SpellCaster m_SpellCaster;
-    private NavMeshAgent m_Agent;
+    protected Attack m_Attack;
+    protected Movement m_Movement;
+    protected InterractScript m_Interract;
+    protected SpellCaster m_SpellCaster;
+    protected NavMeshAgent m_Agent;
 
     private void Start()
     {

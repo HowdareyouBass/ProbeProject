@@ -21,6 +21,7 @@ public class PlayerAnimationsController : MonoBehaviour
     
     private void Start()
     {
+        //
         m_AnimatorOverride = new AnimatorOverrideController(m_Animator.runtimeAnimatorController);
         m_Animator.runtimeAnimatorController = m_AnimatorOverride;
         

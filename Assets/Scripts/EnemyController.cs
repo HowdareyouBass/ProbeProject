@@ -1,6 +1,5 @@
 public class EnemyController : EntityController
 {
-    
     public bool AllSpellsOnCooldown()
     {
         return GetComponent<SpellInventory>().AllSpellsOnCooldown();
