@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 public class InputHandler : MonoBehaviour
 {
-    private const float m_ClickInterval = 0.3f;
+    private const float m_ClickInterval = 0.1f;
     [SerializeField] private PlayerController m_PlayerController;
     [SerializeField] private EnemyController m_EnemyController;
     [SerializeField] private Camera m_PlayerCamera;
@@ -19,7 +19,7 @@ public class InputHandler : MonoBehaviour
             return;
         }
         MovementAndAttackingPlayer();
-        MovementAndAttackingEnemy();
+        // MovementAndAttackingEnemy();
         int i = 0;
         foreach(KeyCode key in Controls.SpellKeys)
         {

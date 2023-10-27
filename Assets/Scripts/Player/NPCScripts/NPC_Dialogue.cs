@@ -8,6 +8,7 @@ public class NPC_Dialogue : MonoBehaviour
     [Header("TypingSound")]
     public AudioClip[] typingSound;
     public AudioSource typingSoundSource;
+    public AudioSource rashirenie;
 
     [Header("Game Objects")]
     public GameObject dialoguePanel;
@@ -16,6 +17,8 @@ public class NPC_Dialogue : MonoBehaviour
     public Text dialogueText;
     public GameObject contButton;
     public GameObject skipButton;
+    public GameObject explode;
+    public GameObject nonExplode;
 
     [Header("Character description")]
     public string NPCNameText;
@@ -32,13 +35,14 @@ public class NPC_Dialogue : MonoBehaviour
 
     void Update()
     {
-       if(Input.GetKeyDown(KeyCode.E) && playerIsClose)
+       if(Input.GetKeyDown(KeyCode.F) && playerIsClose)
         {
             if(dialoguePanel.activeInHierarchy)
             {
                 SkipTyping();
                 respectPoints -= 1;
                 zeroText();
+                Debug.Log("Dialoge end");
             }
             else
             {
@@ -56,10 +60,28 @@ public class NPC_Dialogue : MonoBehaviour
             }
         }
 
-       if (dialogueText.text == dialogue[index])
+        if (dialogueText.text == dialogue[index])
         {
             contButton.SetActive(true);
             skipButton.SetActive(false);
+        }
+    }
+
+    private void Explode()
+    {
+        rashirenie.Play();
+        Invoke("ExplodeNPC", 2.6f);
+    }
+    private void ExplodeNPC()
+    {
+        nonExplode.SetActive(false);
+        GetComponent<NPC_Dialogue>().enabled = false;
+        GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
+        explode.SetActive(true);
+        foreach (Rigidbody rb in explode.GetComponentsInChildren<Rigidbody>())
+        {
+            rb.AddExplosionForce(15, explode.transform.position, 10);
         }
     }
 
@@ -68,6 +90,7 @@ public class NPC_Dialogue : MonoBehaviour
         dialogueText.text = "";
         index = 0;
         dialoguePanel.SetActive(false);
+
     }
 
 
@@ -128,6 +151,7 @@ public class NPC_Dialogue : MonoBehaviour
 
             playerIsClose = false;
             zeroText();
+            Explode();
         }
     }
 }

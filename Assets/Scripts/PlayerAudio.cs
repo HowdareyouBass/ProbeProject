@@ -8,23 +8,24 @@ public class PlayerAudio : MonoBehaviour
     private AudioManager m_AudioManager;
     private Attack m_Attack;
     private SpellInventory m_SpellInventory;
-    private Entity m_Player;
+    private Entity m_Entity;
 
     private void Awake()
     {
         m_Attack = GetComponentInParent<Attack>();
         m_SpellInventory = GetComponentInParent<SpellInventory>();
         m_AudioManager = GetComponent<AudioManager>();
-        m_Player = GetComponentInParent<PlayerScript>().GetEntity();
+        m_Entity = GetComponentInParent<EntityScript>().GetEntity();
     }
 
     private void Start()
     {
         m_Attack.OnAttackPerformed += PlayAttackSound;
-        m_Player.Events.GetEvent(EntityEventName.OnDeath).Subscribe(PlayDeathSound);
+        m_Entity.Events.GetEvent(EntityEventName.OnDeath).Subscribe(PlayDeathSound);
         for(int i = 0; i < SpellInventory.MAXIMUM_SPELLS; i++)
         {
             Spell spell = m_SpellInventory.GetSpell(i);
+            if (spell.SpellSound == null) return;
             m_AudioManager.AddSound(new Sound(spell.SpellSound, spell.Name, spell.SpellSoundVolume));
             spell.events.GetEvent(SpellEventName.OnCast).Subscribe(() => { m_AudioManager.Play(spell.Name); Debug.Log("Should play" + spell.Name); });
         }

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877416c99eddb0543acdd97f2119cf79, type: 3}
   m_Name: DrumOfSkills.effect
   m_EditorClassIdentifier: 
-  m_EffectSprite: {fileID: 0}
+  m_EffectSprite: {fileID: 21300000, guid: dea37381bbc61e746b8d0f607016ec6c, type: 3}
+  m_Effect: {fileID: 0}
   m_DefaultDuration: 3
   m_Components:
   - rid: 7643259961906823172
@@ -26,7 +27,7 @@ MonoBehaviour:
         target: {fileID: 0}
         m_MinimumCount: 0
         m_MaximumCount: 3.4028235e+38
-        m_StartCount: 3
+        m_StartCount: 2
         m_EntityEvent: 7
         m_DecreaseBy: 0
         m_CountDelta: -1

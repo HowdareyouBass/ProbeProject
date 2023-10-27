@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SpellAnimation: {fileID: 0}
   m_SpellSound: {fileID: 8300000, guid: a85b054ac0e4ece42984daee79944eb6, type: 3}
-  m_SpellSoundVolume: 0.732
+  m_SpellSoundVolume: 0.33
   m_Components:
   - rid: 447834619434500098
   - rid: 447834619434500099
@@ -35,6 +35,6 @@ MonoBehaviour:
       data:
         spell: {fileID: 0}
         caster: {fileID: 0}
-        m_Radius: 300
+        m_Radius: 600
         m_PositionType: 0
-        m_Damage: 10
+        m_Damage: 2

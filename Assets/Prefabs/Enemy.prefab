@@ -5590,7 +5590,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 5b7d99e050739794b8030683d55fed84, type: 2}
     - target: {fileID: 5866666021909216657, guid: 928de6f9ff1ea244aabc1e488d8be208, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6060806385407736488, guid: 928de6f9ff1ea244aabc1e488d8be208, type: 3}
       propertyPath: m_LocalPosition.x

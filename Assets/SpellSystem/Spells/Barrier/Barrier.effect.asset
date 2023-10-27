@@ -27,7 +27,7 @@ MonoBehaviour:
         target: {fileID: 0}
         m_MinimumCount: 0
         m_MaximumCount: 3.4028235e+38
-        m_StartCount: 5
+        m_StartCount: 50
         m_EntityEvent: 8
         m_DecreaseBy: 1
         m_CountDelta: 0
