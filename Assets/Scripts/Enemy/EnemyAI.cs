@@ -30,9 +30,15 @@ public class EnemyAI : MonoBehaviour
         m_CheckingForPlayer = StartCoroutine(CheckForPlayerRoutine());
         if (m_PatrolObject == null)
             return;
+        // Debug.Log(m_PatrolObject);
         Transform[] patrolObjects = m_PatrolObject.GetComponentsInChildren<Transform>();
-        if (patrolObjects.Length == 1)
+        if (patrolObjects.Length <= 1)
             return;
+        // Debug.Log(patrolObjects.Length);
+        // foreach(Transform t in patrolObjects)
+        // {
+        //     Debug.Log(t);
+        // }
         m_PatrolPoints = new LinkedList<Vector3>();
         for (int i = 1; i < patrolObjects.Length; i++)
         {
@@ -45,8 +51,7 @@ public class EnemyAI : MonoBehaviour
     {
         while (true)
         {
-            if (player == null)
-                yield break;
+            if (player == null) yield break;
             float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
             if (distanceToPlayer <= detectionDistance || IsInView())
@@ -60,17 +65,6 @@ public class EnemyAI : MonoBehaviour
                     m_Controller.CastSpellNotOnCooldown(new Target(player));
                 }
             }
-            // else
-            // {
-            //     m_Controller.PatrolPoints(m_PatrolPoints);
-            // }
-
-            // if (agent.remainingDistance < distanceToChangeGoal)
-            // {
-            //     currentGoal++;
-            //     if (currentGoal == goals.Length) currentGoal = 0;
-            //     agent.destination = goals[currentGoal].position;
-            // }
             yield return null;
         }
     }

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877416c99eddb0543acdd97f2119cf79, type: 3}
   m_Name: Sleep.effect
   m_EditorClassIdentifier: 
+  m_EffectSprite: {fileID: 0}
+  m_Effect: {fileID: 9196996625891829735, guid: 71eaad1542a4ba044b355149164b2e26, type: 3}
   m_DefaultDuration: 3
   m_Components:
   - rid: 6641091019292803072

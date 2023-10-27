@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877416c99eddb0543acdd97f2119cf79, type: 3}
   m_Name: Barrier.effect
   m_EditorClassIdentifier: 
+  m_EffectSprite: {fileID: 0}
+  m_Effect: {fileID: 6411098427046165843, guid: dfee5f06608b99545bee6e277b63ed79, type: 3}
   m_DefaultDuration: 3
   m_Components:
   - rid: 7643260124454453248
@@ -26,7 +28,7 @@ MonoBehaviour:
         m_MinimumCount: 0
         m_MaximumCount: 3.4028235e+38
         m_StartCount: 5
-        m_EntityEvent: 7
+        m_EntityEvent: 8
         m_DecreaseBy: 1
         m_CountDelta: 0
         m_ReverseEventReturnValue: 1

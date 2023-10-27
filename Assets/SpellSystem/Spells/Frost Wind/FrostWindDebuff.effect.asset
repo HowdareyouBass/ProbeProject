@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877416c99eddb0543acdd97f2119cf79, type: 3}
   m_Name: FrostWindDebuff.effect
   m_EditorClassIdentifier: 
+  m_EffectSprite: {fileID: 0}
+  m_Effect: {fileID: 7548109770966897561, guid: 8976766035595aa44a7f137fbc1aa7e3, type: 3}
   m_DefaultDuration: 3
   m_Components:
   - rid: 447834716389769218

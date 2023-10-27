@@ -49,6 +49,7 @@ public class Movement : MonoBehaviour
 
     public void PatrolPoints(LinkedList<Vector3> points)
     {
+        Debug.Log("Should start patroling", transform);
         m_Patroling = StartCoroutine(PatrolingPointsRoutine(points));
     }
     private IEnumerator PatrolingPointsRoutine(LinkedList<Vector3> points)
@@ -65,6 +66,7 @@ public class Movement : MonoBehaviour
             Move(point.Value);
             while (m_Agent.remainingDistance > 0.1f)
             {
+                Debug.Log("Should move now", transform);
                 yield return null;
             }
             if (point == points.Last)
@@ -112,5 +114,6 @@ public class Movement : MonoBehaviour
             StopCoroutine(m_Looking);
         if (m_Patroling != null)
             StopCoroutine(m_Patroling);
+        StopAllCoroutines();
     }
 }

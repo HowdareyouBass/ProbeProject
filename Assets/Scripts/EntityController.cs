@@ -10,7 +10,7 @@ public class EntityController : MonoBehaviour
     protected SpellCaster m_SpellCaster;
     protected NavMeshAgent m_Agent;
 
-    private void Start()
+    private void Awake()
     {
         m_Attack = GetComponent<Attack>();
         m_Interract = GetComponent<InterractScript>();

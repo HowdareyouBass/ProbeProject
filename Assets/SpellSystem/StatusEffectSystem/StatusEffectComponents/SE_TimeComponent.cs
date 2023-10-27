@@ -11,36 +11,36 @@ public abstract class SE_TimeComponent : StatusEffectComponent
     public event Action OnEffectDeapplied;
 
     [field: SerializeField] public float DurationInSeconds { get; private set; }
-    public int LeftTime { get; private set; } = 0;
+    public float LeftTime { get; private set; } = 0;
 
     public override void Init()
     {
-        LeftTime = (int) (DurationInSeconds * 1000);
+        LeftTime = DurationInSeconds;
         statusEffect.effectTasks.Add(Timer());
     }
     public override void Destroy()
     {
+        
     }
 
     private async Task Timer()
     {
-        Debug.Log(statusEffect.Name);
-        int timer = 0;
+        float timer = 0;
         OnEffectApplied?.Invoke();
         while(!statusEffect.stopEffectToken.IsCancellationRequested && LeftTime > 0)
         {
             Debug.Log(timer);
-            PerMillisecond();
-            timer++;
-            if (timer >= 1000)
+            // PerMillisecond();
+            timer += Time.deltaTime;
+            if (timer >= 1)
             {
                 PerSecond();
                 timer = 0;
             }
-            LeftTime--;
-            await Task.Delay(1);
+            LeftTime -= Time.deltaTime;
+            await Task.Yield();
         }
-        // Only awake effect deapplied if effect was not canseled from another place
+        // Only awake effect deapplied if effect was not canceled from another place
         if (!statusEffect.stopEffectToken.IsCancellationRequested)
         {
             OnEffectDeapplied?.Invoke();

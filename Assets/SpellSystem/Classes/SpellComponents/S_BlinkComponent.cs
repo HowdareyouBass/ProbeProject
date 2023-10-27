@@ -5,9 +5,13 @@ using UnityEngine.AI;
 public sealed class S_BlinkComponent : S_ActiveSpellComponent
 {
     [SerializeField] private int m_MaxDistance;
+    [SerializeField] private GameObject m_BlinkInEffect;
+    [SerializeField] private GameObject m_BlinkOutEffect;
+    [SerializeField] private float m_EffectHeight;
 
     protected override void Cast(Transform caster, Target target)
     {
+        GameObject.Instantiate(m_BlinkInEffect, caster.position + Vector3.up * m_EffectHeight, Quaternion.identity);
         base.Cast(caster, target);
         Vector2 desiredPoint = new Vector2(target.GetPoint().x, target.GetPoint().z);
         Vector2 casterPoint = new Vector2(caster.position.x, caster.position.z);
@@ -42,5 +46,7 @@ public sealed class S_BlinkComponent : S_ActiveSpellComponent
         }
         caster.position = finalPosition;
         caster.GetComponent<NavMeshAgent>().SetDestination(finalPosition);
+
+        GameObject.Instantiate(m_BlinkOutEffect, caster.position + Vector3.up * m_EffectHeight, Quaternion.identity);
     }
 }
