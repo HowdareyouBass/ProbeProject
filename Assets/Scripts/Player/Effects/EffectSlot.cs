@@ -4,11 +4,13 @@ using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 //TODO: Change name of class
 public class EffectSlot : MonoBehaviour
 {
     [SerializeField] private Image m_MainImage;
+    [SerializeField] private Image m_BorderImage;
     [SerializeField] private TextMeshProUGUI m_Text;
     private StatusEffect m_Effect;
 
@@ -40,8 +42,12 @@ public class EffectSlot : MonoBehaviour
     {
         if (m_Effect == null)
         {
+            m_MainImage.enabled = false;
+            m_BorderImage.enabled = false;
             return;
         }
+        m_MainImage.enabled = true;
+        m_BorderImage.enabled = true;
         if (m_Effect.TryGetComponent<SE_CountComponent>(out SE_CountComponent countComponent))
         {
             m_Text.text = countComponent.CurrentCount.ToString();

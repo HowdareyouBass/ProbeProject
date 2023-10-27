@@ -42,7 +42,7 @@ public abstract class Events<T> where T : Enum
 public enum EntityEventName
 {
     None,
-    OnDeath,
+    OnDeath,// returns exp gained
     OnAttack,
     OnDamaged,
     OnHealthChanged,
@@ -56,7 +56,7 @@ public class EntityEvents : Events<EntityEventName>
     protected override void InitEvents()
     {
         AddEvent(EntityEventName.None);
-        AddEvent(EntityEventName.OnDeath);
+        AddEvent<float>(EntityEventName.OnDeath);
         AddEvent<Transform>(EntityEventName.OnAttack);
         AddEvent<float>(EntityEventName.OnDamaged);
         AddEvent<float>(EntityEventName.OnHealthChanged);

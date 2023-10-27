@@ -18,6 +18,12 @@ public abstract class Entity
         Events = new EntityEvents();
     }
 
+    public void GainExperience(float value)
+    {
+        if (value <= 0) return;
+        Stats.AddExperience(value);
+    }
+
     public void SpendStamina(float amount)
     {
         if (amount < 0)
@@ -29,6 +35,7 @@ public abstract class Entity
     {
         if (amount < 0)
             throw new ArgumentOutOfRangeException(nameof(amount));
+        if (amount == 0) return;
         Events.GetEvent<float>(EntityEventName.OnHitTaken, true).Trigger(amount);
         if (Stats.BarrierIsSet)
         {
@@ -40,7 +47,7 @@ public abstract class Entity
         Events.GetEvent<float>(EntityEventName.OnHealthChanged, true).Trigger(amount);
         if (Stats.CurrentHealth <= 0)
         {
-            Events.GetEvent(EntityEventName.OnDeath).Trigger();
+            Events.GetEvent<float>(EntityEventName.OnDeath, true).Trigger(Stats.ExperienceForKill);
         }
     }
     public void EnableBarrier()

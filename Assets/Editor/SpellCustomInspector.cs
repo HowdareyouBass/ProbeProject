@@ -82,6 +82,9 @@ public class SpellCustomInspector : Editor
     {
         m_Object = ((Spell)target);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("m_SpellAnimation"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("m_SpellSound"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("m_SpellSoundVolume"));
+        
         SerializedProperty property = serializedObject.FindProperty("m_Components");
         foreach (SerializedProperty prop in property)
         {

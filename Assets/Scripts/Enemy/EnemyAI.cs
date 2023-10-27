@@ -49,7 +49,7 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator CheckForPlayerRoutine()
     {
-        while (true)
+        while (!player.GetComponent<EntityScript>().isDead)
         {
             if (player == null) yield break;
             float distanceToPlayer = Vector3.Distance(player.position, transform.position);

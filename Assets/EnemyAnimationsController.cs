@@ -43,7 +43,8 @@ public class EnemyAnimationsController : MonoBehaviour
     }
     private void PlayDeathAnimation()
     {
-        m_Animator.Play("Death");
+        m_Animator.applyRootMotion = true;
+        m_Animator.SetTrigger("Die");
     }
 
     private void StartAttackAnimation()

@@ -26,6 +26,7 @@ public sealed class EnemyScript : EntityScript
 
     protected override void Die()
     {
+        Destroy(GetComponent<EnemyAnimationsController>());
         base.Die();
         m_HealthRenderer.enabled = false;
     }

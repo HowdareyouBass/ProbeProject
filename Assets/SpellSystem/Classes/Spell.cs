@@ -6,7 +6,12 @@ using System.Collections.Generic;
 public class Spell : ScriptableObject
 {
     [SerializeField] private AnimationClip m_SpellAnimation;
+    [SerializeField] private AudioClip m_SpellSound;
+    [SerializeField][Range(0f, 1f)] private float m_SpellSoundVolume;
+
     public AnimationClip SpellAnimation { get => m_SpellAnimation; }
+    public AudioClip SpellSound { get => m_SpellSound; }
+    public float SpellSoundVolume { get => m_SpellSoundVolume; }
 
     [SerializeReference] private List<SpellComponent> m_Components;
     

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class EntityStats
 {
@@ -7,6 +8,11 @@ public class EntityStats
     public float MaxHealth { get; private set; } = 0;
     public float CurrentStamina { get; private set; } = 0;
     public float MaxStamina { get; private set; } = 0;
+    public float CurrentExperience { get; private set; } = 0;
+    public int CurrentLevel { get; private set; } = 1;
+
+    public float ExperienceRequiredPerLevel { get; private set; } = 100;
+    public float ExperienceForKill { get; private set;} = 10;
 
     public float AttackSpeed { get; private set; } = 20;
     public float BaseAttackSpeed { get; private set; } = 1;
@@ -21,15 +27,18 @@ public class EntityStats
     private float m_RegenerateAmount = 1;
     private float m_RegeneratePercent = 1;
     private float m_AttackPercent = 1;
-    
+
     public bool PureAttack = false;
     public bool BarrierIsSet = false;
 
-    public float TestFloat = 1.1f;
-
-    public void TestMod()
+    public void AddExperience(float amount)
     {
-        TestFloat = 2.0f;
+        CurrentExperience += amount;
+        if (CurrentExperience >= ExperienceRequiredPerLevel)
+        {
+            CurrentExperience -= amount;
+            CurrentLevel++;
+        }
     }
 
     public void Heal(float amount)
@@ -60,6 +69,7 @@ public class EntityStats
         AttackSpeed = race.AttackSpeed;
         BaseAttackSpeed = race.BaseAttackSpeed;
         Evasion = race.Evasion;
+        ExperienceForKill = race.ExperienceForKill;
     }
     //TODO: Rename this func
     public void AddPassiveStats(PassiveStats stats)

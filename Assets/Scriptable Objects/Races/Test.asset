@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ff1e0d195ec5745884838694990d60, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  <Attack>k__BackingField: 10
+  <Attack>k__BackingField: 50
   <AttackRange>k__BackingField: 3
   <AttackSpeed>k__BackingField: 100
   <BaseAttackSpeed>k__BackingField: 1
@@ -20,6 +20,7 @@ MonoBehaviour:
   <Stamina>k__BackingField: 100
   <Defense>k__BackingField: 0
   <CounterAttack>k__BackingField: 0
+  <ExperienceForKill>k__BackingField: 100
   <Evasion>k__BackingField: 0
   <MagicGift>k__BackingField: 0
   <PhysicsGift>k__BackingField: 0

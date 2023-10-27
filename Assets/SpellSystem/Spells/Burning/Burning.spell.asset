@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2332b67b5d50b2429226faff526af16, type: 3}
   m_Name: Burning.spell
   m_EditorClassIdentifier: 
+  m_SpellAnimation: {fileID: 0}
+  m_SpellSound: {fileID: 8300000, guid: a85b054ac0e4ece42984daee79944eb6, type: 3}
+  m_SpellSoundVolume: 0.732
   m_Components:
   - rid: 447834619434500098
   - rid: 447834619434500099

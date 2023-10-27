@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ae7881aaa5219439c18392edca5dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_InterractionRange: 3
 --- !u!114 &8675684287556781445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,11 +190,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Spells:
-  - {fileID: 11400000, guid: 0be35f0d51d27c94d9b9011e76b90891, type: 2}
-  - {fileID: 11400000, guid: b9ecd2562297acd4ea2513a03e77058d, type: 2}
-  - {fileID: 11400000, guid: adc46cc74c6592e489fae7e5a5aa05be, type: 2}
   - {fileID: 11400000, guid: 720a5b88b01abb74995e335be19e85de, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 9fd661d190bee4e4ca51a09b33a57908, type: 2}
+  - {fileID: 11400000, guid: 7321c3f159324af4d81f068792432ac0, type: 2}
+  - {fileID: 11400000, guid: 8a2f5134a0931de48917b46c4a0156d3, type: 2}
+  - {fileID: 11400000, guid: adc46cc74c6592e489fae7e5a5aa05be, type: 2}
   m_SpellCopies: []
 --- !u!114 &506410295481686599
 MonoBehaviour:

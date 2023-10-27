@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Flame.spell
   m_EditorClassIdentifier: 
   m_SpellAnimation: {fileID: -203655887218126122, guid: 5bb8124989440b64983af6d778610784, type: 3}
+  m_SpellSound: {fileID: 8300000, guid: 531b21dc880000741a9776862cccbc51, type: 3}
+  m_SpellSoundVolume: 0.126
   m_Components:
   - rid: 447834599051755523
   - rid: 447834619434500096

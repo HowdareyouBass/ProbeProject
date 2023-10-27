@@ -75,10 +75,9 @@ public class NPC_Dialogue : MonoBehaviour
     {
         int randNum = Random.Range(0, typingSound.Length);
 
-        typingSoundSource.PlayOneShot(typingSound[randNum]);
-
         foreach (char letter in dialogue[index].ToCharArray())
         {
+            typingSoundSource.PlayOneShot(typingSound[randNum]);
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
         }

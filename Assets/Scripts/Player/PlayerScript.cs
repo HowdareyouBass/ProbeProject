@@ -28,6 +28,7 @@ public sealed class PlayerScript : EntityScript
     }
     protected override void Die()
     {
+        Destroy(GetComponent<PlayerAnimationsController>());
         base.Die();
     }
     

@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2332b67b5d50b2429226faff526af16, type: 3}
   m_Name: Didn'tMakeIt.spell
   m_EditorClassIdentifier: 
+  m_SpellAnimation: {fileID: 0}
+  m_SpellSound: {fileID: 8300000, guid: 6ac5e0e0fd31568418fb18c542795878, type: 3}
+  m_SpellSoundVolume: 0
   m_Components:
   - rid: 447834716389769219
   - rid: 447834716389769220

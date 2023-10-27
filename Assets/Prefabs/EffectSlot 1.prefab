@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MainImage: {fileID: 6391027912311168654}
+  m_BorderImage: {fileID: 7082555851754966818}
   m_Text: {fileID: 1253735739592990767}
   durationTime: 0
   currentTime: 0

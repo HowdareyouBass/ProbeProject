@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2332b67b5d50b2429226faff526af16, type: 3}
   m_Name: Blind.spell
   m_EditorClassIdentifier: 
+  m_SpellAnimation: {fileID: 0}
+  m_SpellSound: {fileID: 8300000, guid: 6b909556a2a04cb4da4153b3aa367fa6, type: 3}
+  m_SpellSoundVolume: 0
   m_Components:
   - rid: 7643259987007373313
   - rid: 7643259987007373315
-  spellGameObject: {fileID: 0}
   references:
     version: 2
     RefIds:

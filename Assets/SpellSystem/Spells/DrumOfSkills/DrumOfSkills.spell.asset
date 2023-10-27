@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2332b67b5d50b2429226faff526af16, type: 3}
   m_Name: DrumOfSkills.spell
   m_EditorClassIdentifier: 
+  m_SpellAnimation: {fileID: 0}
+  m_SpellSound: {fileID: 8300000, guid: c9f1813e69b32d24283eb95802c756e7, type: 3}
+  m_SpellSoundVolume: 0
   m_Components:
   - rid: 7643259961906823170
   - rid: 7643259961906823171
-  spellGameObject: {fileID: 0}
   references:
     version: 2
     RefIds:
